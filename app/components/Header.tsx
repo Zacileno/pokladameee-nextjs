@@ -21,23 +21,40 @@ export default function Header() {
       borderBottom: scrolled ? '1px solid rgba(255,255,255,0.08)' : 'none',
     }}>
       <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 72 }}>
-        <a href="/"><Image src="/assets/logo/logo-zakladni.svg" alt="pokládámeee.cz" width={200} height={36} style={{ height: 36, width: 'auto' }} /></a>
+        {/* Logo — základní SVG, text invertován na bílou přes filter */}
+        <a href="/" style={{ display: 'flex', alignItems: 'center' }}>
+          <Image
+            src="/assets/logo/logo-zakladni.svg"
+            alt="pokládámeee.cz"
+            width={220}
+            height={38}
+            style={{
+              height: 38,
+              width: 'auto',
+              // Převede černou → bílou, zachová oranžovou (oranžová je > 50% brightness takže neprojde inverzí)
+              filter: 'brightness(0) saturate(100%) invert(1) sepia(1) saturate(5) hue-rotate(10deg)',
+            }}
+          />
+        </a>
+
         <nav style={{ display: 'flex', alignItems: 'center', gap: 32 }} className="desk-nav">
           {[['#sluzby','Služby'],['#jak-to-funguje','Jak to funguje'],['#reference','Reference']].map(([href, label]) => (
-            <a key={href} href={href} style={{ color: 'rgba(255,255,255,0.8)', fontWeight: 600, fontSize: 15 }}
+            <a key={href} href={href} style={{ color: 'rgba(255,255,255,0.8)', fontWeight: 600, fontSize: 15, transition: 'color 0.2s' }}
               onMouseEnter={e => (e.currentTarget.style.color='#fff')}
               onMouseLeave={e => (e.currentTarget.style.color='rgba(255,255,255,0.8)')}>{label}</a>
           ))}
           <a href="#kontakt" className="btn-primary" style={{ padding: '10px 22px', fontSize: 15 }}>Chci podlahu →</a>
         </nav>
-        <button onClick={() => setMenuOpen(!menuOpen)} className="hamburger" style={{ display:'none', background:'none', border:'none', color:'white', fontSize:24, cursor:'pointer' }} aria-label="Menu">
+        <button onClick={() => setMenuOpen(!menuOpen)} className="hamburger"
+          style={{ display:'none', background:'none', border:'none', color:'white', fontSize:24, cursor:'pointer' }}>
           {menuOpen ? '✕' : '☰'}
         </button>
       </div>
+
       {menuOpen && (
-        <div style={{ background: 'rgba(0,0,0,0.97)', borderTop: '1px solid rgba(255,255,255,0.1)', padding: '24px', display:'flex', flexDirection:'column', gap: 20 }}>
+        <div style={{ background:'rgba(0,0,0,0.97)', borderTop:'1px solid rgba(255,255,255,0.1)', padding:'24px', display:'flex', flexDirection:'column', gap:20 }}>
           {[['#sluzby','Služby'],['#jak-to-funguje','Jak to funguje'],['#reference','Reference']].map(([href,label]) => (
-            <a key={href} href={href} onClick={() => setMenuOpen(false)} style={{ color: 'white', fontWeight: 600, fontSize: 18 }}>{label}</a>
+            <a key={href} href={href} onClick={() => setMenuOpen(false)} style={{ color:'white', fontWeight:600, fontSize:18 }}>{label}</a>
           ))}
           <a href="#kontakt" className="btn-primary" onClick={() => setMenuOpen(false)} style={{ textAlign:'center', justifyContent:'center' }}>Chci podlahu →</a>
         </div>
