@@ -7,6 +7,7 @@ import { inspiraceSchema } from './sanity/schemas/inspirace'
 export default defineConfig({
   name: 'pokladameee',
   title: 'pokládámeee.cz — Admin',
+  basePath: '/studio',
   projectId: '8cvsenqb',
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
   plugins: [structureTool(), visionTool()],
