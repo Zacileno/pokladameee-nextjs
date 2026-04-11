@@ -1,10 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,900&family=Barlow+Condensed:wght@700;900&display=swap');
-
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
   --orange: #FF8800;
@@ -17,12 +11,9 @@
   --gray-100: #EFEFED;
   --gray-400: #9A9A96;
   --gray-700: #3D3D3A;
-  --font: 'Barlow', sans-serif;
-  --font-cond: 'Barlow Condensed', sans-serif;
+  --font: var(--font-barlow, 'Barlow', system-ui, sans-serif);
   --radius: 6px;
   --radius-lg: 12px;
-  --shadow: 0 4px 24px rgba(0,0,0,0.10);
-  --shadow-lg: 0 12px 48px rgba(0,0,0,0.16);
 }
 
 html { font-family: var(--font); font-size: 16px; color: var(--black); background: var(--white); scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
