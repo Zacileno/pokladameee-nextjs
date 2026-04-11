@@ -1,32 +1,28 @@
-"use client"
+'use client'
 import Image from 'next/image'
 
 export default function Footer() {
   return (
     <footer style={{ background: 'var(--black)', color: 'white', padding: '56px 0 32px' }}>
       <div className="container">
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: 48, marginBottom: 48, paddingBottom: 48, borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-          {/* Brand */}
+        <div className="footer-grid">
           <div>
-            <Image src="/assets/logo/logo-zakladni.svg" alt="pokládámeee.cz" width={180} height={32} style={{ height: 32, width: 'auto', marginBottom: 20 }} />
+            <Image src="/assets/logo/logo-zakladni.svg" alt="pokládámeee.cz" width={180} height={32}
+              style={{ height: 32, width: 'auto', marginBottom: 20, filter: 'brightness(0) invert(1)' }} />
             <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 15, lineHeight: 1.7, maxWidth: 320 }}>
               Profesionální pokládka vinylových podlah v Moravskoslezském kraji. Zaměření zdarma, hotovo do týdne.
             </p>
           </div>
-
-          {/* Navigace */}
           <div>
             <h4 style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 20 }}>Navigace</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               {[['#sluzby','Služby'],['#jak-to-funguje','Jak to funguje'],['#reference','Reference'],['#kontakt','Kontakt']].map(([href, label]) => (
-                <a key={href} href={href} style={{ color: 'rgba(255,255,255,0.6)', fontSize: 15, fontWeight: 500, transition: 'color 0.2s' }}
+                <a key={href} href={href} style={{ color: 'rgba(255,255,255,0.6)', fontSize: 15, fontWeight: 500 }}
                   onMouseEnter={e => (e.currentTarget.style.color='#fff')}
                   onMouseLeave={e => (e.currentTarget.style.color='rgba(255,255,255,0.6)')}>{label}</a>
               ))}
             </div>
           </div>
-
-          {/* Kontakt */}
           <div>
             <h4 style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 20 }}>Kontakt</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
@@ -37,8 +33,6 @@ export default function Footer() {
             </div>
           </div>
         </div>
-
-        {/* Bottom */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
           <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: 13 }}>© 2026 pokládámeee.cz — Všechna práva vyhrazena</p>
           <div style={{ display: 'flex', gap: 24 }}>

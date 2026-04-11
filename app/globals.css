@@ -11,7 +11,7 @@
   --gray-100: #EFEFED;
   --gray-400: #9A9A96;
   --gray-700: #3D3D3A;
-  --font: var(--font-barlow, 'Barlow', system-ui, sans-serif);
+  --font: 'Barlow', system-ui, sans-serif;
   --radius: 6px;
   --radius-lg: 12px;
 }
@@ -36,4 +36,59 @@ input, select, textarea { font-family: var(--font); }
 .btn-secondary { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--white); font-weight: 700; font-size: 16px; padding: 13px 28px; border-radius: var(--radius); border: 2px solid rgba(255,255,255,0.4); transition: border-color 0.2s, background 0.2s; white-space: nowrap; }
 .btn-secondary:hover { border-color: var(--white); background: rgba(255,255,255,0.1); }
 
-@media (max-width: 768px) { .section { padding: 56px 0; } .container { padding: 0 16px; } }
+/* ── HERO ── */
+.hero-grid { display: grid; grid-template-columns: 1fr 420px; gap: 64px; align-items: center; padding-top: 100px; padding-bottom: 80px; }
+.hero-form { /* visible desktop */ }
+
+/* ── VÝHODY LIŠTA ── */
+.vyhody-lista { display: flex; justify-content: center; flex-wrap: wrap; }
+.vyhody-item { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 28px 36px; flex: 1 1 160px; border-right: 1px solid var(--gray-100); }
+.vyhody-item:last-child { border-right: none; }
+
+/* ── ŘEMESLNÍK ── */
+.rem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+
+/* ── VYHODY BADGE ── */
+.vyhody-badge-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.vyhody-badge-karty { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+/* ── KONTAKT ── */
+.kontakt-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start; }
+.kontakt-form-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.kontakt-form-row3 { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; margin-bottom: 12px; }
+
+/* ── FOOTER ── */
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+
+/* ── MOBILE ── */
+@media (max-width: 900px) {
+  .section { padding: 56px 0; }
+  .container { padding: 0 16px; }
+
+  .hero-grid { grid-template-columns: 1fr; gap: 0; padding-top: 90px; padding-bottom: 48px; }
+  .hero-form { display: none; }
+
+  .vyhody-item { padding: 20px 16px; flex: 1 1 100px; }
+  .vyhody-item { border-right: none; border-bottom: 1px solid var(--gray-100); }
+  .vyhody-item:last-child { border-bottom: none; }
+  .vyhody-lista { flex-direction: column; }
+
+  .rem-grid { grid-template-columns: 1fr; gap: 40px; }
+
+  .vyhody-badge-grid { grid-template-columns: 1fr; gap: 40px; }
+  .vyhody-badge-karty { grid-template-columns: 1fr 1fr; }
+
+  .kontakt-grid { grid-template-columns: 1fr; gap: 40px; }
+  .kontakt-form-row2 { grid-template-columns: 1fr; }
+  .kontakt-form-row3 { grid-template-columns: 1fr; }
+
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+
+  .desk-nav { display: none !important; }
+  .hamburger { display: block !important; }
+}
+
+@media (max-width: 480px) {
+  .vyhody-badge-karty { grid-template-columns: 1fr; }
+  .hero-grid h1 { font-size: 52px; }
+}
