@@ -15,28 +15,22 @@ export default function Header() {
   return (
     <header style={{
       position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-      background: scrolled ? 'rgba(0,0,0,0.92)' : 'transparent',
+      background: scrolled ? 'rgba(21,76,134,0.97)' : 'transparent',
       backdropFilter: scrolled ? 'blur(12px)' : 'none',
       transition: 'background 0.3s',
-      borderBottom: scrolled ? '1px solid rgba(255,255,255,0.08)' : 'none',
+      borderBottom: scrolled ? '1px solid rgba(255,255,255,0.1)' : 'none',
     }}>
       <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 72 }}>
-        {/* Logo — základní SVG, text invertován na bílou přes filter */}
-        <a href="/" style={{ display: 'flex', alignItems: 'center' }}>
+        <a href="/">
           <Image
-            src="/assets/logo/logo-zakladni.svg"
+            src="/assets/logo/logo-inverzni-modre.svg"
             alt="pokládámeee.cz"
             width={220}
             height={38}
-            style={{
-              height: 38,
-              width: 'auto',
-              // Převede černou → bílou, zachová oranžovou (oranžová je > 50% brightness takže neprojde inverzí)
-              filter: 'brightness(0) saturate(100%) invert(1) sepia(1) saturate(5) hue-rotate(10deg)',
-            }}
+            style={{ height: 38, width: 'auto' }}
+            priority
           />
         </a>
-
         <nav style={{ display: 'flex', alignItems: 'center', gap: 32 }} className="desk-nav">
           {[['#sluzby','Služby'],['#jak-to-funguje','Jak to funguje'],['#reference','Reference']].map(([href, label]) => (
             <a key={href} href={href} style={{ color: 'rgba(255,255,255,0.8)', fontWeight: 600, fontSize: 15, transition: 'color 0.2s' }}
@@ -50,9 +44,8 @@ export default function Header() {
           {menuOpen ? '✕' : '☰'}
         </button>
       </div>
-
       {menuOpen && (
-        <div style={{ background:'rgba(0,0,0,0.97)', borderTop:'1px solid rgba(255,255,255,0.1)', padding:'24px', display:'flex', flexDirection:'column', gap:20 }}>
+        <div style={{ background:'rgba(21,76,134,0.98)', borderTop:'1px solid rgba(255,255,255,0.1)', padding:'24px', display:'flex', flexDirection:'column', gap:20 }}>
           {[['#sluzby','Služby'],['#jak-to-funguje','Jak to funguje'],['#reference','Reference']].map(([href,label]) => (
             <a key={href} href={href} onClick={() => setMenuOpen(false)} style={{ color:'white', fontWeight:600, fontSize:18 }}>{label}</a>
           ))}
