@@ -1,89 +1,60 @@
-'use client'
-import { useState } from 'react'
+import { client, INSPIRACE_QUERY } from '../../lib/sanity'
+import PredPoKarta from './PredPoKarta'
 
-const projekty = [
+export const revalidate = 3600
+
+type Inspirace = {
+  _id: string
+  nazev: string
+  material?: string
+  rozloha?: string
+  lokalita?: string
+  fotoPo: { asset: { url: string } }
+  fotoPred?: { asset: { url: string } }
+}
+
+const FALLBACK: Inspirace[] = [
   {
-    id: 1,
+    _id: 'fallback-1',
     nazev: 'Obývací pokoj, Ostrava',
     material: 'Vinyl lepený, dub světlý',
     rozloha: '42 m²',
-    pred: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80',
-    po: 'https://images.unsplash.com/photo-1562663474-6cbb3eaa4d14?w=600&q=80',
+    fotoPo: { asset: { url: 'https://images.unsplash.com/photo-1562663474-6cbb3eaa4d14?w=600&q=80' } },
+    fotoPred: { asset: { url: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80' } },
   },
   {
-    id: 2,
+    _id: 'fallback-2',
     nazev: 'Kuchyň + jídelna, Opava',
     material: 'Vinyl lepený, beton šedý',
     rozloha: '28 m²',
-    pred: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600&q=80',
-    po: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80',
+    fotoPo: { asset: { url: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80' } },
+    fotoPred: { asset: { url: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600&q=80' } },
   },
   {
-    id: 3,
+    _id: 'fallback-3',
     nazev: 'Ložnice, Frýdek-Místek',
     material: 'Vinyl plovoucí, ořech tmavý',
     rozloha: '19 m²',
-    pred: 'https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=600&q=80',
-    po: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&q=80',
+    fotoPo: { asset: { url: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&q=80' } },
+    fotoPred: { asset: { url: 'https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=600&q=80' } },
   },
   {
-    id: 4,
+    _id: 'fallback-4',
     nazev: 'Celý byt 3+1, Karviná',
     material: 'Vinyl lepený, dub přírodní',
     rozloha: '67 m²',
-    pred: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80',
-    po: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80',
+    fotoPo: { asset: { url: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80' } },
+    fotoPred: { asset: { url: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80' } },
   },
 ]
 
-function PredPo({ pred, po, nazev }: { pred: string; po: string; nazev: string }) {
-  const [zobrazit, setZobrazit] = useState<'pred' | 'po'>('po')
+export default async function GalerieSekce() {
+  let projekty: Inspirace[] = FALLBACK
+  try {
+    const data = await client.fetch<Inspirace[]>(INSPIRACE_QUERY)
+    if (data?.length) projekty = data
+  } catch {}
 
-  return (
-    <div style={{ position: 'relative', borderRadius: 12, overflow: 'hidden', aspectRatio: '4/3', cursor: 'pointer' }}
-      onClick={() => setZobrazit(z => z === 'pred' ? 'po' : 'pred')}>
-      <img
-        src={zobrazit === 'pred' ? pred : po}
-        alt={nazev}
-        style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'opacity 0.3s' }}
-      />
-      {/* Přepínač */}
-      <div style={{
-        position: 'absolute', top: 12, left: 12,
-        display: 'flex', gap: 4,
-      }}>
-        {(['pred', 'po'] as const).map(stav => (
-          <button key={stav}
-            onClick={e => { e.stopPropagation(); setZobrazit(stav) }}
-            style={{
-              padding: '4px 12px',
-              borderRadius: 100,
-              border: 'none',
-              fontSize: 12,
-              fontWeight: 700,
-              cursor: 'pointer',
-              background: zobrazit === stav ? 'var(--orange)' : 'rgba(0,0,0,0.5)',
-              color: 'white',
-              transition: 'background 0.2s',
-            }}>
-            {stav === 'pred' ? 'Před' : 'Po'}
-          </button>
-        ))}
-      </div>
-      {/* Hint */}
-      <div style={{
-        position: 'absolute', bottom: 12, right: 12,
-        background: 'rgba(0,0,0,0.5)',
-        color: 'white', fontSize: 11, fontWeight: 600,
-        padding: '3px 8px', borderRadius: 100,
-      }}>
-        klikni pro přepnutí
-      </div>
-    </div>
-  )
-}
-
-export default function GalerieSekce() {
   return (
     <section id="inspirace" className="section" style={{ background: 'white' }}>
       <div className="container">
@@ -107,24 +78,14 @@ export default function GalerieSekce() {
           gap: 24,
         }}>
           {projekty.map(p => (
-            <div key={p.id}>
-              <PredPo pred={p.pred} po={p.po} nazev={p.nazev} />
-              <div style={{ marginTop: 14 }}>
-                <div style={{ fontWeight: 800, fontSize: 16, marginBottom: 4 }}>{p.nazev}</div>
-                <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                  <span style={{
-                    background: 'var(--gray-50)', border: '1px solid var(--gray-100)',
-                    fontSize: 12, fontWeight: 600, padding: '3px 10px', borderRadius: 100,
-                    color: 'var(--gray-700)',
-                  }}>{p.material}</span>
-                  <span style={{
-                    background: 'var(--orange-light)', border: '1px solid rgba(255,136,0,0.2)',
-                    fontSize: 12, fontWeight: 700, padding: '3px 10px', borderRadius: 100,
-                    color: 'var(--orange)',
-                  }}>{p.rozloha}</span>
-                </div>
-              </div>
-            </div>
+            <PredPoKarta
+              key={p._id}
+              po={p.fotoPo?.asset?.url}
+              pred={p.fotoPred?.asset?.url}
+              nazev={p.nazev}
+              material={p.material}
+              rozloha={p.rozloha}
+            />
           ))}
         </div>
 
