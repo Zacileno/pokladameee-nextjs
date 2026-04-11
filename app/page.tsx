@@ -2,8 +2,8 @@ import Header from './components/Header'
 import HeroSection from './components/HeroSection'
 import SluzbySekce from './components/SluzbySekce'
 import JakToFunguje from './components/JakToFunguje'
-import RemeselnikSekce from './components/RemeselnikSekce'
 import GalerieSekce from './components/GalerieSekce'
+import RemeselnikSekce from './components/RemeselnikSekce'
 import VyhodyBadge from './components/VyhodyBadge'
 import ReferenceSekce from './components/ReferenceSekce'
 import KontaktSekce from './components/KontaktSekce'
@@ -16,9 +16,9 @@ export default function Home() {
       <main>
         <HeroSection />
         <SluzbySekce />
-        <RemeselnikSekce />
-        <GalerieSekce />
         <JakToFunguje />
+        <GalerieSekce />
+        <RemeselnikSekce />
         <VyhodyBadge />
         <ReferenceSekce />
         <KontaktSekce />

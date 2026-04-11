@@ -21,7 +21,7 @@ export default function Header() {
       borderBottom: scrolled ? '1px solid rgba(255,255,255,0.08)' : 'none',
     }}>
       <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 72 }}>
-        <a href="/"><Image src="/assets/logo/logo-bile.svg" alt="pokládámeee.cz" width={200} height={36} style={{ height: 36, width: 'auto' }} /></a>
+        <a href="/"><Image src="/assets/logo/logo-zakladni.svg" alt="pokládámeee.cz" width={200} height={36} style={{ height: 36, width: 'auto' }} /></a>
         <nav style={{ display: 'flex', alignItems: 'center', gap: 32 }} className="desk-nav">
           {[['#sluzby','Služby'],['#jak-to-funguje','Jak to funguje'],['#reference','Reference']].map(([href, label]) => (
             <a key={href} href={href} style={{ color: 'rgba(255,255,255,0.8)', fontWeight: 600, fontSize: 15 }}

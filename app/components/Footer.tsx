@@ -8,7 +8,7 @@ export default function Footer() {
         <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: 48, marginBottom: 48, paddingBottom: 48, borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
           {/* Brand */}
           <div>
-            <Image src="/assets/logo/logo-bile.svg" alt="pokládámeee.cz" width={180} height={32} style={{ height: 32, width: 'auto', marginBottom: 20 }} />
+            <Image src="/assets/logo/logo-zakladni.svg" alt="pokládámeee.cz" width={180} height={32} style={{ height: 32, width: 'auto', marginBottom: 20 }} />
             <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 15, lineHeight: 1.7, maxWidth: 320 }}>
               Profesionální pokládka vinylových podlah v Moravskoslezském kraji. Zaměření zdarma, hotovo do týdne.
             </p>
