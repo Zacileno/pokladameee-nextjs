@@ -26,8 +26,8 @@ export default function Footer() {
           <div>
             <h4 style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 20 }}>Kontakt</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              <a href="tel:+420000000000" style={{ color: 'rgba(255,255,255,0.6)', fontSize: 15 }}>+420 XXX XXX XXX</a>
-              <a href="mailto:adam@pokládámeee.cz" style={{ color: 'rgba(255,255,255,0.6)', fontSize: 15 }}>adam@pokládámeee.cz</a>
+              <a href="tel:+420739229922" style={{ color: 'rgba(255,255,255,0.6)', fontSize: 15 }}>+420 739 229 922</a>
+              <a href="mailto:adam.hajdusek@pokladameee.cz" style={{ color: 'rgba(255,255,255,0.6)', fontSize: 15 }}>adam.hajdusek@pokladameee.cz</a>
               <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: 15 }}>Po–Pá 7:00–18:00</div>
               <div style={{ color: 'var(--orange)', fontSize: 15, fontWeight: 700 }}>Moravskoslezský kraj</div>
             </div>

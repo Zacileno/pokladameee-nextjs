@@ -1,7 +1,10 @@
 'use client'
 import { useState } from 'react'
 
-export default function HeroSection() {
+const HERO_FALLBACK = 'https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?w=1600&q=85'
+
+export default function HeroSection({ heroFotkaUrl }: { heroFotkaUrl?: string | null }) {
+  const bgImage = heroFotkaUrl || HERO_FALLBACK
   const [form, setForm] = useState({ jmeno: '', telefon: '', sluzba: '', zprava: '' })
   const [sent, setSent] = useState(false)
 
@@ -13,7 +16,7 @@ export default function HeroSection() {
   return (
     <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
-        <img src="https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?w=1600&q=85" alt=""
+        <img src={bgImage} alt=""
           style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(105deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.75) 45%, rgba(0,0,0,0.55) 100%)' }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(255,136,0,0.12) 0%, transparent 50%)' }} />

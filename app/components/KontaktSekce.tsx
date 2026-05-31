@@ -34,8 +34,8 @@ export default function KontaktSekce() {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               {[
-                { icon: '📞', label: 'Zavolejte', val: '+420 XXX XXX XXX', href: 'tel:+420000000000' },
-                { icon: '✉️', label: 'Napište e-mail', val: 'adam@pokládámeee.cz', href: 'mailto:adam@pokládámeee.cz' },
+                { icon: '📞', label: 'Zavolejte', val: '+420 739 229 922', href: 'tel:+420739229922' },
+                { icon: '✉️', label: 'Napište e-mail', val: 'adam.hajdusek@pokladameee.cz', href: 'mailto:adam.hajdusek@pokladameee.cz' },
                 { icon: '🕐', label: 'Pracovní doba', val: 'Po–Pá 7:00–18:00' },
                 { icon: '📍', label: 'Kde pokládáme', val: 'Moravskoslezský kraj' },
               ].map(({ icon, label, val, href }) => (

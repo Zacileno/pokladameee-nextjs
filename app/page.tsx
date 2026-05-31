@@ -1,3 +1,4 @@
+import { client, NASTAVENI_QUERY } from '../lib/sanity'
 import Header from './components/Header'
 import HeroSection from './components/HeroSection'
 import VyhodySekce from './components/VyhodySekce'
@@ -10,12 +11,25 @@ import ReferenceSekce from './components/ReferenceSekce'
 import KontaktSekce from './components/KontaktSekce'
 import Footer from './components/Footer'
 
-export default function Home() {
+export const revalidate = 3600
+
+type Nastaveni = {
+  heroFotka?: { asset: { url: string } }
+  telefon?: string
+  email?: string
+}
+
+export default async function Home() {
+  let nastaveni: Nastaveni | null = null
+  try {
+    nastaveni = await client.fetch<Nastaveni>(NASTAVENI_QUERY)
+  } catch {}
+
   return (
     <>
       <Header />
       <main>
-        <HeroSection />
+        <HeroSection heroFotkaUrl={nastaveni?.heroFotka?.asset?.url} />
         <VyhodySekce />
         <SluzbySekce />
         <JakToFunguje />

@@ -1,42 +1,77 @@
-export default function RemeselnikSekce() {
-  return (
-    <section className="section" style={{ background: 'var(--orange-light)', overflow: 'hidden' }}>
-      <div className="container">
-        <div className="rem-grid">
-          <div style={{ position: 'relative' }}>
-            <div style={{ borderRadius: 16, overflow: 'hidden', aspectRatio: '4/5', position: 'relative', boxShadow: '0 24px 64px rgba(0,0,0,0.15)' }}>
-              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80" alt="Adam Hajdušek"
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-              <div style={{ position: 'absolute', bottom: 20, left: 20, background: 'var(--orange)', color: 'white', fontWeight: 800, fontSize: 14, padding: '8px 16px', borderRadius: 100, display: 'flex', alignItems: 'center', gap: 8 }}>
-                <span>✓</span> pokládámeee.cz
-              </div>
-            </div>
-            <div style={{ position: 'absolute', top: -20, right: -20, background: 'var(--blue)', color: 'white', borderRadius: 12, padding: '20px 24px', boxShadow: '0 12px 32px rgba(21,76,134,0.3)', textAlign: 'center' }}>
-              <div style={{ fontSize: 36, fontWeight: 900, lineHeight: 1 }}>200+</div>
-              <div style={{ fontSize: 13, opacity: 0.8, marginTop: 4 }}>realizací</div>
-            </div>
-          </div>
+import { client, PROJEKTY_QUERY } from '../../lib/sanity'
 
-          <div>
-            <p style={{ color: 'var(--orange)', fontWeight: 700, fontSize: 13, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Kdo u vás přijde</p>
-            <h2 className="section-title" style={{ color: 'var(--black)' }}>
-              Adam Hajdušek<br /><span>zakladatel & technik</span>
-            </h2>
-            <p style={{ marginTop: 20, fontSize: 17, lineHeight: 1.75, color: 'var(--gray-700)', marginBottom: 16 }}>
-              Každou zakázku řeším osobně. Přijedu, změřím, poradím s výběrem vinylu — a řeknu vám rovnou co čekat, bez keců.
-            </p>
-            <p style={{ fontSize: 17, lineHeight: 1.75, color: 'var(--gray-700)', marginBottom: 40 }}>
-              Přes 200 realizací po celém MSK. Vinyl pokládám od roku 2018. Znám každý typ podkladu, na který v moravskoslezských domácnostech narazíte.
-            </p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-              {[['🏆','200+ realizací v MSK'],['⭐','Hodnocení 5.0 na Google'],['📞','Voláte mně — ne call centru'],['🔧','Certifikovaný pokládač UpFloor']].map(([icon, text]) => (
-                <div key={text as string} style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-                  <div style={{ width: 40, height: 40, borderRadius: 10, background: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, flexShrink: 0, boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>{icon}</div>
-                  <span style={{ fontWeight: 600, fontSize: 15, color: 'var(--gray-700)' }}>{text as string}</span>
+export const revalidate = 3600
+
+type Projekt = {
+  _id: string
+  nazev: string
+  url: string
+  pocetKlientu?: number
+  logo?: { asset: { url: string } }
+}
+
+const FALLBACK_PROJEKTY: Projekt[] = [
+  { _id: 'fb-1', nazev: 'Malujemeee', url: 'https://malujemeee.cz', pocetKlientu: 3200 },
+  { _id: 'fb-2', nazev: 'Žaluzieee', url: 'https://zaluzieee.cz', pocetKlientu: 1400 },
+]
+
+export default async function RemeselnikSekce() {
+  let projekty: Projekt[] = FALLBACK_PROJEKTY
+  try {
+    const data = await client.fetch<Projekt[]>(PROJEKTY_QUERY)
+    if (data?.length) projekty = data
+  } catch {}
+
+  return (
+    <section className="section" style={{ background: '#FF8800', overflow: 'hidden' }}>
+      <div className="container">
+        <div style={{ textAlign: 'center', marginBottom: 56 }}>
+          <p style={{ color: 'rgba(255,255,255,0.7)', fontWeight: 700, fontSize: 13, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>
+            Naše rodina značek
+          </p>
+          <h2 style={{ fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 900, color: 'white', lineHeight: 1.15, marginBottom: 20 }}>
+            Dobré řemeslo si zaslouží<br />dobré jméno
+          </h2>
+          <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: 17, lineHeight: 1.7, maxWidth: 620, margin: '0 auto' }}>
+            Pokládámeee není jen firma — jsme součástí rodiny značek, které vrací řemeslu respekt. Potvrdilo nám to již <strong style={{ color: 'white' }}>8 932 klientů</strong> napříč projekty.
+          </p>
+        </div>
+
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 20, justifyContent: 'center' }}>
+          {projekty.map(p => (
+            <a
+              key={p._id}
+              href={p.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                background: 'rgba(255,255,255,0.12)',
+                border: '1.5px solid rgba(255,255,255,0.25)',
+                borderRadius: 16,
+                padding: '28px 32px',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: 12,
+                minWidth: 180,
+                textDecoration: 'none',
+                transition: 'background 0.2s',
+                backdropFilter: 'blur(8px)',
+              }}
+            >
+              {p.logo?.asset?.url ? (
+                <img src={p.logo.asset.url} alt={p.nazev} style={{ height: 48, objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
+              ) : (
+                <div style={{ fontWeight: 900, fontSize: 22, color: 'white', letterSpacing: '-0.02em' }}>{p.nazev}</div>
+              )}
+              {p.pocetKlientu ? (
+                <div style={{ color: 'rgba(255,255,255,0.75)', fontSize: 13, fontWeight: 600 }}>
+                  {p.pocetKlientu.toLocaleString('cs-CZ')} klientů
                 </div>
-              ))}
-            </div>
-          </div>
+              ) : null}
+              <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: 12 }}>{p.url.replace('https://', '')}</div>
+            </a>
+          ))}
         </div>
       </div>
     </section>

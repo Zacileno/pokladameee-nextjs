@@ -1,12 +1,30 @@
-export default function ReferenceSekce() {
-  const recenze = [
-    { jmeno: 'Martin K.', mesto: 'Ostrava', hvezdy: 5, text: 'Vinyl položen za jeden den, parta přišla přesně, po sobě uklidili. Doporučuji!' },
-    { jmeno: 'Petra N.', mesto: 'Opava', hvezdy: 5, text: 'Konečně firma, která splní co slíbí. Zaměřili v úterý, v pátek máme novou podlahu.' },
-    { jmeno: 'Radek Š.', mesto: 'Frýdek-Místek', hvezdy: 5, text: 'Skvělý výběr vinylu, poradili s barvou i s tím co vydrží se psem. Spokojenost.' },
-    { jmeno: 'Jana H.', mesto: 'Karviná', hvezdy: 5, text: 'Výborná práce, přesná komunikace. Starou kobercovku vzali s sebou, nemuseli jsme nic řešit.' },
-    { jmeno: 'Tomáš B.', mesto: 'Havířov', hvezdy: 5, text: 'Cena odpovídá kvalitě. Vinyl vypadá skvěle, montáž proběhla hladce. Rozhodně doporučuji.' },
-    { jmeno: 'Lenka M.', mesto: 'Třinec', hvezdy: 5, text: 'Přijeli rychle, zaměření i nabídka do druhého dne. Nakonec jsme zvolili tmavý vinyl — naprosto spokojeni.' },
-  ]
+import { client, REFERENCE_QUERY } from '../../lib/sanity'
+
+export const revalidate = 3600
+
+type Recenze = {
+  _id: string
+  jmeno: string
+  text: string
+  hvezdicky: number
+  datum?: string
+}
+
+const FALLBACK: Recenze[] = [
+  { _id: 'f1', jmeno: 'Martin K.', text: 'Vinyl položen za jeden den, parta přišla přesně, po sobě uklidili. Doporučuji!', hvezdicky: 5 },
+  { _id: 'f2', jmeno: 'Petra N.', text: 'Konečně firma, která splní co slíbí. Zaměřili v úterý, v pátek máme novou podlahu.', hvezdicky: 5 },
+  { _id: 'f3', jmeno: 'Radek Š.', text: 'Skvělý výběr vinylu, poradili s barvou i s tím co vydrží se psem. Spokojenost.', hvezdicky: 5 },
+  { _id: 'f4', jmeno: 'Jana H.', text: 'Výborná práce, přesná komunikace. Starou kobercovku vzali s sebou, nemuseli jsme nic řešit.', hvezdicky: 5 },
+  { _id: 'f5', jmeno: 'Tomáš B.', text: 'Cena odpovídá kvalitě. Vinyl vypadá skvěle, montáž proběhla hladce. Rozhodně doporučuji.', hvezdicky: 5 },
+  { _id: 'f6', jmeno: 'Lenka M.', text: 'Přijeli rychle, zaměření i nabídka do druhého dne. Nakonec jsme zvolili tmavý vinyl — naprosto spokojeni.', hvezdicky: 5 },
+]
+
+export default async function ReferenceSekce() {
+  let recenze: Recenze[] = FALLBACK
+  try {
+    const data = await client.fetch<Recenze[]>(REFERENCE_QUERY)
+    if (data?.length) recenze = data
+  } catch {}
 
   return (
     <section id="reference" className="section" style={{ background: 'var(--gray-50)' }}>
@@ -34,15 +52,15 @@ export default function ReferenceSekce() {
           gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
           gap: 20,
         }}>
-          {recenze.map((r, i) => (
-            <div key={i} style={{
+          {recenze.map(r => (
+            <div key={r._id} style={{
               background: 'white',
               borderRadius: 12,
               padding: '28px 24px',
               border: '1px solid var(--gray-100)',
             }}>
               <div style={{ color: 'var(--orange)', fontSize: 18, marginBottom: 12 }}>
-                {'★'.repeat(r.hvezdy)}
+                {'★'.repeat(r.hvezdicky)}
               </div>
               <p style={{ fontSize: 15, lineHeight: 1.65, marginBottom: 20, color: 'var(--gray-700)' }}>
                 „{r.text}"
@@ -56,7 +74,6 @@ export default function ReferenceSekce() {
                 }}>{r.jmeno[0]}</div>
                 <div>
                   <div style={{ fontWeight: 700, fontSize: 14 }}>{r.jmeno}</div>
-                  <div style={{ color: 'var(--gray-400)', fontSize: 13 }}>{r.mesto}</div>
                 </div>
               </div>
             </div>

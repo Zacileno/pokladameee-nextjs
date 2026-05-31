@@ -20,3 +20,17 @@ export const INSPIRACE_QUERY = `*[_type == "inspirace"] | order(poradiZobrazeni 
 export const AKCE_QUERY = `*[_type == "akce" && aktivni == true] | order(_createdAt desc) {
   _id, nazev, popis, platnostDo, badge
 }`
+
+export const REFERENCE_QUERY = `*[_type == "reference" && aktivni == true] | order(_createdAt desc) {
+  _id, jmeno, text, hvezdicky, datum
+}`
+
+export const PROJEKTY_QUERY = `*[_type == "projekt" && aktivni == true] | order(_createdAt asc) {
+  _id, nazev, url, pocetKlientu,
+  logo { asset->{ url } }
+}`
+
+export const NASTAVENI_QUERY = `*[_type == "nastaveni"][0] {
+  telefon, email,
+  heroFotka { asset->{ url } }
+}`
