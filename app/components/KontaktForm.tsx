@@ -2,10 +2,6 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-type Props = {
-  variant: 'hero' | 'full'
-}
-
 type FormData = {
   jmeno: string
   email: string
@@ -18,7 +14,7 @@ type FormData = {
 
 const EMPTY: FormData = { jmeno: '', email: '', telefon: '', ulice: '', mesto: '', psc: '', zprava: '' }
 
-export default function KontaktForm({ variant }: Props) {
+export default function KontaktForm() {
   const router = useRouter()
   const [form, setForm] = useState<FormData>(EMPTY)
   const [loading, setLoading] = useState(false)
@@ -49,39 +45,22 @@ export default function KontaktForm({ variant }: Props) {
     }
   }
 
-  const isHero = variant === 'hero'
-
   return (
     <form className="kontakt-form" onSubmit={handleSubmit}>
       <input className="form-input" type="text" placeholder="Jméno a příjmení *" required value={form.jmeno} onChange={set('jmeno')} />
       <input className="form-input" type="email" placeholder="E-mail *" required value={form.email} onChange={set('email')} />
       <input className="form-input" type="tel" placeholder="Telefon *" required value={form.telefon} onChange={set('telefon')} />
-
-      {!isHero && (
-        <>
-          <input className="form-input" type="text" placeholder="Ulice a č.p." value={form.ulice} onChange={set('ulice')} />
-          <div className="kontakt-form-row3">
-            <input className="form-input" type="text" placeholder="Město" value={form.mesto} onChange={set('mesto')} />
-            <input className="form-input" type="text" placeholder="PSČ" value={form.psc} onChange={set('psc')} />
-          </div>
-        </>
-      )}
-
-      <textarea
-        className="form-input form-textarea"
-        placeholder="Zpráva (rozloha, lokalita...)"
-        rows={isHero ? 3 : 4}
-        value={form.zprava}
-        onChange={set('zprava')}
-      />
-
+      <input className="form-input" type="text" placeholder="Ulice a č.p." value={form.ulice} onChange={set('ulice')} />
+      <div className="kontakt-form-row3">
+        <input className="form-input" type="text" placeholder="Město" value={form.mesto} onChange={set('mesto')} />
+        <input className="form-input" type="text" placeholder="PSČ" value={form.psc} onChange={set('psc')} />
+      </div>
+      <textarea className="form-input form-textarea" placeholder="Zpráva (rozloha, lokalita...)" rows={3} value={form.zprava} onChange={set('zprava')} />
       <label className="form-gdpr">
         <input type="checkbox" required style={{ accentColor: 'var(--orange)', flexShrink: 0, marginTop: 2 }} />
         Souhlasím se zpracováním osobních údajů a obchodními podmínkami.
       </label>
-
       {error && <p className="form-error">{error}</p>}
-
       <button type="submit" disabled={loading} className="btn-primary form-submit">
         {loading ? 'Odesílám...' : 'Odeslat poptávku'}
       </button>

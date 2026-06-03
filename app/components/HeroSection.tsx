@@ -48,7 +48,7 @@ export default function HeroSection({ heroFotkaUrl }: { heroFotkaUrl?: string | 
               <h3 style={{ fontSize: 22, fontWeight: 900, marginBottom: 4 }}>Nezávazná poptávka</h3>
               <p style={{ color: 'var(--gray-400)', fontSize: 14 }}>Odpovíme do 24 hodin. Zaměření zdarma.</p>
             </div>
-            <KontaktForm variant="hero" />
+            <KontaktForm />
           </div>
         </div>
       </div>
