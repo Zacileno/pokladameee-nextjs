@@ -59,47 +59,31 @@ export default async function RemeselnikSekce() {
         </div>
       </div>
 
-      {/* Fullwidth pruhy projektů */}
-      <div style={{ paddingBottom: 80 }}>
-        {projekty.map((p, i) => {
+      {/* 50/50 pruhy projektů — jeden řádek */}
+      <div className="rem-radek">
+        {projekty.map((p) => {
           const meta = PROJEKT_META[p.nazev] ?? { barva: '#1a1a1a', accent: '#FF8800', claim: '', recenzi: 0, eeeFrom: p.nazev.length - 3 }
-          const reversed = i % 2 === 1
           return (
-            <div key={p._id} className="rem-pruh" style={{ background: meta.barva, flexDirection: reversed ? 'row-reverse' : 'row' }}>
-              {/* Textová část */}
-              <div className="rem-pruh-text">
-                <p style={{ color: 'rgba(255,255,255,0.55)', fontWeight: 700, fontSize: 12, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 14 }}>
-                  Také od nás
-                </p>
-                <h3 style={{ fontSize: 'clamp(34px, 4vw, 56px)', fontWeight: 900, color: 'white', lineHeight: 1.0, marginBottom: 18 }}>
-                  <NazevSProjektem nazev={p.nazev} accent={meta.accent} />
-                </h3>
-                <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: 16, lineHeight: 1.7, maxWidth: 420, marginBottom: 20 }}>
-                  {meta.claim}
-                </p>
-                {/* Hvězdičky + recenze */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 28 }}>
-                  <span style={{ color: meta.accent, fontSize: 18, letterSpacing: 2 }}>★★★★★</span>
-                  <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: 14 }}>
-                    {p.pocetKlientu ? `${p.pocetKlientu.toLocaleString('cs-CZ')} spokojených klientů` : `${meta.recenzi} recenzí`}
-                  </span>
-                </div>
-                <a href={p.url} target="_blank" rel="noopener noreferrer" className="rem-pruh-btn"
-                  style={{ background: meta.accent, color: meta.accent === '#FFD600' ? '#1A7A4A' : 'white' }}>
-                  Navštívit {p.url.replace('https://', '')} →
-                </a>
+            <div key={p._id} className="rem-pruh-text" style={{ background: meta.barva }}>
+              <p style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 700, fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 12 }}>
+                Také od nás
+              </p>
+              <h3 style={{ fontSize: 'clamp(28px, 3vw, 42px)', fontWeight: 900, color: 'white', lineHeight: 1.0, marginBottom: 14 }}>
+                <NazevSProjektem nazev={p.nazev} accent={meta.accent} />
+              </h3>
+              <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: 15, lineHeight: 1.65, marginBottom: 18 }}>
+                {meta.claim}
+              </p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 24 }}>
+                <span style={{ color: meta.accent, fontSize: 16 }}>★★★★★</span>
+                <span style={{ color: 'rgba(255,255,255,0.55)', fontSize: 13 }}>
+                  {p.pocetKlientu ? `${p.pocetKlientu.toLocaleString('cs-CZ')} klientů` : `${meta.recenzi} recenzí`}
+                </span>
               </div>
-
-              {/* Vizuální část */}
-              <div className="rem-pruh-visual" style={{ background: `linear-gradient(135deg, ${meta.barva} 0%, color-mix(in srgb, ${meta.barva} 60%, black) 100%)` }}>
-                {p.logo?.asset?.url ? (
-                  <img src={p.logo.asset.url} alt={p.nazev} style={{ maxHeight: 80, maxWidth: 220, objectFit: 'contain', filter: 'brightness(0) invert(1)', opacity: 0.9 }} />
-                ) : (
-                  <span style={{ fontSize: 'clamp(64px, 8vw, 110px)', fontWeight: 900, color: 'white', opacity: 0.08, lineHeight: 1, userSelect: 'none', letterSpacing: '-0.04em', display: 'block' }}>
-                    {p.nazev}
-                  </span>
-                )}
-              </div>
+              <a href={p.url} target="_blank" rel="noopener noreferrer" className="rem-pruh-btn"
+                style={{ background: meta.accent, color: meta.accent === '#FFD600' ? '#1A7A4A' : 'white' }}>
+                {p.url.replace('https://', '')} →
+              </a>
             </div>
           )
         })}
