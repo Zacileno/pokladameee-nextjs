@@ -21,7 +21,7 @@ export const AKCE_QUERY = `*[_type == "akce" && aktivni == true] | order(_create
   _id, nazev, popis, platnostDo, badge
 }`
 
-export const REFERENCE_QUERY = `*[_type == "reference" && aktivni == true] | order(_createdAt desc) {
+export const REFERENCE_QUERY = `*[_type == "recenze" && aktivni == true] | order(_createdAt desc) {
   _id, jmeno, text, hvezdicky, datum
 }`
 

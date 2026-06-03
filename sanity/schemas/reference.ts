@@ -1,7 +1,7 @@
 import { defineType, defineField } from 'sanity'
 
 export const referenceSchema = defineType({
-  name: 'reference',
+  name: 'recenze',
   title: 'Recenze',
   type: 'document',
   fields: [
