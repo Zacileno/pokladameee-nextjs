@@ -49,7 +49,8 @@ Push vždy do `origin main`.
 - **Framework:** Next.js (App Router, TypeScript)
 - **Styly:** Inline styles + CSS třídy v `globals.css` — žádný Tailwind
 - **CMS:** Sanity (`projectId: 8cvsenqb`, dataset: `production`)
-- **Formuláře:** Formspree (ID zatím nevyplněno — placeholder v HeroSection + KontaktSekce)
+- **Formuláře:** vlastní API route `/api/kontakt` → Make webhook + Resend emaily
+- **Emaily:** Resend — transakční emaily z `/api/kontakt` (Adamovi + zákazníkovi)
 - **Deployment:** Vercel (auto-deploy z `main` branche)
 - **Font:** Barlow (Google Fonts, načítán přes `<link>` v layout.tsx — ne next/font)
 - **Obrázky:** `next/image`, unoptimized: true, remote patterns: Unsplash + cdn.sanity.io
@@ -175,10 +176,11 @@ npm run dev
 NEXT_PUBLIC_SANITY_PROJECT_ID=8cvsenqb
 NEXT_PUBLIC_SANITY_DATASET=production
 MAKE_WEBHOOK_URL=https://placeholder.make.webhook   ← nahradit reálnou URL z Make
+RESEND_API_KEY=re_...                               ← vyplnit po registraci na resend.com
 ```
 
 Stejné proměnné musí být na Vercelu: Settings → Environment Variables (na obou projektech).
-**TODO Vercel:** Přidat `MAKE_WEBHOOK_URL` s reálnou webhook URL z Make.com na projektu `pokladameee-testing`.
+**TODO Vercel:** Přidat `MAKE_WEBHOOK_URL` a `RESEND_API_KEY` na projektu `pokladameee-testing`.
 
 ---
 
@@ -216,10 +218,11 @@ Na `pokladameee-testing.vercel.app/studio`:
 ## TODO — zbývá do plnohodnotného webu
 
 ### 🔴 Kritické
-- [ ] Formspree ID — propojit hero formulář + kontaktní formulář
+- [ ] Registrace na resend.com, ověření domény pokladameee.cz (DNS v Cloudflare), vyplnit RESEND_API_KEY na Vercelu
+- [ ] Přepnout příjemce emailu v `/api/kontakt/route.ts` z martin@zacileno.cz zpět na adam.hajdusek@pokladameee.cz
 - [ ] Nahrát loga Malujemeee + Žaluzieee do Sanity (Projekty skupiny)
 - [ ] Přidat reálné recenze do Sanity (Reference)
-- [ ] Ověřit že schémata reference, nastaveni, projekt jsou vidět v Sanity Studiu
+- [x] ~~Ověřit že schémata reference, nastaveni, projekt jsou vidět v Sanity Studiu~~ ✓
 
 ### 🟡 Důležité
 - [ ] Reálná hero fotka pozadí (nahrát přes Sanity → Nastavení)
