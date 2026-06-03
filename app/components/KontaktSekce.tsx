@@ -1,19 +1,6 @@
-'use client'
-import { useState } from 'react'
+import KontaktForm from './KontaktForm'
 
 export default function KontaktSekce() {
-  const [form, setForm] = useState({ jmeno: '', prijmeni: '', email: '', telefon: '', ulice: '', mesto: '', psc: '', sluzba: '', zprava: '' })
-  const [sent, setSent] = useState(false)
-  const [loading, setLoading] = useState(false)
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    await new Promise(r => setTimeout(r, 800))
-    setSent(true)
-    setLoading(false)
-  }
-
   return (
     <section id="kontakt" className="section" style={{ background: 'white' }}>
       <div className="container">
@@ -52,52 +39,12 @@ export default function KontaktSekce() {
           </div>
 
           <div style={{ background: 'var(--gray-50)', borderRadius: 16, padding: '40px 36px', border: '1px solid var(--gray-100)' }}>
-            {sent ? (
-              <div style={{ textAlign: 'center', padding: '48px 0' }}>
-                <div style={{ fontSize: 56, marginBottom: 20 }}>✅</div>
-                <h3 style={{ fontSize: 26, fontWeight: 900, marginBottom: 12 }}>Poptávka odeslána!</h3>
-                <p style={{ color: 'var(--gray-400)', fontSize: 16 }}>Ozveme se vám do 24 hodin.</p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit}>
-                <h3 style={{ fontSize: 22, fontWeight: 900, marginBottom: 6 }}>Nezávazná poptávka</h3>
-                <p style={{ color: 'var(--gray-400)', fontSize: 14, marginBottom: 28 }}>Odpovíme do 24 hodin. Zaměření zdarma.</p>
-                <div className="kontakt-form-row2">
-                  <input type="text" placeholder="Jméno *" required value={form.jmeno} onChange={e => setForm({...form, jmeno: e.target.value})} style={inp} />
-                  <input type="text" placeholder="Příjmení *" required value={form.prijmeni} onChange={e => setForm({...form, prijmeni: e.target.value})} style={inp} />
-                </div>
-                <div className="kontakt-form-row2">
-                  <input type="email" placeholder="E-mail *" required value={form.email} onChange={e => setForm({...form, email: e.target.value})} style={inp} />
-                  <input type="tel" placeholder="Telefon" value={form.telefon} onChange={e => setForm({...form, telefon: e.target.value})} style={inp} />
-                </div>
-                <input type="text" placeholder="Ulice a č.p." value={form.ulice} onChange={e => setForm({...form, ulice: e.target.value})} style={{...inp, marginBottom: 12}} />
-                <div className="kontakt-form-row3">
-                  <input type="text" placeholder="Město" value={form.mesto} onChange={e => setForm({...form, mesto: e.target.value})} style={inp} />
-                  <input type="text" placeholder="PSČ" value={form.psc} onChange={e => setForm({...form, psc: e.target.value})} style={inp} />
-                </div>
-                <select value={form.sluzba} onChange={e => setForm({...form, sluzba: e.target.value})} style={{...inp, marginBottom: 12, color: form.sluzba ? '#000' : '#999'}}>
-                  <option value="">Mám zájem o...</option>
-                  <option>Vinylová podlaha lepená</option>
-                  <option>Vinylová podlaha plovoucí</option>
-                  <option>Výměna staré podlahy</option>
-                  <option>Konzultaci na místě</option>
-                  <option>Chci pomoct s výběrem</option>
-                </select>
-                <textarea placeholder="Zpráva (rozloha, patro, lokalita...)" value={form.zprava} onChange={e => setForm({...form, zprava: e.target.value})} rows={4} style={{...inp, resize: 'none', marginBottom: 16}} />
-                <label style={{ display: 'flex', gap: 10, alignItems: 'flex-start', fontSize: 12, color: 'var(--gray-400)', marginBottom: 20, cursor: 'pointer' }}>
-                  <input type="checkbox" required style={{ marginTop: 2, accentColor: 'var(--orange)', flexShrink: 0 }} />
-                  Souhlasím se zpracováním osobních údajů a všeobecnými obchodními podmínkami.
-                </label>
-                <button type="submit" disabled={loading} className="btn-primary" style={{ width: '100%', justifyContent: 'center', fontSize: 16, padding: '15px', opacity: loading ? 0.7 : 1 }}>
-                  {loading ? 'Odesílám...' : 'Odeslat poptávku'}
-                </button>
-              </form>
-            )}
+            <h3 style={{ fontSize: 22, fontWeight: 900, marginBottom: 6 }}>Nezávazná poptávka</h3>
+            <p style={{ color: 'var(--gray-400)', fontSize: 14, marginBottom: 28 }}>Odpovíme do 24 hodin. Zaměření zdarma.</p>
+            <KontaktForm variant="full" />
           </div>
         </div>
       </div>
     </section>
   )
 }
-
-const inp: React.CSSProperties = { padding: '11px 14px', border: '1.5px solid #E5E5E0', borderRadius: 6, fontSize: 14, outline: 'none', width: '100%', background: 'white', transition: 'border-color 0.2s', display: 'block' }

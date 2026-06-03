@@ -1,17 +1,9 @@
-'use client'
-import { useState } from 'react'
+import KontaktForm from './KontaktForm'
 
 const HERO_FALLBACK = 'https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?w=1600&q=85'
 
 export default function HeroSection({ heroFotkaUrl }: { heroFotkaUrl?: string | null }) {
   const bgImage = heroFotkaUrl || HERO_FALLBACK
-  const [form, setForm] = useState({ jmeno: '', telefon: '', sluzba: '', zprava: '' })
-  const [sent, setSent] = useState(false)
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    setSent(true)
-  }
 
   return (
     <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
@@ -52,42 +44,14 @@ export default function HeroSection({ heroFotkaUrl }: { heroFotkaUrl?: string | 
 
           {/* Formulář — skryto na mobilu přes CSS třídu */}
           <div className="hero-form" style={{ background: 'rgba(255,255,255,0.97)', borderRadius: 16, padding: '36px 32px', boxShadow: '0 24px 64px rgba(0,0,0,0.35)' }}>
-            {sent ? (
-              <div style={{ textAlign: 'center', padding: '32px 0' }}>
-                <div style={{ fontSize: 48, marginBottom: 16 }}>✅</div>
-                <h3 style={{ fontSize: 22, fontWeight: 800, marginBottom: 8 }}>Hotovo!</h3>
-                <p style={{ color: 'var(--gray-400)' }}>Brzy vám zavoláme a domluvíme termín zaměření.</p>
-              </div>
-            ) : (
-              <>
-                <div style={{ marginBottom: 24 }}>
-                  <h3 style={{ fontSize: 22, fontWeight: 900, marginBottom: 4 }}>Nezávazná poptávka</h3>
-                  <p style={{ color: 'var(--gray-400)', fontSize: 14 }}>Odpovíme do 24 hodin. Zaměření zdarma.</p>
-                </div>
-                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-                  <input type="text" placeholder="Jméno a příjmení *" required value={form.jmeno} onChange={e => setForm({...form, jmeno: e.target.value})} style={inp} />
-                  <input type="tel" placeholder="Telefon *" required value={form.telefon} onChange={e => setForm({...form, telefon: e.target.value})} style={inp} />
-                  <select value={form.sluzba} onChange={e => setForm({...form, sluzba: e.target.value})} style={{...inp, color: form.sluzba ? '#000' : '#999'}}>
-                    <option value="">Typ podlahy...</option>
-                    <option>Vinylová podlaha lepená</option>
-                    <option>Vinylová podlaha plovoucí</option>
-                    <option>Výměna staré podlahy</option>
-                    <option>Chci pomoct s výběrem</option>
-                  </select>
-                  <textarea placeholder="Zpráva (rozloha, lokalita...)" value={form.zprava} onChange={e => setForm({...form, zprava: e.target.value})} rows={3} style={{...inp, resize: 'none'}} />
-                  <label style={{ display: 'flex', gap: 10, alignItems: 'flex-start', fontSize: 12, color: 'var(--gray-400)', cursor: 'pointer' }}>
-                    <input type="checkbox" required style={{ marginTop: 2, accentColor: 'var(--orange)' }} />
-                    Souhlasím se zpracováním osobních údajů a obchodními podmínkami.
-                  </label>
-                  <button type="submit" className="btn-primary" style={{ justifyContent: 'center', fontSize: 16, padding: '14px' }}>Odeslat poptávku</button>
-                </form>
-              </>
-            )}
+            <div style={{ marginBottom: 24 }}>
+              <h3 style={{ fontSize: 22, fontWeight: 900, marginBottom: 4 }}>Nezávazná poptávka</h3>
+              <p style={{ color: 'var(--gray-400)', fontSize: 14 }}>Odpovíme do 24 hodin. Zaměření zdarma.</p>
+            </div>
+            <KontaktForm variant="hero" />
           </div>
         </div>
       </div>
     </section>
   )
 }
-
-const inp: React.CSSProperties = { padding: '12px 14px', border: '1.5px solid #E5E5E0', borderRadius: 6, fontSize: 15, outline: 'none', width: '100%', background: '#FAFAF8', transition: 'border-color 0.2s' }
