@@ -45,8 +45,12 @@ input, select, textarea { font-family: var(--font); }
 .vyhody-item { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 28px 36px; flex: 1 1 160px; border-right: 1px solid var(--gray-100); }
 .vyhody-item:last-child { border-right: none; }
 
-/* ── ŘEMESLNÍK ── */
-.rem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+/* ── ŘEMESLNÍK — fullwidth pruhy ── */
+.rem-pruh { display: flex; min-height: 280px; }
+.rem-pruh-text { flex: 1 1 55%; padding: 52px 64px; display: flex; flex-direction: column; justify-content: center; }
+.rem-pruh-visual { flex: 1 1 45%; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 40px; }
+.rem-pruh-btn { display: inline-flex; align-items: center; font-weight: 800; font-size: 15px; padding: 13px 26px; border-radius: 6px; text-decoration: none; transition: opacity 0.2s, transform 0.15s; white-space: nowrap; width: fit-content; }
+.rem-pruh-btn:hover { opacity: 0.88; transform: translateY(-1px); }
 
 /* ── VYHODY BADGE ── */
 .vyhody-badge-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
@@ -83,7 +87,9 @@ input, select, textarea { font-family: var(--font); }
   .vyhody-item:last-child { border-bottom: none; }
   .vyhody-lista { flex-direction: column; }
 
-  .rem-grid { grid-template-columns: 1fr; gap: 40px; }
+  .rem-pruh { flex-direction: column !important; }
+  .rem-pruh-text { padding: 36px 24px; }
+  .rem-pruh-visual { min-height: 140px; padding: 24px; }
 
   .vyhody-badge-grid { grid-template-columns: 1fr; gap: 40px; }
   .vyhody-badge-karty { grid-template-columns: 1fr 1fr; }
