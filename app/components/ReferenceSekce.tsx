@@ -1,6 +1,6 @@
 import { client, REFERENCE_QUERY } from '../../lib/sanity'
 
-export const revalidate = 3600
+export const revalidate = 60
 
 type Recenze = {
   _id: string
