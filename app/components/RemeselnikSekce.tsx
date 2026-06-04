@@ -1,6 +1,6 @@
 import { client, PROJEKTY_QUERY } from '../../lib/sanity'
 
-export const revalidate = 60
+export const revalidate = 0
 
 type Projekt = {
   _id: string

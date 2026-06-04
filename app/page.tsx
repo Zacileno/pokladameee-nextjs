@@ -11,7 +11,7 @@ import ReferenceSekce from './components/ReferenceSekce'
 import KontaktSekce from './components/KontaktSekce'
 import Footer from './components/Footer'
 
-export const revalidate = 60
+export const revalidate = 0
 
 type HeroSekce = {
   heroFotka?: { asset: { url: string } }
