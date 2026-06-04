@@ -113,21 +113,16 @@ export default async function RemeselnikSekce() {
                     <img src={p.logoUrl} alt={p.nazev} style={{ height: 36, width: 'auto', marginBottom: 20, objectFit: 'contain', objectPosition: 'left' }} />
                   )}
 
-                  {/* Název */}
-                  <h3 style={{ fontSize: 'clamp(28px, 3vw, 42px)', fontWeight: 900, color: 'white', lineHeight: 1.0, marginBottom: 8 }}>
-                    <NazevSEee nazev={p.nazev} accent={accent} />
-                  </h3>
-
                   {/* Claim */}
                   {p.claim && (
-                    <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: 15, lineHeight: 1.5, marginBottom: p.popis ? 6 : 16 }}>
+                    <p style={{ color: 'rgba(0,0,0,0.75)', fontSize: 15, lineHeight: 1.5, marginBottom: p.popis ? 6 : 16 }}>
                       {p.claim}
                     </p>
                   )}
 
                   {/* Popis */}
                   {p.popis && (
-                    <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 14, lineHeight: 1.5, marginBottom: 20 }}>
+                    <p style={{ color: 'rgba(0,0,0,0.45)', fontSize: 14, lineHeight: 1.5, marginBottom: 20 }}>
                       {p.popis}
                     </p>
                   )}
@@ -136,12 +131,12 @@ export default async function RemeselnikSekce() {
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 24 }}>
                     {p.hodnoceni && <Hvezdicky pocet={p.hodnoceni} accent={accent} />}
                     {p.hodnoceni && (
-                      <span style={{ color: 'rgba(255,255,255,0.8)', fontSize: 14, fontWeight: 700 }}>
+                      <span style={{ color: 'rgba(0,0,0,0.7)', fontSize: 14, fontWeight: 700 }}>
                         {p.hodnoceni.toFixed(1)}
                       </span>
                     )}
                     {p.pocetKlientu && (
-                      <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: 13 }}>
+                      <span style={{ color: 'rgba(0,0,0,0.45)', fontSize: 13 }}>
                         · {p.pocetKlientu.toLocaleString('cs-CZ')} klientů
                       </span>
                     )}
