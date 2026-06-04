@@ -1,4 +1,4 @@
-import { client, NASTAVENI_QUERY } from '../lib/sanity'
+import { client, HERO_SEKCE_QUERY, KONTAKT_SEKCE_QUERY } from '../lib/sanity'
 import Header from './components/Header'
 import HeroSection from './components/HeroSection'
 import VyhodySekce from './components/VyhodySekce'
@@ -13,33 +13,39 @@ import Footer from './components/Footer'
 
 export const revalidate = 3600
 
-type Nastaveni = {
+type HeroSekce = {
   heroFotka?: { asset: { url: string } }
+}
+
+type KontaktSekceData = {
+  nadpis?: string
+  podnadpis?: string
+  jmeno?: string
+  role?: string
+  citat?: string
+  fotoUrl?: string
   telefon?: string
   email?: string
-  nadpisKontakt?: string
-  podnadpisKontakt?: string
-  jmenoKontakt?: string
-  roleKontakt?: string
-  citatKontakt?: string
-  fotoKontaktUrl?: string
-  telefonKontakt?: string
-  emailKontakt?: string
-  pracovniDobaKontakt?: string
-  regionKontakt?: string
+  pracovniDoba?: string
+  region?: string
 }
 
 export default async function Home() {
-  let nastaveni: Nastaveni | null = null
+  let heroSekce: HeroSekce | null = null
+  let kontaktSekce: KontaktSekceData | null = null
+
   try {
-    nastaveni = await client.fetch<Nastaveni>(NASTAVENI_QUERY)
+    ;[heroSekce, kontaktSekce] = await Promise.all([
+      client.fetch<HeroSekce>(HERO_SEKCE_QUERY),
+      client.fetch<KontaktSekceData>(KONTAKT_SEKCE_QUERY),
+    ])
   } catch {}
 
   return (
     <>
       <Header />
       <main>
-        <HeroSection heroFotkaUrl={nastaveni?.heroFotka?.asset?.url} />
+        <HeroSection heroFotkaUrl={heroSekce?.heroFotka?.asset?.url} />
         <VyhodySekce />
         <SluzbySekce />
         <JakToFunguje />
@@ -47,18 +53,7 @@ export default async function Home() {
         <RemeselnikSekce />
         <VyhodyBadge />
         <ReferenceSekce />
-        <KontaktSekce kontakt={{
-          nadpis: nastaveni?.nadpisKontakt,
-          podnadpis: nastaveni?.podnadpisKontakt,
-          jmeno: nastaveni?.jmenoKontakt,
-          role: nastaveni?.roleKontakt,
-          citat: nastaveni?.citatKontakt,
-          fotoUrl: nastaveni?.fotoKontaktUrl,
-          telefon: nastaveni?.telefonKontakt,
-          email: nastaveni?.emailKontakt,
-          pracovniDoba: nastaveni?.pracovniDobaKontakt,
-          region: nastaveni?.regionKontakt,
-        }} />
+        <KontaktSekce kontakt={kontaktSekce ?? undefined} />
       </main>
       <Footer />
     </>

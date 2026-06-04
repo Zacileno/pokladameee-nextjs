@@ -30,12 +30,14 @@ export const PROJEKTY_QUERY = `*[_type == "projekt" && aktivni == true] | order(
   logo { asset->{ url } }
 }`
 
-export const NASTAVENI_QUERY = `*[_type == "nastaveni"][0] {
+export const HERO_SEKCE_QUERY = `*[_type == "heroSekce"][0] {
+  heroFotka { asset->{ url } }
+}`
+
+export const KONTAKT_SEKCE_QUERY = `*[_type == "kontaktSekce"][0] {
+  nadpis, podnadpis,
+  jmeno, role, citat,
+  "fotoUrl": foto.asset->url,
   telefon, email,
-  heroFotka { asset->{ url } },
-  nadpisKontakt, podnadpisKontakt,
-  jmenoKontakt, roleKontakt, citatKontakt,
-  "fotoKontaktUrl": fotoKontakt.asset->url,
-  telefonKontakt, emailKontakt,
-  pracovniDobaKontakt, regionKontakt
+  pracovniDoba, region
 }`

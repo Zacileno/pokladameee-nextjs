@@ -9,24 +9,24 @@ const client = createClient({
 })
 
 async function seed() {
-  const doc = await client.fetch(`*[_type == "nastaveni"][0]{ _id }`)
+  const doc = await client.fetch(`*[_type == "kontaktSekce"][0]{ _id }`)
   if (!doc?._id) {
-    console.error('Sanity dokument nastaveni nenalezen. Založ ho nejdřív přes Studio.')
+    console.error('Sanity dokument kontaktSekce nenalezen. Založ ho nejdřív přes Studio.')
     process.exit(1)
   }
 
   const result = await client
     .patch(doc._id)
     .setIfMissing({
-      nadpisKontakt: 'Napište přímo nám',
-      podnadpisKontakt: 'Zaměření je zdarma. Odpovíme do 24 hodin, obvykle dřív. Přijedeme k vám v celém MSK.',
-      jmenoKontakt: 'Adam Hajdušek',
-      roleKontakt: 'Zakladatel & hlavní technik',
-      citatKontakt: 'Každou podlahu řešíme osobně. Přijedeme se podívat.',
-      telefonKontakt: '+420 739 229 922',
-      emailKontakt: 'adam.hajdusek@pokladameee.cz',
-      pracovniDobaKontakt: 'Po–Pá 7:00–18:00',
-      regionKontakt: 'Moravskoslezský kraj',
+      nadpis: 'Napište přímo nám',
+      podnadpis: 'Zaměření je zdarma. Odpovíme do 24 hodin, obvykle dřív. Přijedeme k vám v celém MSK.',
+      jmeno: 'Adam Hajdušek',
+      role: 'Zakladatel & hlavní technik',
+      citat: 'Každou podlahu řešíme osobně. Přijedeme se podívat.',
+      telefon: '+420 739 229 922',
+      email: 'adam.hajdusek@pokladameee.cz',
+      pracovniDoba: 'Po–Pá 7:00–18:00',
+      region: 'Moravskoslezský kraj',
     })
     .commit()
 
