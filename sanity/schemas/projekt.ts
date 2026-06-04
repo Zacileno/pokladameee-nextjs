@@ -14,6 +14,7 @@ export const projektSchema = defineType({
     defineField({ name: 'hodnoceni', title: 'Hodnocení (např. 4.9)', type: 'number' }),
     defineField({ name: 'url', title: 'URL webu', type: 'url', validation: r => r.required() }),
     defineField({ name: 'barva', title: 'Barva pozadí karty (hex)', type: 'string' }),
+    defineField({ name: 'barvaBtn', title: 'Barva tlačítka (hex)', type: 'string' }),
     defineField({ name: 'aktivni', title: 'Aktivní', type: 'boolean', initialValue: true }),
   ],
   preview: { select: { title: 'nazev', subtitle: 'url', media: 'logo' } },

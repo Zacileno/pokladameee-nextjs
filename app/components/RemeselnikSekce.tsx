@@ -11,6 +11,7 @@ type Projekt = {
   pocetKlientu?: number
   hodnoceni?: number
   barva?: string
+  barvaBtn?: string
   logoUrl?: string
   fotkaUrl?: string
 }
@@ -25,6 +26,7 @@ const FALLBACK_PROJEKTY: Projekt[] = [
     pocetKlientu: 3200,
     hodnoceni: 4.9,
     barva: '#5B2D8E',
+    barvaBtn: '#5B2D8E',
   },
   {
     _id: 'fb-2',
@@ -35,6 +37,7 @@ const FALLBACK_PROJEKTY: Projekt[] = [
     pocetKlientu: 30389,
     hodnoceni: 5.0,
     barva: '#1A7A4A',
+    barvaBtn: '#1A7A4A',
   },
 ]
 
@@ -87,7 +90,8 @@ export default async function RemeselnikSekce() {
           {projekty.map((p) => {
             const barva = p.barva ?? '#1a1a1a'
             const accent = getAccent(barva)
-            const btnColor = accent === '#FFD600' ? barva : 'white'
+            const btnBg = p.barvaBtn ?? accent
+            const btnColor = btnBg === '#FFD600' ? '#1A7A4A' : 'white'
 
             return (
               <div key={p._id} className="projekt-karta" style={{ background: barva }}>
@@ -128,7 +132,7 @@ export default async function RemeselnikSekce() {
 
                   {/* CTA tlačítko */}
                   <a href={p.url} target="_blank" rel="noopener noreferrer" className="rem-pruh-btn"
-                    style={{ background: accent, color: btnColor }}>
+                    style={{ background: btnBg, color: btnColor }}>
                     {p.url.replace(/https?:\/\//, '').replace(/\/$/, '')} →
                   </a>
                 </div>
