@@ -26,8 +26,9 @@ export const REFERENCE_QUERY = `*[_type == "recenze" && aktivni == true] | order
 }`
 
 export const PROJEKTY_QUERY = `*[_type == "projekt" && aktivni == true] | order(_createdAt asc) {
-  _id, nazev, url, pocetKlientu,
-  logo { asset->{ url } }
+  _id, nazev, claim, popis, url, pocetKlientu, hodnoceni, barva,
+  "logoUrl": logo.asset->url,
+  "fotkaUrl": fotkaRemselniku.asset->url
 }`
 
 export const HERO_SEKCE_QUERY = `*[_type == "heroSekce"][0] {

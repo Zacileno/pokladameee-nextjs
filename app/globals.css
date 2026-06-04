@@ -45,9 +45,11 @@ input, select, textarea { font-family: var(--font); }
 .vyhody-item { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 28px 36px; flex: 1 1 160px; border-right: 1px solid var(--gray-100); }
 .vyhody-item:last-child { border-right: none; }
 
-/* ── ŘEMESLNÍK — 50/50 řádek ── */
-.rem-radek { display: flex; }
-.rem-pruh-text { flex: 1 1 50%; padding: 48px 56px; display: flex; flex-direction: column; justify-content: center; min-height: 280px; }
+/* ── ŘEMESLNÍK — karty projektů ── */
+.projekt-seznam { display: flex; flex-direction: column; gap: 24px; padding-bottom: 80px; }
+.projekt-karta { position: relative; overflow: visible; display: flex; flex-direction: row; align-items: stretch; border-radius: 16px; min-height: 220px; }
+.projekt-karta-obsah { display: flex; flex-direction: column; justify-content: center; gap: 0; padding: 40px 48px; flex: 1; }
+.projekt-karta-foto { position: absolute; right: 40px; bottom: 0; height: 110%; object-fit: contain; pointer-events: none; }
 .rem-pruh-btn { display: inline-flex; align-items: center; font-weight: 800; font-size: 14px; padding: 11px 22px; border-radius: 6px; text-decoration: none; transition: opacity 0.2s, transform 0.15s; white-space: nowrap; width: fit-content; }
 .rem-pruh-btn:hover { opacity: 0.88; transform: translateY(-1px); }
 
@@ -86,8 +88,8 @@ input, select, textarea { font-family: var(--font); }
   .vyhody-item:last-child { border-bottom: none; }
   .vyhody-lista { flex-direction: column; }
 
-  .rem-radek { flex-direction: column; }
-  .rem-pruh-text { padding: 36px 24px; }
+  .projekt-karta-foto { display: none; }
+  .projekt-karta-obsah { padding: 32px 24px; }
 
   .vyhody-badge-grid { grid-template-columns: 1fr; gap: 40px; }
   .vyhody-badge-karty { grid-template-columns: 1fr 1fr; }

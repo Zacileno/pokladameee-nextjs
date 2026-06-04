@@ -1,35 +1,73 @@
 import { client, PROJEKTY_QUERY } from '../../lib/sanity'
 
-export const revalidate = 3600
+export const revalidate = 60
 
 type Projekt = {
   _id: string
   nazev: string
+  claim?: string
+  popis?: string
   url: string
   pocetKlientu?: number
-  logo?: { asset: { url: string } }
+  hodnoceni?: number
+  barva?: string
+  logoUrl?: string
+  fotkaUrl?: string
 }
 
 const FALLBACK_PROJEKTY: Projekt[] = [
-  { _id: 'fb-1', nazev: 'Malujemeee', url: 'https://malujemeee.cz', pocetKlientu: 3200 },
-  { _id: 'fb-2', nazev: 'Žaluzieee', url: 'https://zaluzieee.cz', pocetKlientu: 1400 },
+  {
+    _id: 'fb-1',
+    nazev: 'Malujemeee',
+    claim: 'Malujeme byty, domy a kanceláře v celém MSK.',
+    popis: 'Čistě, rychle, bez zápachu. Hotovo do týdne.',
+    url: 'https://malujemeee.cz',
+    pocetKlientu: 3200,
+    hodnoceni: 4.9,
+    barva: '#5B2D8E',
+  },
+  {
+    _id: 'fb-2',
+    nazev: 'Žaluzieee',
+    claim: 'Žaluzie, rolety a záclony na míru.',
+    popis: 'Montáž do 48 hodin po celém Moravskoslezském kraji.',
+    url: 'https://www.zaluzieee.cz/',
+    pocetKlientu: 30389,
+    hodnoceni: 5.0,
+    barva: '#1A7A4A',
+  },
 ]
 
-const PROJEKT_META: Record<string, { barva: string; accent: string; claim: string; recenzi: number; eeeFrom: number }> = {
-  Malujemeee: { barva: '#5B2D8E', accent: '#FF8800', claim: 'Malujeme byty, domy a kanceláře v celém MSK. Čistě, rychle, bez zápachu.', recenzi: 184, eeeFrom: 6 },
-  Žaluzieee:  { barva: '#1A7A4A', accent: '#FFD600', claim: 'Žaluzie, rolety a záclony na míru. Montáž do 48 hodin po celém Moravskoslezském kraji.', recenzi: 97, eeeFrom: 7 },
+// accent barva tlačítka a hvězdiček podle barvy pozadí karty
+const ACCENTY: Record<string, string> = {
+  '#5B2D8E': '#FF8800',
+  '#1A7A4A': '#FFD600',
 }
 
-function getEeeFrom(nazev: string): number {
-  return PROJEKT_META[nazev]?.eeeFrom ?? nazev.length - 3
+function getAccent(barva: string): string {
+  return ACCENTY[barva.toUpperCase()] ?? ACCENTY[barva] ?? '#FF8800'
 }
 
-function NazevSProjektem({ nazev, accent }: { nazev: string; accent: string }) {
-  const idx = getEeeFrom(nazev)
+function getEeeIdx(nazev: string): number {
+  // najde začátek "eee" suffixu
+  const m = nazev.match(/eee$/i)
+  return m ? nazev.length - 3 : nazev.length
+}
+
+function NazevSEee({ nazev, accent }: { nazev: string; accent: string }) {
+  const idx = getEeeIdx(nazev)
   return (
     <span>
       {nazev.slice(0, idx)}
       <span style={{ color: accent }}>{nazev.slice(idx)}</span>
+    </span>
+  )
+}
+
+function Hvezdicky({ pocet, accent }: { pocet: number; accent: string }) {
+  return (
+    <span style={{ color: accent, fontSize: 18, letterSpacing: 2 }}>
+      {'★'.repeat(Math.round(pocet))}{'☆'.repeat(5 - Math.round(pocet))}
     </span>
   )
 }
@@ -42,7 +80,7 @@ export default async function RemeselnikSekce() {
   } catch {}
 
   return (
-    <section style={{ background: '#FF8800', overflow: 'hidden' }}>
+    <section style={{ background: '#FF8800', overflow: 'visible' }}>
       {/* Hlavička sekce */}
       <div className="container" style={{ paddingTop: 80, paddingBottom: 56 }}>
         <div style={{ textAlign: 'center' }}>
@@ -59,34 +97,76 @@ export default async function RemeselnikSekce() {
         </div>
       </div>
 
-      {/* 50/50 pruhy projektů — jeden řádek */}
-      <div className="rem-radek">
-        {projekty.map((p) => {
-          const meta = PROJEKT_META[p.nazev] ?? { barva: '#1a1a1a', accent: '#FF8800', claim: '', recenzi: 0, eeeFrom: p.nazev.length - 3 }
-          return (
-            <div key={p._id} className="rem-pruh-text" style={{ background: meta.barva }}>
-              <p style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 700, fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 12 }}>
-                Také od nás
-              </p>
-              <h3 style={{ fontSize: 'clamp(28px, 3vw, 42px)', fontWeight: 900, color: 'white', lineHeight: 1.0, marginBottom: 14 }}>
-                <NazevSProjektem nazev={p.nazev} accent={meta.accent} />
-              </h3>
-              <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: 15, lineHeight: 1.65, marginBottom: 18 }}>
-                {meta.claim}
-              </p>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 24 }}>
-                <span style={{ color: meta.accent, fontSize: 16 }}>★★★★★</span>
-                <span style={{ color: 'rgba(255,255,255,0.55)', fontSize: 13 }}>
-                  {p.pocetKlientu ? `${p.pocetKlientu.toLocaleString('cs-CZ')} klientů` : `${meta.recenzi} recenzí`}
-                </span>
+      {/* Karty projektů */}
+      <div className="container">
+        <div className="projekt-seznam">
+          {projekty.map((p) => {
+            const barva = p.barva ?? '#1a1a1a'
+            const accent = getAccent(barva)
+            const btnColor = accent === '#FFD600' ? barva : 'white'
+
+            return (
+              <div key={p._id} className="projekt-karta" style={{ background: barva }}>
+                <div className="projekt-karta-obsah">
+                  {/* Logo */}
+                  {p.logoUrl && (
+                    <img src={p.logoUrl} alt={p.nazev} style={{ height: 36, width: 'auto', marginBottom: 20, objectFit: 'contain', objectPosition: 'left' }} />
+                  )}
+
+                  {/* Název */}
+                  <h3 style={{ fontSize: 'clamp(28px, 3vw, 42px)', fontWeight: 900, color: 'white', lineHeight: 1.0, marginBottom: 8 }}>
+                    <NazevSEee nazev={p.nazev} accent={accent} />
+                  </h3>
+
+                  {/* Claim */}
+                  {p.claim && (
+                    <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: 15, lineHeight: 1.5, marginBottom: p.popis ? 6 : 16 }}>
+                      {p.claim}
+                    </p>
+                  )}
+
+                  {/* Popis */}
+                  {p.popis && (
+                    <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 14, lineHeight: 1.5, marginBottom: 20 }}>
+                      {p.popis}
+                    </p>
+                  )}
+
+                  {/* Hodnocení + klienti */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 24 }}>
+                    {p.hodnoceni && <Hvezdicky pocet={p.hodnoceni} accent={accent} />}
+                    {p.hodnoceni && (
+                      <span style={{ color: 'rgba(255,255,255,0.8)', fontSize: 14, fontWeight: 700 }}>
+                        {p.hodnoceni.toFixed(1)}
+                      </span>
+                    )}
+                    {p.pocetKlientu && (
+                      <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: 13 }}>
+                        · {p.pocetKlientu.toLocaleString('cs-CZ')} klientů
+                      </span>
+                    )}
+                  </div>
+
+                  {/* CTA tlačítko */}
+                  <a href={p.url} target="_blank" rel="noopener noreferrer" className="rem-pruh-btn"
+                    style={{ background: accent, color: btnColor }}>
+                    {p.url.replace(/https?:\/\//, '').replace(/\/$/, '')} →
+                  </a>
+                </div>
+
+                {/* Přetékající fotka řemeslníka */}
+                {p.fotkaUrl && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={p.fotkaUrl}
+                    alt=""
+                    className="projekt-karta-foto"
+                  />
+                )}
               </div>
-              <a href={p.url} target="_blank" rel="noopener noreferrer" className="rem-pruh-btn"
-                style={{ background: meta.accent, color: meta.accent === '#FFD600' ? '#1A7A4A' : 'white' }}>
-                {p.url.replace('https://', '')} →
-              </a>
-            </div>
-          )
-        })}
+            )
+          })}
+        </div>
       </div>
     </section>
   )
