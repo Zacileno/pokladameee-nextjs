@@ -88,8 +88,9 @@ input, select, textarea { font-family: var(--font); }
   .vyhody-item:last-child { border-bottom: none; }
   .vyhody-lista { flex-direction: column; }
 
-  .projekt-karta-foto { display: none; }
-  .projekt-karta-obsah { padding: 32px 24px; }
+  .projekt-karta { overflow: hidden; min-height: 280px; }
+  .projekt-karta-foto { display: block; height: 90%; right: -10px; }
+  .projekt-karta-obsah { padding: 32px 24px; padding-right: 120px; }
 
   .vyhody-badge-grid { grid-template-columns: 1fr; gap: 40px; }
   .vyhody-badge-karty { grid-template-columns: 1fr 1fr; }
