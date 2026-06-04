@@ -35,6 +35,10 @@ export const HERO_SEKCE_QUERY = `*[_type == "heroSekce"][0] {
   heroFotka { asset->{ url } }
 }`
 
+export const HERO_IKONKY_QUERY = `*[_type == "heroIkonky"][0] {
+  ikonky[] { emoji, title, sub }
+}`
+
 export const KONTAKT_SEKCE_QUERY = `*[_type == "kontaktSekce"][0] {
   nadpis, podnadpis,
   jmeno, role, citat,

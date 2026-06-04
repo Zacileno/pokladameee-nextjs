@@ -1,4 +1,4 @@
-import { client, HERO_SEKCE_QUERY, KONTAKT_SEKCE_QUERY } from '../lib/sanity'
+import { client, HERO_SEKCE_QUERY, HERO_IKONKY_QUERY, KONTAKT_SEKCE_QUERY } from '../lib/sanity'
 import Header from './components/Header'
 import HeroSection from './components/HeroSection'
 import VyhodySekce from './components/VyhodySekce'
@@ -17,6 +17,12 @@ type HeroSekce = {
   heroFotka?: { asset: { url: string } }
 }
 
+type HeroIkonka = {
+  emoji?: string
+  title?: string
+  sub?: string
+}
+
 type KontaktSekceData = {
   nadpis?: string
   podnadpis?: string
@@ -32,11 +38,13 @@ type KontaktSekceData = {
 
 export default async function Home() {
   let heroSekce: HeroSekce | null = null
+  let heroIkonky: HeroIkonka[] | null = null
   let kontaktSekce: KontaktSekceData | null = null
 
   try {
-    ;[heroSekce, kontaktSekce] = await Promise.all([
+    ;[heroSekce, { ikonky: heroIkonky } = {} as any, kontaktSekce] = await Promise.all([
       client.fetch<HeroSekce>(HERO_SEKCE_QUERY),
+      client.fetch<{ ikonky: HeroIkonka[] }>(HERO_IKONKY_QUERY),
       client.fetch<KontaktSekceData>(KONTAKT_SEKCE_QUERY),
     ])
   } catch {}
@@ -46,7 +54,7 @@ export default async function Home() {
       <Header />
       <main>
         <HeroSection heroFotkaUrl={heroSekce?.heroFotka?.asset?.url} />
-        <VyhodySekce />
+        <VyhodySekce ikonky={heroIkonky ?? undefined} />
         <SluzbySekce />
         <JakToFunguje />
         <GalerieSekce />
