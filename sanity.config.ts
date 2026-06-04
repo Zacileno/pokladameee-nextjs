@@ -7,6 +7,7 @@ import { referenceSchema } from './sanity/schemas/reference'
 import { projektSchema } from './sanity/schemas/projekt'
 import { heroSekceSchema } from './sanity/schemas/heroSekce'
 import { heroIkonkySchema } from './sanity/schemas/heroIkonky'
+import { sluzbySekceSchema } from './sanity/schemas/sluzbySekce'
 import { obecneNastaveniSchema } from './sanity/schemas/obecneNastaveni'
 import { kontaktSekceSchema } from './sanity/schemas/kontaktSekce'
 
@@ -17,5 +18,5 @@ export default defineConfig({
   projectId: '8cvsenqb',
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
   plugins: [structureTool(), visionTool()],
-  schema: { types: [akceSchema, inspiraceSchema, referenceSchema, projektSchema, heroSekceSchema, heroIkonkySchema, obecneNastaveniSchema, kontaktSekceSchema] },
+  schema: { types: [akceSchema, inspiraceSchema, referenceSchema, projektSchema, heroSekceSchema, heroIkonkySchema, sluzbySekceSchema, obecneNastaveniSchema, kontaktSekceSchema] },
 })

@@ -39,6 +39,11 @@ export const HERO_IKONKY_QUERY = `*[_type == "heroIkonky"][0] {
   ikonky[] { emoji, title, sub }
 }`
 
+export const SLUZBY_SEKCE_QUERY = `*[_type == "sluzbySekce"][0] {
+  nadpis, podnadpis,
+  sluzby[] { emoji, title, desc, detail }
+}`
+
 export const KONTAKT_SEKCE_QUERY = `*[_type == "kontaktSekce"][0] {
   nadpis, podnadpis,
   jmeno, role, citat,
