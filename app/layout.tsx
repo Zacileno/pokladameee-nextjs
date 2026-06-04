@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   description: 'Profesionální pokládka vinylových podlah v Moravskoslezském kraji. Zaměření zdarma do 48 hodin, realizace do týdne. Starou podlahu ekologicky odstraníme. Volejte Adama Hajdušek.',
   keywords: ['vinylová podlaha', 'pokládka podlahy', 'Ostrava', 'MSK', 'Moravskoslezský kraj', 'vinyl lepený', 'podlahy Opava', 'podlahy Frýdek-Místek', 'pokládámeee'],
   authors: [{ name: 'pokládámeee.cz' }],
+  icons: { icon: '/favicon.svg', shortcut: '/favicon.svg' },
   openGraph: {
     title: 'pokládámeee.cz – Vinylové podlahy v MSK',
     description: 'Pokládka vinylových podlah v Moravskoslezském kraji. Zaměření zdarma, hotovo do týdne.',
