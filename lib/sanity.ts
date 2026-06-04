@@ -32,5 +32,10 @@ export const PROJEKTY_QUERY = `*[_type == "projekt" && aktivni == true] | order(
 
 export const NASTAVENI_QUERY = `*[_type == "nastaveni"][0] {
   telefon, email,
-  heroFotka { asset->{ url } }
+  heroFotka { asset->{ url } },
+  nadpisKontakt, podnadpisKontakt,
+  jmenoKontakt, roleKontakt, citatKontakt,
+  "fotoKontaktUrl": fotoKontakt.asset->url,
+  telefonKontakt, emailKontakt,
+  pracovniDobaKontakt, regionKontakt
 }`

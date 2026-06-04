@@ -17,6 +17,16 @@ type Nastaveni = {
   heroFotka?: { asset: { url: string } }
   telefon?: string
   email?: string
+  nadpisKontakt?: string
+  podnadpisKontakt?: string
+  jmenoKontakt?: string
+  roleKontakt?: string
+  citatKontakt?: string
+  fotoKontaktUrl?: string
+  telefonKontakt?: string
+  emailKontakt?: string
+  pracovniDobaKontakt?: string
+  regionKontakt?: string
 }
 
 export default async function Home() {
@@ -37,7 +47,18 @@ export default async function Home() {
         <RemeselnikSekce />
         <VyhodyBadge />
         <ReferenceSekce />
-        <KontaktSekce />
+        <KontaktSekce kontakt={{
+          nadpis: nastaveni?.nadpisKontakt,
+          podnadpis: nastaveni?.podnadpisKontakt,
+          jmeno: nastaveni?.jmenoKontakt,
+          role: nastaveni?.roleKontakt,
+          citat: nastaveni?.citatKontakt,
+          fotoUrl: nastaveni?.fotoKontaktUrl,
+          telefon: nastaveni?.telefonKontakt,
+          email: nastaveni?.emailKontakt,
+          pracovniDoba: nastaveni?.pracovniDobaKontakt,
+          region: nastaveni?.regionKontakt,
+        }} />
       </main>
       <Footer />
     </>
