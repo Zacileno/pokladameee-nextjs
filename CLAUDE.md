@@ -218,7 +218,8 @@ Na `pokladameee-testing.vercel.app/studio`:
 ## TODO — zbývá do plnohodnotného webu
 
 ### 🔴 Kritické
-- [ ] Registrace na resend.com, ověření domény pokladameee.cz (DNS v Cloudflare), vyplnit RESEND_API_KEY na Vercelu
+- [x] ~~Registrace na resend.com, ověření domény pokladameee.cz (DNS v Cloudflare), vyplnit RESEND_API_KEY na Vercelu~~ ✓
+- [x] ~~Vyplnit MAKE_WEBHOOK_URL na Vercelu~~ ✓
 - [ ] Přepnout příjemce emailu v `/api/kontakt/route.ts` z martin@zacileno.cz zpět na adam.hajdusek@pokladameee.cz
 - [ ] Nahrát loga Malujemeee + Žaluzieee do Sanity (Projekty skupiny)
 - [ ] Přidat reálné recenze do Sanity (Reference)
@@ -241,6 +242,9 @@ Na `pokladameee-testing.vercel.app/studio`:
 
 ## Technické poznámky
 
+- **Formuláře — flow:** `KontaktForm` → POST `/api/kontakt` → Make webhook (`MAKE_WEBHOOK_URL`) + Resend emaily (`RESEND_API_KEY`) → přesměrování na `/dekujeme`
+- **Resend odesílací adresa:** `no-reply@pokladameee.cz` (doména ověřena)
+- **Testovací email:** během testování jde notifikace na `martin@zacileno.cz` — před produkcí přepnout na `adam.hajdusek@pokladameee.cz`
 - **Google Fonts:** načítáme přes `<link>` tag (ne `next/font`) — build server na Vercelu nemá přístup na internet
 - **Logo filter:** `logo-inverzni-modre.svg` má bílý text nativně — není třeba CSS filter
 - **Vercel framework preset:** musí být nastaven na **Next.js** (jinak 404) — na `pokladameee-testing` opraveno ručně přes dashboard
