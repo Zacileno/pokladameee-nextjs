@@ -94,28 +94,28 @@ export default async function RemeselnikSekce() {
                 <div className="projekt-karta-obsah">
                   {/* Logo */}
                   {p.logoUrl && (
-                    <img src={p.logoUrl} alt={p.nazev} style={{ height: 36, width: 'auto', marginBottom: 20, objectFit: 'contain', objectPosition: 'left' }} />
+                    <img src={p.logoUrl} alt={p.nazev} style={{ height: 48, width: 'auto', marginBottom: 24, objectFit: 'contain', objectPosition: 'left' }} />
                   )}
 
                   {/* Claim */}
                   {p.claim && (
-                    <p style={{ color: 'rgba(0,0,0,0.75)', fontSize: 15, lineHeight: 1.5, marginBottom: p.popis ? 6 : 16 }}>
+                    <p style={{ color: '#111', fontSize: 20, fontWeight: 800, lineHeight: 1.3, marginBottom: p.popis ? 8 : 20 }}>
                       {p.claim}
                     </p>
                   )}
 
                   {/* Popis */}
                   {p.popis && (
-                    <p style={{ color: 'rgba(0,0,0,0.45)', fontSize: 14, lineHeight: 1.5, marginBottom: 20 }}>
+                    <p style={{ color: 'rgba(0,0,0,0.5)', fontSize: 14, lineHeight: 1.5, marginBottom: 24 }}>
                       {p.popis}
                     </p>
                   )}
 
                   {/* Hodnocení + klienti */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 24 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 28 }}>
                     {p.hodnoceni && <Hvezdicky pocet={p.hodnoceni} accent={accent} />}
                     {p.hodnoceni && (
-                      <span style={{ color: 'rgba(0,0,0,0.7)', fontSize: 14, fontWeight: 700 }}>
+                      <span style={{ color: '#111', fontSize: 15, fontWeight: 800 }}>
                         {p.hodnoceni.toFixed(1)}
                       </span>
                     )}
