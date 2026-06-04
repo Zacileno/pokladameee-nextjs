@@ -48,22 +48,6 @@ function getAccent(barva: string): string {
   return ACCENTY[barva.toUpperCase()] ?? ACCENTY[barva] ?? '#FF8800'
 }
 
-function getEeeIdx(nazev: string): number {
-  // najde začátek "eee" suffixu
-  const m = nazev.match(/eee$/i)
-  return m ? nazev.length - 3 : nazev.length
-}
-
-function NazevSEee({ nazev, accent }: { nazev: string; accent: string }) {
-  const idx = getEeeIdx(nazev)
-  return (
-    <span>
-      {nazev.slice(0, idx)}
-      <span style={{ color: accent }}>{nazev.slice(idx)}</span>
-    </span>
-  )
-}
-
 function Hvezdicky({ pocet, accent }: { pocet: number; accent: string }) {
   return (
     <span style={{ color: accent, fontSize: 18, letterSpacing: 2 }}>
