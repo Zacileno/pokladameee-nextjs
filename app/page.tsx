@@ -1,4 +1,10 @@
-import { client, HERO_SEKCE_QUERY, HERO_IKONKY_QUERY, SLUZBY_SEKCE_QUERY, KONTAKT_SEKCE_QUERY } from '../lib/sanity'
+import {
+  client,
+  HERO_SEKCE_QUERY, HERO_IKONKY_QUERY,
+  SLUZBY_SEKCE_QUERY, JAK_TO_FUNGUJE_QUERY,
+  PROC_NAS_VYBRAT_QUERY, RODINA_ZNACEK_QUERY,
+  OBECNE_NASTAVENI_QUERY, KONTAKT_SEKCE_QUERY,
+} from '../lib/sanity'
 import Header from './components/Header'
 import HeroSection from './components/HeroSection'
 import VyhodySekce from './components/VyhodySekce'
@@ -13,47 +19,26 @@ import Footer from './components/Footer'
 
 export const revalidate = 0
 
-type HeroSekce = {
-  heroFotka?: { asset: { url: string } }
-}
-
-type HeroIkonka = {
-  emoji?: string
-  title?: string
-  sub?: string
-}
-
-type SluzbaSekceData = {
-  nadpis?: string
-  podnadpis?: string
-  sluzby?: { emoji?: string; title?: string; desc?: string; detail?: string }[]
-}
-
-type KontaktSekceData = {
-  nadpis?: string
-  podnadpis?: string
-  jmeno?: string
-  role?: string
-  citat?: string
-  fotoUrl?: string
-  telefon?: string
-  email?: string
-  pracovniDoba?: string
-  region?: string
-}
-
 export default async function Home() {
-  let heroSekce: HeroSekce | null = null
-  let heroIkonky: HeroIkonka[] | null = null
-  let sluzbySekce: SluzbaSekceData | null = null
-  let kontaktSekce: KontaktSekceData | null = null
+  let heroSekce: any = null
+  let heroIkonkyData: any = null
+  let sluzbySekce: any = null
+  let jakToFungujeData: any = null
+  let procNasVybratData: any = null
+  let rodinaZnacekData: any = null
+  let obecneNastaveni: any = null
+  let kontaktSekce: any = null
 
   try {
-    ;[heroSekce, { ikonky: heroIkonky } = {} as any, sluzbySekce, kontaktSekce] = await Promise.all([
-      client.fetch<HeroSekce>(HERO_SEKCE_QUERY),
-      client.fetch<{ ikonky: HeroIkonka[] }>(HERO_IKONKY_QUERY),
-      client.fetch<SluzbaSekceData>(SLUZBY_SEKCE_QUERY),
-      client.fetch<KontaktSekceData>(KONTAKT_SEKCE_QUERY),
+    ;[heroSekce, heroIkonkyData, sluzbySekce, jakToFungujeData, procNasVybratData, rodinaZnacekData, obecneNastaveni, kontaktSekce] = await Promise.all([
+      client.fetch(HERO_SEKCE_QUERY),
+      client.fetch(HERO_IKONKY_QUERY),
+      client.fetch(SLUZBY_SEKCE_QUERY),
+      client.fetch(JAK_TO_FUNGUJE_QUERY),
+      client.fetch(PROC_NAS_VYBRAT_QUERY),
+      client.fetch(RODINA_ZNACEK_QUERY),
+      client.fetch(OBECNE_NASTAVENI_QUERY),
+      client.fetch(KONTAKT_SEKCE_QUERY),
     ])
   } catch {}
 
@@ -62,16 +47,16 @@ export default async function Home() {
       <Header />
       <main>
         <HeroSection heroFotkaUrl={heroSekce?.heroFotka?.asset?.url} />
-        <VyhodySekce ikonky={heroIkonky ?? undefined} />
-        <SluzbySekce data={sluzbySekce ?? undefined} />
-        <JakToFunguje />
+        <VyhodySekce ikonky={heroIkonkyData?.ikonky} />
+        <SluzbySekce data={sluzbySekce} />
+        <JakToFunguje data={jakToFungujeData} />
         <GalerieSekce />
-        <RemeselnikSekce />
-        <VyhodyBadge />
+        <RemeselnikSekce data={rodinaZnacekData} />
+        <VyhodyBadge data={procNasVybratData} />
         <ReferenceSekce />
-        <KontaktSekce kontakt={kontaktSekce ?? undefined} />
+        <KontaktSekce kontakt={kontaktSekce} />
       </main>
-      <Footer />
+      <Footer nastaveni={obecneNastaveni} />
     </>
   )
 }

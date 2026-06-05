@@ -44,6 +44,23 @@ export const SLUZBY_SEKCE_QUERY = `*[_type == "sluzbySekce"][0] {
   sluzby[] { emoji, title, desc, detail }
 }`
 
+export const JAK_TO_FUNGUJE_QUERY = `*[_type == "jakToFunguje"][0] {
+  kroky[] { title, desc }
+}`
+
+export const PROC_NAS_VYBRAT_QUERY = `*[_type == "procNasVybrat"][0] {
+  nadpis, podnadpis,
+  vyhody[] { emoji, title, desc }
+}`
+
+export const RODINA_ZNACEK_QUERY = `*[_type == "rodinaZnacek"][0] {
+  nadpis, podnadpis, pocetKlientuCelkem
+}`
+
+export const OBECNE_NASTAVENI_QUERY = `*[_type == "obecneNastaveni"][0] {
+  telefon, email, pracovniDoba, region, popisFooter
+}`
+
 export const KONTAKT_SEKCE_QUERY = `*[_type == "kontaktSekce"][0] {
   nadpis, podnadpis,
   jmeno, role, citat,

@@ -59,11 +59,17 @@ function Hvezdicky({ pocet, accent }: { pocet: number; accent: string }) {
   )
 }
 
-export default async function RemeselnikSekce() {
+type RodinaData = { nadpis?: string; podnadpis?: string; pocetKlientuCelkem?: number }
+
+export default async function RemeselnikSekce({ data }: { data?: RodinaData }) {
+  const nadpis = data?.nadpis || 'Dobré řemeslo si zaslouží dobré jméno'
+  const podnadpis = data?.podnadpis || 'Pokládámeee není jen firma — jsme součástí rodiny značek, které vrací řemeslu respekt.'
+  const pocet = data?.pocetKlientuCelkem ?? 8932
+
   let projekty: Projekt[] = FALLBACK_PROJEKTY
   try {
-    const data = await client.fetch<Projekt[]>(PROJEKTY_QUERY)
-    if (data?.length) projekty = data
+    const fetched = await client.fetch<Projekt[]>(PROJEKTY_QUERY)
+    if (fetched?.length) projekty = fetched
   } catch {}
 
   return (
@@ -75,11 +81,11 @@ export default async function RemeselnikSekce() {
             Naše rodina značek
           </p>
           <h2 style={{ fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 900, color: 'white', lineHeight: 1.15, marginBottom: 20 }}>
-            Dobré řemeslo si zaslouží<br />dobré jméno
+            {nadpis}
           </h2>
           <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: 17, lineHeight: 1.7, maxWidth: 620, margin: '0 auto' }}>
-            Pokládámeee není jen firma — jsme součástí rodiny značek, které vrací řemeslu respekt.
-            Potvrdilo nám to již <strong style={{ color: 'white' }}>8 932 klientů</strong> napříč projekty.
+            {podnadpis}{' '}
+            Potvrdilo nám to již <strong style={{ color: 'white' }}>{pocet.toLocaleString('cs-CZ')} klientů</strong> napříč projekty.
           </p>
         </div>
       </div>
