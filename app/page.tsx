@@ -50,7 +50,7 @@ export default async function Home() {
         <VyhodySekce ikonky={heroIkonkyData?.ikonky} />
         <SluzbySekce data={sluzbySekce} />
         <JakToFunguje data={jakToFungujeData} />
-        <GalerieSekce />
+        {/* <GalerieSekce /> */}
         <RemeselnikSekce data={rodinaZnacekData} />
         <VyhodyBadge data={procNasVybratData} />
         <ReferenceSekce />
