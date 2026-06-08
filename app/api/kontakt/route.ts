@@ -22,10 +22,9 @@ export async function POST(req: NextRequest) {
 
   const adresa = [ulice, mesto, psc].filter(Boolean).join(', ')
 
-  // TODO: přepnout zpět na adam.hajdusek@pokladameee.cz před spuštěním produkce
   await resend.emails.send({
     from: 'no-reply@pokladameee.cz',
-    to: 'martin@zacileno.cz',
+    to: ['adam.hajdusek@pokladameee.cz', 'martin@zacileno.cz'],
     subject: `Nová poptávka — ${jmeno}`,
     html: `
       <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 32px;">
