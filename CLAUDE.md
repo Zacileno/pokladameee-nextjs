@@ -54,6 +54,7 @@ Push vždy do `origin main`.
 - **Deployment:** Vercel (auto-deploy z `main` branche)
 - **Font:** Barlow (Google Fonts, načítán přes `<link>` v layout.tsx — ne next/font)
 - **Obrázky:** `next/image`, unoptimized: true, remote patterns: Unsplash + cdn.sanity.io
+- **Favicon:** `/public/favicon.svg` — oranžová ikona (3 pruhy) ze loga
 
 ---
 
@@ -68,9 +69,11 @@ Push vždy do `origin main`.
 | CSS vars | `--orange`, `--blue`, `--orange-light` |
 
 **Logo soubory** (`/public/assets/logo/`):
-- `logo-inverzni-modre.svg` — bílý text + oranžová ikona → **používá se v headeru a footeru**
-- `logo-zakladni.svg` — černý text + oranžová ikona → světlá pozadí
+- `logo-inverzni-modre.svg` — bílý text + oranžová ikona → **používá se v headeru**
+- `logo-zakladni.svg` — černý text + oranžová ikona → světlá pozadí, footer (s CSS filter invert)
 - `logo-bile.svg` — bílá ikona → záloha
+
+**Fotka Adama:** `/public/assets/adam.jpg` — oříznutá 400×400px, pro kontaktní sekci
 
 **Brand pravidlo eee:** suffix `eee` vždy v `<span>` s oranžovou barvou.
 Slovo před ním musí končit souhláskou: `pokládám` + `eee` ✓, nikdy `pokládáme` + `eee` ✗
@@ -81,23 +84,25 @@ Slovo před ním musí končit souhláskou: `pokládám` + `eee` ✓, nikdy `pok
 
 ```
 app/
-  layout.tsx               # Root layout, metadata, Google Fonts link
+  layout.tsx               # Root layout, metadata, favicon, Google Fonts link
   globals.css              # CSS proměnné + VŠECHNY media queries (breakpoint 900px)
-  page.tsx                 # Homepage — fetchuje nastaveni ze Sanity, předává heroFotkaUrl
+  page.tsx                 # Homepage — fetchuje vše ze Sanity paralelně (Promise.all)
   components/
     Header.tsx             # Fixed, průhledný → modrý rgba(21,76,134,0.97) po scrollu
-    HeroSection.tsx        # Fullscreen foto + formulář vpravo (skrytý na mobilu), heroFotka ze Sanity
-    VyhodySekce.tsx        # Ikonová lišta 5 ikon, hned pod hero
-    SluzbySekce.tsx        # 4 karty služeb
-    JakToFunguje.tsx       # 4 kroky, modrý background
-    GalerieSekce.tsx       # Galerie před/po, napojená na Sanity schema inspirace
-    RemeselnikSekce.tsx    # Sekce důvěryhodnosti — sesterské projekty ze Sanity, oranžový bg
-    VyhodyBadge.tsx        # 4 výhody, 2-sloupcový grid
-    ReferenceSekce.tsx     # Recenze ze Sanity schema reference (aktivni==true), fallback placeholder
-    KontaktSekce.tsx       # Kontaktní formulář + reálné kontakty (používá KontaktForm variant="full")
-    KontaktForm.tsx        # Sdílený formulář — prop variant: "hero" | "full", POST /api/kontakt, redirect /dekujeme
-    Footer.tsx             # 3-sloupcový footer + reálné kontakty
-  api/kontakt/route.ts     # POST → Make webhook (MAKE_WEBHOOK_URL env var)
+                           # onScroll() voláno při mountu (fix pro refresh na #anchor)
+    HeroSection.tsx        # Fullscreen foto + formulář vpravo (skrytý na mobilu)
+    VyhodySekce.tsx        # Ikonová lišta 5 ikon — Sanity: heroIkonky, mobil: 2-sloupcový grid
+    SluzbySekce.tsx        # 4 služby — Sanity: sluzbySekce, mobil: horizontální kartičky
+    JakToFunguje.tsx       # 4 kroky — Sanity: jakToFunguje, modrý background
+    GalerieSekce.tsx       # Galerie před/po — Sanity: inspirace
+    RemeselnikSekce.tsx    # Rodina značek — Sanity: rodinaZnacek (hlavička) + projekt (karty)
+                           # Karty s přetékající fotkou řemeslníka (PNG průhledné pozadí, poměr 2:3)
+    VyhodyBadge.tsx        # Proč nás vybrat — Sanity: procNasVybrat, 4 výhody 2-sloupcový grid
+    ReferenceSekce.tsx     # Recenze — Sanity: reference (aktivni==true), fallback placeholder
+    KontaktSekce.tsx       # Kontaktní sekce — Sanity: kontaktSekce
+    KontaktForm.tsx        # Sdílený formulář — POST /api/kontakt, redirect /dekujeme
+    Footer.tsx             # 3-sloupcový footer — Sanity: obecneNastaveni (kontakty + popis)
+  api/kontakt/route.ts     # POST → Make webhook (MAKE_WEBHOOK_URL) + Resend emaily
   dekujeme/page.tsx        # Děkovná stránka po odeslání formuláře
   akce/page.tsx
   inspirace/page.tsx
@@ -108,21 +113,55 @@ app/
   studio/[[...tool]]/page.tsx   # Sanity Studio embedded
 
 lib/
-  sanity.ts                # Sanity client, urlFor helper, GROQ queries
+  sanity.ts                # Sanity client, urlFor helper, všechny GROQ queries
 
 sanity/
   schemas/
-    akce.ts                # Schema: Akce a slevy
-    inspirace.ts           # Schema: Galerie před/po
-    reference.ts           # Schema: Recenze (jmeno, text, hvezdicky, datum, aktivni)
-    nastaveni.ts           # Schema: Singleton nastavení webu (heroFotka, telefon, email)
-    projekt.ts             # Schema: Projekty skupiny (nazev, logo, url, pocetKlientu, aktivni)
+    heroSekce.ts           # Hero obrázek (heroFotka)
+    heroIkonky.ts          # Hero ikonky — array max 5 (emoji, title, sub)
+    sluzbySekce.ts         # Služby — nadpis, podnadpis, array max 4 (emoji, title, desc, detail)
+    jakToFunguje.ts        # Jak to funguje — array max 4 kroků (title, desc)
+    procNasVybrat.ts       # Proč nás vybrat — nadpis, podnadpis, array max 4 (emoji, title, desc)
+    rodinaZnacek.ts        # Rodina značek — nadpis, podnadpis, pocetKlientuCelkem
+    projekt.ts             # Projekty skupiny — nazev, claim, popis, logo, fotkaRemselniku,
+                           #   pocetKlientu, hodnoceni, url, barva, barvaBtn, aktivni
+    inspirace.ts           # Galerie před/po (fotoPo povinné, fotoPred volitelné)
+    akce.ts                # Akce a slevy (aktivni přepínač)
+    reference.ts           # Recenze (jmeno, text, hvezdicky 1-5, datum, aktivni)
+    obecneNastaveni.ts     # Obecné nastavení — telefon, email, pracovniDoba, region, popisFooter
+    kontaktSekce.ts        # Kontaktní sekce — nadpis, podnadpis, jmeno, role, citat,
+                           #   foto, telefon, email, pracovniDoba, region
+
+  schemaTypes/
+    index.ts               # Registrace všech schémat
 
 public/
+  favicon.svg              # Favicon — oranžová ikona (3 pruhy)
   assets/
     logo/                  # SVG loga (3 varianty)
     elementy/              # Brand grafické elementy
+    adam.jpg               # Fotka Adama, 400×400px, pro kontaktní sekci
 ```
+
+---
+
+## Sanity — přehled dokumentů (singletons)
+
+Každý typ má právě jeden dokument s pevným `_id`. Vytvořeny přes API seed:
+
+| `_id` / typ | Studio název | Obsah |
+|---|---|---|
+| `heroSekce` | Hero obrázek | heroFotka |
+| `heroIkonky` | Hero ikonky | ikonky[] |
+| `sluzbySekce` | Služby sekce | nadpis, podnadpis, sluzby[] |
+| `jakToFunguje` | Jak to funguje | kroky[] |
+| `procNasVybrat` | Proč nás vybrat | nadpis, podnadpis, vyhody[] |
+| `rodinaZnacek` | Rodina značek | nadpis, podnadpis, pocetKlientuCelkem |
+| `obecneNastaveni` | Obecné nastavení | telefon, email, pracovniDoba, region, popisFooter |
+| `kontaktSekce` | Kontaktní sekce | všechna kontaktní pole + foto |
+| `heroIkonky` | Hero ikonky | ikonky[] |
+
+Kolekce (více dokumentů): `projekt`, `inspirace`, `akce`, `reference`
 
 ---
 
@@ -132,13 +171,20 @@ Breakpoint: **900px**, sekundárně 480px. Vše definováno v `globals.css`.
 
 CSS třídy pro layouty:
 - `.hero-grid` — 2 sloupce → 1 sloupec, `.hero-form` skrytý
-- `.vyhody-lista` / `.vyhody-item` — flex row → column
-- `.rem-grid` — 2 sloupce → 1 sloupec
+- `.vyhody-lista` / `.vyhody-item` — desktop flex row → mobil 2-sloupcový grid
+- `.sluzby-grid` / `.sluzba-karta` — desktop 2 sloupce → mobil 1 sloupec, horizontální karta
+- `.projekt-seznam` / `.projekt-karta` / `.projekt-karta-foto` — karty s přetékající fotkou
 - `.vyhody-badge-grid` / `.vyhody-badge-karty` — gridy
 - `.kontakt-grid`, `.kontakt-form-row2`, `.kontakt-form-row3`
 - `.footer-grid`
 
 **Nikdy** nepřidávej `@media` přímo do komponent — vždy jen do `globals.css`.
+
+---
+
+## GROQ queries (lib/sanity.ts)
+
+Všechny queries pojmenovány jako `*_QUERY` konstanty. `page.tsx` je fetchuje paralelně přes `Promise.all`. Každá komponenta má fallback na hardcoded hodnoty pokud Sanity vrátí null.
 
 ---
 
@@ -175,12 +221,11 @@ npm run dev
 ```
 NEXT_PUBLIC_SANITY_PROJECT_ID=8cvsenqb
 NEXT_PUBLIC_SANITY_DATASET=production
-MAKE_WEBHOOK_URL=https://placeholder.make.webhook   ← nahradit reálnou URL z Make
-RESEND_API_KEY=re_...                               ← vyplnit po registraci na resend.com
+MAKE_WEBHOOK_URL=https://...   ← reálná URL z Make (nastaveno na Vercelu) ✓
+RESEND_API_KEY=re_...          ← nastaveno na Vercelu ✓
 ```
 
-Stejné proměnné musí být na Vercelu: Settings → Environment Variables (na obou projektech).
-**TODO Vercel:** Přidat `MAKE_WEBHOOK_URL` a `RESEND_API_KEY` na projektu `pokladameee-testing`.
+**Sanity token pro seed skripty:** `~/.config/sanity/config.json` → `authToken` (osobní CLI token, nikam nepushovat, na Vercel nepatří — web čte pouze publikovaný obsah bez autentizace)
 
 ---
 
@@ -189,15 +234,9 @@ Stejné proměnné musí být na Vercelu: Settings → Environment Variables (na
 - **Studio URL:** `/studio` (lokálně i produkčně)
 - **Project ID:** `8cvsenqb`
 - **Organizace:** Zacileno
+- **revalidate:** aktuálně `0` (dev fáze — okamžitá propagace změn). Před produkcí nastavit na `3600`.
 
-**Schémata:**
-- `inspirace` — galerie před/po (fotoPo povinné, fotoPred volitelné)
-- `akce` — akce a slevy s přepínačem aktivní/neaktivní
-- `reference` — recenze (jmeno, text, hvezdicky 1-5, datum, aktivni)
-- `nastaveni` — singleton nastavení webu (heroFotka, telefon, email)
-- `projekt` — sesterské projekty pro sekci důvěryhodnosti (nazev, logo, url, pocetKlientu, aktivni)
-
-**CORS origins** (nastavit v sanity.io/manage → projekt 8cvsenqb → API → CORS):
+**CORS origins** (sanity.io/manage → projekt 8cvsenqb → API → CORS):
 ```
 https://pokladameee-testing.vercel.app  ← Allow credentials: ✓
 https://pokladameee-nextjs.vercel.app
@@ -209,45 +248,46 @@ http://localhost:3000
 ## Sanity — obsah k doplnění přes Studio
 
 Na `pokladameee-testing.vercel.app/studio`:
-- **Projekty skupiny** — přidat Malujemeee (malujemeee.cz) a Žaluzieee (zaluzieee.cz) s logy
+- **Projekty skupiny** — nahrát logo Malujemeee + Žaluzieee, fotky řemeslníků (PNG, průhledné pozadí, poměr 2:3)
+- **Hero obrázek** — nahrát reálnou hero fotku pozadí
 - **Recenze** — přidat reálné recenze z Google
-- **Nastavení** — nahrát hero fotku až bude k dispozici
+- **Kontaktní sekce** — nahrát foto Adama (nebo použít `/public/assets/adam.jpg`)
 
 ---
 
 ## TODO — zbývá do plnohodnotného webu
 
 ### 🔴 Kritické
-- [x] ~~Registrace na resend.com, ověření domény pokladameee.cz (DNS v Cloudflare), vyplnit RESEND_API_KEY na Vercelu~~ ✓
+- [x] ~~Registrace na resend.com, ověření domény, RESEND_API_KEY na Vercelu~~ ✓
 - [x] ~~Vyplnit MAKE_WEBHOOK_URL na Vercelu~~ ✓
-- [ ] Přepnout příjemce emailu v `/api/kontakt/route.ts` z martin@zacileno.cz zpět na adam.hajdusek@pokladameee.cz
-- [ ] Nahrát loga Malujemeee + Žaluzieee do Sanity (Projekty skupiny)
+- [ ] Přepnout příjemce emailu v `/api/kontakt/route.ts` z `martin@zacileno.cz` na `adam.hajdusek@pokladameee.cz`
+- [ ] Nahrát loga + fotky řemeslníků do Sanity (Projekty skupiny)
 - [ ] Přidat reálné recenze do Sanity (Reference)
-- [x] ~~Ověřit že schémata reference, nastaveni, projekt jsou vidět v Sanity Studiu~~ ✓
 
 ### 🟡 Důležité
-- [ ] Reálná hero fotka pozadí (nahrát přes Sanity → Nastavení)
-- [ ] Reálné fotky galerie před/po (nahrát přes Sanity → Inspirace / Galerie)
+- [ ] Reálná hero fotka pozadí (Sanity → Hero obrázek)
+- [ ] Reálné fotky galerie před/po (Sanity → Inspirace / Galerie)
 - [ ] Vyplnit GDPR a obchodní podmínky
 - [ ] Google Search Console — registrace domény
+- [ ] Před produkcí: `revalidate` z `0` na `3600` v `page.tsx` a `RemeselnikSekce.tsx`
 - [ ] Přesměrovat pokladameee.cz na Next.js až bude testing hotový
 
 ### 🟢 Nice to have
-- [ ] Napojit AkceSekce na Sanity
+- [ ] Napojit AkceSekce na Sanity (schema existuje, sekce zatím není na homepage)
 - [ ] Přidat Akce + Inspirace do navigace v Headeru
 - [ ] Google Analytics / GA4
-- [ ] Formspree integrace
+- [ ] On-demand revalidation ze Sanity webhooku (místo časového revalidate)
 
 ---
 
 ## Technické poznámky
 
-- **Formuláře — flow:** `KontaktForm` → POST `/api/kontakt` → Make webhook (`MAKE_WEBHOOK_URL`) + Resend emaily (`RESEND_API_KEY`) → přesměrování na `/dekujeme`
+- **Formuláře — flow:** `KontaktForm` → POST `/api/kontakt` → Make webhook + Resend emaily → redirect `/dekujeme`
 - **Resend odesílací adresa:** `no-reply@pokladameee.cz` (doména ověřena)
-- **Testovací email:** během testování jde notifikace na `martin@zacileno.cz` — před produkcí přepnout na `adam.hajdusek@pokladameee.cz`
+- **Testovací email:** notifikace jde na `martin@zacileno.cz` — před produkcí přepnout
 - **Google Fonts:** načítáme přes `<link>` tag (ne `next/font`) — build server na Vercelu nemá přístup na internet
-- **Logo filter:** `logo-inverzni-modre.svg` má bílý text nativně — není třeba CSS filter
-- **Vercel framework preset:** musí být nastaven na **Next.js** (jinak 404) — na `pokladameee-testing` opraveno ručně přes dashboard
-- **Landing page:** `pokladameee-landing` repo, čistý HTML, nasazený na `pokladameee-nextjs` Vercel projekt + doména `pokladameee.cz`
+- **Logo filter:** footer používá `logo-zakladni.svg` s `filter: brightness(0) invert(1)` pro bílou variantu
 - **Sanity init:** byl spuštěn v projektu — nevytvářej nový projekt, vždy použij `8cvsenqb`
-- **Vercel framework preset:** při vytváření nového projektu přes CLI se může nastavit na "Other" — vždy zkontrolovat v Settings → Build and Deployment
+- **Vercel framework preset:** musí být nastaven na **Next.js** (jinak 404) — na `pokladameee-testing` opraveno
+- **Seed skripty:** `scripts/seed-kontakt.ts` — vyžaduje `SANITY_TOKEN` env var
+- **Fotka řemeslníka v kartách:** PNG s průhledným pozadím, doporučený poměr **2:3** (např. 600×900px), min. 800px výška
