@@ -21,26 +21,25 @@ Vždy ho čti před zahájením práce.
 
 | Co | URL |
 |----|-----|
-| GitHub (vývoj) | `github.com/Zacileno/pokladameee-testing` |
-| GitHub (produkce) | `github.com/Zacileno/pokladameee-nextjs` |
-| GitHub (landing) | `github.com/Zacileno/pokladameee-landing` |
-| Vývoj (testing) | `pokladameee-testing.vercel.app` ← **sem pushovat při vývoji** |
-| Produkce | `pokladameee-nextjs.vercel.app` + `pokladameee.cz` |
-| Sanity Studio (testing) | `pokladameee-testing.vercel.app/studio` |
+| GitHub (jediné repo) | `github.com/Zacileno/pokladameee-nextjs` |
+| Staging (větev `dev`) | Vercel preview URL pro větev `dev` ← **sem pushovat při vývoji** |
+| Produkce (větev `main`) | `pokladameee-nextjs.vercel.app` + `pokladameee.cz` |
+| Sanity Studio | `pokladameee.cz/studio` (nebo staging URL `/studio`) |
 | Lokální dev | `localhost:3000` |
 
-**Důležité:** Veškerý vývoj probíhá na `pokladameee-testing`. Na produkci (`pokladameee-nextjs`) visí prozatím jen provizorní landing page z `pokladameee-landing` repo. Až bude testing hotový, přesuneme obsah na produkci.
+**Workflow:** Vývoj probíhá na větvi `dev` (staging), po review se merguje do `main` (produkce).  
+`pokladameee-testing` repo je archivované — nepoužívat.
 
 ---
 
 ## Git remoty (v ~/Developer/pokladameee-nextjs)
 
 ```bash
-origin      → github.com/Zacileno/pokladameee-testing   ← pushovat sem
-production  → github.com/Zacileno/pokladameee-nextjs
+origin      → github.com/Zacileno/pokladameee-nextjs   ← jediné repo
+testing-old → github.com/Zacileno/pokladameee-testing  ← archiv, nepoužívat
 ```
 
-Push vždy do `origin main`.
+Push vždy do `origin dev` (vývoj) nebo `origin main` (produkce).
 
 ---
 
@@ -193,15 +192,23 @@ Všechny queries pojmenovány jako `*_QUERY` konstanty. `page.tsx` je fetchuje p
 ### Jak pracujeme
 1. Diskuze a zadání → **Claude.ai chat**
 2. Větší změny → Claude Code píše kód a pushne na GitHub
-3. Vercel auto-deployuje `pokladameee-testing` z `origin/main`
+3. Vercel auto-deployuje staging z větve `dev`, produkci z větve `main`
 4. Vizuální review → Claude in Chrome (screenshot → feedback → fix)
 5. Lokální preview: `npm run dev` ve Warpu
 
 ### Git příkazy (Warp)
 ```bash
 cd ~/Developer/pokladameee-nextjs
-git pull
-git add -A && git commit -m "feat: popis" && git push origin main
+
+# Vývoj → staging
+git checkout dev
+git pull origin dev
+git add -A && git commit -m "feat: popis" && git push origin dev
+
+# Nasazení na produkci
+git checkout main
+git merge dev
+git push origin main
 ```
 
 Commit prefix: `feat` / `fix` / `style` / `content` / `chore`
