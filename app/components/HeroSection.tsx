@@ -38,7 +38,7 @@ export default function HeroSection({ heroFotkaUrl }: { heroFotkaUrl?: string | 
             </div>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
               <a href="#kontakt" className="btn-primary" style={{ fontSize: 17, padding: '15px 32px' }}>Chci zaměřit zdarma →</a>
-              <a href="#inspirace" className="btn-secondary" style={{ fontSize: 17, padding: '15px 32px' }}>Zobrazit výsledky</a>
+              {/* <a href="#inspirace" className="btn-secondary" style={{ fontSize: 17, padding: '15px 32px' }}>Zobrazit výsledky</a> — vrátit až bude GalerieSekce viditelná */}
             </div>
           </div>
 
