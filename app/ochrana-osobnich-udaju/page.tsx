@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+import Header from '@/app/components/Header'
+import Footer from '@/app/components/Footer'
 
 export const metadata: Metadata = {
   title: 'Zásady ochrany osobních údajů | pokládámeee.cz',
@@ -39,7 +41,9 @@ const aStyle: React.CSSProperties = {
 
 export default function OchranaOsobnichUdajuPage() {
   return (
-    <main style={{ maxWidth: 800, margin: '0 auto', padding: '80px 24px 60px' }}>
+    <>
+      <Header />
+      <main style={{ maxWidth: 800, margin: '0 auto', padding: '120px 24px 80px' }}>
       <h1 style={{ fontSize: 32, fontWeight: 800, color: '#154C86', marginBottom: 32 }}>
         Zásady ochrany osobních údajů
       </h1>
@@ -171,5 +175,7 @@ export default function OchranaOsobnichUdajuPage() {
         </p>
       </section>
     </main>
+      <Footer />
+    </>
   )
 }
