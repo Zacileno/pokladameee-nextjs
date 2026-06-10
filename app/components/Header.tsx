@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 
-export default function Header() {
+export default function Header({ opaque }: { opaque?: boolean }) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -16,8 +16,8 @@ export default function Header() {
   return (
     <header style={{
       position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-      background: scrolled ? 'rgba(21,76,134,0.97)' : 'transparent',
-      backdropFilter: scrolled ? 'blur(12px)' : 'none',
+      background: (scrolled || opaque) ? 'rgba(21,76,134,0.97)' : 'transparent',
+      backdropFilter: (scrolled || opaque) ? 'blur(12px)' : 'none',
       transition: 'background 0.3s',
       borderBottom: scrolled ? '1px solid rgba(255,255,255,0.1)' : 'none',
     }}>

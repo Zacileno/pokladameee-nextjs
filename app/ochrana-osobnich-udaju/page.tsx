@@ -42,7 +42,7 @@ const aStyle: React.CSSProperties = {
 export default function OchranaOsobnichUdajuPage() {
   return (
     <>
-      <Header />
+      <Header opaque />
       <main style={{ maxWidth: 800, margin: '0 auto', padding: '120px 24px 80px' }}>
       <h1 style={{ fontSize: 32, fontWeight: 800, color: '#154C86', marginBottom: 32 }}>
         Zásady ochrany osobních údajů
