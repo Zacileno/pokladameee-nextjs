@@ -46,9 +46,10 @@ export default function Footer({ nastaveni }: { nastaveni?: Nastaveni }) {
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
           <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: 13 }}>© 2026 pokládámeee.cz — Všechna práva vyhrazena</p>
-          <div style={{ display: 'flex', gap: 24 }}>
+          <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
             <a href="/ochrana-osobnich-udaju" style={{ color: 'rgba(255,255,255,0.3)', fontSize: 13 }}>Ochrana osobních údajů</a>
             <a href="/obchodni-podminky" style={{ color: 'rgba(255,255,255,0.3)', fontSize: 13 }}>Obchodní podmínky</a>
+            <a href="/reklamacni-rad" style={{ color: 'rgba(255,255,255,0.3)', fontSize: 13 }}>Reklamační řád</a>
           </div>
         </div>
       </div>

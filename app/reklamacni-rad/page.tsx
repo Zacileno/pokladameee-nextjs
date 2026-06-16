@@ -1,0 +1,202 @@
+import type { Metadata } from 'next'
+import Header from '@/app/components/Header'
+import Footer from '@/app/components/Footer'
+
+export const metadata: Metadata = {
+  title: 'Reklamační řád | pokládámeee.cz',
+  description: 'Reklamační řád společnosti SYSPOD s.r.o. — pokládka vinylových podlah v Moravskoslezském kraji.',
+}
+
+const h2Style: React.CSSProperties = {
+  fontSize: 22,
+  fontWeight: 700,
+  color: '#154C86',
+  marginTop: 40,
+  marginBottom: 12,
+}
+
+const h3Style: React.CSSProperties = {
+  fontSize: 17,
+  fontWeight: 700,
+  color: '#333',
+  marginTop: 24,
+  marginBottom: 8,
+}
+
+const pStyle: React.CSSProperties = {
+  fontSize: 16,
+  lineHeight: 1.7,
+  color: '#000',
+  marginBottom: 16,
+}
+
+const olStyle: React.CSSProperties = {
+  paddingLeft: 20,
+  marginBottom: 16,
+}
+
+const ulStyle: React.CSSProperties = {
+  paddingLeft: 20,
+  marginBottom: 16,
+}
+
+const liStyle: React.CSSProperties = {
+  fontSize: 16,
+  lineHeight: 1.7,
+  color: '#000',
+  marginBottom: 6,
+}
+
+const aStyle: React.CSSProperties = {
+  color: '#FF8800',
+  textDecoration: 'underline',
+}
+
+export default function ReklamacniRadPage() {
+  return (
+    <>
+      <Header opaque />
+      <main style={{ maxWidth: 800, margin: '0 auto', padding: '120px 24px 80px' }}>
+        <h1 style={{ fontSize: 32, fontWeight: 800, color: '#154C86', marginBottom: 8 }}>
+          Reklamační řád
+        </h1>
+        <p style={{ fontSize: 14, color: '#666', marginBottom: 32 }}>SYSPOD s.r.o. · platný od 1. 6. 2026</p>
+
+        <section style={{ marginBottom: 32 }}>
+          <h2 style={h2Style}>Úvodní ustanovení</h2>
+          <ol style={olStyle}>
+            <li style={liStyle}>Zhotovitel je právnická osoba zapsaná v obchodním rejstříku, obchodní společnost SYSPOD s.r.o., se sídlem Ostravská 38, Vrbice, 735 51 Bohumín, IČO: 295 24 083.</li>
+            <li style={liStyle}>Objednatel je subjekt, který se zhotovitelem uzavřel smlouvu o dílo (zahrnující zaměření prostoru, dodání podlahové krytiny, pokládku a instalaci, či libovolnou kombinaci těchto plnění).</li>
+            <li style={liStyle}>Objednatel je povinen prohlédnout provedené dílo bezprostředně po jeho převzetí, a to takovým způsobem, aby mohl při vynaložení veškeré odborné péče zjistit zjevné vady díla.</li>
+            <li style={liStyle}>Pokud je zjištěno mechanické poškození dodaného materiálu nebo díla, je objednatel povinen vyhotovit záznam o poškození do předávacího protokolu za přítomnosti zástupce zhotovitele. V opačném případě se má za to, že dílo bylo předáno bez mechanického poškození.</li>
+            <li style={liStyle}>Objednatel přebírá dokončené dílo na základě předávacího protokolu. Převzetí díla potvrdí na předávacím protokolu buď objednatel, nebo jím zmocněný zástupce či zaměstnanec oprávněný k takovému úkonu.</li>
+            <li style={liStyle}>Objednatel je povinen oznámit zhotoviteli písemně vady díla a uplatnit konkrétní nárok z odpovědnosti za vady bez zbytečného odkladu poté, co je mohl při včasné prohlídce a dostatečné péči zjistit. Obdobné platí i pro vadu skrytou.</li>
+            <li style={liStyle}>Zhotovitel nenese odpovědnost za vady zjištěné po zřejmé manipulaci ze strany objednatele nebo třetích osob, ani za poškození vzniklá nevhodným používáním nebo údržbou podlahové krytiny v rozporu s pokyny výrobce.</li>
+            <li style={liStyle}>Objednatel bere na vědomí, že přírodní materiály (dřevo, korek, přírodní textil) vykazují přirozené variace v kresbě, struktuře a odstínu, které jsou charakteristickou vlastností přírodních surovin a nejsou předmětem reklamace.</li>
+          </ol>
+        </section>
+
+        <section style={{ marginBottom: 32 }}>
+          <h2 style={h2Style}>I. Záruční podmínky</h2>
+          <ol style={olStyle}>
+            <li style={liStyle}>V případě, že se po převzetí díla objednatelem vyskytnou v záruční době vady, může objednatel uplatnit svou oprávněnou reklamaci. Záruční doba počíná běžet ode dne předání díla, který je uveden v předávacím protokolu.</li>
+            <li style={liStyle}>
+              Záruka zaniká v následujících případech:
+              <ol type="a" style={{ paddingLeft: 20, marginTop: 8 }}>
+                <li style={liStyle}>Uplynutím záruční doby.</li>
+                <li style={liStyle}>Nevhodným používáním, skladováním nebo údržbou podlahové krytiny v rozporu s pokyny výrobce nebo zhotovitele.</li>
+                <li style={liStyle}>Nedodržením podmínek pro používání podlahové krytiny (nedostatečná nebo nadměrná vlhkost prostředí, teplotní extrémy, nevhodné čisticí prostředky apod.).</li>
+                <li style={liStyle}>Neodbornou manipulací, zásahem do díla ze strany objednatele nebo třetích osob.</li>
+                <li style={liStyle}>Poškozením díla živelnými událostmi (záplava, požár apod.).</li>
+                <li style={liStyle}>Nevyhovujícím stavem podkladní vrstvy, na který byl objednatel před zahájením pokládky upozorněn.</li>
+                <li style={liStyle}>Porušením povinností objednatele vyplývajících z bodů 3 až 7 Úvodních ustanovení.</li>
+              </ol>
+            </li>
+            <li style={liStyle}>V případě reklamace položené podlahové krytiny se záruka vztahuje pouze na vady, které jsou viditelné při prohlídce z výšky stoje (přibližně 1,6 m) při běžném osvětlení místnosti, a za předpokladu, že pokládka byla provedena v souladu s montážními podmínkami platnými v daný moment.</li>
+          </ol>
+        </section>
+
+        <section style={{ marginBottom: 32 }}>
+          <h2 style={h2Style}>II. Vyřízení reklamace</h2>
+          <ol style={olStyle}>
+            <li style={liStyle}>Reklamace bude postoupena k vyřízení pouze tehdy, pokud bude podána písemnou formou, tedy řádným vyplněním reklamačního protokolu (který je nedílnou součástí tohoto Reklamačního řádu) a jeho doručením zhotoviteli poštou, osobně nebo e-mailem na adresu <a href="mailto:podlahy@pokladameee.cz" style={aStyle}>podlahy@pokladameee.cz</a>.</li>
+            <li style={liStyle}>Společně s reklamačním protokolem je vždy nutné doložit doklady o díle vystavené zhotovitelem objednateli (předávací protokol, faktura). Objednatel je povinen zajistit zhotoviteli přístup k reklamované části díla za účelem prohlídky a posouzení vady.</li>
+            <li style={liStyle}>Při zjištění rozdílu v množství nebo druhu dodaného materiálu oproti údajům na faktuře je objednatel povinen podat do sedmi pracovních dnů písemnou zprávu o těchto vadách zhotoviteli. Při nedodržení této lhůty nebude reklamace uznána.</li>
+            <li style={liStyle}>Pokud byla reklamace neoprávněná, zhotovitel naúčtuje objednateli veškeré vzniklé náklady na lokalizaci vady, dopravu a posouzení. Objednatel je povinen tyto náklady uhradit nejpozději do čtrnácti dnů od ukončení reklamačního řízení.</li>
+            <li style={liStyle}>Reklamovat dílo nelze z důvodu nepřesných či zkreslených vizualizací nebo fotografií materiálů uvedených na internetových stránkách zhotovitele.</li>
+            <li style={liStyle}>Jde-li o vadu neodstranitelnou, která však nebrání užívání díla určenému účelu, má objednatel nárok na přiměřenou slevu z ceny díla. V případě, že tato vada výrazně ztěžuje možnost používání díla, má objednatel nárok na odstranění vady nebo přiměřenou náhradu.</li>
+            <li style={liStyle}>V případě, že objednatel nesouhlasí s rozhodnutím odpovědného pracovníka, může se písemně obrátit na jednatele společnosti.</li>
+            <li style={liStyle}>Objednatel nemůže měnit uplatněné reklamační nároky, není-li dohodnuto jinak.</li>
+            <li style={liStyle}>Zhotovitel je povinen oznámit výsledek reklamačního řízení objednateli za předpokladu splnění všech povinností vyplývajících z tohoto reklamačního řádu.</li>
+            <li style={liStyle}>Oprávněnost každé reklamace a posouzení odstranitelnosti či neodstranitelnosti vady provede odpovědný pracovník zhotovitele a své stanovisko sdělí objednateli nejpozději do sedmi pracovních dnů od řádného uplatnění reklamace. V případě oprávněné reklamace je zhotovitel povinen vyřídit reklamaci ve lhůtě přiměřené povaze vady, nejpozději však šedesát kalendářních dnů od jejího řádného uplatnění, nedohodnou-li se obě strany písemně jinak.</li>
+            <li style={liStyle}>Tento reklamační řád je platný od 1. 6. 2026.</li>
+          </ol>
+        </section>
+
+        <section style={{ marginBottom: 32 }}>
+          <h2 style={h2Style}>III. Rozsah záruky — z reklamací jsou vyloučeny tyto vady</h2>
+
+          <h3 style={h3Style}>Vinylová plovoucí podlaha (LVT, SPC, click vinyl)</h3>
+          <ul style={ulStyle}>
+            <li style={liStyle}>Rozdíly v rozměrech spadající do výrobních tolerancí výrobce.</li>
+            <li style={liStyle}>Rozdíly způsobené chybným zadáním objednávky ze strany objednatele.</li>
+            <li style={liStyle}>Závady způsobené pokládkou do nevyhovujícího prostředí (nadměrná vlhkost podkladu přesahující hodnoty doporučené výrobcem, nerovnost podkladu mimo toleranci apod.).</li>
+            <li style={liStyle}>Závady způsobené nevhodným použitím nebo nesprávným ošetřováním (nesprávné čisticí prostředky, nadměrná vlhkost při mytí, ostrá bodová zatížení bez ochranných podložek apod.).</li>
+            <li style={liStyle}>Závady způsobené mechanickým poškozením ze strany uživatele.</li>
+            <li style={liStyle}>Přirozené barevné variace a rozdíly v kresbě dezénu u zakázek realizovaných ve více etapách nebo z různých šarží.</li>
+            <li style={liStyle}>Drobné barevné odchylky oproti vzorníku způsobené rozdílnými světelnými podmínkami.</li>
+            <li style={liStyle}>Dilatační spáry a pohyby plovoucí podlahy v rámci výrobních tolerancí a pokynů výrobce (teplotní roztažnost).</li>
+            <li style={liStyle}>Zvýraznění podkladní vrstvy (telegrafování) u SPC/LVT podlah v důsledku nerovnosti podkladu přesahující toleranci, na niž byl objednatel předem upozorněn.</li>
+            <li style={liStyle}>Škrábance a povrchové vady viditelné pouze při bočním osvětlení nebo z výšky pod 30 cm.</li>
+          </ul>
+
+          <h3 style={h3Style}>Laminátová podlaha</h3>
+          <ul style={ulStyle}>
+            <li style={liStyle}>Rozdíly v rozměrech spadající do výrobních tolerancí výrobce.</li>
+            <li style={liStyle}>Závady způsobené pokládkou na nevyhovující podklad (nadměrná vlhkost, nerovnost, nedostatečná teplota při pokládce apod.).</li>
+            <li style={liStyle}>Bobtnání, deformace nebo zdvihání laminátových prken způsobené nadměrnou vlhkostí prostředí nebo kontaktem s vodou v důsledku jednání objednatele.</li>
+            <li style={liStyle}>Závady způsobené mechanickým poškozením ze strany uživatele (např. pádem těžkých předmětů, tažením nábytku bez ochranných plstí).</li>
+            <li style={liStyle}>Přirozené barevné variace a rozdíly v kresbě imitací dřeva či kamene.</li>
+            <li style={liStyle}>Povrchové škrábance a vady viditelné pouze při bočním osvětlení nebo z výšky pod 30 cm.</li>
+            <li style={liStyle}>Zvýraznění podkladní vrstvy v důsledku nerovnosti, na niž byl objednatel předem upozorněn.</li>
+            <li style={liStyle}>Dilatační spáry v rámci pokynů výrobce.</li>
+            <li style={liStyle}>Opotřebení povrchu odpovídající normálnímu používání (AC třída opotřebení odpovídající intenzitě provozu).</li>
+          </ul>
+
+          <h3 style={h3Style}>Dřevěná podlaha (masiv, třívrstvá, dýhovaná)</h3>
+          <ul style={ulStyle}>
+            <li style={liStyle}>Rozdíly v rozměrech spadající do výrobních tolerancí výrobce.</li>
+            <li style={liStyle}>Přirozené variace v kresbě, barevném odstínu, sukovitosti a struktuře dřeva — jsou nedílnou charakteristikou přírodního materiálu.</li>
+            <li style={liStyle}>Přirozené pohyby dřeva (bobtnání, smršťování) způsobené sezónními změnami vlhkosti a teploty vzduchu v rámci doporučených provozních podmínek.</li>
+            <li style={liStyle}>Závady způsobené provozem mimo doporučené podmínky (relativní vlhkost vzduchu pod 40 % nebo nad 65 %, teplota mimo rozmezí 15–25 °C).</li>
+            <li style={liStyle}>Postupné vyblednutí povrchové úpravy a přirozené stárnutí dřeva působením UV záření.</li>
+            <li style={liStyle}>Závady způsobené nesprávným ošetřováním a údržbou (nevhodné čisticí nebo ošetřovací prostředky, nadměrné vlhčení povrchu).</li>
+            <li style={liStyle}>Povrchové škrábance a vady způsobené mechanickým namáháním (přesouvání nábytku, bodová zatížení, obuv s kovovými podpatky apod.).</li>
+            <li style={liStyle}>Barevné a texturní rozdíly mezi deskami z různých šarží nebo kmenů.</li>
+            <li style={liStyle}>Mírné praskání nebo vrzání podlahy v suchém období způsobené přirozeným pohybem dřeva.</li>
+          </ul>
+
+          <h3 style={h3Style}>PVC podlaha v rolích a dílcích</h3>
+          <ul style={ulStyle}>
+            <li style={liStyle}>Rozdíly v rozměrech a odchylky tloušťky spadající do výrobních tolerancí výrobce.</li>
+            <li style={liStyle}>Přirozené barevné variace a rozdíly v kresbě dezénu u zakázek z různých výrobních šarží.</li>
+            <li style={liStyle}>Závady způsobené pokládkou na nevyhovující podklad (vlhkost, znečištění, nerovnost mimo toleranci).</li>
+            <li style={liStyle}>Závady způsobené nesprávným ošetřováním (nevhodné chemické čisticí prostředky, nadměrné vlhčení).</li>
+            <li style={liStyle}>Závady způsobené mechanickým poškozením ze strany uživatele (ostrá bodová zatížení, tah nábytku).</li>
+            <li style={liStyle}>Přirozené barevné změny povrchu vlivem UV záření (slunečního záření) u tmavých dezénů.</li>
+            <li style={liStyle}>Drobné vzduchové bubliny nebo vzedmutí způsobené nevhodnou teplotou při pokládce, na niž byl objednatel upozorněn.</li>
+            <li style={liStyle}>Stopy po přechodových lištách a spárách v místech napojení nebo u zdí, které jsou technicky nevyhnutelné.</li>
+          </ul>
+
+          <h3 style={h3Style}>Koberec (textilní podlahová krytina)</h3>
+          <ul style={ulStyle}>
+            <li style={liStyle}>Rozdíly v rozměrech spadající do výrobních tolerancí výrobce.</li>
+            <li style={liStyle}>Přirozené variace v barvě a vzoru koberce u zakázek realizovaných z různých šarží nebo rolí.</li>
+            <li style={liStyle}>Přirozené sešlapání a změna vzhledu vlasu v místech vysoké zátěže (chůze, nábytek) při normálním používání.</li>
+            <li style={liStyle}>Drobné záchyty a tahané smyčky způsobené ostrými předměty nebo zvířaty.</li>
+            <li style={liStyle}>Závady způsobené nesprávnou údržbou (nevhodné čisticí prostředky, nadměrné vlhčení, nesprávný postup čištění).</li>
+            <li style={liStyle}>Skvrny vzniklé po předání díla objednateli.</li>
+            <li style={liStyle}>Přirozené barevné změny koberce vlivem UV záření (výraznější u přírodních vláken).</li>
+            <li style={liStyle}>Efekt „nažehleného koberce" (změna lesku vlasu) v místech pohybu nábytku — jedná se o charakteristiku textilního vlasu.</li>
+            <li style={liStyle}>Barevný rozdíl v odstínu koberce v závislosti na směru pohledu (efekt pile direction) — je přirozenou vlastností textilní krytiny.</li>
+          </ul>
+
+          <h3 style={h3Style}>Soklové lišty a příslušenství</h3>
+          <ul style={ulStyle}>
+            <li style={liStyle}>Rozdíly v rozměrech a drobné barevné odchylky spadající do výrobních tolerancí výrobce.</li>
+            <li style={liStyle}>Rozdíly v odstínu lišt z různých výrobních šarží.</li>
+            <li style={liStyle}>Závady způsobené mechanickým poškozením ze strany uživatele.</li>
+            <li style={liStyle}>Drobné spáry v rozích a spojích lišt v rozsahu technologických tolerancí pokládky.</li>
+            <li style={liStyle}>Závady způsobené pohybem stavební konstrukce (sedání budovy, smršťování omítek apod.).</li>
+            <li style={liStyle}>Povrchové škrábance a vady viditelné pouze při bočním osvětlení nebo z těsné blízkosti.</li>
+          </ul>
+        </section>
+
+        <p style={{ ...pStyle, marginTop: 40 }}>
+          Přečtěte si také naše <a href="/obchodni-podminky" style={aStyle}>Všeobecné obchodní podmínky</a>.
+        </p>
+      </main>
+      <Footer />
+    </>
+  )
+}

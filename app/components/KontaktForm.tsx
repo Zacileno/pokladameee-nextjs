@@ -58,7 +58,12 @@ export default function KontaktForm() {
       <textarea className="form-input form-textarea" placeholder="Zpráva (rozloha, lokalita...)" rows={3} value={form.zprava} onChange={set('zprava')} />
       <label className="form-gdpr">
         <input type="checkbox" required style={{ accentColor: 'var(--orange)', flexShrink: 0, marginTop: 2 }} />
-        Souhlasím se zpracováním osobních údajů a obchodními podmínkami.
+        <span>
+          Souhlasím se zpracováním osobních údajů dle{' '}
+          <a href="/ochrana-osobnich-udaju" style={{ color: 'var(--orange)' }}>zásad ochrany osobních údajů</a>
+          {' '}a{' '}
+          <a href="/obchodni-podminky" style={{ color: 'var(--orange)' }}>obchodních podmínek</a>.
+        </span>
       </label>
       {error && <p className="form-error">{error}</p>}
       <button type="submit" disabled={loading} className="btn-primary form-submit">
