@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 type Sluzba = {
   emoji?: string
   title?: string
@@ -13,11 +15,11 @@ type Props = {
   }
 }
 
-const FALLBACK_SLUZBY: Sluzba[] = [
-  { emoji: '🪵', title: 'Vinylová podlaha lepená', desc: 'Nejtrvanlivější varianta. Ideální do kuchyní, koupelen a prostor s vyšší zátěží. Lepíme pouze prémiové kolekce UpFloor.', detail: 'Od 346 Kč/m² materiál' },
-  { emoji: '🏠', title: 'Vinylová podlaha plovoucí', desc: 'Rychlá montáž bez lepidla. Skvělá volba pro obývací pokoje a ložnice. Perfektní imitace dřeva i kamene.', detail: 'Montáž do 1 dne' },
-  { emoji: '♻️', title: 'Výměna staré podlahy', desc: 'Ekologicky odstraníme vaši starou podlahu a připravíme podklad. Vše v jedné návštěvě bez zbytečného čekání.', detail: 'Ekologická likvidace zdarma' },
-  { emoji: '📐', title: 'Zaměření a konzultace', desc: 'Přijedeme se podívat, poradíme s výběrem materiálu, barvy i vzoru. Připravíme nezávaznou kalkulaci do 24 hodin.', detail: 'Zdarma po celém MSK' },
+const FALLBACK_SLUZBY: (Sluzba & { href: string })[] = [
+  { emoji: '🪵', title: 'Vinylová podlaha lepená', desc: 'Nejtrvanlivější varianta. Ideální do kuchyní, koupelen a prostor s vyšší zátěží. Lepíme pouze prémiové kolekce UpFloor.', detail: 'Od 346 Kč/m² materiál', href: '/sluzby/vinylova-podlaha' },
+  { emoji: '🏠', title: 'Vinylová podlaha plovoucí', desc: 'Rychlá montáž bez lepidla. Skvělá volba pro obývací pokoje a ložnice. Perfektní imitace dřeva i kamene.', detail: 'Montáž do 1 dne', href: '/sluzby/drevena-podlaha' },
+  { emoji: '♻️', title: 'Výměna staré podlahy', desc: 'Ekologicky odstraníme vaši starou podlahu a připravíme podklad. Vše v jedné návštěvě bez zbytečného čekání.', detail: 'Ekologická likvidace zdarma', href: '/sluzby/pvc-podlaha' },
+  { emoji: '📐', title: 'Zaměření a konzultace', desc: 'Přijedeme se podívat, poradíme s výběrem materiálu, barvy i vzoru. Připravíme nezávaznou kalkulaci do 24 hodin.', detail: 'Zdarma po celém MSK', href: '/sluzby/koberec' },
 ]
 
 export default function SluzbySekce({ data }: Props) {
@@ -42,15 +44,19 @@ export default function SluzbySekce({ data }: Props) {
         </div>
 
         <div className="sluzby-grid">
-          {sluzby.map((s, i) => (
-            <div key={i} className="sluzba-karta">
+          {(sluzby as typeof FALLBACK_SLUZBY).map((s, i) => (
+            <Link key={i} href={s.href || '#'} className="sluzba-karta"
+              style={{ cursor: 'pointer', transition: 'box-shadow 0.2s, transform 0.15s', textDecoration: 'none' }}
+              onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)'; e.currentTarget.style.transform = 'scale(1.01)' }}
+              onMouseLeave={e => { e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'scale(1)' }}
+            >
               <div className="sluzba-ikona">{s.emoji}</div>
               <div className="sluzba-obsah">
                 <h3 style={{ fontSize: 18, fontWeight: 800, marginBottom: 6 }}>{s.title}</h3>
                 <p style={{ fontSize: 14, lineHeight: 1.6, marginBottom: 12, color: 'var(--gray-700)' }}>{s.desc}</p>
                 <div style={{ display: 'inline-block', background: 'var(--orange-light)', color: 'var(--orange)', fontWeight: 700, fontSize: 12, padding: '4px 10px', borderRadius: 100 }}>{s.detail}</div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 

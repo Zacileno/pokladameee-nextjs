@@ -4,5 +4,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: 'https://pokládámeee.cz', lastModified: new Date(), changeFrequency: 'weekly', priority: 1 },
     { url: 'https://pokládámeee.cz/akce', lastModified: new Date(), changeFrequency: 'weekly', priority: 0.8 },
     { url: 'https://pokládámeee.cz/inspirace', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
+    { url: 'https://pokládámeee.cz/sluzby/vinylova-podlaha', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.9 },
+    { url: 'https://pokládámeee.cz/faq', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
   ]
 }
