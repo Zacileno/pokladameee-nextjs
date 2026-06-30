@@ -42,7 +42,7 @@ export default function KarieraKontaktForm({ poziceNazev }: { poziceNazev?: stri
         const data = await res.json()
         throw new Error(data.error || 'Neznámá chyba')
       }
-      router.push('/dekujeme?typ=kariera')
+      router.push('/dekujeme-kariera')
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Nepodařilo se odeslat formulář. Zkuste to prosím znovu.')
     } finally {
