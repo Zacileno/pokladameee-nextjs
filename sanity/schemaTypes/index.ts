@@ -11,7 +11,8 @@ import { procNasVybratSchema } from '../schemas/procNasVybrat'
 import { rodinaZnacekSchema } from '../schemas/rodinaZnacek'
 import { obecneNastaveniSchema } from '../schemas/obecneNastaveni'
 import { kontaktSekceSchema } from '../schemas/kontaktSekce'
+import { vinylovaPodlahaSchema } from '../schemas/vinylovaPodlaha'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [inspiraceSchema, akceSchema, referenceSchema, projektSchema, heroSekceSchema, heroIkonkySchema, sluzbySekceSchema, jakToFungujeSchema, procNasVybratSchema, rodinaZnacekSchema, obecneNastaveniSchema, kontaktSekceSchema],
+  types: [inspiraceSchema, akceSchema, referenceSchema, projektSchema, heroSekceSchema, heroIkonkySchema, sluzbySekceSchema, jakToFungujeSchema, procNasVybratSchema, rodinaZnacekSchema, obecneNastaveniSchema, kontaktSekceSchema, vinylovaPodlahaSchema],
 }
