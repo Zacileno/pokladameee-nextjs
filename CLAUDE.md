@@ -139,7 +139,14 @@ app/
   page.tsx                          # Homepage — fetchuje vše ze Sanity paralelně
   components/                       # Viz sekce Komponenty výše
   api/kontakt/route.ts              # POST → Make webhook + Resend emaily
-  dekujeme/page.tsx                 # Děkovná stránka po odeslání formuláře
+                                    #   typ='kariera' → email přihlášky, jinak email poptávky
+  dekujeme/page.tsx                 # Děkovná stránka po odeslání poptávky zákazníka
+  dekujeme-kariera/page.tsx         # Děkovná stránka po odeslání přihlášky na kariéru
+  kariera/page.tsx                  # /kariera — kariéra stránka (hardcoded data)
+  kariera/[slug]/page.tsx           # /kariera/[slug] — detail pozice
+  kariera/components/               # KarieraHero, TestimonialCarousel, BenefityGrid,
+                                    #   FilozofieSecce, KulturaGrid, VolnePozice, KarieraKontaktForm
+  kariera/[slug]/components/        # PoziceDetail
   akce/page.tsx
   inspirace/page.tsx
   ochrana-osobnich-udaju/page.tsx
@@ -150,6 +157,7 @@ app/
 
 lib/
   sanity.ts             # Sanity client, urlFor helper, všechny GROQ queries (*_QUERY konstanty)
+  kariera-data.ts       # Hardcoded data 4 pozic (slug, texty, bullet listy)
 
 sanity/
   schemas/
@@ -311,12 +319,15 @@ Na `pokladameee.cz/studio`:
 - [ ] Přidat Akce + Inspirace do navigace v Headeru
 - [ ] Google Analytics / GA4
 - [ ] On-demand revalidation ze Sanity webhooku
+- [ ] Kariéra — dořešit posílání životopisů v přihlašovacím formuláři (file upload → Resend attachment nebo odkaz na úložiště)
+- [ ] Kariéra — volitelně napojit pozice na Sanity CMS (aktuálně hardcoded v `lib/kariera-data.ts`)
 
 ---
 
 ## Technické poznámky
 
-- **Formuláře — flow:** `KontaktForm` → POST `/api/kontakt` → Make webhook + Resend emaily → redirect `/dekujeme`
+- **Formuláře — flow (poptávka):** `KontaktForm` → POST `/api/kontakt` → Make webhook + Resend emaily → redirect `/dekujeme`
+- **Formuláře — flow (kariéra):** `KarieraKontaktForm` → POST `/api/kontakt` (pole `typ:'kariera'`, `pozice`) → Make webhook + Resend emaily → redirect `/dekujeme-kariera`
 - **Resend odesílací adresa:** `no-reply@pokladameee.cz` (doména ověřena)
 - **Testovací email:** notifikace jde na `martin@zacileno.cz` — před produkcí přepnout na Adama
 - **Google Fonts:** načítáme přes `<link>` tag (ne `next/font`) — build server na Vercelu nemá přístup na internet

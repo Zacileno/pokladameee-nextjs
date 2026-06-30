@@ -68,3 +68,17 @@ export const KONTAKT_SEKCE_QUERY = `*[_type == "kontaktSekce"][0] {
   telefon, email,
   pracovniDoba, region
 }`
+
+export const VINYLOVA_PODLAHA_QUERY = `*[_type == "vinylovaPodlaha"][0] {
+  heroNadpis, heroPodnadpis, heroBadge,
+  "heroFotkaUrl": heroFotka.asset->url,
+  istrip[] { emoji, text },
+  typyNadpis, typyPodnadpis,
+  typy[] { nazev, badge, popis, vyhody, barva },
+  benefityNadpis,
+  benefity[] { emoji, nadpis, text },
+  krokyNadpis, krokyPodnadpis,
+  kroky[] { nadpis, text },
+  referenceHodnoceni, referenceCitace, referenceJmeno,
+  faq[] { otazka, odpoved }
+}`
