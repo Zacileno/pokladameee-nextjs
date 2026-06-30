@@ -132,3 +132,46 @@ input, select, textarea { font-family: var(--font); }
   .vyhody-badge-karty { grid-template-columns: 1fr; }
   .hero-grid h1 { font-size: 52px; }
 }
+
+/* === KARIÉRA === */
+
+.kariera-benefity-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+.kariera-filozofie-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.kariera-kultura-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.kariera-filtry { display: flex; gap: 8px; flex-wrap: wrap; }
+.kariera-filtry-mobile { display: none; }
+
+.kariera-form-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 900px) {
+  .kariera-benefity-grid { grid-template-columns: repeat(3, 1fr); }
+  .kariera-filozofie-grid { grid-template-columns: 1fr; }
+  .kariera-kultura-grid { grid-template-columns: repeat(2, 1fr); }
+  .kariera-filtry { display: none; }
+  .kariera-filtry-mobile { display: block; width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; }
+  .kariera-form-grid-2col { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .kariera-benefity-grid { grid-template-columns: repeat(2, 1fr); }
+  .kariera-kultura-grid { grid-template-columns: 1fr; }
+}

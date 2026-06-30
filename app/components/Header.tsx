@@ -1,10 +1,12 @@
 'use client'
 import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import Image from 'next/image'
 
 export default function Header({ opaque }: { opaque?: boolean }) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -43,6 +45,9 @@ export default function Header({ opaque }: { opaque?: boolean }) {
           <a href="/#kontakt" style={{ color: 'rgba(255,255,255,0.8)', fontWeight: 600, fontSize: 15, transition: 'color 0.2s' }}
             onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
             onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.8)')}>Kontakt</a>
+          <a href="/kariera" style={{ color: pathname?.startsWith('/kariera') ? '#fff' : 'rgba(255,255,255,0.8)', fontWeight: pathname?.startsWith('/kariera') ? 700 : 600, fontSize: 15, transition: 'color 0.2s', textDecoration: pathname?.startsWith('/kariera') ? 'underline' : 'none', textUnderlineOffset: 4 }}
+            onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+            onMouseLeave={e => (e.currentTarget.style.color = pathname?.startsWith('/kariera') ? '#fff' : 'rgba(255,255,255,0.8)')}>Kariéra</a>
           <a href="/#kontakt" className="btn-primary" style={{ padding: '10px 22px', fontSize: 15 }}>Chci podlahu →</a>
         </nav>
         <button onClick={() => setMenuOpen(!menuOpen)} className="hamburger"
@@ -52,7 +57,7 @@ export default function Header({ opaque }: { opaque?: boolean }) {
       </div>
       {menuOpen && (
         <div style={{ background: 'rgba(21,76,134,0.98)', borderTop: '1px solid rgba(255,255,255,0.1)', padding: '24px', display: 'flex', flexDirection: 'column', gap: 20 }}>
-          {[['#jak-to-funguje', 'Jak to funguje'], ['#reference', 'Reference'], ['/faq', 'FAQ'], ['/#kontakt', 'Kontakt']].map(([href, label]) => (
+          {[['#jak-to-funguje', 'Jak to funguje'], ['#reference', 'Reference'], ['/faq', 'FAQ'], ['/#kontakt', 'Kontakt'], ['/kariera', 'Kariéra']].map(([href, label]) => (
             <a key={href} href={href} onClick={() => setMenuOpen(false)} style={{ color: 'white', fontWeight: 600, fontSize: 18 }}>{label}</a>
           ))}
           <a href="/#kontakt" className="btn-primary" onClick={() => setMenuOpen(false)} style={{ textAlign: 'center', justifyContent: 'center' }}>Chci podlahu →</a>
