@@ -147,6 +147,9 @@ app/
   kariera/components/               # KarieraHero, TestimonialCarousel, BenefityGrid,
                                     #   FilozofieSecce, KulturaGrid, VolnePozice, KarieraKontaktForm
   kariera/[slug]/components/        # PoziceDetail
+  sluzby/vinylova-podlaha/
+    page.tsx                        # Server component, fetchuje VINYLOVA_PODLAHA_QUERY + KONTAKT_SEKCE_QUERY
+    FaqItem.tsx                     # Client component (useState) — FAQ akordeon
   akce/page.tsx
   inspirace/page.tsx
   ochrana-osobnich-udaju/page.tsx
@@ -175,8 +178,15 @@ sanity/
     obecneNastaveni.ts  # Obecné nastavení — telefon, email, pracovniDoba, region, popisFooter
     kontaktSekce.ts     # Kontaktní sekce — nadpis, podnadpis, jmeno, role, citat,
                         #   foto, telefon, email, pracovniDoba, region
+    vinylovaPodlaha.ts  # Podstránka vinylová podlaha — singleton, vše editovatelné
+                        #   hero, istrip[], typy[], benefity[], kroky[],
+                        #   referenceStrip, faq[]
   schemaTypes/
-    index.ts            # Registrace všech schémat
+    index.ts            # Registrace schémat pro Next.js stránky (import v app/)
+
+scripts/
+  seed-kontakt.ts           # Seed kontaktSekce dokumentu
+  seed-vinylova-podlaha.ts  # Seed vinylovaPodlaha dokumentu (demo obsah)
 
 public/
   favicon.svg
@@ -202,6 +212,7 @@ Každý typ má právě jeden dokument s pevným `_id` (singletons):
 | `rodinaZnacek` | Rodina značek | nadpis, podnadpis, pocetKlientuCelkem |
 | `obecneNastaveni` | Obecné nastavení | telefon, email, pracovniDoba, region, popisFooter |
 | `kontaktSekce` | Kontaktní sekce | všechna kontaktní pole + foto |
+| `vinylovaPodlaha` | Podstránka: Vinylová podlaha | hero, istrip[], typy[], benefity[], kroky[], referenceStrip, faq[] |
 
 Kolekce (více dokumentů): `projekt`, `inspirace`, `akce`, `reference`
 
@@ -310,6 +321,8 @@ Na `pokladameee.cz/studio`:
 ### 🟡 Důležité
 - [ ] Reálná hero fotka pozadí (Sanity → Hero obrázek)
 - [ ] Reálné fotky galerie před/po (Sanity → Inspirace) — pak odkomentovat GalerieSekce + button v Hero
+- [ ] Vinylová podlaha — nahrát reálnou hero fotku realizace (Sanity → Podstránka: Vinylová podlaha → Hero fotka)
+- [ ] Vinylová podlaha — přidat do navigace v Headeru (až bude finální)
 - [ ] Vyplnit GDPR a obchodní podmínky
 - [ ] Google Search Console — registrace domény
 - [ ] Přidat `https://www.pokladameee.cz` do Sanity CORS origins
@@ -333,5 +346,26 @@ Na `pokladameee.cz/studio`:
 - **Google Fonts:** načítáme přes `<link>` tag (ne `next/font`) — build server na Vercelu nemá přístup na internet
 - **Logo filter:** footer používá `logo-zakladni.svg` s `filter: brightness(0) invert(1)` pro bílou variantu
 - **Sanity init:** byl spuštěn v projektu — nevytvářej nový projekt, vždy použij `8cvsenqb`
-- **Seed skripty:** `scripts/seed-kontakt.ts` — vyžaduje `SANITY_TOKEN` env var
+- **Seed skripty:** `scripts/seed-*.ts` — vyžadují `SANITY_TOKEN` env var (`~/.config/sanity/config.json` → `authToken`). Spuštění: `SANITY_TOKEN=xxx npx tsx scripts/seed-xxx.ts`
+- **Sanity schéma — dvě místa registrace:** nové schema VŽDY přidat na obě místa:
+  1. `sanity/schemaTypes/index.ts` — pro Next.js stránky
+  2. `sanity.config.ts` → pole `schema.types` — pro Sanity Studio UI (bez tohoto se dokument v Studiu nezobrazí)
 - **Fotka řemeslníka v kartách:** PNG s průhledným pozadím, doporučený poměr **2:3** (např. 600×900px), min. 800px výška
+- **KontaktSekce na podstránkách:** vždy fetchovat `KONTAKT_SEKCE_QUERY` a předat jako prop — jinak se zobrazí jen iniciály místo fotky Adama
+- **Async server component vs. client component:** pokud stránka potřebuje `useState` (např. FAQ akordeon), extrahovat interaktivní část do samostatného `'use client'` souboru — async server komponenty (`RemeselnikSekce` aj.) nelze renderovat z `'use client'` stránky
+
+---
+
+## Workflow — nová CMS stránka (postup)
+
+Při budování nové stránky s Sanity daty postupuj vždy takto:
+
+1. **Design + placeholder obsah** — nejdřív finalizujeme design s hardcoded hodnotami, schválíme vizuál
+2. **Schema** — po schválení designu vytvořit `sanity/schemas/xxx.ts` a zaregistrovat na obou místech (`schemaTypes/index.ts` + `sanity.config.ts`)
+3. **GROQ query** — přidat do `lib/sanity.ts`
+4. **Napojit stránku** — stránka fetchuje data, hardcoded hodnoty zůstávají jako fallback
+5. **Seed skript** — vytvořit `scripts/seed-xxx.ts` s demo obsahem a **sám navrhnout jeho spuštění** uživateli — nečekat, až se zeptá
+6. **Spustit seed** — `SANITY_TOKEN=xxx npx tsx scripts/seed-xxx.ts`
+7. **Commitnout** schema + seed skript + aktualizovat CLAUDE.md
+
+**Klíčové pravidlo:** Krok 5 (seed skript + návrh spuštění) provádíme proaktivně — po dokončení napojení na Sanity automaticky upozornit uživatele, že je připravený seed a nabídnout spuštění. Uživatel nemusí o seed říkat sám.
