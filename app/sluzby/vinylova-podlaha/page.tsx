@@ -4,7 +4,7 @@ import BenefityGrid from '@/app/components/BenefityGrid'
 import RemeselnikSekce from '@/app/components/RemeselnikSekce'
 import KontaktSekce from '@/app/components/KontaktSekce'
 import FaqItem from './FaqItem'
-import { client, VINYLOVA_PODLAHA_QUERY } from '@/lib/sanity'
+import { client, VINYLOVA_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY } from '@/lib/sanity'
 
 export const revalidate = 0
 
@@ -97,8 +97,12 @@ type VinylData = {
 
 export default async function VinylovaPodlahaPage() {
   let data: VinylData | null = null
+  let kontaktSekce: any = null
   try {
-    data = await client.fetch<VinylData>(VINYLOVA_PODLAHA_QUERY)
+    ;[data, kontaktSekce] = await Promise.all([
+      client.fetch<VinylData>(VINYLOVA_PODLAHA_QUERY),
+      client.fetch(KONTAKT_SEKCE_QUERY),
+    ])
   } catch {}
 
   const heroNadpis = data?.heroNadpis || 'Vinylová podlaha — pokládka a montáž'
@@ -300,7 +304,7 @@ export default async function VinylovaPodlahaPage() {
 
       <RemeselnikSekce />
 
-      <KontaktSekce />
+      <KontaktSekce kontakt={kontaktSekce} />
 
       <Footer />
     </>
