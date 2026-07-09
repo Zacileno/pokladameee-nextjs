@@ -82,3 +82,17 @@ export const VINYLOVA_PODLAHA_QUERY = `*[_type == "vinylovaPodlaha"][0] {
   referenceHodnoceni, referenceCitace, referenceJmeno,
   faq[] { otazka, odpoved }
 }`
+
+export const PVC_PODLAHA_QUERY = `*[_type == "pvcPodlaha"][0] {
+  heroNadpis, heroPodnadpis, heroBadge,
+  "heroFotkaUrl": heroFotka.asset->url,
+  istrip[] { emoji, text },
+  typyNadpis, typyPodnadpis,
+  typy[] { nazev, badge, popis, vyhody, barva },
+  benefityNadpis,
+  benefity[] { emoji, nadpis, text },
+  krokyNadpis, krokyPodnadpis,
+  kroky[] { nadpis, text },
+  referenceHodnoceni, referenceCitace, referenceJmeno,
+  faq[] { otazka, odpoved }
+}`
