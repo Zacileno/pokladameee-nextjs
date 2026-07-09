@@ -328,8 +328,8 @@ Na `pokladameee.cz/studio`:
 - [x] ~~Single-repo workflow (dev/main větve)~~ ✓
 - [x] ~~**PVC podlaha — nová podstránka (/sluzby/pvc-podlaha)**~~ ✓
 - [x] ~~**Koberce — nová podstránka (/sluzby/koberce)**~~ ✓
-- [ ] Spustit seed skript pro PVC podlahy (`npx tsx scripts/seed-pvc-podlaha.ts`)
-- [ ] Spustit seed skript pro Koberce (`npx tsx scripts/seed-koberce.ts`)
+- [x] ~~Spustit seed skript pro PVC podlahy~~ ✓
+- [x] ~~Spustit seed skript pro Koberce~~ ✓
 - [ ] Přepnout příjemce emailu v `/api/kontakt/route.ts` z `martin@zacileno.cz` na `adam.hajdusek@pokladameee.cz`
 - [ ] Nahrát loga + fotky řemeslníků do Sanity (Projekty skupiny)
 - [ ] Přidat reálné recenze do Sanity (Reference)
