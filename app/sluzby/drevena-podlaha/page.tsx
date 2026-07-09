@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 import BenefityGrid from '@/app/components/BenefityGrid'
@@ -7,6 +8,15 @@ import FaqItem from './FaqItem'
 import { client, DREVENA_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY } from '@/lib/sanity'
 
 export const revalidate = 0
+
+export const metadata: Metadata = {
+  title: 'Dřevěná podlaha — pokládka bez starostí',
+  description: 'Profesionální pokládka dřevěných podlah v Moravskoslezském kraji. Zaměření a konzultace zdarma do 48 hodin, kompletní servis od výběru dřeviny po úklid. Odvoz staré podlahy zdarma.',
+  openGraph: {
+    title: 'Dřevěná podlaha — pokládka bez starostí | pokládámeee.cz',
+    description: 'Profesionální pokládka dřevěných podlah v Moravskoslezském kraji. Zaměření zdarma do 48 hodin, kompletní servis od výběru dřeviny po úklid.',
+  },
+}
 
 const BENEFITY = [
   { emoji: '🌳', nadpis: 'Přírodní a prémiový materiál', text: 'Dřevo je přírodní, nadčasové a prémiové řešení, které do interiéru přináší teplo a charakter. Zdravé i pro dětské pokoje a ložnice.' },

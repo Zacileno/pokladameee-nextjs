@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 import BenefityGrid from '@/app/components/BenefityGrid'
@@ -7,6 +8,15 @@ import FaqItem from './FaqItem'
 import { client, KOBERCOVA_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY } from '@/lib/sanity'
 
 export const revalidate = 0
+
+export const metadata: Metadata = {
+  title: 'Koberce — pokládka bez starostí',
+  description: 'Profesionální pokládka koberců v Moravskoslezském kraji. Zaměření a konzultace zdarma do 48 hodin, kompletní servis od výběru materiálu po úklid. Odvoz staré podlahy zdarma.',
+  openGraph: {
+    title: 'Koberce — pokládka bez starostí | pokládámeee.cz',
+    description: 'Profesionální pokládka koberců v Moravskoslezském kraji. Zaměření zdarma do 48 hodin, kompletní servis od výběru materiálu po úklid.',
+  },
+}
 
 const BENEFITY = [
   { emoji: '🧶', nadpis: 'Teplo a komfort', text: 'Koberec izoluje teplo a je příjemný na dotek i bosou nohou. V zimě znatelně snižuje pocit chladu z podlahy.' },

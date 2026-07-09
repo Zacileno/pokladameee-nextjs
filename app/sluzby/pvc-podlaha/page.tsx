@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 import BenefityGrid from '@/app/components/BenefityGrid'
@@ -7,6 +8,15 @@ import FaqItem from './FaqItem'
 import { client, PVC_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY } from '@/lib/sanity'
 
 export const revalidate = 0
+
+export const metadata: Metadata = {
+  title: 'PVC podlaha — pokládka bez starostí',
+  description: 'Profesionální pokládka PVC podlah v Moravskoslezském kraji. Zaměření a konzultace zdarma do 48 hodin, kompletní servis od výběru materiálu po úklid. Odvoz staré podlahy zdarma.',
+  openGraph: {
+    title: 'PVC podlaha — pokládka bez starostí | pokládámeee.cz',
+    description: 'Profesionální pokládka PVC podlah v Moravskoslezském kraji. Zaměření zdarma do 48 hodin, kompletní servis od výběru materiálu po úklid.',
+  },
+}
 
 const BENEFITY = [
   { emoji: '💰', nadpis: 'Cenově dostupné řešení', text: 'PVC nabízí skvělý poměr ceny a kvality. Získáte hezkou a funkční podlahu bez zbytečných nákladů — ideální volba, pokud chcete rozumně investovat.' },
