@@ -106,7 +106,8 @@ Každá komponenta má fallback na hardcoded hodnoty pokud Sanity vrátí null.
 |---|---|---|
 | **Vinylová podlaha** | `/app/sluzby/vinylova-podlaha/` | ✅ hotová + Sanity |
 | **PVC podlaha** | `/app/sluzby/pvc-podlaha/` | ✅ hotová + Sanity schema + seed |
-| **Koberce** | `/app/sluzby/koberce/` | ✅ **NOVĚ hotová** + Sanity schema + seed |
+| **Koberce** | `/app/sluzby/koberce/` | ✅ hotová + Sanity schema + seed |
+| **Dřevěná podlaha** | `/app/sluzby/drevena-podlaha/` | ✅ **NOVĚ hotová** + Sanity schema + seed |
 
 Struktura je identická — všechny podstránky fetchují ze Sanity, mají fallback na hardcoded texty, FAQ akordeon, reference strip, atd.
 
@@ -224,7 +225,8 @@ Každý typ má právě jeden dokument s pevným `_id` (singletons):
 | `kontaktSekce` | Kontaktní sekce | všechna kontaktní pole + foto |
 | `vinylovaPodlaha` | Podstránka: Vinylová podlaha | hero, istrip[], typy[], benefity[], kroky[], referenceStrip, faq[] |
 | `pvcPodlaha` | Podstránka: PVC podlaha | hero, istrip[], typy[], benefity[], kroky[], referenceStrip, faq[] |
-| `kobercovaPodlaha` | **Podstránka: Kobercová podlaha** | **hero, istrip[], typy[], benefity[], kroky[], referenceStrip, faq[]** |
+| `kobercovaPodlaha` | Podstránka: Kobercová podlaha | hero, istrip[], typy[], benefity[], kroky[], referenceStrip, faq[] |
+| `drevenaPodlaha` | **Podstránka: Dřevěná podlaha** | **hero, istrip[], typy[], benefity[], kroky[], referenceStrip, faq[]** |
 
 Kolekce (více dokumentů): `projekt`, `inspirace`, `akce`, `reference`
 
@@ -328,8 +330,10 @@ Na `pokladameee.cz/studio`:
 - [x] ~~Single-repo workflow (dev/main větve)~~ ✓
 - [x] ~~**PVC podlaha — nová podstránka (/sluzby/pvc-podlaha)**~~ ✓
 - [x] ~~**Koberce — nová podstránka (/sluzby/koberce)**~~ ✓
+- [x] ~~**Dřevěná podlaha — nová podstránka (/sluzby/drevena-podlaha)**~~ ✓
 - [x] ~~Spustit seed skript pro PVC podlahy~~ ✓
 - [x] ~~Spustit seed skript pro Koberce~~ ✓
+- [x] ~~Spustit seed skript pro Dřevěnou podlahu~~ ✓
 - [ ] Přepnout příjemce emailu v `/api/kontakt/route.ts` z `martin@zacileno.cz` na `adam.hajdusek@pokladameee.cz`
 - [ ] Nahrát loga + fotky řemeslníků do Sanity (Projekty skupiny)
 - [ ] Přidat reálné recenze do Sanity (Reference)
@@ -340,9 +344,11 @@ Na `pokladameee.cz/studio`:
 - [ ] Vinylová podlaha — nahrát reálnou hero fotku realizace (Sanity → Podstránka: Vinylová podlaha → Hero fotka)
 - [ ] **PVC podlaha — nahrát reálnou hero fotku realizace** (Sanity → Podstránka: PVC podlaha → Hero fotka)
 - [ ] **Koberce — nahrát reálnou hero fotku realizace** (Sanity → Podstránka: Kobercová podlaha → Hero fotka)
+- [ ] **Dřevěná podlaha — nahrát reálnou hero fotku realizace** (Sanity → Podstránka: Dřevěná podlaha → Hero fotka)
 - [ ] Vinylová podlaha — přidat do navigace v Headeru (až bude finální)
 - [ ] **PVC podlaha — přidat do navigace v Headeru** (až bude finální)
 - [ ] **Koberce — přidat do navigace v Headeru** (až bude finální)
+- [ ] **Dřevěná podlaha — přidat do navigace v Headeru** (až bude finální)
 - [ ] Vyplnit GDPR a obchodní podmínky
 - [ ] Google Search Console — registrace domény
 - [ ] Přidat `https://www.pokladameee.cz` do Sanity CORS origins

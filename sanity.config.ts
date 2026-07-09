@@ -16,6 +16,7 @@ import { kontaktSekceSchema } from './sanity/schemas/kontaktSekce'
 import { vinylovaPodlahaSchema } from './sanity/schemas/vinylovaPodlaha'
 import { pvcPodlahaSchema } from './sanity/schemas/pvcPodlaha'
 import { kobercovaPodlahaSchema } from './sanity/schemas/kobercovaPodlaha'
+import { drevenaPodlahaSchema } from './sanity/schemas/drevenaPodlaha'
 
 export default defineConfig({
   name: 'pokladameee',
@@ -24,5 +25,5 @@ export default defineConfig({
   projectId: '8cvsenqb',
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
   plugins: [structureTool(), visionTool()],
-  schema: { types: [akceSchema, inspiraceSchema, referenceSchema, projektSchema, heroSekceSchema, heroIkonkySchema, sluzbySekceSchema, jakToFungujeSchema, procNasVybratSchema, rodinaZnacekSchema, obecneNastaveniSchema, kontaktSekceSchema, vinylovaPodlahaSchema, pvcPodlahaSchema, kobercovaPodlahaSchema] },
+  schema: { types: [akceSchema, inspiraceSchema, referenceSchema, projektSchema, heroSekceSchema, heroIkonkySchema, sluzbySekceSchema, jakToFungujeSchema, procNasVybratSchema, rodinaZnacekSchema, obecneNastaveniSchema, kontaktSekceSchema, vinylovaPodlahaSchema, pvcPodlahaSchema, kobercovaPodlahaSchema, drevenaPodlahaSchema] },
 })
