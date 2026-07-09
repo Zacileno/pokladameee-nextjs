@@ -12,22 +12,22 @@ const BENEFITY = [
   { emoji: '🧶', nadpis: 'Teplo a komfort', text: 'Koberec izoluje teplo a je příjemný na dotek i bosou nohou. V zimě znatelně snižuje pocit chladu z podlahy.' },
   { emoji: '🔇', nadpis: 'Tlumí hluk', text: 'Skvěle pohlcuje zvuk kroků i akustiku místnosti. Ideální do bytů, kanceláří a místností nad obytnými prostory.' },
   { emoji: '🎨', nadpis: 'Stovky vzorů a barev', text: 'Od jednobarevných po vzorované, od krátkého vlasu po plyšový — najdeme koberec přesně podle vašeho interiéru.' },
-  { emoji: '💰', nadpis: 'Cenově dostupné řešení', text: 'Koberce nabízíme v širokém cenovém rozpětí — od ekonomických variant po prémiovou vlnu. Vždy najdeme řešení podle rozpočtu.' },
+  { emoji: '🏢', nadpis: 'Univerzální nasazení', text: 'Hodí se do bytů, rodinných domů i kanceláří a hotelových prostor — jedno řešení pro domácnost i firmu.' },
 ]
 
 const KROKY = [
-  { nadpis: 'Zavoláte nebo napíšete', text: 'Do 48 h přijedeme na zaměření — bez závazku a bez skrytých nákladů. Poradíme s výběrem materiálu podle využití místnosti.' },
-  { nadpis: 'Vyberete materiál', text: 'Přivezeme vzorník koberců — vlna, polypropylen, nylon, různé výšky vlasu i barvy. Domluvíme se na ceně a termínu.' },
-  { nadpis: 'Položíme a uklidíme', text: 'Profesionální pokládka — příprava podkladu, natažení nebo lepení, řezy u stěn a dveří. Odvoz staré podlahy a úklid po sobě.' },
-  { nadpis: 'Garance a podpora', text: 'Na práci máte záruku. Kdyby se cokoliv stalo, voláte nás. Poradíme i s údržbou a čištěním koberce.' },
+  { nadpis: 'Zaměření a konzultace zdarma', text: 'Do 48 h od poptávky přijedeme na místo, zhodnotíme podklad a poradíme s výběrem materiálu podle využití místnosti i rozpočtu. Bez závazku.' },
+  { nadpis: 'Vzorník, výběr a kalkulace na místě', text: 'Přivezeme vzorník koberců — vlna, polypropylen, nylon, různé výšky vlasu i barvy. Cenu vám spočítáme rovnou na místě.' },
+  { nadpis: 'Demontáž, příprava a pokládka', text: 'Odborně odstraníme starou podlahu, připravíme podklad a koberec profesionálně nainstalujeme — natažení nebo lepení, přesné řezy u stěn a dveří.' },
+  { nadpis: 'Úklid a záruka', text: 'Po sobě uklidíme a odpad ekologicky zlikvidujeme. Na práci máte záruku — když se něco stane, voláte nás, ne výrobce ani dodavatele.' },
 ]
 
 const ISTRIP = [
-  { emoji: '🧶', text: 'Teplo pod nohama' },
-  { emoji: '⏱️', text: 'Rychlá pokládka' },
+  { emoji: '📏', text: 'Zaměření do 48 hodin' },
+  { emoji: '🧶', text: 'Teplo a komfort pod nohama' },
   { emoji: '🔇', text: 'Tlumí hluk a kroky' },
-  { emoji: '♻️', text: 'Ekologické varianty' },
   { emoji: '🎨', text: 'Stovky vzorů a barev' },
+  { emoji: '🏢', text: 'Domácnosti i komerční prostory' },
 ]
 
 const TYPY = [
@@ -116,8 +116,8 @@ export default async function KobercovaPodlahaPage() {
     ])
   } catch {}
 
-  const heroNadpis = data?.heroNadpis || 'Pokládka koberců'
-  const heroPodnadpis = data?.heroPodnadpis || 'Teplo pod nohama, tlumení hluku a nekonečná škála barev a vzorů. Koberce jsou ideální volba pro ložnice, obývací pokoje, kanceláře i hotelové prostory. Přijedeme zaměřit do 48 hodin, poradíme s výběrem materiálu a profesionálně položíme.'
+  const heroNadpis = data?.heroNadpis || 'Koberce — pokládka bez starostí'
+  const heroPodnadpis = data?.heroPodnadpis || 'Teplo pod nohama, tlumení hluku a nekonečná škála barev a vzorů. Koberec vám kompletně vyřešíme od zaměření po úklid — bez shánění materiálu, řemeslníků nebo odvozu odpadu. Ozvěte se a do 48 hodin přijedeme změřit, poradit a nacenit přímo na místě.'
   const heroBadge = data?.heroBadge || '🚛 Odvoz staré podlahy zdarma'
   const heroFotkaUrl = data?.heroFotkaUrl || null
 
