@@ -37,7 +37,7 @@ export default function Header({ opaque }: { opaque?: boolean }) {
           />
         </a>
         <nav style={{ display: 'flex', alignItems: 'center', gap: 32 }} className="desk-nav">
-          {[['#jak-to-funguje', 'Jak to funguje'], ['#reference', 'Reference'], ['/faq', 'FAQ']].map(([href, label]) => (
+          {[['/#jak-to-funguje', 'Jak to funguje'], ['/#reference', 'Reference'], ['/faq', 'FAQ']].map(([href, label]) => (
             <a key={href} href={href} style={{ color: 'rgba(255,255,255,0.8)', fontWeight: 600, fontSize: 15, transition: 'color 0.2s' }}
               onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
               onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.8)')}>{label}</a>
@@ -57,7 +57,7 @@ export default function Header({ opaque }: { opaque?: boolean }) {
       </div>
       {menuOpen && (
         <div style={{ background: 'rgba(21,76,134,0.98)', borderTop: '1px solid rgba(255,255,255,0.1)', padding: '24px', display: 'flex', flexDirection: 'column', gap: 20 }}>
-          {[['#jak-to-funguje', 'Jak to funguje'], ['#reference', 'Reference'], ['/faq', 'FAQ'], ['/#kontakt', 'Kontakt'], ['/kariera', 'Kariéra']].map(([href, label]) => (
+          {[['/#jak-to-funguje', 'Jak to funguje'], ['/#reference', 'Reference'], ['/faq', 'FAQ'], ['/#kontakt', 'Kontakt'], ['/kariera', 'Kariéra']].map(([href, label]) => (
             <a key={href} href={href} onClick={() => setMenuOpen(false)} style={{ color: 'white', fontWeight: 600, fontSize: 18 }}>{label}</a>
           ))}
           <a href="/#kontakt" className="btn-primary" onClick={() => setMenuOpen(false)} style={{ textAlign: 'center', justifyContent: 'center' }}>Chci podlahu →</a>
