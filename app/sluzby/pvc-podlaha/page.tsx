@@ -9,25 +9,25 @@ import { client, PVC_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY } from '@/lib/sanity'
 export const revalidate = 0
 
 const BENEFITY = [
-  { emoji: '💪', nadpis: 'Extrémně odolná', text: 'PVC snáší vysokou zátěž, nárazům a opotřebení. Vhodná do komerčních prostor, kuchyní, bazénů i sportovních hal.' },
-  { emoji: '💧', nadpis: 'Vodě odolná', text: 'Stoprocentně voděodolná — ideální do koupelen, kuchyní, předsíní a všech vlhkých prostor. Nehnívá a necpou se v ní bakterie.' },
-  { emoji: '🧹', nadpis: 'Snadná údržba', text: 'Stačí von a voda — žádné speciální mycí prostředky. Ideální pro lidi s alergiemi a domácnosti s dětmi.' },
-  { emoji: '🎨', nadpis: 'Pestrá nabídka', text: 'Desítky dekorů — imitace dřeva, kamene, betonu, moderní tóny a metalické efekty. Vždy najdeš design, který se shoduje s interiérem.' },
+  { emoji: '💰', nadpis: 'Cenově dostupné řešení', text: 'PVC nabízí skvělý poměr ceny a kvality. Získáte hezkou a funkční podlahu bez zbytečných nákladů — ideální volba, pokud chcete rozumně investovat.' },
+  { emoji: '🦶', nadpis: 'Měkká a teplá na chůzi', text: 'Na rozdíl od tvrdších krytin je PVC příjemně měkké a teplé i bez bot. Oceníte to v ložnicích, dětských pokojích i obývacích prostorech.' },
+  { emoji: '💧', nadpis: 'Voděodolná a snadná údržba', text: 'Stoprocentně voděodolná — ideální do koupelen, kuchyní i předsíní. Stačí pravidelné setření, žádná speciální chemie.' },
+  { emoji: '🏢', nadpis: 'Univerzální nasazení', text: 'Hodí se do domácností i společných prostor, provozoven a komerčních objektů. Jedno řešení pro byt i firmu.' },
 ]
 
 const KROKY = [
-  { nadpis: 'Zavoláte nebo napíšete', text: 'Do 48 h přijedeme na zaměření — bez závazku a bez skrytých nákladů. Zhodnotíme stav podkladu a poradíme varianty.' },
-  { nadpis: 'Vyberete materiál', text: 'Přivezeme vzorník PVC s různými tloušťkami a designy. Ukážeme vám diferenci mezi standard a premium třídou. Domlouváme se na ceně.' },
-  { nadpis: 'Položíme a uklidíme', text: 'Profesionální pokládka — správná příprava podkladu, presné lepení, řez v rozích. Odvez staré podlahy, vyčistíme po sobě.' },
-  { nadpis: 'Garanti a podpora', text: 'Na práci máte záruku. Kdyby se cokoliv stalo, voláte nás. Nabízíme i údržbu a regeneraci.' },
+  { nadpis: 'Zaměření a konzultace zdarma', text: 'Do 48 h od poptávky přijedeme na místo, zhodnotíme podklad a poradíme s výběrem materiálu podle prostoru, zátěže i rozpočtu. Bez závazku.' },
+  { nadpis: 'Vzorník, výběr a kalkulace na místě', text: 'Přivezeme vzorník PVC v různých dekorech a tloušťkách. Pomůžeme vybrat a cenu vám spočítáme rovnou na místě.' },
+  { nadpis: 'Demontáž, příprava a pokládka', text: 'Odborně odstraníme starou podlahu, připravíme podklad a novou PVC podlahu profesionálně položíme — u jednodušších realizací obvykle za jeden den.' },
+  { nadpis: 'Úklid a záruka', text: 'Po sobě uklidíme a odpad ekologicky zlikvidujeme. Na práci máte záruku — když se něco stane, voláte nás, ne výrobce ani dodavatele.' },
 ]
 
 const ISTRIP = [
-  { emoji: '🏗️', text: 'Prvotřídní kvalita' },
-  { emoji: '⏱️', text: 'Rychlá pokládka' },
-  { emoji: '💧', text: 'Vodě odolná' },
-  { emoji: '♻️', text: 'Ekologicky bezpečné' },
-  { emoji: '📊', text: 'Průmyslový standard' },
+  { emoji: '📏', text: 'Zaměření do 48 hodin' },
+  { emoji: '💧', text: 'Voděodolné a snadná údržba' },
+  { emoji: '🦶', text: 'Měkké a teplé na chůzi' },
+  { emoji: '💰', text: 'Cenově dostupné řešení' },
+  { emoji: '🏢', text: 'Domácnosti i komerční prostory' },
 ]
 
 const TYPY = [
@@ -116,8 +116,8 @@ export default async function PvcPodlahaPage() {
     ])
   } catch {}
 
-  const heroNadpis = data?.heroNadpis || 'PVC podlaha — pokládka a montáž'
-  const heroPodnadpis = data?.heroPodnadpis || 'Odolná, voděodolná a snadná na údržbu. PVC podlahy jsou ideální pro koupelny, kuchyně, obchodní prostory a všechny náročné prostředí. Přijedeme zaměřit do 48 hodin, poradíme s výběrem a profesionálně položíme.'
+  const heroNadpis = data?.heroNadpis || 'PVC podlaha — pokládka bez starostí'
+  const heroPodnadpis = data?.heroPodnadpis || 'Praktická, cenově dostupná a příjemně teplá na chůzi. PVC podlahu vám kompletně vyřešíme od zaměření po úklid — bez shánění materiálu, řemeslníků nebo odvozu odpadu. Ozvěte se a do 48 hodin přijedeme změřit, poradit a nacenit přímo na místě.'
   const heroBadge = data?.heroBadge || '🚛 Odvoz staré podlahy zdarma'
   const heroFotkaUrl = data?.heroFotkaUrl || null
 
