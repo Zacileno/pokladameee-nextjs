@@ -9,25 +9,25 @@ import { client, DREVENA_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY } from '@/lib/sanity
 export const revalidate = 0
 
 const BENEFITY = [
-  { emoji: '🌳', nadpis: 'Přírodní a zdravý materiál', text: 'Dřevo je přírodní, dýchající materiál bez škodlivých látek. Vhodné i do dětských pokojů a ložnic.' },
+  { emoji: '🌳', nadpis: 'Přírodní a prémiový materiál', text: 'Dřevo je přírodní, nadčasové a prémiové řešení, které do interiéru přináší teplo a charakter. Zdravé i pro dětské pokoje a ložnice.' },
   { emoji: '🔨', nadpis: 'Opakovaně brousitelná', text: 'Na rozdíl od laminátu nebo vinylu lze masivní dřevěnou podlahu brousit a renovovat i několikrát za desítky let.' },
   { emoji: '🏡', nadpis: 'Zvyšuje hodnotu nemovitosti', text: 'Dřevěná podlaha je vnímaná jako prémiový standard a dlouhodobě zvyšuje hodnotu bytu i domu.' },
-  { emoji: '🎨', nadpis: 'Přírodní krása a variabilita', text: 'Desítky dřevin, odstínů a kartáčování — od světlého dubu po tmavý ořech. Vždy najdeme design, který sedí k interiéru.' },
+  { emoji: '🎨', nadpis: 'Každá podlaha je originál', text: 'Přírodní kresba dřeva, odstíny a kartáčování dělají z každé podlahy originál. Desítky dřevin od světlého dubu po tmavý ořech.' },
 ]
 
 const KROKY = [
-  { nadpis: 'Zavoláte nebo napíšete', text: 'Do 48 h přijedeme na zaměření — bez závazku a bez skrytých nákladů. Zhodnotíme stav podkladu a poradíme s výběrem dřeviny.' },
-  { nadpis: 'Vyberete materiál', text: 'Přivezeme vzorník dřevěných podlah — dub, buk, ořech i exotické dřeviny, různé odstíny a kartáčování. Domluvíme se na ceně.' },
-  { nadpis: 'Položíme a uklidíme', text: 'Profesionální pokládka — příprava podkladu, přesné lepení nebo zaklikávání, olejování či lakování. Odvoz staré podlahy, úklid po sobě.' },
-  { nadpis: 'Garance a podpora', text: 'Na práci máte záruku. Poradíme i s údržbou, olejováním a případným budoucím broušením.' },
+  { nadpis: 'Zaměření a konzultace zdarma', text: 'Do 48 h od poptávky přijedeme na místo, zhodnotíme podklad a poradíme s výběrem dřeviny podle prostoru i rozpočtu. Bez závazku.' },
+  { nadpis: 'Vzorník, výběr a kalkulace na místě', text: 'Přivezeme vzorník dřevěných podlah — dub, buk, ořech i exotické dřeviny, různé odstíny a kartáčování. Cenu vám spočítáme rovnou na místě.' },
+  { nadpis: 'Demontáž, příprava a pokládka', text: 'Odborně odstraníme starou podlahu, připravíme podklad a novou dřevěnou podlahu profesionálně položíme — lepení nebo zaklikávání, olejování či lakování.' },
+  { nadpis: 'Úklid a záruka', text: 'Po sobě uklidíme a odpad ekologicky zlikvidujeme. Na práci máte záruku — když se něco stane, voláte nás, ne výrobce ani dodavatele.' },
 ]
 
 const ISTRIP = [
-  { emoji: '🌳', text: 'Přírodní materiál' },
-  { emoji: '⏱️', text: 'Rychlá pokládka' },
+  { emoji: '📏', text: 'Zaměření do 48 hodin' },
+  { emoji: '🌳', text: 'Přírodní a nadčasový materiál' },
   { emoji: '🔨', text: 'Brousitelná a renovovatelná' },
   { emoji: '🏡', text: 'Zvyšuje hodnotu nemovitosti' },
-  { emoji: '📊', text: 'Dlouhá životnost' },
+  { emoji: '📊', text: 'Dlouhá životnost při správné péči' },
 ]
 
 const TYPY = [
@@ -116,8 +116,8 @@ export default async function DrevenaPodlahaPage() {
     ])
   } catch {}
 
-  const heroNadpis = data?.heroNadpis || 'Dřevěná podlaha — pokládka a montáž'
-  const heroPodnadpis = data?.heroPodnadpis || 'Přírodní materiál, který dodá interiéru teplo a eleganci. Dřevěné podlahy jsou investicí na desítky let — lze je opakovaně brousit a renovovat. Přijedeme zaměřit do 48 hodin, poradíme s výběrem dřeviny a profesionálně položíme.'
+  const heroNadpis = data?.heroNadpis || 'Dřevěná podlaha — pokládka bez starostí'
+  const heroPodnadpis = data?.heroPodnadpis || 'Přírodní, nadčasové a prémiové řešení, které do interiéru přináší teplo, charakter a originalitu — každá podlaha je jedinečná. Kompletně vyřešíme od zaměření po úklid, bez shánění materiálu, řemeslníků nebo odvozu odpadu. Ozvěte se a do 48 hodin přijedeme změřit, poradit a nacenit přímo na místě.'
   const heroBadge = data?.heroBadge || '🚛 Odvoz staré podlahy zdarma'
   const heroFotkaUrl = data?.heroFotkaUrl || null
 
