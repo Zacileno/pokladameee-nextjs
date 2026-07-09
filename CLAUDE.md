@@ -100,6 +100,15 @@ Každá komponenta má fallback na hardcoded hodnoty pokud Sanity vrátí null.
 | `KontaktSekce` | `kontaktSekce` | ✅ viditelná |
 | `Footer` | `obecneNastaveni` | ✅ viditelná |
 
+### Podstránky služeb (Sluzby)
+
+| Podstránka | Soubory | Stav |
+|---|---|---|
+| **Vinylová podlaha** | `/app/sluzby/vinylova-podlaha/` | ✅ hotová + Sanity |
+| **PVC podlaha** | `/app/sluzby/pvc-podlaha/` | ✅ **NOVĚ hotová** + Sanity schema + seed |
+
+Struktura je identická — obě podstránky fetchují ze Sanity, mají fallback na hardcoded texty, FAQ akordeon, reference strip, atd.
+
 ### Skryté prvky — vrátit až bude GalerieSekce viditelná
 
 - `HeroSection.tsx:41` — button "Zobrazit výsledky" (`href="#inspirace"`) je zakomentován.  
@@ -213,6 +222,7 @@ Každý typ má právě jeden dokument s pevným `_id` (singletons):
 | `obecneNastaveni` | Obecné nastavení | telefon, email, pracovniDoba, region, popisFooter |
 | `kontaktSekce` | Kontaktní sekce | všechna kontaktní pole + foto |
 | `vinylovaPodlaha` | Podstránka: Vinylová podlaha | hero, istrip[], typy[], benefity[], kroky[], referenceStrip, faq[] |
+| `pvcPodlaha` | **Podstránka: PVC podlaha** | **hero, istrip[], typy[], benefity[], kroky[], referenceStrip, faq[]** |
 
 Kolekce (více dokumentů): `projekt`, `inspirace`, `akce`, `reference`
 
@@ -314,6 +324,8 @@ Na `pokladameee.cz/studio`:
 - [x] ~~Registrace na resend.com, ověření domény, RESEND_API_KEY na Vercelu~~ ✓
 - [x] ~~Vyplnit MAKE_WEBHOOK_URL na Vercelu~~ ✓
 - [x] ~~Single-repo workflow (dev/main větve)~~ ✓
+- [x] ~~**PVC podlaha — nová podstránka (/sluzby/pvc-podlaha)**~~ ✓
+- [ ] Spustit seed skript pro PVC podlahy (`npm run seed-pvc` nebo `npx tsx scripts/seed-pvc-podlaha.ts`)
 - [ ] Přepnout příjemce emailu v `/api/kontakt/route.ts` z `martin@zacileno.cz` na `adam.hajdusek@pokladameee.cz`
 - [ ] Nahrát loga + fotky řemeslníků do Sanity (Projekty skupiny)
 - [ ] Přidat reálné recenze do Sanity (Reference)
@@ -322,7 +334,9 @@ Na `pokladameee.cz/studio`:
 - [ ] Reálná hero fotka pozadí (Sanity → Hero obrázek)
 - [ ] Reálné fotky galerie před/po (Sanity → Inspirace) — pak odkomentovat GalerieSekce + button v Hero
 - [ ] Vinylová podlaha — nahrát reálnou hero fotku realizace (Sanity → Podstránka: Vinylová podlaha → Hero fotka)
+- [ ] **PVC podlaha — nahrát reálnou hero fotku realizace** (Sanity → Podstránka: PVC podlaha → Hero fotka)
 - [ ] Vinylová podlaha — přidat do navigace v Headeru (až bude finální)
+- [ ] **PVC podlaha — přidat do navigace v Headeru** (až bude finální)
 - [ ] Vyplnit GDPR a obchodní podmínky
 - [ ] Google Search Console — registrace domény
 - [ ] Přidat `https://www.pokladameee.cz` do Sanity CORS origins
