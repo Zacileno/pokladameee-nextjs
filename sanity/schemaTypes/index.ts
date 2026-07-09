@@ -13,7 +13,8 @@ import { obecneNastaveniSchema } from '../schemas/obecneNastaveni'
 import { kontaktSekceSchema } from '../schemas/kontaktSekce'
 import { vinylovaPodlahaSchema } from '../schemas/vinylovaPodlaha'
 import { pvcPodlahaSchema } from '../schemas/pvcPodlaha'
+import { kobercovaPodlahaSchema } from '../schemas/kobercovaPodlaha'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [inspiraceSchema, akceSchema, referenceSchema, projektSchema, heroSekceSchema, heroIkonkySchema, sluzbySekceSchema, jakToFungujeSchema, procNasVybratSchema, rodinaZnacekSchema, obecneNastaveniSchema, kontaktSekceSchema, vinylovaPodlahaSchema, pvcPodlahaSchema],
+  types: [inspiraceSchema, akceSchema, referenceSchema, projektSchema, heroSekceSchema, heroIkonkySchema, sluzbySekceSchema, jakToFungujeSchema, procNasVybratSchema, rodinaZnacekSchema, obecneNastaveniSchema, kontaktSekceSchema, vinylovaPodlahaSchema, pvcPodlahaSchema, kobercovaPodlahaSchema],
 }
