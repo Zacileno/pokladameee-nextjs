@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { pushDataLayerEvent } from '@/lib/gtm'
 
 type FormData = {
   jmeno: string
@@ -37,6 +38,7 @@ export default function KontaktForm() {
         const data = await res.json()
         throw new Error(data.error || 'Neznámá chyba')
       }
+      pushDataLayerEvent('formular_odeslani', { typ_formulare: 'poptavka' })
       router.push('/dekujeme')
     } catch (err: any) {
       setError(err.message || 'Nepodařilo se odeslat formulář. Zkuste to prosím znovu.')
