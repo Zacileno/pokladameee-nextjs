@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
+import { isValidLetters, isValidPhoneChars, isValidDigitsSpace } from '@/lib/formInput'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -49,6 +50,16 @@ export async function POST(req: NextRequest) {
 
   if (!souhlas) {
     return NextResponse.json({ error: 'Je nutné souhlasit se zpracováním osobních údajů' }, { status: 400 })
+  }
+
+  if (
+    !isValidLetters(String(jmeno)) ||
+    (prijmeni && !isValidLetters(String(prijmeni))) ||
+    (mesto && !isValidLetters(String(mesto))) ||
+    !isValidPhoneChars(String(telefon)) ||
+    (psc && !isValidDigitsSpace(String(psc)))
+  ) {
+    return NextResponse.json({ error: 'Neplatný formát některého pole' }, { status: 400 })
   }
 
   // Escapované verze pro vkládání do HTML e-mailů — surová data jdou jen do Make webhooku a `to:` pole Resendu
