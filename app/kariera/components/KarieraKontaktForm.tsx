@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { pushDataLayerEvent } from '@/lib/gtm'
+import { onlyLetters, onlyPhoneChars } from '@/lib/formInput'
 
 type FormData = {
   jmeno: string
@@ -24,6 +25,9 @@ export default function KarieraKontaktForm({ poziceNazev }: { poziceNazev?: stri
 
   const set = (field: keyof FormData) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setForm(f => ({ ...f, [field]: e.target.value }))
+
+  const setFiltered = (field: keyof FormData, filter: (v: string) => string) => (e: React.ChangeEvent<HTMLInputElement>) =>
+    setForm(f => ({ ...f, [field]: filter(e.target.value) }))
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -83,14 +87,14 @@ export default function KarieraKontaktForm({ poziceNazev }: { poziceNazev?: stri
           <input name="website" style={{ display: 'none' }} value={form.website} onChange={set('website')} tabIndex={-1} autoComplete="off" />
 
           <div className="kariera-form-grid-2col">
-            <input style={inputStyle} type="text" placeholder="Jméno *" required value={form.jmeno} onChange={set('jmeno')} />
-            <input style={inputStyle} type="text" placeholder="Příjmení *" required value={form.prijmeni} onChange={set('prijmeni')} />
+            <input style={inputStyle} type="text" placeholder="Jméno *" required value={form.jmeno} onChange={setFiltered('jmeno', onlyLetters)} />
+            <input style={inputStyle} type="text" placeholder="Příjmení *" required value={form.prijmeni} onChange={setFiltered('prijmeni', onlyLetters)} />
           </div>
           <div className="kariera-form-grid-2col">
             <input style={inputStyle} type="email" placeholder="E-mail *" required value={form.email} onChange={set('email')} />
-            <input style={inputStyle} type="tel" placeholder="Telefon *" required value={form.telefon} onChange={set('telefon')} />
+            <input style={inputStyle} type="tel" inputMode="tel" placeholder="Telefon *" required value={form.telefon} onChange={setFiltered('telefon', onlyPhoneChars)} />
           </div>
-          <input style={inputStyle} type="text" placeholder="Z jakého jsi města?" value={form.mesto} onChange={set('mesto')} />
+          <input style={inputStyle} type="text" placeholder="Z jakého jsi města?" value={form.mesto} onChange={setFiltered('mesto', onlyLetters)} />
           <textarea
             style={{ ...inputStyle, resize: 'vertical' }}
             placeholder="Zkušenost a motivace pro práci s podlahami."
