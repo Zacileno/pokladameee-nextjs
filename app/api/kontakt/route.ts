@@ -3,6 +3,9 @@ import { Resend } from 'resend'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
+const escapeHtml = (value: unknown): string =>
+  String(value ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] as string))
+
 export async function POST(req: NextRequest) {
   const body = await req.json()
   const { jmeno, prijmeni, email, telefon, ulice, mesto, psc, zprava, typ, pozice } = body
@@ -13,6 +16,15 @@ export async function POST(req: NextRequest) {
   if (!jmeno || !email || !telefon) {
     return NextResponse.json({ error: 'Chybí povinná pole' }, { status: 400 })
   }
+
+  // Escapované verze pro vkládání do HTML e-mailů — surová data jdou jen do Make webhooku a `to:` pole Resendu
+  const eJmeno = escapeHtml(jmeno)
+  const eCeleJmeno = escapeHtml(celeJmeno)
+  const eEmail = escapeHtml(email)
+  const eTelefon = escapeHtml(telefon)
+  const eMesto = escapeHtml(mesto)
+  const eZprava = escapeHtml(zprava)
+  const ePozice = escapeHtml(pozice)
 
   const webhookUrl = process.env.MAKE_WEBHOOK_URL
   if (webhookUrl) {
@@ -33,18 +45,18 @@ export async function POST(req: NextRequest) {
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 32px;">
           <div style="background: #154C86; padding: 24px 32px; border-radius: 8px 8px 0 0;">
             <h1 style="color: white; margin: 0; font-size: 22px;">Nová přihláška z kariéra stránky</h1>
-            ${pozice ? `<p style="color: rgba(255,255,255,0.7); margin: 8px 0 0; font-size: 14px;">Pozice: ${pozice}</p>` : ''}
+            ${ePozice ? `<p style="color: rgba(255,255,255,0.7); margin: 8px 0 0; font-size: 14px;">Pozice: ${ePozice}</p>` : ''}
           </div>
           <div style="background: #f8f7f5; padding: 32px; border-radius: 0 0 8px 8px; border: 1px solid #efefed; border-top: none;">
             <table style="width: 100%; border-collapse: collapse;">
-              <tr><td style="padding: 8px 0; color: #9a9a96; font-size: 13px; width: 140px;">Jméno</td><td style="padding: 8px 0; font-weight: 700;">${celeJmeno}</td></tr>
-              <tr><td style="padding: 8px 0; color: #9a9a96; font-size: 13px;">Email</td><td style="padding: 8px 0;"><a href="mailto:${email}" style="color: #154C86;">${email}</a></td></tr>
-              <tr><td style="padding: 8px 0; color: #9a9a96; font-size: 13px;">Telefon</td><td style="padding: 8px 0;"><a href="tel:${telefon}" style="color: #154C86; font-weight: 700;">${telefon}</a></td></tr>
-              ${mesto ? `<tr><td style="padding: 8px 0; color: #9a9a96; font-size: 13px;">Město</td><td style="padding: 8px 0;">${mesto}</td></tr>` : ''}
-              ${zprava ? `<tr><td style="padding: 8px 0; color: #9a9a96; font-size: 13px; vertical-align: top;">Zkušenosti / motivace</td><td style="padding: 8px 0;">${zprava}</td></tr>` : ''}
+              <tr><td style="padding: 8px 0; color: #9a9a96; font-size: 13px; width: 140px;">Jméno</td><td style="padding: 8px 0; font-weight: 700;">${eCeleJmeno}</td></tr>
+              <tr><td style="padding: 8px 0; color: #9a9a96; font-size: 13px;">Email</td><td style="padding: 8px 0;"><a href="mailto:${eEmail}" style="color: #154C86;">${eEmail}</a></td></tr>
+              <tr><td style="padding: 8px 0; color: #9a9a96; font-size: 13px;">Telefon</td><td style="padding: 8px 0;"><a href="tel:${eTelefon}" style="color: #154C86; font-weight: 700;">${eTelefon}</a></td></tr>
+              ${eMesto ? `<tr><td style="padding: 8px 0; color: #9a9a96; font-size: 13px;">Město</td><td style="padding: 8px 0;">${eMesto}</td></tr>` : ''}
+              ${eZprava ? `<tr><td style="padding: 8px 0; color: #9a9a96; font-size: 13px; vertical-align: top;">Zkušenosti / motivace</td><td style="padding: 8px 0;">${eZprava}</td></tr>` : ''}
             </table>
             <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid #efefed;">
-              <a href="mailto:${email}" style="background: #FF8800; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 15px;">Odpovědět uchazeči</a>
+              <a href="mailto:${eEmail}" style="background: #FF8800; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 15px;">Odpovědět uchazeči</a>
             </div>
           </div>
         </div>
@@ -63,8 +75,8 @@ export async function POST(req: NextRequest) {
             <p style="color: rgba(255,255,255,0.7); margin: 8px 0 0; font-size: 14px;">Podlahy beeezstarostí</p>
           </div>
           <div style="background: #f8f7f5; padding: 32px; border-radius: 0 0 8px 8px; border: 1px solid #efefed; border-top: none;">
-            <h2 style="color: #000; font-size: 20px; margin: 0 0 16px;">Děkujeme za přihlášku, ${jmeno}!</h2>
-            <p style="color: #3d3d3a; line-height: 1.7; margin: 0 0 16px;">Vaši přihlášku jsme dostali${pozice ? ` na pozici <strong>${pozice}</strong>` : ''}. Ozveme se vám co nejdříve — obvykle do pár pracovních dní.</p>
+            <h2 style="color: #000; font-size: 20px; margin: 0 0 16px;">Děkujeme za přihlášku, ${eJmeno}!</h2>
+            <p style="color: #3d3d3a; line-height: 1.7; margin: 0 0 16px;">Vaši přihlášku jsme dostali${ePozice ? ` na pozici <strong>${ePozice}</strong>` : ''}. Ozveme se vám co nejdříve — obvykle do pár pracovních dní.</p>
             <p style="color: #3d3d3a; line-height: 1.7; margin: 0 0 24px;">Mezitím se na nás klidně podívejte na webu nebo nám zavolejte.</p>
             <div style="background: white; border-radius: 8px; padding: 20px 24px; border: 1px solid #efefed; margin-bottom: 24px;">
               <p style="margin: 0 0 8px; color: #9a9a96; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em;">Přímý kontakt</p>
@@ -79,6 +91,7 @@ export async function POST(req: NextRequest) {
   } else {
     // --- Email Adamovi: nová poptávka podlahy ---
     const adresa = [ulice, mesto, psc].filter(Boolean).join(', ')
+    const eAdresa = escapeHtml(adresa)
 
     await resend.emails.send({
       from: 'no-reply@pokladameee.cz',
@@ -91,14 +104,14 @@ export async function POST(req: NextRequest) {
           </div>
           <div style="background: #f8f7f5; padding: 32px; border-radius: 0 0 8px 8px; border: 1px solid #efefed; border-top: none;">
             <table style="width: 100%; border-collapse: collapse;">
-              <tr><td style="padding: 8px 0; color: #9a9a96; font-size: 13px; width: 120px;">Jméno</td><td style="padding: 8px 0; font-weight: 700;">${celeJmeno}</td></tr>
-              <tr><td style="padding: 8px 0; color: #9a9a96; font-size: 13px;">Email</td><td style="padding: 8px 0;"><a href="mailto:${email}" style="color: #154C86;">${email}</a></td></tr>
-              <tr><td style="padding: 8px 0; color: #9a9a96; font-size: 13px;">Telefon</td><td style="padding: 8px 0;"><a href="tel:${telefon}" style="color: #154C86; font-weight: 700;">${telefon}</a></td></tr>
-              ${adresa ? `<tr><td style="padding: 8px 0; color: #9a9a96; font-size: 13px;">Adresa</td><td style="padding: 8px 0;">${adresa}</td></tr>` : ''}
-              ${zprava ? `<tr><td style="padding: 8px 0; color: #9a9a96; font-size: 13px; vertical-align: top;">Zpráva</td><td style="padding: 8px 0;">${zprava}</td></tr>` : ''}
+              <tr><td style="padding: 8px 0; color: #9a9a96; font-size: 13px; width: 120px;">Jméno</td><td style="padding: 8px 0; font-weight: 700;">${eCeleJmeno}</td></tr>
+              <tr><td style="padding: 8px 0; color: #9a9a96; font-size: 13px;">Email</td><td style="padding: 8px 0;"><a href="mailto:${eEmail}" style="color: #154C86;">${eEmail}</a></td></tr>
+              <tr><td style="padding: 8px 0; color: #9a9a96; font-size: 13px;">Telefon</td><td style="padding: 8px 0;"><a href="tel:${eTelefon}" style="color: #154C86; font-weight: 700;">${eTelefon}</a></td></tr>
+              ${eAdresa ? `<tr><td style="padding: 8px 0; color: #9a9a96; font-size: 13px;">Adresa</td><td style="padding: 8px 0;">${eAdresa}</td></tr>` : ''}
+              ${eZprava ? `<tr><td style="padding: 8px 0; color: #9a9a96; font-size: 13px; vertical-align: top;">Zpráva</td><td style="padding: 8px 0;">${eZprava}</td></tr>` : ''}
             </table>
             <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid #efefed;">
-              <a href="mailto:${email}" style="background: #FF8800; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 15px;">Odpovědět zákazníkovi</a>
+              <a href="mailto:${eEmail}" style="background: #FF8800; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 15px;">Odpovědět zákazníkovi</a>
             </div>
           </div>
         </div>
@@ -117,7 +130,7 @@ export async function POST(req: NextRequest) {
             <p style="color: rgba(255,255,255,0.7); margin: 8px 0 0; font-size: 14px;">Podlahy beeezstarostí</p>
           </div>
           <div style="background: #f8f7f5; padding: 32px; border-radius: 0 0 8px 8px; border: 1px solid #efefed; border-top: none;">
-            <h2 style="color: #000; font-size: 20px; margin: 0 0 16px;">Děkujeme za vaši poptávku, ${jmeno.split(' ')[0]}!</h2>
+            <h2 style="color: #000; font-size: 20px; margin: 0 0 16px;">Děkujeme za vaši poptávku, ${escapeHtml(String(jmeno).split(' ')[0])}!</h2>
             <p style="color: #3d3d3a; line-height: 1.7; margin: 0 0 24px;">Vaši zprávu jsme přijali. Adam se vám ozve co nejdříve — obvykle do 24 hodin. Zaměření je <strong>zdarma</strong>.</p>
             <div style="background: white; border-radius: 8px; padding: 20px 24px; border: 1px solid #efefed; margin-bottom: 24px;">
               <p style="margin: 0 0 8px; color: #9a9a96; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em;">Přímý kontakt</p>

@@ -11,9 +11,10 @@ type FormData = {
   mesto: string
   psc: string
   zprava: string
+  website: string
 }
 
-const EMPTY: FormData = { jmeno: '', email: '', telefon: '', ulice: '', mesto: '', psc: '', zprava: '' }
+const EMPTY: FormData = { jmeno: '', email: '', telefon: '', ulice: '', mesto: '', psc: '', zprava: '', website: '' }
 
 export default function KontaktForm() {
   const router = useRouter()
@@ -26,6 +27,7 @@ export default function KontaktForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (form.website) return
     setLoading(true)
     setError(null)
     try {
@@ -49,6 +51,7 @@ export default function KontaktForm() {
 
   return (
     <form className="kontakt-form" onSubmit={handleSubmit}>
+      <input name="website" style={{ display: 'none' }} value={form.website} onChange={set('website')} tabIndex={-1} autoComplete="off" />
       <input className="form-input" type="text" placeholder="Jméno a příjmení *" required value={form.jmeno} onChange={set('jmeno')} />
       <input className="form-input" type="email" placeholder="E-mail *" required value={form.email} onChange={set('email')} />
       <input className="form-input" type="tel" placeholder="Telefon *" required value={form.telefon} onChange={set('telefon')} />
