@@ -73,7 +73,6 @@ export default function KontaktForm() {
       <label className="form-gdpr">
         <input
           type="checkbox"
-          required
           checked={form.souhlas}
           onChange={e => setForm(f => ({ ...f, souhlas: e.target.checked }))}
           style={{ accentColor: 'var(--orange)', flexShrink: 0, marginTop: 2 }}

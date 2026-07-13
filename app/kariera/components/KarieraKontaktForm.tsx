@@ -105,7 +105,6 @@ export default function KarieraKontaktForm({ poziceNazev }: { poziceNazev?: stri
           <label style={{ display: 'flex', gap: 10, alignItems: 'flex-start', fontSize: 14, color: '#555', cursor: 'pointer' }}>
             <input
               type="checkbox"
-              required
               checked={form.souhlas}
               onChange={e => setForm(f => ({ ...f, souhlas: e.target.checked }))}
               style={{ accentColor: 'var(--orange)', flexShrink: 0, marginTop: 2 }}
