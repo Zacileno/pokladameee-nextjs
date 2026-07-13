@@ -6,7 +6,37 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 const escapeHtml = (value: unknown): string =>
   String(value ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] as string))
 
+// --- In-memory rate limiting ---
+// Funguje per serverless instance (Vercel) — nesdílí se napříč regiony/instancemi,
+// ale odchytí skriptované zneužití v rámci jednoho warm instance. Pro tenhle rozsah
+// (poptávkový formulář) je to dostatečná ochrana bez externí závislosti.
+const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000 // 15 minut
+const RATE_LIMIT_MAX = 5 // max. 5 odeslání na IP za okno
+
+const requestLog = new Map<string, number[]>()
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now()
+  const timestamps = (requestLog.get(ip) || []).filter((t) => now - t < RATE_LIMIT_WINDOW_MS)
+  timestamps.push(now)
+  requestLog.set(ip, timestamps)
+
+  // Občasný úklid starých záznamů, ať mapa neroste do nekonečna
+  if (Math.random() < 0.01) {
+    for (const [key, times] of requestLog) {
+      if (times.every((t) => now - t >= RATE_LIMIT_WINDOW_MS)) requestLog.delete(key)
+    }
+  }
+
+  return timestamps.length > RATE_LIMIT_MAX
+}
+
 export async function POST(req: NextRequest) {
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
+  if (isRateLimited(ip)) {
+    return NextResponse.json({ error: 'Příliš mnoho požadavků. Zkuste to prosím za chvíli znovu.' }, { status: 429 })
+  }
+
   const body = await req.json()
   const { jmeno, prijmeni, email, telefon, ulice, mesto, psc, zprava, typ, pozice } = body
 
