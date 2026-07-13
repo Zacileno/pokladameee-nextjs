@@ -38,13 +38,17 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json()
-  const { jmeno, prijmeni, email, telefon, ulice, mesto, psc, zprava, typ, pozice } = body
+  const { jmeno, prijmeni, email, telefon, ulice, mesto, psc, zprava, typ, pozice, souhlas } = body
 
   const celeJmeno = prijmeni ? `${jmeno} ${prijmeni}` : jmeno
   const isPrihlaska = typ === 'kariera'
 
   if (!jmeno || !email || !telefon) {
     return NextResponse.json({ error: 'Chybí povinná pole' }, { status: 400 })
+  }
+
+  if (!souhlas) {
+    return NextResponse.json({ error: 'Je nutné souhlasit se zpracováním osobních údajů' }, { status: 400 })
   }
 
   // Escapované verze pro vkládání do HTML e-mailů — surová data jdou jen do Make webhooku a `to:` pole Resendu
@@ -61,7 +65,7 @@ export async function POST(req: NextRequest) {
     await fetch(webhookUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ jmeno: celeJmeno, email, telefon, ulice, mesto, psc, zprava, typ, pozice }),
+      body: JSON.stringify({ jmeno: celeJmeno, email, telefon, ulice, mesto, psc, zprava, typ, pozice, souhlas: true, souhlasDatum: new Date().toISOString() }),
     })
   }
 

@@ -11,9 +11,10 @@ type FormData = {
   mesto: string
   zprava: string
   website: string
+  souhlas: boolean
 }
 
-const EMPTY: FormData = { jmeno: '', prijmeni: '', email: '', telefon: '', mesto: '', zprava: '', website: '' }
+const EMPTY: FormData = { jmeno: '', prijmeni: '', email: '', telefon: '', mesto: '', zprava: '', website: '', souhlas: false }
 
 export default function KarieraKontaktForm({ poziceNazev }: { poziceNazev?: string }) {
   const router = useRouter()
@@ -27,6 +28,10 @@ export default function KarieraKontaktForm({ poziceNazev }: { poziceNazev?: stri
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (form.website) return
+    if (!form.souhlas) {
+      setError('Pro odeslání musíš souhlasit se zpracováním osobních údajů.')
+      return
+    }
     setLoading(true)
     setError(null)
     try {
@@ -94,7 +99,13 @@ export default function KarieraKontaktForm({ poziceNazev }: { poziceNazev?: stri
             onChange={set('zprava')}
           />
           <label style={{ display: 'flex', gap: 10, alignItems: 'flex-start', fontSize: 14, color: '#555', cursor: 'pointer' }}>
-            <input type="checkbox" required style={{ accentColor: 'var(--orange)', flexShrink: 0, marginTop: 2 }} />
+            <input
+              type="checkbox"
+              required
+              checked={form.souhlas}
+              onChange={e => setForm(f => ({ ...f, souhlas: e.target.checked }))}
+              style={{ accentColor: 'var(--orange)', flexShrink: 0, marginTop: 2 }}
+            />
             <span>
               Souhlasím se zpracováním osobních údajů dle{' '}
               <a href="/ochrana-osobnich-udaju" style={{ color: 'var(--orange)' }}>zásad ochrany osobních údajů</a>
