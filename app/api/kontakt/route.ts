@@ -84,7 +84,7 @@ export async function POST(req: NextRequest) {
     // --- Email Adamovi: nová přihláška ---
     await resend.emails.send({
       from: 'no-reply@pokladameee.cz',
-      to: ['adam.hajdusek@pokladameee.cz', 'martin@zacileno.cz'],
+      to: ['adam.hajdusek@pokladameee.cz'],
       subject: `Nová přihláška — ${celeJmeno}${pozice ? ` (${pozice})` : ''}`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 32px;">
