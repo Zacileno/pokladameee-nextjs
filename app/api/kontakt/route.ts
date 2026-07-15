@@ -140,7 +140,7 @@ export async function POST(req: NextRequest) {
 
     await resend.emails.send({
       from: 'no-reply@pokladameee.cz',
-      to: ['adam.hajdusek@pokladameee.cz', 'martin@zacileno.cz'],
+      to: ['adam.hajdusek@pokladameee.cz'],
       subject: `Nová poptávka — ${celeJmeno}`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 32px;">
