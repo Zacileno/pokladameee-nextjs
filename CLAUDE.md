@@ -402,7 +402,8 @@ Na `pokladameee.cz/studio`:
 - **Formuláře — flow (kariéra):** `KarieraKontaktForm` → POST `/api/kontakt` (pole `typ:'kariera'`, `pozice`) → Make webhook + Resend emaily → `pushDataLayerEvent('formular_odeslani', { typ_formulare: 'kariera', pozice })` → redirect `/dekujeme-kariera`
 - **GTM dataLayer event:** `gtm.historyChange-v2` NENÍ spolehlivý signál odeslání formuláře — je to obecná GTM systémová událost při jakékoli klientské navigaci. Proto vlastní `formular_odeslani` (viz `lib/gtm.ts`), pushuje se až po potvrzeném `res.ok`, ne na klik tlačítka.
 - **Resend odesílací adresa:** `no-reply@pokladameee.cz` (doména ověřena)
-- **Notifikace o poptávce/přihlášce:** chodí na `adam.hajdusek@pokladameee.cz` i `martin@zacileno.cz` zároveň (zatím vědomě oba, na výslovné přání)
+- **Notifikace o poptávce:** chodí jen na `adam.hajdusek@pokladameee.cz`
+- **Notifikace o přihlášce na kariéru:** chodí na `adam.hajdusek@pokladameee.cz` i `martin@zacileno.cz` zároveň (zatím vědomě oba, na výslovné přání)
 - **Google Fonts:** načítáme přes `<link>` tag (ne `next/font`) — build server na Vercelu nemá přístup na internet
 - **Logo filter:** footer používá `logo-zakladni.svg` s `filter: brightness(0) invert(1)` pro bílou variantu
 - **Sanity init:** byl spuštěn v projektu — nevytvářej nový projekt, vždy použij `8cvsenqb`
