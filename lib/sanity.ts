@@ -124,3 +124,16 @@ export const DREVENA_PODLAHA_QUERY = `*[_type == "drevenaPodlaha"][0] {
   referenceHodnoceni, referenceCitace, referenceJmeno,
   faq[] { otazka, odpoved }
 }`
+
+export const BLOG_POSTS_QUERY = `*[_type == "blogPost"] | order(datumVydani desc) {
+  _id, title, "slug": slug.current, kategorie, perex, datumVydani,
+  "obrazekUrl": hlavniObrazek.asset->url
+}`
+
+export const BLOG_POST_QUERY = `*[_type == "blogPost" && slug.current == $slug][0] {
+  _id, title, kategorie, perex, datumVydani, obsah,
+  "obrazekUrl": hlavniObrazek.asset->url,
+  seoTitle, seoDescription
+}`
+
+export const BLOG_SLUGS_QUERY = `*[_type == "blogPost"]{ "slug": slug.current }`

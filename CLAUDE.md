@@ -48,6 +48,7 @@ Výchozí větev pro práci: `dev`. Push vždy do `origin dev` (vývoj) nebo `or
 - **Framework:** Next.js 16 (App Router, TypeScript, Turbopack)
 - **Styly:** Inline styles + CSS třídy v `globals.css` — žádný Tailwind
 - **CMS:** Sanity (`projectId: 8cvsenqb`, dataset: `production`)
+- **Rich text:** `@portabletext/react` — renderování Sanity Portable Text (zatím jen blog)
 - **Formuláře:** vlastní API route `/api/kontakt` → Make webhook + Resend emaily
 - **Emaily:** Resend — transakční emaily z `/api/kontakt` (Adamovi + zákazníkovi)
 - **Deployment:** Vercel — větev `dev` → Preview, větev `main` → Production (`pokladameee.cz`)
@@ -121,6 +122,16 @@ Samostatná stránka `/faq` — dřív na ni Header odkazoval, ale neexistovala 
 
 Na `main` i `dev`.
 
+### Blog (`/app/blog/`)
+
+- **`/blog`** — přehledová stránka, grid článků (`.blog-grid`), stránkování po 9 (`?page=N`)
+- **`/blog/[slug]`** — detail článku: breadcrumb, hlavní obrázek, Portable Text obsah (H2/H3, tučně, odrážky, obrázky v textu), „Související články" (max 3, ze stejné kolekce), na konci `<KontaktSekce>` jako CTA
+- **Obsah v Sanity** — dokument `blogPost` (kolekce, ne singleton). Editace přes Studio → „Blog — článek". Pole: `title`, `slug`, `kategorie`, `perex`, `hlavniObrazek`, `datumVydani`, `obsah` (Portable Text), `seoTitle`/`seoDescription` (volitelné override).
+- **Renderování textu:** `@portabletext/react` + `app/components/PortableTextComponents.tsx` (mapování H2/H3/odkazy/obrázky na styl webu)
+- **Fallback:** `lib/blog-fallback.ts` — 3 demo články použité, pokud Sanity nevrátí žádný `blogPost` (stejný vzor jako u ostatních podstránek)
+- **Bez odkazu v navigaci** — zatím se drží stejné konvence jako PVC/koberce/dřevo: přístupné přímou URL (`/blog`), zvážit přidání do Headeru a `sitemap.ts`, až budou nahrané reálné obrázky článků
+- **Chybí:** `hlavniObrazek` u demo článků (seed skript ho nenastavuje — nahrát ručně přes Studio)
+
 ### Skryté prvky — vrátit až bude GalerieSekce viditelná
 
 - `HeroSection.tsx:41` — button "Zobrazit výsledky" (`href="#inspirace"`) je zakomentován.  
@@ -147,6 +158,7 @@ app/components/
   KontaktSekce.tsx    # Kontaktní sekce s formulářem
   KontaktForm.tsx     # Sdílený formulář — POST /api/kontakt, redirect /dekujeme
   Footer.tsx          # 3-sloupcový footer
+  PortableTextComponents.tsx  # Mapování Sanity Portable Text bloků na styl webu (blog)
 ```
 
 ---
@@ -177,18 +189,24 @@ app/
   faq/
     page.tsx                        # Agreguje FAQ ze 4 podstránek (živě ze Sanity) + hardcoded obecné otázky
     FaqItem.tsx
+  blog/
+    page.tsx                        # /blog — grid článků + stránkování (?page=N)
+    BlogCard.tsx                    # Karta článku (obrázek, kategorie, datum, perex, "Číst dále")
+    Pagination.tsx                  # Číslované stránkování
+    [slug]/page.tsx                 # Detail článku — breadcrumb, Portable Text, související, KontaktSekce CTA
   akce/page.tsx
   inspirace/page.tsx
   ochrana-osobnich-udaju/page.tsx
   obchodni-podminky/page.tsx
   robots.ts
-  sitemap.ts                        # Neobsahuje PVC/koberce/drevena/faq — zvážit doplnění, až budou finální
+  sitemap.ts                        # Neobsahuje PVC/koberce/drevena/faq/blog — zvážit doplnění, až budou finální
   studio/[[...tool]]/page.tsx       # Sanity Studio embedded
 
 lib/
   sanity.ts             # Sanity client, urlFor helper, všechny GROQ queries (*_QUERY konstanty)
   kariera-data.ts       # Hardcoded data 4 pozic (slug, texty, bullet listy)
   gtm.ts                # pushDataLayerEvent() helper — custom GTM dataLayer eventy
+  blog-fallback.ts      # 3 demo články — fallback, pokud Sanity nevrátí blogPost dokumenty
 
 sanity/
   schemas/
@@ -212,6 +230,8 @@ sanity/
     pvcPodlaha.ts       # Podstránka PVC podlaha — stejná struktura jako vinylovaPodlaha
     kobercovaPodlaha.ts # Podstránka Kobercová podlaha — stejná struktura
     drevenaPodlaha.ts   # Podstránka Dřevěná podlaha — stejná struktura
+    blogPost.ts          # Blog — článek (kolekce, ne singleton): title, slug, kategorie,
+                          #   perex, hlavniObrazek, datumVydani, obsah (Portable Text)
   schemaTypes/
     index.ts            # Registrace schémat pro Next.js stránky (import v app/)
   lib/
@@ -224,6 +244,7 @@ scripts/
   seed-koberce.ts            # Seed kobercovaPodlaha dokumentu
   seed-drevena-podlaha.ts    # Seed drevenaPodlaha dokumentu
   seed-vinylova-podlaha.ts  # Seed vinylovaPodlaha dokumentu (demo obsah)
+  seed-blog.ts               # Seed 3 demo blogPost dokumentů (bez hlavniObrazek — nahrát přes Studio)
 
 public/
   favicon.svg
@@ -254,7 +275,7 @@ Každý typ má právě jeden dokument s pevným `_id` (singletons):
 | `kobercovaPodlaha` | Podstránka: Kobercová podlaha | hero, istrip[], typy[], benefity[], kroky[], referenceStrip, faq[] |
 | `drevenaPodlaha` | Podstránka: Dřevěná podlaha | hero, istrip[], typy[], benefity[], kroky[], referenceStrip, faq[] |
 
-Kolekce (více dokumentů): `projekt`, `inspirace`, `akce`, `reference`
+Kolekce (více dokumentů): `projekt`, `inspirace`, `akce`, `reference`, `blogPost`
 
 ---
 
@@ -345,6 +366,7 @@ Na `pokladameee.cz/studio`:
 - **Hero obrázek** — nahrát reálnou hero fotku pozadí
 - **Recenze** — přidat reálné recenze z Google
 - **Kontaktní sekce** — nahrát foto Adama (nebo použít `/public/assets/adam.jpg`)
+- **Blog — články** — nahrát `hlavniObrazek` u 3 demo článků (seed skript ho nenastavuje)
 
 ---
 
@@ -365,6 +387,7 @@ Na `pokladameee.cz/studio`:
 - [x] ~~Oprava: `/faq` vracelo 404 (odkaz v Headeru existoval, stránka ne) — vytvořena a nasazena~~ ✓
 - [x] ~~Oprava: odkazy „Jak to funguje" / „Reference" mimo homepage nefungovaly~~ ✓
 - [x] ~~Vlastní GTM dataLayer event `formular_odeslani` při úspěšném odeslání formuláře~~ ✓
+- [x] ~~Blogová sekce (/blog + /blog/[slug]) — Sanity CMS, grid, stránkování, SEO/OG, responzivní~~ ✓
 - [ ] Nahrát loga + fotky řemeslníků do Sanity (Projekty skupiny)
 - [ ] Přidat reálné recenze do Sanity (Reference)
 
@@ -379,7 +402,9 @@ Na `pokladameee.cz/studio`:
 - [ ] PVC podlaha — přidat do navigace v Headeru (až bude finální)
 - [ ] Koberce — přidat do navigace v Headeru (až bude finální)
 - [ ] Dřevěná podlaha — přidat do navigace v Headeru (až bude finální)
-- [ ] Přidat PVC/Koberce/Dřevěná podlaha/FAQ do `app/sitemap.ts` (až budou finální — dnes tam záměrně nejsou, viz podstránky výše)
+- [ ] Přidat PVC/Koberce/Dřevěná podlaha/FAQ/Blog do `app/sitemap.ts` (až budou finální — dnes tam záměrně nejsou, viz podstránky výše)
+- [ ] Blog — nahrát hlavní obrázky ke 3 demo článkům, přidat do navigace v Headeru (až bude finální)
+- [ ] Blog — napsat reálné články (demo obsah slouží jen jako ukázka struktury/designu)
 - [ ] Vinylová podlaha — projít a případně přepsat texty podle klientova brief (zatím záměrně beze změny, na výslovné přání)
 - [ ] Vyplnit GDPR a obchodní podmínky
 - [ ] Google Search Console — registrace domény
