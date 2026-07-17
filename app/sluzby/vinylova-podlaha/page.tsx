@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 import BenefityGrid from '@/app/components/BenefityGrid'
@@ -7,6 +8,17 @@ import FaqItem from './FaqItem'
 import { client, VINYLOVA_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY } from '@/lib/sanity'
 
 export const revalidate = 0
+
+export const metadata: Metadata = {
+  title: 'Vinylová podlaha — pokládka a montáž',
+  description: 'Profesionální pokládka vinylových podlah v Moravskoslezském kraji. Lepená i plovoucí varianta, zaměření zdarma do 48 hodin, realizace do týdne. Odvoz staré podlahy zdarma.',
+  openGraph: {
+    title: 'Vinylová podlaha — pokládka a montáž | pokládámeee.cz',
+    description: 'Profesionální pokládka vinylových podlah v Moravskoslezském kraji. Zaměření zdarma do 48 hodin, realizace do týdne.',
+    url: 'https://www.pokladameee.cz/sluzby/vinylova-podlaha',
+  },
+  alternates: { canonical: 'https://www.pokladameee.cz/sluzby/vinylova-podlaha' },
+}
 
 const BENEFITY = [
   { emoji: '💧', nadpis: 'Voděodolný', text: 'Odolává vlhkosti — vhodný do koupelny, kuchyně i předsíně' },

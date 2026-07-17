@@ -91,6 +91,45 @@ input, select, textarea { font-family: var(--font); }
 .faq-list { display: flex; flex-direction: column; gap: 0; max-width: 760px; margin: 0 auto; }
 .hero-sluzby-grid { display: grid; grid-template-columns: 1fr 420px; gap: 64px; align-items: center; }
 
+/* ── BLOG ── */
+.blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.blog-karta { display: flex; flex-direction: column; background: white; border-radius: 12px; border: 1px solid var(--gray-100); overflow: hidden; transition: transform 0.15s, box-shadow 0.15s; }
+.blog-karta:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0,0,0,0.08); }
+.blog-karta-obrazek { position: relative; width: 100%; aspect-ratio: 16/10; background: var(--gray-50); overflow: hidden; }
+.blog-karta-obrazek img { width: 100%; height: 100%; object-fit: cover; }
+.blog-karta-obsah { display: flex; flex-direction: column; gap: 10px; padding: 20px 22px 24px; flex: 1; }
+.blog-karta-meta { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--gray-400); }
+.blog-karta-kategorie { color: var(--orange); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-size: 12px; }
+.blog-karta-nadpis { font-size: 19px; font-weight: 800; line-height: 1.25; }
+.blog-karta-perex { font-size: 14.5px; color: var(--gray-700); line-height: 1.6; flex: 1; }
+.blog-karta-link { display: inline-flex; align-items: center; gap: 6px; color: var(--blue); font-weight: 700; font-size: 14px; margin-top: 4px; }
+
+.blog-pagination { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 56px; }
+.blog-pagination a, .blog-pagination span { display: inline-flex; align-items: center; justify-content: center; min-width: 40px; height: 40px; padding: 0 12px; border-radius: 8px; font-weight: 700; font-size: 14px; }
+.blog-pagination a { background: white; border: 1px solid var(--gray-100); color: var(--gray-700); transition: border-color 0.2s, color 0.2s; }
+.blog-pagination a:hover { border-color: var(--orange); color: var(--orange); }
+.blog-pagination .aktivni { background: var(--orange); color: white; }
+.blog-pagination .disabled { opacity: 0.35; pointer-events: none; }
+
+.blog-breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--gray-400); margin-bottom: 20px; }
+.blog-breadcrumb a { color: var(--gray-400); transition: color 0.15s; }
+.blog-breadcrumb a:hover { color: var(--orange); }
+
+.blog-clanek-hlavicka { max-width: 760px; margin: 0 auto 32px; }
+.blog-clanek-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.blog-clanek-obrazek { width: 100%; aspect-ratio: 21/9; border-radius: 16px; overflow: hidden; background: var(--gray-50); margin-bottom: 40px; }
+.blog-clanek-obrazek img { width: 100%; height: 100%; object-fit: cover; }
+.blog-clanek-obsah { max-width: 720px; margin: 0 auto; font-size: 17px; line-height: 1.8; color: var(--gray-700); }
+.blog-clanek-obsah h2 { font-size: 28px; font-weight: 800; margin: 44px 0 16px; line-height: 1.25; }
+.blog-clanek-obsah h3 { font-size: 21px; font-weight: 800; margin: 32px 0 12px; line-height: 1.3; }
+.blog-clanek-obsah p { margin-bottom: 18px; }
+.blog-clanek-obsah ul, .blog-clanek-obsah ol { margin: 0 0 18px; padding-left: 22px; display: flex; flex-direction: column; gap: 8px; }
+.blog-clanek-obsah li { line-height: 1.7; }
+.blog-clanek-obsah strong { color: var(--black); font-weight: 700; }
+.blog-clanek-obsah a { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+.blog-clanek-obsah img { width: 100%; border-radius: 12px; margin: 8px 0 28px; }
+.blog-souvisejici-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+
 /* ── FOOTER ── */
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.1); }
 
@@ -136,6 +175,13 @@ input, select, textarea { font-family: var(--font); }
 
   .desk-nav { display: none !important; }
   .hamburger { display: block !important; }
+
+  .blog-grid { grid-template-columns: 1fr; gap: 20px; }
+  .blog-souvisejici-grid { grid-template-columns: 1fr; gap: 20px; }
+  .blog-clanek-obrazek { aspect-ratio: 16/10; border-radius: 12px; margin-bottom: 28px; }
+  .blog-clanek-obsah { font-size: 16px; }
+  .blog-clanek-obsah h2 { font-size: 23px; margin: 32px 0 12px; }
+  .blog-clanek-obsah h3 { font-size: 19px; }
 }
 
 @media (max-width: 480px) {

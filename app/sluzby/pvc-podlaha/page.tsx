@@ -15,7 +15,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'PVC podlaha — pokládka bez starostí | pokládámeee.cz',
     description: 'Profesionální pokládka PVC podlah v Moravskoslezském kraji. Zaměření zdarma do 48 hodin, kompletní servis od výběru materiálu po úklid.',
+    url: 'https://www.pokladameee.cz/sluzby/pvc-podlaha',
   },
+  alternates: { canonical: 'https://www.pokladameee.cz/sluzby/pvc-podlaha' },
 }
 
 const BENEFITY = [

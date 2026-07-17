@@ -5,6 +5,7 @@ import Footer from '@/app/components/Footer'
 export const metadata: Metadata = {
   title: 'Zásady ochrany osobních údajů | pokládámeee.cz',
   description: 'Informace o zpracování osobních údajů společností SYSPOD s.r.o.',
+  alternates: { canonical: 'https://www.pokladameee.cz/ochrana-osobnich-udaju' },
 }
 
 const h2Style: React.CSSProperties = {

@@ -15,11 +15,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Kariéra | Pokládámeee.cz',
     description: 'Hledáme šikovné řemeslníky, obchodníky a koordinátory do týmu pokládámeee.cz v Moravskoslezském kraji.',
-    url: 'https://pokladameee.cz/kariera',
+    url: 'https://www.pokladameee.cz/kariera',
     siteName: 'pokládámeee.cz',
     locale: 'cs_CZ',
     type: 'website',
   },
+  alternates: { canonical: 'https://www.pokladameee.cz/kariera' },
 }
 
 export default function KarieraPage() {

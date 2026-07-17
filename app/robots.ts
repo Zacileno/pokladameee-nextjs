@@ -2,6 +2,6 @@ import type { MetadataRoute } from 'next'
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: { userAgent: '*', allow: '/', disallow: '/studio/' },
-    sitemap: 'https://pokládámeee.cz/sitemap.xml',
+    sitemap: 'https://www.pokladameee.cz/sitemap.xml',
   }
 }

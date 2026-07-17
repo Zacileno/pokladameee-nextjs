@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 import KontaktSekce from '@/app/components/KontaktSekce'
+import JsonLd from '@/app/components/JsonLd'
 import FaqItem from './FaqItem'
 import {
   client,
@@ -20,7 +21,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Časté otázky | pokládámeee.cz',
     description: 'Odpovědi na nejčastější otázky o pokládce podlah — vinyl, PVC, koberce i dřevo.',
+    url: 'https://www.pokladameee.cz/faq',
   },
+  alternates: { canonical: 'https://www.pokladameee.cz/faq' },
 }
 
 type FaqEntry = { otazka?: string; odpoved?: string }
@@ -99,8 +102,19 @@ export default async function FaqPage() {
     { id: 'drevo', nadpis: 'Dřevěná podlaha', faq: drevenaData?.faq?.length ? drevenaData.faq : DREVO_FALLBACK },
   ]
 
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: sekce.flatMap(s => s.faq).map((f: FaqEntry) => ({
+      '@type': 'Question',
+      name: f.otazka || '',
+      acceptedAnswer: { '@type': 'Answer', text: f.odpoved || '' },
+    })),
+  }
+
   return (
     <>
+      <JsonLd data={faqJsonLd} />
       <Header opaque />
 
       {/* HERO */}

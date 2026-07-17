@@ -15,7 +15,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Dřevěná podlaha — pokládka bez starostí | pokládámeee.cz',
     description: 'Profesionální pokládka dřevěných podlah v Moravskoslezském kraji. Zaměření zdarma do 48 hodin, kompletní servis od výběru dřeviny po úklid.',
+    url: 'https://www.pokladameee.cz/sluzby/drevena-podlaha',
   },
+  alternates: { canonical: 'https://www.pokladameee.cz/sluzby/drevena-podlaha' },
 }
 
 const BENEFITY = [
