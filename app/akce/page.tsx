@@ -3,7 +3,10 @@ import { client, AKCE_QUERY } from '../../lib/sanity'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
-export const metadata: Metadata = { title: 'Akce a slevy' }
+export const metadata: Metadata = {
+  title: 'Akce a slevy',
+  alternates: { canonical: 'https://www.pokladameee.cz/akce' },
+}
 export const revalidate = 3600
 
 type Akce = {

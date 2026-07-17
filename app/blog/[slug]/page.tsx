@@ -70,12 +70,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     openGraph: {
       title: `${title} | pokládámeee.cz`,
       description,
-      url: `https://pokladameee.cz/blog/${slug}`,
+      url: `https://www.pokladameee.cz/blog/${slug}`,
       siteName: 'pokládámeee.cz',
       locale: 'cs_CZ',
       type: 'article',
       ...(data.obrazekUrl ? { images: [{ url: data.obrazekUrl }] } : {}),
     },
+    alternates: { canonical: `https://www.pokladameee.cz/blog/${slug}` },
   }
 }
 

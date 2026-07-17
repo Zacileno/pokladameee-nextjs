@@ -15,7 +15,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Koberce — pokládka bez starostí | pokládámeee.cz',
     description: 'Profesionální pokládka koberců v Moravskoslezském kraji. Zaměření zdarma do 48 hodin, kompletní servis od výběru materiálu po úklid.',
+    url: 'https://www.pokladameee.cz/sluzby/koberce',
   },
+  alternates: { canonical: 'https://www.pokladameee.cz/sluzby/koberce' },
 }
 
 const BENEFITY = [

@@ -15,7 +15,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Vinylová podlaha — pokládka a montáž | pokládámeee.cz',
     description: 'Profesionální pokládka vinylových podlah v Moravskoslezském kraji. Zaměření zdarma do 48 hodin, realizace do týdne.',
+    url: 'https://www.pokladameee.cz/sluzby/vinylova-podlaha',
   },
+  alternates: { canonical: 'https://www.pokladameee.cz/sluzby/vinylova-podlaha' },
 }
 
 const BENEFITY = [

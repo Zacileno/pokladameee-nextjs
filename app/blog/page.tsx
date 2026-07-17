@@ -16,7 +16,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Blog | pokládámeee.cz',
     description: 'Rady, návody a tipy k výběru a pokládce podlah.',
+    url: 'https://www.pokladameee.cz/blog',
   },
+  alternates: { canonical: 'https://www.pokladameee.cz/blog' },
 }
 
 export default async function BlogPage({

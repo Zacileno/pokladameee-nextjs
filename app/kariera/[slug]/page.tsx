@@ -19,11 +19,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     openGraph: {
       title: `${p.nazev} | Kariéra pokládámeee.cz`,
       description: p.perex,
-      url: `https://pokladameee.cz/kariera/${p.slug}`,
+      url: `https://www.pokladameee.cz/kariera/${p.slug}`,
       siteName: 'pokládámeee.cz',
       locale: 'cs_CZ',
       type: 'website',
     },
+    alternates: { canonical: `https://www.pokladameee.cz/kariera/${p.slug}` },
   }
 }
 

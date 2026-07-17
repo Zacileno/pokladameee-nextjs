@@ -4,7 +4,10 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import PredPoKarta from '../components/PredPoKarta'
 
-export const metadata: Metadata = { title: 'Inspirace a galerie' }
+export const metadata: Metadata = {
+  title: 'Inspirace a galerie',
+  alternates: { canonical: 'https://www.pokladameee.cz/inspirace' },
+}
 export const revalidate = 3600
 
 type Inspirace = {

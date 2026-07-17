@@ -5,6 +5,7 @@ import Footer from '@/app/components/Footer'
 export const metadata: Metadata = {
   title: 'Reklamační řád | pokládámeee.cz',
   description: 'Reklamační řád společnosti SYSPOD s.r.o. — pokládka vinylových podlah v Moravskoslezském kraji.',
+  alternates: { canonical: 'https://www.pokladameee.cz/reklamacni-rad' },
 }
 
 const h2Style: React.CSSProperties = {
