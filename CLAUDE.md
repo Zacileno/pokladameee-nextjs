@@ -30,6 +30,8 @@ Vždy ho čti před zahájením práce.
 **Workflow:** Vývoj na větvi `dev` (staging) → po review merge do `main` (produkce).  
 `pokladameee-testing` repo je archivované — nepoužívat.
 
+**⚠️ Kanonická doména pro metadata/SEO je vždy `https://www.pokladameee.cz`** (bez diakritiky, s `www`). Apex (`pokladameee.cz`) i `http://` na ni přesměrovávají (Cloudflare → Vercel). **Nikdy nepoužívat „pokládámeee.cz" s diakritikou** v `metadataBase`, `canonical`, `sitemap.ts` ani OG tagách — taková doména neexistuje (ani doslova, ani její IDN/punycode tvar `xn--pokldmeee-31ab.cz` není registrovaný). Diakritika je jen ve značce/brandu (`pokládámeee.cz` v title/textu), nikdy v URL.
+
 ---
 
 ## Git remoty (v ~/Developer/pokladameee-nextjs)
@@ -388,6 +390,9 @@ Na `pokladameee.cz/studio`:
 - [x] ~~Oprava: odkazy „Jak to funguje" / „Reference" mimo homepage nefungovaly~~ ✓
 - [x] ~~Vlastní GTM dataLayer event `formular_odeslani` při úspěšném odeslání formuláře~~ ✓
 - [x] ~~Blogová sekce (/blog + /blog/[slug]) — Sanity CMS, grid, stránkování, SEO/OG, responzivní~~ ✓
+- [x] ~~Kritická SEO chyba: kanonická doména v metadatech/sitemapu/robots.txt neexistovala (diakritika) — opraveno na www.pokladameee.cz~~ ✓
+- [x] ~~Vinylová podlaha — chyběla vlastní metadata (title/description/OG)~~ ✓
+- [x] ~~/dekujeme a /dekujeme-kariera — nastaveno noindex,follow~~ ✓
 - [ ] Nahrát loga + fotky řemeslníků do Sanity (Projekty skupiny)
 - [ ] Přidat reálné recenze do Sanity (Reference)
 
@@ -407,8 +412,10 @@ Na `pokladameee.cz/studio`:
 - [ ] Blog — napsat reálné články (demo obsah slouží jen jako ukázka struktury/designu)
 - [ ] Vinylová podlaha — projít a případně přepsat texty podle klientova brief (zatím záměrně beze změny, na výslovné přání)
 - [ ] Vyplnit GDPR a obchodní podmínky
-- [ ] Google Search Console — registrace domény
+- [ ] Google Search Console — registrace domény (`www.pokladameee.cz`) — teď, když je sitemap konečně funkční, dává smysl to udělat
 - [ ] Přidat `https://www.pokladameee.cz` do Sanity CORS origins
+- [ ] Vlastní `alternates.canonical` na každé podstránce (blog, FAQ, kariéra, služby) — dnes všechny dědí canonical z root layoutu (homepage), ne vlastní URL. Doména už je funkční, ale toto zůstává technický dluh.
+- [ ] Structured data (JSON-LD) — chybí LocalBusiness/Organization schema (lokální SEO, Google Business Panel), FAQPage schema na /faq (rich snippet), Article schema na blog článcích
 
 ### 🟢 Nice to have
 - [ ] Napojit AkceSekce na Sanity (schema existuje, sekce zatím není na homepage)
