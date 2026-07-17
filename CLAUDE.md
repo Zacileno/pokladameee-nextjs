@@ -161,6 +161,7 @@ app/components/
   KontaktForm.tsx     # Sdílený formulář — POST /api/kontakt, redirect /dekujeme
   Footer.tsx          # 3-sloupcový footer
   PortableTextComponents.tsx  # Mapování Sanity Portable Text bloků na styl webu (blog)
+  JsonLd.tsx           # Vykreslení <script type="application/ld+json"> — structured data
 ```
 
 ---
@@ -394,6 +395,7 @@ Na `pokladameee.cz/studio`:
 - [x] ~~Vinylová podlaha — chyběla vlastní metadata (title/description/OG)~~ ✓
 - [x] ~~/dekujeme a /dekujeme-kariera — nastaveno noindex,follow~~ ✓
 - [x] ~~Vlastní `alternates.canonical` na všech 16 stránkách (dosud dědily z homepage)~~ ✓
+- [x] ~~Structured data (JSON-LD) — LocalBusiness site-wide, FAQPage na /faq, Article na blog článcích~~ ✓
 - [ ] Nahrát loga + fotky řemeslníků do Sanity (Projekty skupiny)
 - [ ] Přidat reálné recenze do Sanity (Reference)
 
@@ -415,7 +417,6 @@ Na `pokladameee.cz/studio`:
 - [ ] Vyplnit GDPR a obchodní podmínky
 - [ ] Google Search Console — registrace domény (`www.pokladameee.cz`) — teď, když je sitemap konečně funkční, dává smysl to udělat
 - [ ] Přidat `https://www.pokladameee.cz` do Sanity CORS origins
-- [ ] Structured data (JSON-LD) — chybí LocalBusiness/Organization schema (lokální SEO, Google Business Panel), FAQPage schema na /faq (rich snippet), Article schema na blog článcích
 
 ### 🟢 Nice to have
 - [ ] Napojit AkceSekce na Sanity (schema existuje, sekce zatím není na homepage)
