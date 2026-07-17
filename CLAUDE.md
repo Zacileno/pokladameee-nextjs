@@ -416,7 +416,7 @@ Na `pokladameee.cz/studio`:
 - [ ] Vinylová podlaha — projít a případně přepsat texty podle klientova brief (zatím záměrně beze změny, na výslovné přání)
 - [ ] Vyplnit GDPR a obchodní podmínky
 - [ ] Google Search Console — registrace domény (`www.pokladameee.cz`) — teď, když je sitemap konečně funkční, dává smysl to udělat
-- [ ] Přidat `https://www.pokladameee.cz` do Sanity CORS origins
+- [x] ~~Přidat `https://www.pokladameee.cz` do Sanity CORS origins~~ ✓
 
 ### 🟢 Nice to have
 - [ ] Napojit AkceSekce na Sanity (schema existuje, sekce zatím není na homepage)
