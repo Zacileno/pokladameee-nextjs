@@ -5,6 +5,7 @@ import { PortableText } from '@portabletext/react'
 import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 import KontaktSekce from '@/app/components/KontaktSekce'
+import JsonLd from '@/app/components/JsonLd'
 import { portableTextComponents } from '@/app/components/PortableTextComponents'
 import BlogCard, { type BlogPostSummary } from '../BlogCard'
 import { client, BLOG_POST_QUERY, BLOG_POSTS_QUERY, BLOG_SLUGS_QUERY, KONTAKT_SEKCE_QUERY } from '@/lib/sanity'
@@ -98,8 +99,26 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   const fallbackOdstavce = isFallback ? BLOG_FALLBACK_POSTS.find(p => p.slug === slug)?.odstavce : null
 
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: data.title,
+    description: data.perex,
+    datePublished: data.datumVydani,
+    dateModified: data.datumVydani,
+    ...(data.obrazekUrl ? { image: [data.obrazekUrl] } : {}),
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `https://www.pokladameee.cz/blog/${slug}` },
+    author: { '@type': 'Organization', name: 'pokládámeee.cz', url: 'https://www.pokladameee.cz' },
+    publisher: {
+      '@type': 'Organization',
+      name: 'pokládámeee.cz',
+      logo: { '@type': 'ImageObject', url: 'https://www.pokladameee.cz/assets/logo/logo-zakladni.svg' },
+    },
+  }
+
   return (
     <>
+      <JsonLd data={articleJsonLd} />
       <Header opaque />
 
       <section style={{ paddingTop: 120, paddingBottom: 40 }}>
