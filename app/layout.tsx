@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://pokládámeee.cz'),
+  metadataBase: new URL('https://www.pokladameee.cz'),
   title: {
     default: 'pokládámeee.cz – Vinylové podlahy v MSK | Pokládka do týdne',
     template: '%s | pokládámeee.cz',
@@ -14,13 +14,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'pokládámeee.cz – Vinylové podlahy v MSK',
     description: 'Pokládka vinylových podlah v Moravskoslezském kraji. Zaměření zdarma, hotovo do týdne.',
-    url: 'https://pokládámeee.cz',
+    url: 'https://www.pokladameee.cz',
     siteName: 'pokládámeee.cz',
     locale: 'cs_CZ',
     type: 'website',
   },
   robots: { index: true, follow: true },
-  alternates: { canonical: 'https://pokládámeee.cz' },
+  alternates: { canonical: 'https://www.pokladameee.cz' },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

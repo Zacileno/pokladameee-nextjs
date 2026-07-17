@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
-export const metadata = { title: 'Děkujeme — pokládámeee.cz' }
+export const metadata = { title: 'Děkujeme — pokládámeee.cz', robots: { index: false, follow: true } }
 
 export default function Dekujeme() {
   return (
