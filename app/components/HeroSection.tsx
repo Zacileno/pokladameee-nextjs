@@ -26,7 +26,7 @@ export default function HeroSection({ heroFotkaUrl }: { heroFotkaUrl?: string | 
               Podlahy<br />b<span style={{ color: 'var(--orange)' }}>eee</span>zstarostí
             </h1>
             <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: 'clamp(16px, 2vw, 20px)', lineHeight: 1.65, maxWidth: 520, marginBottom: 32 }}>
-              Pokládáme vinylové podlahy po celém MSK. Přijedeme zaměřit zdarma, hotovo do týdne. Starou podlahu ekologicky odstraníme.
+              Pokládáme podlahy po celém Moravskoslezském kraji. Přijedeme zaměřit zdarma, hotovo do týdne. Starou podlahu ekologicky odstraníme.
             </p>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 32 }}>
               {[{ num: '48h', label: 'zaměření' }, { num: '1 týden', label: 'realizace' }, { num: '0 Kč', label: 'zaměření' }].map(({ num, label }) => (
