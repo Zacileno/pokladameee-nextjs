@@ -23,7 +23,7 @@ export default function HeroSection({ heroFotkaUrl }: { heroFotkaUrl?: string | 
               <span style={{ color: 'var(--orange)', fontWeight: 700, fontSize: 13, letterSpacing: '0.05em' }}>MORAVSKOSLEZSKÝ KRAJ</span>
             </div>
             <h1 style={{ fontSize: 'clamp(44px, 6vw, 88px)', fontWeight: 900, color: 'white', lineHeight: 1.0, marginBottom: 24 }}>
-              Podlahy<br />b<span style={{ color: 'var(--orange)' }}>eee</span>zstarostí
+              Podlahy<br />b<span style={{ color: 'var(--orange)' }}>eee</span>zstarostně
             </h1>
             <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: 'clamp(16px, 2vw, 20px)', lineHeight: 1.65, maxWidth: 520, marginBottom: 32 }}>
               Pokládáme podlahy po celém Moravskoslezském kraji. Přijedeme zaměřit zdarma, hotovo do týdne. Starou podlahu ekologicky odstraníme.
