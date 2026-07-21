@@ -21,6 +21,8 @@ type BlogPostData = {
   datumVydani?: string
   obrazekUrl?: string
   obsah?: any[]
+  obsahHtml?: string
+  pouzitHtmlKod?: boolean
   seoTitle?: string
   seoDescription?: string
 }
@@ -151,7 +153,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           )}
 
           <div className="blog-clanek-obsah">
-            {data.obsah?.length ? (
+            {data.pouzitHtmlKod && data.obsahHtml ? (
+              <div dangerouslySetInnerHTML={{ __html: data.obsahHtml }} />
+            ) : data.obsah?.length ? (
               <PortableText value={data.obsah} components={portableTextComponents} />
             ) : (
               fallbackOdstavce?.map((odstavec, i) => <p key={i}>{odstavec}</p>)

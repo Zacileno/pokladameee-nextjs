@@ -131,7 +131,7 @@ export const BLOG_POSTS_QUERY = `*[_type == "blogPost"] | order(datumVydani desc
 }`
 
 export const BLOG_POST_QUERY = `*[_type == "blogPost" && slug.current == $slug][0] {
-  _id, title, kategorie, perex, datumVydani, obsah,
+  _id, title, kategorie, perex, datumVydani, obsah, obsahHtml, pouzitHtmlKod,
   "obrazekUrl": hlavniObrazek.asset->url,
   seoTitle, seoDescription
 }`

@@ -127,9 +127,10 @@ Na `main` i `dev`.
 ### Blog (`/app/blog/`)
 
 - **`/blog`** — přehledová stránka, grid článků (`.blog-grid`), stránkování po 9 (`?page=N`)
-- **`/blog/[slug]`** — detail článku: breadcrumb, hlavní obrázek, Portable Text obsah (H2/H3, tučně, odrážky, obrázky v textu), „Související články" (max 3, ze stejné kolekce), na konci `<KontaktSekce>` jako CTA
-- **Obsah v Sanity** — dokument `blogPost` (kolekce, ne singleton). Editace přes Studio → „Blog — článek". Pole: `title`, `slug`, `kategorie`, `perex`, `hlavniObrazek`, `datumVydani`, `obsah` (Portable Text), `seoTitle`/`seoDescription` (volitelné override).
-- **Renderování textu:** `@portabletext/react` + `app/components/PortableTextComponents.tsx` (mapování H2/H3/odkazy/obrázky na styl webu)
+- **`/blog/[slug]`** — detail článku: breadcrumb, hlavní obrázek, obsah článku (Portable Text nebo surové HTML, viz níže), „Související články" (max 3, ze stejné kolekce), na konci `<KontaktSekce>` jako CTA
+- **Obsah v Sanity** — dokument `blogPost` (kolekce, ne singleton). Editace přes Studio → „Blog — článek". Pole: `title`, `slug`, `kategorie`, `perex`, `hlavniObrazek`, `datumVydani`, `pouzitHtmlKod`, `obsah`, `obsahHtml`, `seoTitle`/`seoDescription` (volitelné override).
+- **Přepínač editoru:** boolean pole `pouzitHtmlKod` ve Studiu přepíná, které ze dvou polí se použije — **vypnuto** (výchozí) = normální rich-text editor, pole `obsah` (Portable Text: H2/H3, tučně, kurzíva, odrážky, odkazy, obrázky). **Zapnuto** = zobrazí se místo toho pole `obsahHtml` (syrový HTML kód), vykreslí se přes `dangerouslySetInnerHTML` (`app/blog/[slug]/page.tsx`). Zbytek stránky (hero obrázek, breadcrumb, související články, CTA) je nezávislý na této volbě. **Pozor:** `obsahHtml` je bez sanitizace — editovat by ho měl jen důvěryhodný správce (Adam), ne cizí přispěvatelé.
+- **Renderování Portable Textu:** `@portabletext/react` + `app/components/PortableTextComponents.tsx` (mapování H2/H3/odkazy/obrázky na styl webu)
 - **Fallback:** `lib/blog-fallback.ts` — 3 demo články použité, pokud Sanity nevrátí žádný `blogPost` (stejný vzor jako u ostatních podstránek)
 - **Bez odkazu v navigaci** — zatím se drží stejné konvence jako PVC/koberce/dřevo: přístupné přímou URL (`/blog`), zvážit přidání do Headeru a `sitemap.ts`, až budou nahrané reálné obrázky článků
 - **Chybí:** `hlavniObrazek` u demo článků (seed skript ho nenastavuje — nahrát ručně přes Studio)
@@ -196,7 +197,7 @@ app/
     page.tsx                        # /blog — grid článků + stránkování (?page=N)
     BlogCard.tsx                    # Karta článku (obrázek, kategorie, datum, perex, "Číst dále")
     Pagination.tsx                  # Číslované stránkování
-    [slug]/page.tsx                 # Detail článku — breadcrumb, Portable Text, související, KontaktSekce CTA
+    [slug]/page.tsx                 # Detail článku — breadcrumb, obsah (Portable Text nebo HTML), související, KontaktSekce CTA
   akce/page.tsx
   inspirace/page.tsx
   ochrana-osobnich-udaju/page.tsx
@@ -234,7 +235,8 @@ sanity/
     kobercovaPodlaha.ts # Podstránka Kobercová podlaha — stejná struktura
     drevenaPodlaha.ts   # Podstránka Dřevěná podlaha — stejná struktura
     blogPost.ts          # Blog — článek (kolekce, ne singleton): title, slug, kategorie,
-                          #   perex, hlavniObrazek, datumVydani, obsah (Portable Text)
+                          #   perex, hlavniObrazek, datumVydani, pouzitHtmlKod (přepínač),
+                          #   obsah (Portable Text) / obsahHtml (surové HTML, dle přepínače)
   schemaTypes/
     index.ts            # Registrace schémat pro Next.js stránky (import v app/)
   lib/
@@ -421,7 +423,8 @@ Na `pokladameee.cz/studio`:
 ### 🟢 Nice to have
 - [ ] Napojit AkceSekce na Sanity (schema existuje, sekce zatím není na homepage)
 - [ ] Přidat Akce + Inspirace do navigace v Headeru
-- [ ] Google Analytics / GA4 — dataLayer event `formular_odeslani` (typ_formulare: poptavka/kariera) hotový, trigger + konverze se nastavují v GTM UI (mimo repo, rozpracovává klient)
+- [x] ~~Google Analytics / GA4 — trigger + konverze v GTM UI pro poptávkový formulář~~ ✓
+- [ ] Google Analytics / GA4 — trigger + konverze v GTM UI pro kariérní formulář (`typ_formulare: kariera`) — zatím nenastaveno
 - [ ] On-demand revalidation ze Sanity webhooku
 - [ ] Kariéra — dořešit posílání životopisů v přihlašovacím formuláři (file upload → Resend attachment nebo odkaz na úložiště)
 - [ ] Kariéra — volitelně napojit pozice na Sanity CMS (aktuálně hardcoded v `lib/kariera-data.ts`)
