@@ -36,10 +36,19 @@ export const blogPostSchema = defineType({
     defineField({ name: 'hlavniObrazek', title: 'Hlavní obrázek', type: 'image', options: { hotspot: true }, group: 'obsah', validation: r => r.required() }),
     defineField({ name: 'datumVydani', title: 'Datum vydání', type: 'datetime', group: 'obsah', validation: r => r.required() }),
     defineField({
+      name: 'pouzitHtmlKod',
+      title: 'Vložit obsah jako HTML kód místo psaní v editoru',
+      description: 'Vypnuto = píšete přes normální textový editor níže. Zapnuto = místo editoru se zobrazí pole na vložení vlastního HTML kódu.',
+      type: 'boolean',
+      initialValue: false,
+      group: 'obsah',
+    }),
+    defineField({
       name: 'obsah',
       title: 'Obsah článku',
       type: 'array',
       group: 'obsah',
+      hidden: ({ parent }) => !!parent?.pouzitHtmlKod,
       of: [
         {
           type: 'block',
@@ -69,6 +78,15 @@ export const blogPostSchema = defineType({
         },
         { type: 'image', options: { hotspot: true } },
       ],
+    }),
+    defineField({
+      name: 'obsahHtml',
+      title: 'Obsah článku (HTML kód)',
+      description: 'Vložte přímo HTML kód textu článku (odstavce <p>, nadpisy <h2>/<h3>, odkazy, obrázky...). Vykreslí se přesně tak, jak je napsané.',
+      type: 'text',
+      rows: 20,
+      group: 'obsah',
+      hidden: ({ parent }) => !parent?.pouzitHtmlKod,
     }),
     defineField({ name: 'seoTitle', title: 'SEO titulek (volitelné, jinak se použije nadpis)', type: 'string', group: 'seo' }),
     defineField({ name: 'seoDescription', title: 'SEO popisek (volitelné, jinak se použije perex)', type: 'text', rows: 2, group: 'seo' }),

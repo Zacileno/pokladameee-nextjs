@@ -30,6 +30,8 @@ Vždy ho čti před zahájením práce.
 **Workflow:** Vývoj na větvi `dev` (staging) → po review merge do `main` (produkce).  
 `pokladameee-testing` repo je archivované — nepoužívat.
 
+**⚠️ Kanonická doména pro metadata/SEO je vždy `https://www.pokladameee.cz`** (bez diakritiky, s `www`). Apex (`pokladameee.cz`) i `http://` na ni přesměrovávají (Cloudflare → Vercel). **Nikdy nepoužívat „pokládámeee.cz" s diakritikou** v `metadataBase`, `canonical`, `sitemap.ts` ani OG tagách — taková doména neexistuje (ani doslova, ani její IDN/punycode tvar `xn--pokldmeee-31ab.cz` není registrovaný). Diakritika je jen ve značce/brandu (`pokládámeee.cz` v title/textu), nikdy v URL.
+
 ---
 
 ## Git remoty (v ~/Developer/pokladameee-nextjs)
@@ -48,6 +50,7 @@ Výchozí větev pro práci: `dev`. Push vždy do `origin dev` (vývoj) nebo `or
 - **Framework:** Next.js 16 (App Router, TypeScript, Turbopack)
 - **Styly:** Inline styles + CSS třídy v `globals.css` — žádný Tailwind
 - **CMS:** Sanity (`projectId: 8cvsenqb`, dataset: `production`)
+- **Rich text:** `@portabletext/react` — renderování Sanity Portable Text (zatím jen blog)
 - **Formuláře:** vlastní API route `/api/kontakt` → Make webhook + Resend emaily
 - **Emaily:** Resend — transakční emaily z `/api/kontakt` (Adamovi + zákazníkovi)
 - **Deployment:** Vercel — větev `dev` → Preview, větev `main` → Production (`pokladameee.cz`)
@@ -100,6 +103,38 @@ Každá komponenta má fallback na hardcoded hodnoty pokud Sanity vrátí null.
 | `KontaktSekce` | `kontaktSekce` | ✅ viditelná |
 | `Footer` | `obecneNastaveni` | ✅ viditelná |
 
+### Podstránky služeb (Sluzby)
+
+| Podstránka | Soubory | Stav |
+|---|---|---|
+| **Vinylová podlaha** | `/app/sluzby/vinylova-podlaha/` | ✅ hotová + Sanity · na `main` i `dev` |
+| **PVC podlaha** | `/app/sluzby/pvc-podlaha/` | ✅ hotová + Sanity schema + seed · texty přepsané dle klientova brief · na `main` i `dev` |
+| **Koberce** | `/app/sluzby/koberce/` | ✅ hotová + Sanity schema + seed · texty přepsané dle klientova brief · na `main` i `dev` |
+| **Dřevěná podlaha** | `/app/sluzby/drevena-podlaha/` | ✅ hotová + Sanity schema + seed · texty přepsané dle klientova brief · na `main` i `dev` |
+
+Struktura je identická — všechny podstránky fetchují ze Sanity, mají fallback na hardcoded texty, FAQ akordeon, reference strip, atd.
+
+**Důležité:** PVC, Koberce a Dřevěná podlaha jsou už živé i na produkci (`main`), ale **záměrně nejsou nikde odkázané** (ne v Headeru, ne v sitemap.ts) — přístupné jen přímou URL, stejně jako vinylová podlaha. Až budou finální (reálné foto, schválení), přidat do navigace v Headeru a do `app/sitemap.ts`.
+
+### FAQ stránka (`/app/faq/`)
+
+Samostatná stránka `/faq` — dřív na ni Header odkazoval, ale neexistovala (404). Skládá se ze 2 částí:
+- **FAQ ze 4 podstránek služeb** — natahuje se živě ze Sanity (stejné GROQ query jako podstránky), needituje se samostatně — úpravy dělat přes „Podstránka: X" → FAQ v každém dokumentu.
+- **Sekce „Obecné otázky"** — natvrdo v kódu (`app/faq/page.tsx`, konstanta `OBECNE`), **není v Sanity** — vědomě odloženo, needitovatelné přes Studio.
+
+Na `main` i `dev`.
+
+### Blog (`/app/blog/`)
+
+- **`/blog`** — přehledová stránka, grid článků (`.blog-grid`), stránkování po 9 (`?page=N`)
+- **`/blog/[slug]`** — detail článku: breadcrumb, hlavní obrázek, obsah článku (Portable Text nebo surové HTML, viz níže), „Související články" (max 3, ze stejné kolekce), na konci `<KontaktSekce>` jako CTA
+- **Obsah v Sanity** — dokument `blogPost` (kolekce, ne singleton). Editace přes Studio → „Blog — článek". Pole: `title`, `slug`, `kategorie`, `perex`, `hlavniObrazek`, `datumVydani`, `pouzitHtmlKod`, `obsah`, `obsahHtml`, `seoTitle`/`seoDescription` (volitelné override).
+- **Přepínač editoru:** boolean pole `pouzitHtmlKod` ve Studiu přepíná, které ze dvou polí se použije — **vypnuto** (výchozí) = normální rich-text editor, pole `obsah` (Portable Text: H2/H3, tučně, kurzíva, odrážky, odkazy, obrázky). **Zapnuto** = zobrazí se místo toho pole `obsahHtml` (syrový HTML kód), vykreslí se přes `dangerouslySetInnerHTML` (`app/blog/[slug]/page.tsx`). Zbytek stránky (hero obrázek, breadcrumb, související články, CTA) je nezávislý na této volbě. **Pozor:** `obsahHtml` je bez sanitizace — editovat by ho měl jen důvěryhodný správce (Adam), ne cizí přispěvatelé.
+- **Renderování Portable Textu:** `@portabletext/react` + `app/components/PortableTextComponents.tsx` (mapování H2/H3/odkazy/obrázky na styl webu)
+- **Fallback:** `lib/blog-fallback.ts` — 3 demo články použité, pokud Sanity nevrátí žádný `blogPost` (stejný vzor jako u ostatních podstránek)
+- **Bez odkazu v navigaci** — zatím se drží stejné konvence jako PVC/koberce/dřevo: přístupné přímou URL (`/blog`), zvážit přidání do Headeru a `sitemap.ts`, až budou nahrané reálné obrázky článků
+- **Chybí:** `hlavniObrazek` u demo článků (seed skript ho nenastavuje — nahrát ručně přes Studio)
+
 ### Skryté prvky — vrátit až bude GalerieSekce viditelná
 
 - `HeroSection.tsx:41` — button "Zobrazit výsledky" (`href="#inspirace"`) je zakomentován.  
@@ -126,6 +161,8 @@ app/components/
   KontaktSekce.tsx    # Kontaktní sekce s formulářem
   KontaktForm.tsx     # Sdílený formulář — POST /api/kontakt, redirect /dekujeme
   Footer.tsx          # 3-sloupcový footer
+  PortableTextComponents.tsx  # Mapování Sanity Portable Text bloků na styl webu (blog)
+  JsonLd.tsx           # Vykreslení <script type="application/ld+json"> — structured data
 ```
 
 ---
@@ -150,17 +187,30 @@ app/
   sluzby/vinylova-podlaha/
     page.tsx                        # Server component, fetchuje VINYLOVA_PODLAHA_QUERY + KONTAKT_SEKCE_QUERY
     FaqItem.tsx                     # Client component (useState) — FAQ akordeon
+  sluzby/pvc-podlaha/               # Stejná struktura jako vinylova-podlaha
+  sluzby/koberce/                   # Stejná struktura jako vinylova-podlaha
+  sluzby/drevena-podlaha/           # Stejná struktura jako vinylova-podlaha
+  faq/
+    page.tsx                        # Agreguje FAQ ze 4 podstránek (živě ze Sanity) + hardcoded obecné otázky
+    FaqItem.tsx
+  blog/
+    page.tsx                        # /blog — grid článků + stránkování (?page=N)
+    BlogCard.tsx                    # Karta článku (obrázek, kategorie, datum, perex, "Číst dále")
+    Pagination.tsx                  # Číslované stránkování
+    [slug]/page.tsx                 # Detail článku — breadcrumb, obsah (Portable Text nebo HTML), související, KontaktSekce CTA
   akce/page.tsx
   inspirace/page.tsx
   ochrana-osobnich-udaju/page.tsx
   obchodni-podminky/page.tsx
   robots.ts
-  sitemap.ts
+  sitemap.ts                        # Neobsahuje PVC/koberce/drevena/faq/blog — zvážit doplnění, až budou finální
   studio/[[...tool]]/page.tsx       # Sanity Studio embedded
 
 lib/
   sanity.ts             # Sanity client, urlFor helper, všechny GROQ queries (*_QUERY konstanty)
   kariera-data.ts       # Hardcoded data 4 pozic (slug, texty, bullet listy)
+  gtm.ts                # pushDataLayerEvent() helper — custom GTM dataLayer eventy
+  blog-fallback.ts      # 3 demo články — fallback, pokud Sanity nevrátí blogPost dokumenty
 
 sanity/
   schemas/
@@ -181,12 +231,25 @@ sanity/
     vinylovaPodlaha.ts  # Podstránka vinylová podlaha — singleton, vše editovatelné
                         #   hero, istrip[], typy[], benefity[], kroky[],
                         #   referenceStrip, faq[]
+    pvcPodlaha.ts       # Podstránka PVC podlaha — stejná struktura jako vinylovaPodlaha
+    kobercovaPodlaha.ts # Podstránka Kobercová podlaha — stejná struktura
+    drevenaPodlaha.ts   # Podstránka Dřevěná podlaha — stejná struktura
+    blogPost.ts          # Blog — článek (kolekce, ne singleton): title, slug, kategorie,
+                          #   perex, hlavniObrazek, datumVydani, pouzitHtmlKod (přepínač),
+                          #   obsah (Portable Text) / obsahHtml (surové HTML, dle přepínače)
   schemaTypes/
     index.ts            # Registrace schémat pro Next.js stránky (import v app/)
+  lib/
+    client.ts            # Sanity klient pro seed skripty — token: process.env.SANITY_TOKEN,
+                          #   useCdn: !SANITY_TOKEN (bez tokenu by create/replace mutace padaly na 403)
 
 scripts/
   seed-kontakt.ts           # Seed kontaktSekce dokumentu
+  seed-pvc-podlaha.ts        # Seed pvcPodlaha dokumentu
+  seed-koberce.ts            # Seed kobercovaPodlaha dokumentu
+  seed-drevena-podlaha.ts    # Seed drevenaPodlaha dokumentu
   seed-vinylova-podlaha.ts  # Seed vinylovaPodlaha dokumentu (demo obsah)
+  seed-blog.ts               # Seed 3 demo blogPost dokumentů (bez hlavniObrazek — nahrát přes Studio)
 
 public/
   favicon.svg
@@ -213,8 +276,11 @@ Každý typ má právě jeden dokument s pevným `_id` (singletons):
 | `obecneNastaveni` | Obecné nastavení | telefon, email, pracovniDoba, region, popisFooter |
 | `kontaktSekce` | Kontaktní sekce | všechna kontaktní pole + foto |
 | `vinylovaPodlaha` | Podstránka: Vinylová podlaha | hero, istrip[], typy[], benefity[], kroky[], referenceStrip, faq[] |
+| `pvcPodlaha` | Podstránka: PVC podlaha | hero, istrip[], typy[], benefity[], kroky[], referenceStrip, faq[] |
+| `kobercovaPodlaha` | Podstránka: Kobercová podlaha | hero, istrip[], typy[], benefity[], kroky[], referenceStrip, faq[] |
+| `drevenaPodlaha` | Podstránka: Dřevěná podlaha | hero, istrip[], typy[], benefity[], kroky[], referenceStrip, faq[] |
 
-Kolekce (více dokumentů): `projekt`, `inspirace`, `akce`, `reference`
+Kolekce (více dokumentů): `projekt`, `inspirace`, `akce`, `reference`, `blogPost`
 
 ---
 
@@ -305,6 +371,7 @@ Na `pokladameee.cz/studio`:
 - **Hero obrázek** — nahrát reálnou hero fotku pozadí
 - **Recenze** — přidat reálné recenze z Google
 - **Kontaktní sekce** — nahrát foto Adama (nebo použít `/public/assets/adam.jpg`)
+- **Blog — články** — nahrát `hlavniObrazek` u 3 demo článků (seed skript ho nenastavuje)
 
 ---
 
@@ -314,7 +381,23 @@ Na `pokladameee.cz/studio`:
 - [x] ~~Registrace na resend.com, ověření domény, RESEND_API_KEY na Vercelu~~ ✓
 - [x] ~~Vyplnit MAKE_WEBHOOK_URL na Vercelu~~ ✓
 - [x] ~~Single-repo workflow (dev/main větve)~~ ✓
-- [ ] Přepnout příjemce emailu v `/api/kontakt/route.ts` z `martin@zacileno.cz` na `adam.hajdusek@pokladameee.cz`
+- [x] ~~PVC podlaha — nová podstránka (/sluzby/pvc-podlaha)~~ ✓
+- [x] ~~Koberce — nová podstránka (/sluzby/koberce)~~ ✓
+- [x] ~~Dřevěná podlaha — nová podstránka (/sluzby/drevena-podlaha)~~ ✓
+- [x] ~~Spustit seed skript pro PVC podlahy~~ ✓
+- [x] ~~Spustit seed skript pro Koberce~~ ✓
+- [x] ~~Spustit seed skript pro Dřevěnou podlahu~~ ✓
+- [x] ~~Přepsat texty PVC/Koberce/Dřevěná podlaha podle klientova vydefinování služby (brief)~~ ✓
+- [x] ~~Nasadit PVC/Koberce/Dřevěná podlaha i na produkci (main), bez odkazu v navigaci~~ ✓
+- [x] ~~Oprava: `/faq` vracelo 404 (odkaz v Headeru existoval, stránka ne) — vytvořena a nasazena~~ ✓
+- [x] ~~Oprava: odkazy „Jak to funguje" / „Reference" mimo homepage nefungovaly~~ ✓
+- [x] ~~Vlastní GTM dataLayer event `formular_odeslani` při úspěšném odeslání formuláře~~ ✓
+- [x] ~~Blogová sekce (/blog + /blog/[slug]) — Sanity CMS, grid, stránkování, SEO/OG, responzivní~~ ✓
+- [x] ~~Kritická SEO chyba: kanonická doména v metadatech/sitemapu/robots.txt neexistovala (diakritika) — opraveno na www.pokladameee.cz~~ ✓
+- [x] ~~Vinylová podlaha — chyběla vlastní metadata (title/description/OG)~~ ✓
+- [x] ~~/dekujeme a /dekujeme-kariera — nastaveno noindex,follow~~ ✓
+- [x] ~~Vlastní `alternates.canonical` na všech 16 stránkách (dosud dědily z homepage)~~ ✓
+- [x] ~~Structured data (JSON-LD) — LocalBusiness site-wide, FAQPage na /faq, Article na blog článcích~~ ✓
 - [ ] Nahrát loga + fotky řemeslníků do Sanity (Projekty skupiny)
 - [ ] Přidat reálné recenze do Sanity (Reference)
 
@@ -322,25 +405,38 @@ Na `pokladameee.cz/studio`:
 - [ ] Reálná hero fotka pozadí (Sanity → Hero obrázek)
 - [ ] Reálné fotky galerie před/po (Sanity → Inspirace) — pak odkomentovat GalerieSekce + button v Hero
 - [ ] Vinylová podlaha — nahrát reálnou hero fotku realizace (Sanity → Podstránka: Vinylová podlaha → Hero fotka)
+- [ ] PVC podlaha — nahrát reálnou hero fotku realizace (Sanity → Podstránka: PVC podlaha → Hero fotka)
+- [ ] Koberce — nahrát reálnou hero fotku realizace (Sanity → Podstránka: Kobercová podlaha → Hero fotka)
+- [ ] Dřevěná podlaha — nahrát reálnou hero fotku realizace (Sanity → Podstránka: Dřevěná podlaha → Hero fotka)
 - [ ] Vinylová podlaha — přidat do navigace v Headeru (až bude finální)
+- [ ] PVC podlaha — přidat do navigace v Headeru (až bude finální)
+- [ ] Koberce — přidat do navigace v Headeru (až bude finální)
+- [ ] Dřevěná podlaha — přidat do navigace v Headeru (až bude finální)
+- [ ] Přidat PVC/Koberce/Dřevěná podlaha/FAQ/Blog do `app/sitemap.ts` (až budou finální — dnes tam záměrně nejsou, viz podstránky výše)
+- [ ] Blog — nahrát hlavní obrázky ke 3 demo článkům, přidat do navigace v Headeru (až bude finální)
+- [ ] Blog — napsat reálné články (demo obsah slouží jen jako ukázka struktury/designu)
+- [ ] Vinylová podlaha — projít a případně přepsat texty podle klientova brief (zatím záměrně beze změny, na výslovné přání)
 - [ ] Vyplnit GDPR a obchodní podmínky
-- [ ] Google Search Console — registrace domény
-- [ ] Přidat `https://www.pokladameee.cz` do Sanity CORS origins
+- [x] ~~Google Search Console — registrace domény (`www.pokladameee.cz`) + odeslání sitemap.xml~~ ✓
+- [x] ~~Přidat `https://www.pokladameee.cz` do Sanity CORS origins~~ ✓
 
 ### 🟢 Nice to have
 - [ ] Napojit AkceSekce na Sanity (schema existuje, sekce zatím není na homepage)
 - [ ] Přidat Akce + Inspirace do navigace v Headeru
-- [ ] Google Analytics / GA4
+- [x] ~~Google Analytics / GA4 — trigger + konverze v GTM UI pro poptávkový formulář~~ ✓
+- [ ] Google Analytics / GA4 — trigger + konverze v GTM UI pro kariérní formulář (`typ_formulare: kariera`) — zatím nenastaveno
 - [ ] On-demand revalidation ze Sanity webhooku
 - [ ] Kariéra — dořešit posílání životopisů v přihlašovacím formuláři (file upload → Resend attachment nebo odkaz na úložiště)
 - [ ] Kariéra — volitelně napojit pozice na Sanity CMS (aktuálně hardcoded v `lib/kariera-data.ts`)
+- [ ] Sekce „Obecné otázky" na `/faq` — vytvořit Sanity schema, aby šla editovat přes Studio (zatím vědomě hardcoded v kódu, na výslovné přání ponecháno)
 
 ---
 
 ## Technické poznámky
 
-- **Formuláře — flow (poptávka):** `KontaktForm` → POST `/api/kontakt` → Make webhook + Resend emaily → redirect `/dekujeme`
-- **Formuláře — flow (kariéra):** `KarieraKontaktForm` → POST `/api/kontakt` (pole `typ:'kariera'`, `pozice`) → Make webhook + Resend emaily → redirect `/dekujeme-kariera`
+- **Formuláře — flow (poptávka):** `KontaktForm` → POST `/api/kontakt` → Make webhook + Resend emaily → `pushDataLayerEvent('formular_odeslani', { typ_formulare: 'poptavka' })` → redirect `/dekujeme`
+- **Formuláře — flow (kariéra):** `KarieraKontaktForm` → POST `/api/kontakt` (pole `typ:'kariera'`, `pozice`) → Make webhook + Resend emaily → `pushDataLayerEvent('formular_odeslani', { typ_formulare: 'kariera', pozice })` → redirect `/dekujeme-kariera`
+- **GTM dataLayer event:** `gtm.historyChange-v2` NENÍ spolehlivý signál odeslání formuláře — je to obecná GTM systémová událost při jakékoli klientské navigaci. Proto vlastní `formular_odeslani` (viz `lib/gtm.ts`), pushuje se až po potvrzeném `res.ok`, ne na klik tlačítka.
 - **Resend odesílací adresa:** `no-reply@pokladameee.cz` (doména ověřena)
 - **Notifikace o poptávce i přihlášce na kariéru:** chodí jen na `adam.hajdusek@pokladameee.cz` (Martin odebrán z obou)
 - **Google Fonts:** načítáme přes `<link>` tag (ne `next/font`) — build server na Vercelu nemá přístup na internet
