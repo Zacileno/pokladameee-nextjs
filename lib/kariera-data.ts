@@ -13,8 +13,8 @@ export type Pozice = {
 
 export const pozice: Pozice[] = [
   {
-    slug: 'pokladac-vinylove-podlahy-msk',
-    nazev: 'Pokládač vinylových podlah',
+    slug: 'podlahar-vinylove-podlahy-msk',
+    nazev: 'Podlahář vinylových podlah',
     region: 'moravskoslezsky-kraj',
     regionLabel: 'Moravskoslezský kraj',
     typ: 'v-terenu',
