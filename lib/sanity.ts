@@ -137,3 +137,15 @@ export const BLOG_POST_QUERY = `*[_type == "blogPost" && slug.current == $slug][
 }`
 
 export const BLOG_SLUGS_QUERY = `*[_type == "blogPost"]{ "slug": slug.current }`
+
+export const KARIERNI_POZICE_QUERY = `*[_type == "karierniPozice" && aktivni != false] | order(datumZverejneni desc) {
+  _id, nazev, "slug": slug.current, region, regionLabel, typ, typLabel, perex,
+  naplnPrace, pozadujeme, nabizime, datumZverejneni
+}`
+
+export const KARIERNI_POZICE_DETAIL_QUERY = `*[_type == "karierniPozice" && slug.current == $slug && aktivni != false][0] {
+  _id, nazev, "slug": slug.current, region, regionLabel, typ, typLabel, perex,
+  naplnPrace, pozadujeme, nabizime, datumZverejneni
+}`
+
+export const KARIERNI_POZICE_SLUGS_QUERY = `*[_type == "karierniPozice" && aktivni != false]{ "slug": slug.current }`

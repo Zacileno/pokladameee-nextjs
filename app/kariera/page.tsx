@@ -8,6 +8,8 @@ import FilozofieSecce from './components/FilozofieSecce'
 import KulturaGrid from './components/KulturaGrid'
 import VolnePozice from './components/VolnePozice'
 import KarieraKontaktForm from './components/KarieraKontaktForm'
+import { client, KARIERNI_POZICE_QUERY } from '@/lib/sanity'
+import { pozice as POZICE_FALLBACK, type Pozice } from '@/lib/kariera-data'
 
 export const metadata: Metadata = {
   title: 'Kariéra | Pokládámeee.cz — Práce v oblasti podlah MSK',
@@ -23,7 +25,13 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://www.pokladameee.cz/kariera' },
 }
 
-export default function KarieraPage() {
+export default async function KarieraPage() {
+  let pozice: Pozice[] = POZICE_FALLBACK
+  try {
+    const data = await client.fetch<Pozice[]>(KARIERNI_POZICE_QUERY)
+    if (data?.length) pozice = data
+  } catch {}
+
   return (
     <>
       <Header opaque />
@@ -33,7 +41,7 @@ export default function KarieraPage() {
         <BenefityGrid />
         <FilozofieSecce />
         <KulturaGrid />
-        <VolnePozice />
+        <VolnePozice pozice={pozice} />
         <KarieraKontaktForm />
       </main>
       <Footer />

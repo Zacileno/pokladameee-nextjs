@@ -24,7 +24,7 @@ function BulletList({ items }: { items: string[] }) {
   )
 }
 
-export default function PoziceDetail({ pozice }: { pozice: Pozice }) {
+export default function PoziceDetail({ pozice, vsechnyPozice }: { pozice: Pozice; vsechnyPozice: Pozice[] }) {
   return (
     <>
       <section style={{ background: 'white', padding: '48px 0 0' }}>
@@ -74,7 +74,7 @@ export default function PoziceDetail({ pozice }: { pozice: Pozice }) {
 
       <BenefityGrid compact />
       <KarieraKontaktForm poziceNazev={pozice.nazev} />
-      <VolnePozice excludeSlug={pozice.slug} />
+      <VolnePozice pozice={vsechnyPozice} excludeSlug={pozice.slug} />
       <TestimonialCarousel />
     </>
   )

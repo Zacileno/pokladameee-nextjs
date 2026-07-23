@@ -179,8 +179,8 @@ app/
                                     #   typ='kariera' → email přihlášky, jinak email poptávky
   dekujeme/page.tsx                 # Děkovná stránka po odeslání poptávky zákazníka
   dekujeme-kariera/page.tsx         # Děkovná stránka po odeslání přihlášky na kariéru
-  kariera/page.tsx                  # /kariera — kariéra stránka (hardcoded data)
-  kariera/[slug]/page.tsx           # /kariera/[slug] — detail pozice
+  kariera/page.tsx                  # /kariera — kariéra stránka, fetchuje KARIERNI_POZICE_QUERY (fallback kariera-data.ts)
+  kariera/[slug]/page.tsx           # /kariera/[slug] — detail pozice + JobPosting JSON-LD
   kariera/components/               # KarieraHero, TestimonialCarousel, BenefityGrid,
                                     #   FilozofieSecce, KulturaGrid, VolnePozice, KarieraKontaktForm
   kariera/[slug]/components/        # PoziceDetail
@@ -208,7 +208,7 @@ app/
 
 lib/
   sanity.ts             # Sanity client, urlFor helper, všechny GROQ queries (*_QUERY konstanty)
-  kariera-data.ts       # Hardcoded data 4 pozic (slug, texty, bullet listy)
+  kariera-data.ts       # Fallback data 4 pozic (slug, texty, bullet listy) — použije se, pokud Sanity nevrátí karierniPozice
   gtm.ts                # pushDataLayerEvent() helper — custom GTM dataLayer eventy
   blog-fallback.ts      # 3 demo články — fallback, pokud Sanity nevrátí blogPost dokumenty
 
@@ -237,6 +237,9 @@ sanity/
     blogPost.ts          # Blog — článek (kolekce, ne singleton): title, slug, kategorie,
                           #   perex, hlavniObrazek, datumVydani, pouzitHtmlKod (přepínač),
                           #   obsah (Portable Text) / obsahHtml (surové HTML, dle přepínače)
+    karierniPozice.ts    # Kariéra — pozice (kolekce, ne singleton): nazev, slug, region,
+                          #   regionLabel, typ, typLabel, perex, naplnPrace[], pozadujeme[],
+                          #   nabizime[], datumZverejneni (i pro JobPosting JSON-LD), aktivni
   schemaTypes/
     index.ts            # Registrace schémat pro Next.js stránky (import v app/)
   lib/
@@ -250,6 +253,7 @@ scripts/
   seed-drevena-podlaha.ts    # Seed drevenaPodlaha dokumentu
   seed-vinylova-podlaha.ts  # Seed vinylovaPodlaha dokumentu (demo obsah)
   seed-blog.ts               # Seed 3 demo blogPost dokumentů (bez hlavniObrazek — nahrát přes Studio)
+  seed-kariera.ts             # Seed 4 karierniPozice dokumentů z lib/kariera-data.ts + datumZverejneni
 
 public/
   favicon.svg
@@ -280,7 +284,7 @@ Každý typ má právě jeden dokument s pevným `_id` (singletons):
 | `kobercovaPodlaha` | Podstránka: Kobercová podlaha | hero, istrip[], typy[], benefity[], kroky[], referenceStrip, faq[] |
 | `drevenaPodlaha` | Podstránka: Dřevěná podlaha | hero, istrip[], typy[], benefity[], kroky[], referenceStrip, faq[] |
 
-Kolekce (více dokumentů): `projekt`, `inspirace`, `akce`, `reference`, `blogPost`
+Kolekce (více dokumentů): `projekt`, `inspirace`, `akce`, `reference`, `blogPost`, `karierniPozice`
 
 ---
 
@@ -398,6 +402,9 @@ Na `pokladameee.cz/studio`:
 - [x] ~~/dekujeme a /dekujeme-kariera — nastaveno noindex,follow~~ ✓
 - [x] ~~Vlastní `alternates.canonical` na všech 16 stránkách (dosud dědily z homepage)~~ ✓
 - [x] ~~Structured data (JSON-LD) — LocalBusiness site-wide, FAQPage na /faq, Article na blog článcích~~ ✓
+- [x] ~~Structured data (JSON-LD) — JobPosting na detailu kariérních pozic~~ ✓
+- [x] ~~Vlastní 404 stránka v designu webu~~ ✓
+- [x] ~~Kariéra — napojení pozic na Sanity CMS (fallback na lib/kariera-data.ts)~~ ✓
 - [ ] Nahrát loga + fotky řemeslníků do Sanity (Projekty skupiny)
 - [ ] Přidat reálné recenze do Sanity (Reference)
 
@@ -427,7 +434,6 @@ Na `pokladameee.cz/studio`:
 - [ ] Google Analytics / GA4 — trigger + konverze v GTM UI pro kariérní formulář (`typ_formulare: kariera`) — zatím nenastaveno
 - [ ] On-demand revalidation ze Sanity webhooku
 - [ ] Kariéra — dořešit posílání životopisů v přihlašovacím formuláři (file upload → Resend attachment nebo odkaz na úložiště)
-- [ ] Kariéra — volitelně napojit pozice na Sanity CMS (aktuálně hardcoded v `lib/kariera-data.ts`)
 - [ ] Sekce „Obecné otázky" na `/faq` — vytvořit Sanity schema, aby šla editovat přes Studio (zatím vědomě hardcoded v kódu, na výslovné přání ponecháno)
 
 ---

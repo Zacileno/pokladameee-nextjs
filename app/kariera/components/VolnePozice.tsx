@@ -1,13 +1,13 @@
 'use client'
 import { useState } from 'react'
-import { pozice } from '../../../lib/kariera-data'
+import type { Pozice } from '../../../lib/kariera-data'
 
 const FILTERS = [
   { value: 'vse', label: 'Vše' },
   { value: 'moravskoslezsky-kraj', label: 'Moravskoslezský kraj' },
 ]
 
-export default function VolnePozice({ excludeSlug }: { excludeSlug?: string }) {
+export default function VolnePozice({ pozice, excludeSlug }: { pozice: Pozice[]; excludeSlug?: string }) {
   const [activeFilter, setActiveFilter] = useState('vse')
 
   const filtered = pozice.filter(p => {
