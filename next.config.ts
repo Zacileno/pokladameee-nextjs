@@ -8,6 +8,15 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'cdn.sanity.io' },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: '/kariera/pokladac-vinylove-podlahy-msk',
+        destination: '/kariera/podlahar-vinylove-podlahy-msk',
+        permanent: true,
+      },
+    ]
+  },
   async headers() {
     return [
       {
