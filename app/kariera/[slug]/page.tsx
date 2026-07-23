@@ -7,6 +7,8 @@ import PoziceDetail from './components/PoziceDetail'
 import { client, KARIERNI_POZICE_QUERY, KARIERNI_POZICE_DETAIL_QUERY, KARIERNI_POZICE_SLUGS_QUERY } from '@/lib/sanity'
 import { pozice as POZICE_FALLBACK, type Pozice } from '@/lib/kariera-data'
 
+export const revalidate = 0
+
 async function getVsechnyPozice(): Promise<Pozice[]> {
   try {
     const data = await client.fetch<Pozice[]>(KARIERNI_POZICE_QUERY)

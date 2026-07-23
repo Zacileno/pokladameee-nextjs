@@ -11,6 +11,8 @@ import KarieraKontaktForm from './components/KarieraKontaktForm'
 import { client, KARIERNI_POZICE_QUERY } from '@/lib/sanity'
 import { pozice as POZICE_FALLBACK, type Pozice } from '@/lib/kariera-data'
 
+export const revalidate = 0
+
 export const metadata: Metadata = {
   title: 'Kariéra | Pokládámeee.cz — Práce v oblasti podlah MSK',
   description: 'Hledáme šikovné řemeslníky, obchodníky a koordinátory do týmu pokládámeee.cz v Moravskoslezském kraji. Volné pozice, férová odměna, firemní auto.',
