@@ -30,9 +30,10 @@ export default function NotFound() {
           </a>
         </div>
         <div style={{ display: 'flex', gap: 20, justifyContent: 'center', flexWrap: 'wrap', paddingTop: 24, borderTop: '1px solid var(--gray-100)' }}>
-          <Link href="/sluzby/vinylova-podlaha" style={{ color: 'var(--gray-500)', fontSize: 14, fontWeight: 600 }}>Naše služby</Link>
-          <Link href="/blog" style={{ color: 'var(--gray-500)', fontSize: 14, fontWeight: 600 }}>Blog</Link>
-          <Link href="/faq" style={{ color: 'var(--gray-500)', fontSize: 14, fontWeight: 600 }}>Časté otázky</Link>
+          <Link href="/#jak-to-funguje" style={{ color: 'var(--gray-500)', fontSize: 14, fontWeight: 600 }}>Jak to funguje</Link>
+          <Link href="/#reference" style={{ color: 'var(--gray-500)', fontSize: 14, fontWeight: 600 }}>Reference</Link>
+          <Link href="/faq" style={{ color: 'var(--gray-500)', fontSize: 14, fontWeight: 600 }}>FAQ</Link>
+          <Link href="/#kontakt" style={{ color: 'var(--gray-500)', fontSize: 14, fontWeight: 600 }}>Kontakt</Link>
           <Link href="/kariera" style={{ color: 'var(--gray-500)', fontSize: 14, fontWeight: 600 }}>Kariéra</Link>
         </div>
       </div>
