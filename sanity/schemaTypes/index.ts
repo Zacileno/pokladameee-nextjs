@@ -16,7 +16,8 @@ import { pvcPodlahaSchema } from '../schemas/pvcPodlaha'
 import { kobercovaPodlahaSchema } from '../schemas/kobercovaPodlaha'
 import { drevenaPodlahaSchema } from '../schemas/drevenaPodlaha'
 import { blogPostSchema } from '../schemas/blogPost'
+import { karierniPoziceSchema } from '../schemas/karierniPozice'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [inspiraceSchema, akceSchema, referenceSchema, projektSchema, heroSekceSchema, heroIkonkySchema, sluzbySekceSchema, jakToFungujeSchema, procNasVybratSchema, rodinaZnacekSchema, obecneNastaveniSchema, kontaktSekceSchema, vinylovaPodlahaSchema, pvcPodlahaSchema, kobercovaPodlahaSchema, drevenaPodlahaSchema, blogPostSchema],
+  types: [inspiraceSchema, akceSchema, referenceSchema, projektSchema, heroSekceSchema, heroIkonkySchema, sluzbySekceSchema, jakToFungujeSchema, procNasVybratSchema, rodinaZnacekSchema, obecneNastaveniSchema, kontaktSekceSchema, vinylovaPodlahaSchema, pvcPodlahaSchema, kobercovaPodlahaSchema, drevenaPodlahaSchema, blogPostSchema, karierniPoziceSchema],
 }

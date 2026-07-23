@@ -9,6 +9,7 @@ export type Pozice = {
   naplnPrace: string[]
   pozadujeme: string[]
   nabizime: string[]
+  datumZverejneni?: string
 }
 
 export const pozice: Pozice[] = [
