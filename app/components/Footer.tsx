@@ -9,7 +9,7 @@ type Nastaveni = {
 }
 
 export default function Footer({ nastaveni }: { nastaveni?: Nastaveni }) {
-  const telefon = nastaveni?.telefon || '+420 739 229 922'
+  const telefon = nastaveni?.telefon || '+420 730 454 309'
   const email = nastaveni?.email || 'adam.hajdusek@pokladameee.cz'
   const pracovniDoba = nastaveni?.pracovniDoba || 'Po–Pá 7:00–18:00'
   const region = nastaveni?.region || 'Moravskoslezský kraj'

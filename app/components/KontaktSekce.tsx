@@ -25,7 +25,7 @@ export default function KontaktSekce({ kontakt }: Props) {
   const role = kontakt?.role || 'Zakladatel & hlavní technik'
   const citat = kontakt?.citat || 'Každou podlahu řešíme osobně. Přijedeme se podívat.'
   const fotoUrl = kontakt?.fotoUrl || null
-  const telefon = kontakt?.telefon || '+420 739 229 922'
+  const telefon = kontakt?.telefon || '+420 730 454 309'
   const email = kontakt?.email || 'adam.hajdusek@pokladameee.cz'
   const pracovniDoba = kontakt?.pracovniDoba || 'Po–Pá 7:00–18:00'
   const region = kontakt?.region || 'Moravskoslezský kraj'

@@ -176,14 +176,14 @@ export default async function KobercovaPodlahaPage() {
                 <a href="/#kontakt" className="btn-primary" style={{ borderRadius: 10, padding: '15px 28px' }}>
                   Nezávazná poptávka →
                 </a>
-                <a href="tel:+420739229922" style={{
+                <a href="tel:+420730454309" style={{
                   display: 'inline-flex', alignItems: 'center', gap: 8,
                   background: 'rgba(255,255,255,0.12)', color: 'white',
                   fontWeight: 700, fontSize: 16, padding: '14px 24px',
                   borderRadius: 10, border: '1px solid rgba(255,255,255,0.25)',
                   textDecoration: 'none', transition: 'background 0.2s',
                 }}>
-                  📞 +420 739 229 922
+                  📞 +420 730 454 309
                 </a>
               </div>
             </div>

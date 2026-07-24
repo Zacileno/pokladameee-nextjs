@@ -70,7 +70,7 @@ export default function OchranaOsobnichUdajuPage() {
         <p style={pStyle}>
           <a href="https://www.pokladameee.cz" style={aStyle}>www.pokladameee.cz</a><br />
           email: <a href="mailto:adam.hajdusek@pokladameee.cz" style={aStyle}>adam.hajdusek@pokladameee.cz</a><br />
-          tel.: <a href="tel:+420739229922" style={aStyle}>+420 739 229 922</a>
+          tel.: <a href="tel:+420730454309" style={aStyle}>+420 730 454 309</a>
         </p>
       </section>
 

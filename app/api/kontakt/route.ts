@@ -125,7 +125,7 @@ export async function POST(req: NextRequest) {
             <p style="color: #3d3d3a; line-height: 1.7; margin: 0 0 24px;">Mezitím se na nás klidně podívejte na webu nebo nám zavolejte.</p>
             <div style="background: white; border-radius: 8px; padding: 20px 24px; border: 1px solid #efefed; margin-bottom: 24px;">
               <p style="margin: 0 0 8px; color: #9a9a96; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em;">Přímý kontakt</p>
-              <a href="tel:+420739229922" style="color: #154C86; font-weight: 800; font-size: 20px; text-decoration: none;">+420 739 229 922</a>
+              <a href="tel:+420730454309" style="color: #154C86; font-weight: 800; font-size: 20px; text-decoration: none;">+420 730 454 309</a>
               <p style="margin: 6px 0 0; color: #9a9a96; font-size: 13px;">Adam Hajdušek — Po–Pá 7:00–18:00</p>
             </div>
             <p style="color: #9a9a96; font-size: 13px; margin: 0;">pokládámeee.cz · Moravskoslezský kraj</p>
@@ -179,7 +179,7 @@ export async function POST(req: NextRequest) {
             <p style="color: #3d3d3a; line-height: 1.7; margin: 0 0 24px;">Vaši zprávu jsme přijali. Adam se vám ozve co nejdříve — obvykle do 24 hodin. Zaměření je <strong>zdarma</strong>.</p>
             <div style="background: white; border-radius: 8px; padding: 20px 24px; border: 1px solid #efefed; margin-bottom: 24px;">
               <p style="margin: 0 0 8px; color: #9a9a96; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em;">Přímý kontakt</p>
-              <a href="tel:+420739229922" style="color: #154C86; font-weight: 800; font-size: 20px; text-decoration: none;">+420 739 229 922</a>
+              <a href="tel:+420730454309" style="color: #154C86; font-weight: 800; font-size: 20px; text-decoration: none;">+420 730 454 309</a>
               <p style="margin: 6px 0 0; color: #9a9a96; font-size: 13px;">Adam Hajdušek — Po–Pá 7:00–18:00</p>
             </div>
             <p style="color: #9a9a96; font-size: 13px; margin: 0;">pokládámeee.cz · Moravskoslezský kraj</p>
