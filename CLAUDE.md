@@ -9,7 +9,7 @@ Vždy ho čti před zahájením práce.
 
 **Web:** pokládámeee.cz — firma na pokládku vinylových podlah v MSK  
 **Kontakt:** Adam Hajdušek (zakladatel & technik)  
-**Telefon:** +420 739 229 922  
+**Telefon:** +420 730 454 309  
 **Email:** adam.hajdusek@pokladameee.cz  
 **Oblast:** Moravskoslezský kraj  
 **Claim:** Podlahy beeezstarostí  

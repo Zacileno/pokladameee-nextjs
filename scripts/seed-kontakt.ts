@@ -23,7 +23,7 @@ async function seed() {
       jmeno: 'Adam Hajdušek',
       role: 'Zakladatel & hlavní technik',
       citat: 'Každou podlahu řešíme osobně. Přijedeme se podívat.',
-      telefon: '+420 739 229 922',
+      telefon: '+420 730 454 309',
       email: 'adam.hajdusek@pokladameee.cz',
       pracovniDoba: 'Po–Pá 7:00–18:00',
       region: 'Moravskoslezský kraj',

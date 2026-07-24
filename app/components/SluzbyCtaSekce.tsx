@@ -19,14 +19,14 @@ export default function SluzbyCtaSekce({
           {text}
         </p>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
-          <a href="tel:+420739229922" style={{
+          <a href="tel:+420730454309" style={{
             color: '#fff', fontSize: 28, fontWeight: 700, textDecoration: 'none',
             transition: 'opacity 0.2s',
           }}
             onMouseEnter={e => (e.currentTarget.style.opacity = '0.8')}
             onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
           >
-            +420 739 229 922
+            +420 730 454 309
           </a>
           <a href="/#kontakt" style={{
             display: 'inline-flex', alignItems: 'center', gap: 8,

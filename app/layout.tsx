@@ -8,7 +8,7 @@ const LOCAL_BUSINESS_JSON_LD = {
   name: 'pokládámeee.cz',
   image: 'https://www.pokladameee.cz/assets/logo/logo-zakladni.svg',
   url: 'https://www.pokladameee.cz',
-  telephone: '+420739229922',
+  telephone: '+420730454309',
   email: 'adam.hajdusek@pokladameee.cz',
   description: 'Profesionální pokládka vinylových, PVC, kobercových a dřevěných podlah v Moravskoslezském kraji. Zaměření zdarma, odvoz staré podlahy zdarma.',
   address: {
