@@ -173,7 +173,7 @@ export default async function PvcPodlahaPage() {
                 {heroBadge}
               </p>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                <a href="/#kontakt" className="btn-primary" style={{ borderRadius: 10, padding: '15px 28px' }}>
+                <a href="#kontakt" className="btn-primary" style={{ borderRadius: 10, padding: '15px 28px' }}>
                   Nezávazná poptávka →
                 </a>
                 <a href="tel:+420730454309" style={{

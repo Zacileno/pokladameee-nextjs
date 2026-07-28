@@ -91,6 +91,13 @@ input, select, textarea { font-family: var(--font); }
 .faq-list { display: flex; flex-direction: column; gap: 0; max-width: 760px; margin: 0 auto; }
 .hero-sluzby-grid { display: grid; grid-template-columns: 1fr 420px; gap: 64px; align-items: center; }
 
+/* ── SLUŽBY PŘEHLED ── */
+.sluzby-prehled-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.sluzby-prehled-karta { position: relative; display: block; aspect-ratio: 4/5; border-radius: 16px; overflow: hidden; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+.sluzby-prehled-karta:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.18); }
+.sluzby-prehled-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.15) 45%, transparent 70%); }
+.sluzby-prehled-label { position: absolute; left: 20px; bottom: 20px; right: 20px; color: white; font-weight: 800; font-size: 22px; line-height: 1.2; }
+
 /* ── BLOG ── */
 .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
 .blog-karta { display: flex; flex-direction: column; background: white; border-radius: 12px; border: 1px solid var(--gray-100); overflow: hidden; transition: transform 0.15s, box-shadow 0.15s; }
@@ -175,6 +182,9 @@ input, select, textarea { font-family: var(--font); }
 
   .desk-nav { display: none !important; }
   .hamburger { display: block !important; }
+
+  .sluzby-prehled-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .sluzby-prehled-label { font-size: 18px; left: 14px; bottom: 14px; right: 14px; }
 
   .blog-grid { grid-template-columns: 1fr; gap: 20px; }
   .blog-souvisejici-grid { grid-template-columns: 1fr; gap: 20px; }

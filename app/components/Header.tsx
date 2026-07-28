@@ -3,9 +3,18 @@ import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import Image from 'next/image'
 
+const SLUZBY_LINKS: [string, string][] = [
+  ['/sluzby/vinylova-podlaha', 'Vinylová podlaha'],
+  ['/sluzby/pvc-podlaha', 'PVC podlaha'],
+  ['/sluzby/drevena-podlaha', 'Dřevěná podlaha'],
+  ['/sluzby/koberce', 'Koberce'],
+]
+
 export default function Header({ opaque }: { opaque?: boolean }) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [sluzbyOpen, setSluzbyOpen] = useState(false)
+  const [sluzbyMobileOpen, setSluzbyMobileOpen] = useState(false)
   const pathname = usePathname()
 
   useEffect(() => {
@@ -37,6 +46,30 @@ export default function Header({ opaque }: { opaque?: boolean }) {
           />
         </a>
         <nav style={{ display: 'flex', alignItems: 'center', gap: 32 }} className="desk-nav">
+          <div
+            style={{ position: 'relative' }}
+            onMouseEnter={() => setSluzbyOpen(true)}
+            onMouseLeave={() => setSluzbyOpen(false)}
+          >
+            <a href="/sluzby" style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: pathname?.startsWith('/sluzby') ? '#fff' : 'rgba(255,255,255,0.8)', fontWeight: pathname?.startsWith('/sluzby') ? 700 : 600, fontSize: 15, transition: 'color 0.2s' }}
+              onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+              onMouseLeave={e => (e.currentTarget.style.color = pathname?.startsWith('/sluzby') ? '#fff' : 'rgba(255,255,255,0.8)')}>
+              Služby <span style={{ fontSize: 11, transform: sluzbyOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s', display: 'inline-block' }}>▾</span>
+            </a>
+            {sluzbyOpen && (
+              <div style={{ position: 'absolute', top: '100%', left: 0, paddingTop: 12, minWidth: 220 }}>
+                <div style={{ background: 'white', borderRadius: 10, boxShadow: '0 12px 32px rgba(0,0,0,0.18)', padding: 8, display: 'flex', flexDirection: 'column' }}>
+                  {SLUZBY_LINKS.map(([href, label]) => (
+                    <a key={href} href={href} style={{ color: 'var(--gray-700)', fontWeight: 600, fontSize: 14.5, padding: '10px 14px', borderRadius: 6, transition: 'background 0.15s, color 0.15s' }}
+                      onMouseEnter={e => { e.currentTarget.style.background = 'var(--gray-50)'; e.currentTarget.style.color = 'var(--orange)' }}
+                      onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--gray-700)' }}>
+                      {label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
           {[['/#jak-to-funguje', 'Jak to funguje'], ['/#reference', 'Reference'], ['/faq', 'FAQ']].map(([href, label]) => (
             <a key={href} href={href} style={{ color: 'rgba(255,255,255,0.8)', fontWeight: 600, fontSize: 15, transition: 'color 0.2s' }}
               onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
@@ -57,6 +90,21 @@ export default function Header({ opaque }: { opaque?: boolean }) {
       </div>
       {menuOpen && (
         <div style={{ background: 'rgba(21,76,134,0.98)', borderTop: '1px solid rgba(255,255,255,0.1)', padding: '24px', display: 'flex', flexDirection: 'column', gap: 20 }}>
+          <div>
+            <button onClick={() => setSluzbyMobileOpen(!sluzbyMobileOpen)}
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', background: 'none', border: 'none', color: 'white', fontWeight: 600, fontSize: 18, fontFamily: 'inherit', cursor: 'pointer', padding: 0 }}>
+              Služby
+              <span style={{ fontSize: 14, transform: sluzbyMobileOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }}>▾</span>
+            </button>
+            {sluzbyMobileOpen && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginTop: 16, paddingLeft: 16 }}>
+                <a href="/sluzby" onClick={() => setMenuOpen(false)} style={{ color: 'rgba(255,255,255,0.85)', fontWeight: 600, fontSize: 16 }}>Všechny služby</a>
+                {SLUZBY_LINKS.map(([href, label]) => (
+                  <a key={href} href={href} onClick={() => setMenuOpen(false)} style={{ color: 'rgba(255,255,255,0.85)', fontWeight: 600, fontSize: 16 }}>{label}</a>
+                ))}
+              </div>
+            )}
+          </div>
           {[['/#jak-to-funguje', 'Jak to funguje'], ['/#reference', 'Reference'], ['/faq', 'FAQ'], ['/#kontakt', 'Kontakt'], ['/kariera', 'Kariéra']].map(([href, label]) => (
             <a key={href} href={href} onClick={() => setMenuOpen(false)} style={{ color: 'white', fontWeight: 600, fontSize: 18 }}>{label}</a>
           ))}

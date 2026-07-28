@@ -103,6 +103,10 @@ Každá komponenta má fallback na hardcoded hodnoty pokud Sanity vrátí null.
 | `KontaktSekce` | `kontaktSekce` | ✅ viditelná |
 | `Footer` | `obecneNastaveni` | ✅ viditelná |
 
+### Přehledová stránka `/sluzby`
+
+`app/sluzby/page.tsx` — grid 4 karet (jedna na každou službu), foto + název, styl podle referenčního screenshotu (celoplošná fotka, gradient overlay dole, bílý nadpis vlevo dole). Foto se fetchuje ze stejného Sanity dokumentu jako daná podstránka (`heroFotkaUrl`) — pokud tam není, zobrazí se barevný gradient s emoji jako placeholder. `revalidate = 0`, žádné vlastní Sanity schema (jen agreguje existující 4 podstránky). CSS třídy `.sluzby-prehled-grid` / `.sluzby-prehled-karta` v `globals.css`.
+
 ### Podstránky služeb (Sluzby)
 
 | Podstránka | Soubory | Stav |
@@ -114,7 +118,7 @@ Každá komponenta má fallback na hardcoded hodnoty pokud Sanity vrátí null.
 
 Struktura je identická — všechny podstránky fetchují ze Sanity, mají fallback na hardcoded texty, FAQ akordeon, reference strip, atd.
 
-**Důležité:** PVC, Koberce a Dřevěná podlaha jsou už živé i na produkci (`main`), ale **záměrně nejsou nikde odkázané** (ne v Headeru, ne v sitemap.ts) — přístupné jen přímou URL, stejně jako vinylová podlaha. Až budou finální (reálné foto, schválení), přidat do navigace v Headeru a do `app/sitemap.ts`.
+**Důležité:** Od dropdown menu "Služby" v Headeru (viz Komponenty) jsou všechny 4 podstránky + přehledová `/sluzby` dostupné i z hlavní navigace. V `app/sitemap.ts` ale zatím záměrně nejsou — čeká se na reálné fotky, pak doplnit.
 
 ### FAQ stránka (`/app/faq/`)
 
@@ -148,6 +152,7 @@ Na `main` i `dev`.
 app/components/
   Header.tsx          # Fixed, průhledný → modrý rgba(21,76,134,0.97) po scrollu
                       # onScroll() voláno při mountu (fix pro refresh na #anchor)
+                      # "Služby" — hover dropdown (desktop) / rozbalovací sekce (mobil) na 4 podstránky + /sluzby
   HeroSection.tsx     # Fullscreen foto + formulář vpravo (skrytý na mobilu)
                       # Button "Zobrazit výsledky" zakomentován — vrátit s GalerieSekce
   VyhodySekce.tsx     # Ikonová lišta 5 ikon, mobil: 2-sloupcový grid
@@ -184,6 +189,7 @@ app/
   kariera/components/               # KarieraHero, TestimonialCarousel, BenefityGrid,
                                     #   FilozofieSecce, KulturaGrid, VolnePozice, KarieraKontaktForm
   kariera/[slug]/components/        # PoziceDetail
+  sluzby/page.tsx                    # /sluzby — přehled 4 služeb, grid karet (foto + název)
   sluzby/vinylova-podlaha/
     page.tsx                        # Server component, fetchuje VINYLOVA_PODLAHA_QUERY + KONTAKT_SEKCE_QUERY
     FaqItem.tsx                     # Client component (useState) — FAQ akordeon
@@ -415,10 +421,7 @@ Na `pokladameee.cz/studio`:
 - [ ] PVC podlaha — nahrát reálnou hero fotku realizace (Sanity → Podstránka: PVC podlaha → Hero fotka)
 - [ ] Koberce — nahrát reálnou hero fotku realizace (Sanity → Podstránka: Kobercová podlaha → Hero fotka)
 - [ ] Dřevěná podlaha — nahrát reálnou hero fotku realizace (Sanity → Podstránka: Dřevěná podlaha → Hero fotka)
-- [ ] Vinylová podlaha — přidat do navigace v Headeru (až bude finální)
-- [ ] PVC podlaha — přidat do navigace v Headeru (až bude finální)
-- [ ] Koberce — přidat do navigace v Headeru (až bude finální)
-- [ ] Dřevěná podlaha — přidat do navigace v Headeru (až bude finální)
+- [x] ~~Služby — přidat do navigace v Headeru (dropdown: Vinylová podlaha, PVC podlaha, Koberce, Dřevěná podlaha + odkaz na /sluzby)~~ ✓
 - [ ] Přidat PVC/Koberce/Dřevěná podlaha/FAQ/Blog do `app/sitemap.ts` (až budou finální — dnes tam záměrně nejsou, viz podstránky výše)
 - [ ] Blog — nahrát hlavní obrázky ke 3 demo článkům, přidat do navigace v Headeru (až bude finální)
 - [ ] Blog — napsat reálné články (demo obsah slouží jen jako ukázka struktury/designu)
