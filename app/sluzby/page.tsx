@@ -3,7 +3,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
-import { client, VINYLOVA_PODLAHA_QUERY, PVC_PODLAHA_QUERY, KOBERCOVA_PODLAHA_QUERY, DREVENA_PODLAHA_QUERY } from '@/lib/sanity'
+import KontaktSekce from '@/app/components/KontaktSekce'
+import { client, VINYLOVA_PODLAHA_QUERY, PVC_PODLAHA_QUERY, KOBERCOVA_PODLAHA_QUERY, DREVENA_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY } from '@/lib/sanity'
 
 export const revalidate = 0
 
@@ -36,6 +37,11 @@ export default async function SluzbyPage() {
       }
     })
   )
+
+  let kontaktSekce: any = null
+  try {
+    kontaktSekce = await client.fetch(KONTAKT_SEKCE_QUERY)
+  } catch {}
 
   return (
     <>
@@ -70,6 +76,8 @@ export default async function SluzbyPage() {
             </div>
           </div>
         </section>
+
+        <KontaktSekce kontakt={kontaktSekce} />
       </main>
       <Footer />
     </>
