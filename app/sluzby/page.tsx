@@ -85,7 +85,7 @@ export default async function SluzbyPage() {
           </div>
         </section>
 
-        <section style={{ background: 'white', borderTop: '3px solid var(--blue)', borderBottom: '1px solid var(--gray-100)' }}>
+        <section style={{ background: 'white', borderBottom: '1px solid var(--gray-100)' }}>
           <div className="container">
             <div className="sluzby-istripgrid">
               {ISTRIP.map(({ emoji, text }, i) => (
