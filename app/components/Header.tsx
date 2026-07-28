@@ -6,8 +6,8 @@ import Image from 'next/image'
 const SLUZBY_LINKS: [string, string][] = [
   ['/sluzby/vinylova-podlaha', 'Vinylová podlaha'],
   ['/sluzby/pvc-podlaha', 'PVC podlaha'],
-  ['/sluzby/koberce', 'Koberce'],
   ['/sluzby/drevena-podlaha', 'Dřevěná podlaha'],
+  ['/sluzby/koberce', 'Koberce'],
 ]
 
 export default function Header({ opaque }: { opaque?: boolean }) {
