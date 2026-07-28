@@ -103,6 +103,10 @@ Každá komponenta má fallback na hardcoded hodnoty pokud Sanity vrátí null.
 | `KontaktSekce` | `kontaktSekce` | ✅ viditelná |
 | `Footer` | `obecneNastaveni` | ✅ viditelná |
 
+### Přehledová stránka `/sluzby`
+
+`app/sluzby/page.tsx` — grid 4 karet (jedna na každou službu), foto + název, styl podle referenčního screenshotu (celoplošná fotka, gradient overlay dole, bílý nadpis vlevo dole). Foto se fetchuje ze stejného Sanity dokumentu jako daná podstránka (`heroFotkaUrl`) — pokud tam není, zobrazí se barevný gradient s emoji jako placeholder. `revalidate = 0`, žádné vlastní Sanity schema (jen agreguje existující 4 podstránky). CSS třídy `.sluzby-prehled-grid` / `.sluzby-prehled-karta` v `globals.css`.
+
 ### Podstránky služeb (Sluzby)
 
 | Podstránka | Soubory | Stav |
@@ -114,7 +118,7 @@ Každá komponenta má fallback na hardcoded hodnoty pokud Sanity vrátí null.
 
 Struktura je identická — všechny podstránky fetchují ze Sanity, mají fallback na hardcoded texty, FAQ akordeon, reference strip, atd.
 
-**Důležité:** PVC, Koberce a Dřevěná podlaha jsou už živé i na produkci (`main`), ale **záměrně nejsou nikde odkázané** (ne v Headeru, ne v sitemap.ts) — přístupné jen přímou URL, stejně jako vinylová podlaha. Až budou finální (reálné foto, schválení), přidat do navigace v Headeru a do `app/sitemap.ts`.
+**Důležité:** PVC, Koberce a Dřevěná podlaha jsou už živé i na produkci (`main`), ale **záměrně nejsou nikde odkázané** (ne v Headeru, ne v sitemap.ts) — přístupné jen přímou URL, stejně jako vinylová podlaha a přehledová `/sluzby`. Až budou finální (reálné foto, schválení), přidat do navigace v Headeru a do `app/sitemap.ts`.
 
 ### FAQ stránka (`/app/faq/`)
 
@@ -184,6 +188,7 @@ app/
   kariera/components/               # KarieraHero, TestimonialCarousel, BenefityGrid,
                                     #   FilozofieSecce, KulturaGrid, VolnePozice, KarieraKontaktForm
   kariera/[slug]/components/        # PoziceDetail
+  sluzby/page.tsx                    # /sluzby — přehled 4 služeb, grid karet (foto + název)
   sluzby/vinylova-podlaha/
     page.tsx                        # Server component, fetchuje VINYLOVA_PODLAHA_QUERY + KONTAKT_SEKCE_QUERY
     FaqItem.tsx                     # Client component (useState) — FAQ akordeon
