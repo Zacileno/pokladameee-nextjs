@@ -12,11 +12,11 @@ type FormData = {
   mesto: string
   psc: string
   zprava: string
-  website: string
+  kontrolni_pole: string
   souhlas: boolean
 }
 
-const EMPTY: FormData = { jmeno: '', email: '', telefon: '', ulice: '', mesto: '', psc: '', zprava: '', website: '', souhlas: false }
+const EMPTY: FormData = { jmeno: '', email: '', telefon: '', ulice: '', mesto: '', psc: '', zprava: '', kontrolni_pole: '', souhlas: false }
 
 export default function KontaktForm() {
   const router = useRouter()
@@ -32,7 +32,7 @@ export default function KontaktForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (form.website) return
+    if (form.kontrolni_pole) return
     if (!form.souhlas) {
       setError('Pro odeslání musíte souhlasit se zpracováním osobních údajů.')
       return
@@ -60,7 +60,8 @@ export default function KontaktForm() {
 
   return (
     <form className="kontakt-form" onSubmit={handleSubmit}>
-      <input name="website" style={{ display: 'none' }} value={form.website} onChange={set('website')} tabIndex={-1} autoComplete="off" />
+      {/* Honeypot proti botům — schválně obecný název, ať ho prohlížeč/správce hesel neinterpretuje jako pole na URL/web a nevyplní ho sám */}
+      <input name="kontrolni_pole" style={{ position: 'absolute', left: -9999, width: 1, height: 1, opacity: 0, overflow: 'hidden' }} value={form.kontrolni_pole} onChange={set('kontrolni_pole')} tabIndex={-1} autoComplete="off" aria-hidden="true" />
       <input className="form-input" type="text" placeholder="Jméno a příjmení *" required value={form.jmeno} onChange={setFiltered('jmeno', onlyLetters)} />
       <input className="form-input" type="email" placeholder="E-mail *" required value={form.email} onChange={set('email')} />
       <input className="form-input" type="tel" inputMode="tel" placeholder="Telefon *" required value={form.telefon} onChange={setFiltered('telefon', onlyPhoneChars)} />
