@@ -11,11 +11,11 @@ type FormData = {
   telefon: string
   mesto: string
   zprava: string
-  website: string
+  kontrolni_pole: string
   souhlas: boolean
 }
 
-const EMPTY: FormData = { jmeno: '', prijmeni: '', email: '', telefon: '', mesto: '', zprava: '', website: '', souhlas: false }
+const EMPTY: FormData = { jmeno: '', prijmeni: '', email: '', telefon: '', mesto: '', zprava: '', kontrolni_pole: '', souhlas: false }
 
 export default function KarieraKontaktForm({ poziceNazev }: { poziceNazev?: string }) {
   const router = useRouter()
@@ -31,7 +31,7 @@ export default function KarieraKontaktForm({ poziceNazev }: { poziceNazev?: stri
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (form.website) return
+    if (form.kontrolni_pole) return
     if (!form.souhlas) {
       setError('Pro odeslání musíš souhlasit se zpracováním osobních údajů.')
       return
@@ -84,7 +84,8 @@ export default function KarieraKontaktForm({ poziceNazev }: { poziceNazev?: stri
         </p>
 
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-          <input name="website" style={{ display: 'none' }} value={form.website} onChange={set('website')} tabIndex={-1} autoComplete="off" />
+          {/* Honeypot proti botům — schválně obecný název, ať ho prohlížeč/správce hesel neinterpretuje jako pole na URL/web a nevyplní ho sám */}
+          <input name="kontrolni_pole" style={{ position: 'absolute', left: -9999, width: 1, height: 1, opacity: 0, overflow: 'hidden' }} value={form.kontrolni_pole} onChange={set('kontrolni_pole')} tabIndex={-1} autoComplete="off" aria-hidden="true" />
 
           <div className="kariera-form-grid-2col">
             <input style={inputStyle} type="text" placeholder="Jméno *" required value={form.jmeno} onChange={setFiltered('jmeno', onlyLetters)} />

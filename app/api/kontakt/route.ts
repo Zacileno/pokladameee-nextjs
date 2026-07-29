@@ -39,7 +39,13 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json()
-  const { jmeno, prijmeni, email, telefon, ulice, mesto, psc, zprava, typ, pozice, souhlas } = body
+  const { jmeno, prijmeni, email, telefon, ulice, mesto, psc, zprava, typ, pozice, souhlas, kontrolni_pole } = body
+
+  // Honeypot — skryté pole vyplňují jen boti (lidem zůstává prázdné a neviditelné).
+  // Vracíme "úspěch", ať boti nezkouší API volat opakovaně jinak.
+  if (kontrolni_pole) {
+    return NextResponse.json({ success: true })
+  }
 
   const celeJmeno = prijmeni ? `${jmeno} ${prijmeni}` : jmeno
   const isPrihlaska = typ === 'kariera'
@@ -71,17 +77,32 @@ export async function POST(req: NextRequest) {
   const eZprava = escapeHtml(zprava)
   const ePozice = escapeHtml(pozice)
 
+  // Webhook i e-maily níže jsou navzájem nezávislé (obalené vlastním try/catch) —
+  // selhání jednoho (např. výpadek Make.com) nesmí strhnout celý požadavek a připravit
+  // Adama o notifikační e-mail, který dorazí i tak.
+  let webhookOk = false
   const webhookUrl = process.env.MAKE_WEBHOOK_URL
   if (webhookUrl) {
-    await fetch(webhookUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ jmeno: celeJmeno, email, telefon, ulice, mesto, psc, zprava, typ, pozice, souhlas: true, souhlasDatum: new Date().toISOString() }),
-    })
+    try {
+      const webhookRes = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ jmeno: celeJmeno, email, telefon, ulice, mesto, psc, zprava, typ, pozice, souhlas: true, souhlasDatum: new Date().toISOString() }),
+      })
+      webhookOk = webhookRes.ok
+      if (!webhookRes.ok) {
+        console.error('Make webhook vrátil chybu:', webhookRes.status, await webhookRes.text().catch(() => ''))
+      }
+    } catch (err) {
+      console.error('Make webhook selhal:', err)
+    }
   }
+
+  let adamEmailOk = false
 
   if (isPrihlaska) {
     // --- Email Adamovi: nová přihláška ---
+    try {
     await resend.emails.send({
       from: 'no-reply@pokladameee.cz',
       to: ['adam.hajdusek@pokladameee.cz'],
@@ -107,8 +128,13 @@ export async function POST(req: NextRequest) {
         </div>
       `,
     })
+    adamEmailOk = true
+    } catch (err) {
+      console.error('Email Adamovi (přihláška) selhal:', err)
+    }
 
     // --- Potvrzovací email uchazeči ---
+    try {
     await resend.emails.send({
       from: 'no-reply@pokladameee.cz',
       to: email,
@@ -133,11 +159,15 @@ export async function POST(req: NextRequest) {
         </div>
       `,
     })
+    } catch (err) {
+      console.error('Potvrzovací email uchazeči selhal:', err)
+    }
   } else {
     // --- Email Adamovi: nová poptávka podlahy ---
     const adresa = [ulice, mesto, psc].filter(Boolean).join(', ')
     const eAdresa = escapeHtml(adresa)
 
+    try {
     await resend.emails.send({
       from: 'no-reply@pokladameee.cz',
       to: ['adam.hajdusek@pokladameee.cz'],
@@ -162,8 +192,13 @@ export async function POST(req: NextRequest) {
         </div>
       `,
     })
+    adamEmailOk = true
+    } catch (err) {
+      console.error('Email Adamovi (poptávka) selhal:', err)
+    }
 
     // --- Potvrzovací email zákazníkovi ---
+    try {
     await resend.emails.send({
       from: 'no-reply@pokladameee.cz',
       to: email,
@@ -187,6 +222,18 @@ export async function POST(req: NextRequest) {
         </div>
       `,
     })
+    } catch (err) {
+      console.error('Potvrzovací email zákazníkovi selhal:', err)
+    }
+  }
+
+  // Pokud selhal jak webhook (Make), tak notifikace Adamovi, nemáme poptávku
+  // zaznamenanou vůbec nikde — zákazník to musí vědět a zavolat přímo.
+  if (!webhookOk && !adamEmailOk) {
+    return NextResponse.json(
+      { error: 'Poptávku se nepodařilo doručit. Zavolejte nám prosím přímo na +420 730 454 309.' },
+      { status: 502 }
+    )
   }
 
   return NextResponse.json({ success: true })
