@@ -80,17 +80,17 @@ export default function ReklamacniRadPage() {
         <section style={{ marginBottom: 32 }}>
           <h2 style={h2Style}>I. Záruční podmínky</h2>
           <ol style={olStyle}>
-            <li style={liStyle}>V případě, že se po převzetí díla objednatelem vyskytnou v záruční době vady, může objednatel uplatnit svou oprávněnou reklamaci. Záruční doba počíná běžet ode dne předání díla, který je uveden v předávacím protokolu.</li>
+            <li style={liStyle}>V případě, že se po převzetí díla objednatelem vyskytnou v záruční době vady, může objednatel uplatnit svou oprávněnou reklamaci. Záruční doba počíná běžet ode dne předání díla, který je uveden v předávacím protokolu, a reklamaci lze uplatnit pouze v jejím průběhu.</li>
             <li style={liStyle}>
-              Záruka zaniká v následujících případech:
+              Zhotovitel neodpovídá za vady, které byly prokazatelně způsobeny:
               <ol type="a" style={{ paddingLeft: 20, marginTop: 8 }}>
-                <li style={liStyle}>Uplynutím záruční doby.</li>
-                <li style={liStyle}>Nevhodným používáním, skladováním nebo údržbou podlahové krytiny v rozporu s pokyny výrobce nebo zhotovitele.</li>
-                <li style={liStyle}>Nedodržením podmínek pro používání podlahové krytiny (nedostatečná nebo nadměrná vlhkost prostředí, teplotní extrémy, nevhodné čisticí prostředky apod.).</li>
-                <li style={liStyle}>Neodbornou manipulací, zásahem do díla ze strany objednatele nebo třetích osob.</li>
-                <li style={liStyle}>Poškozením díla živelnými událostmi (záplava, požár apod.).</li>
-                <li style={liStyle}>Nevyhovujícím stavem podkladní vrstvy, na který byl objednatel před zahájením pokládky upozorněn.</li>
-                <li style={liStyle}>Porušením povinností objednatele vyplývajících z bodů 3 až 7 Úvodních ustanovení.</li>
+                <li style={liStyle}>nevhodným používáním, skladováním nebo údržbou podlahové krytiny v rozporu s pokyny výrobce nebo zhotovitele,</li>
+                <li style={liStyle}>nedodržením podmínek pro používání podlahové krytiny (nedostatečná nebo nadměrná vlhkost prostředí, teplotní extrémy, nevhodné čisticí prostředky apod.),</li>
+                <li style={liStyle}>neodbornou manipulací nebo zásahem do díla ze strany objednatele nebo třetích osob,</li>
+                <li style={liStyle}>mechanickým poškozením ze strany objednatele nebo třetích osob,</li>
+                <li style={liStyle}>živelnou událostí (záplava, požár apod.),</li>
+                <li style={liStyle}>nevyhovujícím stavem podkladní vrstvy — <strong>pouze však tehdy</strong>, pokud na něj zhotovitel objednatele písemně upozornil a objednatel i přesto písemně potvrdil, že na pokládce za daných podmínek trvá, nebo pokud šlo o skrytou vadu podkladu, kterou objednatel zhotoviteli zamlčel. V ostatních případech, kdy zhotovitel podklad před pokládkou kontroloval nebo připravoval (nivelace, vyrovnání apod.), odpovídá za jeho řádné provedení a nemůže se odpovědnosti za nevyhovující podklad jednostranně zprostit,</li>
+                <li style={liStyle}>porušením povinností objednatele vyplývajících z bodů 3 až 7 Úvodních ustanovení.</li>
               </ol>
             </li>
             <li style={liStyle}>V případě reklamace položené podlahové krytiny se záruka vztahuje pouze na vady, které jsou viditelné při prohlídce z výšky stoje (přibližně 1,6 m) při běžném osvětlení místnosti, a za předpokladu, že pokládka byla provedena v souladu s montážními podmínkami platnými v daný moment.</li>
@@ -109,7 +109,7 @@ export default function ReklamacniRadPage() {
             <li style={liStyle}>V případě, že objednatel nesouhlasí s rozhodnutím odpovědného pracovníka, může se písemně obrátit na jednatele společnosti.</li>
             <li style={liStyle}>Objednatel nemůže měnit uplatněné reklamační nároky, není-li dohodnuto jinak.</li>
             <li style={liStyle}>Zhotovitel je povinen oznámit výsledek reklamačního řízení objednateli za předpokladu splnění všech povinností vyplývajících z tohoto reklamačního řádu.</li>
-            <li style={liStyle}>Oprávněnost každé reklamace a posouzení odstranitelnosti či neodstranitelnosti vady provede odpovědný pracovník zhotovitele a své stanovisko sdělí objednateli nejpozději do sedmi pracovních dnů od řádného uplatnění reklamace. V případě oprávněné reklamace je zhotovitel povinen vyřídit reklamaci ve lhůtě přiměřené povaze vady, nejpozději však šedesát kalendářních dnů od jejího řádného uplatnění, nedohodnou-li se obě strany písemně jinak.</li>
+            <li style={liStyle}>Oprávněnost každé reklamace a posouzení odstranitelnosti či neodstranitelnosti vady provede odpovědný pracovník zhotovitele a své stanovisko sdělí objednateli nejpozději do sedmi pracovních dnů od řádného uplatnění reklamace. V případě oprávněné reklamace je zhotovitel povinen vyřídit reklamaci ve lhůtě přiměřené povaze vady, nejpozději však třicet kalendářních dnů od jejího řádného uplatnění, nedohodnou-li se obě strany písemně jinak.</li>
             <li style={liStyle}>Tento reklamační řád je platný od 1. 6. 2026.</li>
           </ol>
         </section>
