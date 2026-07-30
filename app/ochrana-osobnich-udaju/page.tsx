@@ -99,6 +99,7 @@ export default function OchranaOsobnichUdajuPage() {
           <li style={liStyle}>identifikační údaje (jméno, příjmení),</li>
           <li style={liStyle}>kontaktní údaje (e-mailová adresa, telefonní číslo, adresa),</li>
           <li style={liStyle}>údaje poskytnuté v rámci poptávkového formuláře (popis zakázky, lokace, rozsah prací),</li>
+          <li style={liStyle}>fotografie prostor, podkladu a průběhu či výsledku realizace — pořizované v rámci zaměření a pokládky za účelem přípravy nabídky, dokumentace stavu podkladu, kontroly kvality provedené práce a řešení případných reklamací,</li>
           <li style={liStyle}>smluvní a fakturační údaje (v případě uzavření smlouvy),</li>
           <li style={liStyle}>provozní a lokalizační údaje (při návštěvě webových stránek — viz sekce Cookies).</li>
         </ul>
@@ -127,6 +128,10 @@ export default function OchranaOsobnichUdajuPage() {
           Osobní údaje mohou být předány třetím stranám pouze v nezbytném rozsahu a za předpokladu, že je pro to právní základ. Příjemci mohou být zejména:
         </p>
         <ul style={ulStyle}>
+          <li style={liStyle}>technici a podlaháři provádějící zaměření, přípravu podkladu a pokládku (zaměstnanci nebo smluvní partneři Správce),</li>
+          <li style={liStyle}>účetní a daňový poradce,</li>
+          <li style={liStyle}>dodavatelé podlahových krytin a materiálu, je-li to nutné pro vyřízení zakázky,</li>
+          <li style={liStyle}>poskytovatel CRM / evidenčního systému poptávek a zakázek,</li>
           <li style={liStyle}>poskytovatelé IT služeb a hostingu (zpracovatelé),</li>
           <li style={liStyle}>poskytovatelé e-mailových a komunikačních služeb,</li>
           <li style={liStyle}>orgány veřejné moci, pokud to ukládá zákon.</li>
@@ -142,10 +147,11 @@ export default function OchranaOsobnichUdajuPage() {
           Osobní údaje jsou uchovávány po dobu nezbytně nutnou k naplnění účelu zpracování:
         </p>
         <ul style={ulStyle}>
-          <li style={liStyle}>údaje z poptávkového formuláře — po dobu jednání o zakázce a následně po dobu trvání smluvního vztahu,</li>
+          <li style={liStyle}>poptávky, ze kterých se nestala zakázka — po dobu 12 měsíců od odeslání poptávky, poté jsou vymazány,</li>
+          <li style={liStyle}>údaje zákazníků, se kterými byla uzavřena smlouva o dílo (včetně fotografií realizace) — po dobu 10 let od dokončení zakázky,</li>
           <li style={liStyle}>smluvní a fakturační dokumentace — po dobu stanovenou zákonem (zpravidla 10 let od vystavení dokladu),</li>
           <li style={liStyle}>údaje zpracovávané na základě souhlasu — do odvolání souhlasu,</li>
-          <li style={liStyle}>údaje zpracovávané na základě oprávněného zájmu — do doby, než je vznesen oprávněný námitka.</li>
+          <li style={liStyle}>údaje zpracovávané na základě oprávněného zájmu — do doby, než je vznesena oprávněná námitka.</li>
         </ul>
       </section>
 
