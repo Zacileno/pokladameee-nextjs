@@ -65,7 +65,7 @@ export const KONTAKT_SEKCE_QUERY = `*[_type == "kontaktSekce"][0] {
   nadpis, podnadpis,
   jmeno, role, citat,
   "fotoUrl": foto.asset->url,
-  telefon, email,
+  telefon, telefonTechnicke, email,
   pracovniDoba, region
 }`
 

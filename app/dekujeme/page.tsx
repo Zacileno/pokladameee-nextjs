@@ -26,8 +26,8 @@ export default function Dekujeme() {
         </p>
         <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
           <Link href="/" className="btn-primary" style={{ fontSize: 16, padding: '13px 28px' }}>← Zpět na hlavní stránku</Link>
-          <a href="tel:+420730454309" className="btn-secondary" style={{ fontSize: 16, padding: '12px 28px', background: 'var(--blue)', color: 'white', borderRadius: 'var(--radius)', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
-            📞 +420 730 454 309
+          <a href="tel:+420790388487" className="btn-secondary" style={{ fontSize: 16, padding: '12px 28px', background: 'var(--blue)', color: 'white', borderRadius: 'var(--radius)', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+            📞 +420 790 388 487
           </a>
         </div>
       </div>
