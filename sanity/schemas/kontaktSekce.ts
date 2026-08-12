@@ -12,6 +12,7 @@ export const kontaktSekceSchema = defineType({
     defineField({ name: 'citat', title: 'Citát', type: 'text', rows: 2 }),
     defineField({ name: 'foto', title: 'Foto', type: 'image', options: { hotspot: true } }),
     defineField({ name: 'telefon', title: 'Telefon', type: 'string' }),
+    defineField({ name: 'telefonTechnicke', title: 'Telefon — technické dotazy (volitelné)', description: 'Pokud vyplněno, zobrazí se pod hlavním telefonem jako druhá volba "Pro technické dotazy".', type: 'string' }),
     defineField({ name: 'email', title: 'E-mail', type: 'string' }),
     defineField({ name: 'pracovniDoba', title: 'Pracovní doba', type: 'string' }),
     defineField({ name: 'region', title: 'Region', type: 'string' }),

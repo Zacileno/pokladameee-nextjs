@@ -9,7 +9,7 @@ Vždy ho čti před zahájením práce.
 
 **Web:** pokládámeee.cz — firma na pokládku vinylových podlah v MSK  
 **Kontakt:** Adam Hajdušek (zakladatel & technik)  
-**Telefon:** +420 730 454 309  
+**Telefon:** +420 790 388 487 (technické dotazy: +420 730 454 309)  
 **Email:** adam.hajdusek@pokladameee.cz  
 **Oblast:** Moravskoslezský kraj  
 **Claim:** Podlahy beeezstarostí  
@@ -136,8 +136,8 @@ Na `main` i `dev`.
 - **Přepínač editoru:** boolean pole `pouzitHtmlKod` ve Studiu přepíná, které ze dvou polí se použije — **vypnuto** (výchozí) = normální rich-text editor, pole `obsah` (Portable Text: H2/H3, tučně, kurzíva, odrážky, odkazy, obrázky). **Zapnuto** = zobrazí se místo toho pole `obsahHtml` (syrový HTML kód), vykreslí se přes `dangerouslySetInnerHTML` (`app/blog/[slug]/page.tsx`). Zbytek stránky (hero obrázek, breadcrumb, související články, CTA) je nezávislý na této volbě. **Pozor:** `obsahHtml` je bez sanitizace — editovat by ho měl jen důvěryhodný správce (Adam), ne cizí přispěvatelé.
 - **Renderování Portable Textu:** `@portabletext/react` + `app/components/PortableTextComponents.tsx` (mapování H2/H3/odkazy/obrázky na styl webu)
 - **Fallback:** `lib/blog-fallback.ts` — 3 demo články použité, pokud Sanity nevrátí žádný `blogPost` (stejný vzor jako u ostatních podstránek)
-- **Bez odkazu v navigaci** — zatím se drží stejné konvence jako PVC/koberce/dřevo: přístupné přímou URL (`/blog`), zvážit přidání do Headeru a `sitemap.ts`, až budou nahrané reálné obrázky článků
-- **Chybí:** `hlavniObrazek` u demo článků (seed skript ho nenastavuje — nahrát ručně přes Studio)
+- **Reálné články** — 4 skutečné články (nahradily demo obsah), všechny s `pouzitHtmlKod: true` a nahraným `hlavniObrazek`
+- **Bez odkazu v navigaci** — zatím se drží stejné konvence jako PVC/koberce/dřevo: přístupné přímou URL (`/blog`), zvážit přidání do Headeru a `sitemap.ts`
 
 ### Skryté prvky — vrátit až bude GalerieSekce viditelná
 
@@ -381,7 +381,6 @@ Na `pokladameee.cz/studio`:
 - **Hero obrázek** — nahrát reálnou hero fotku pozadí
 - **Recenze** — přidat reálné recenze z Google
 - **Kontaktní sekce** — nahrát foto Adama (nebo použít `/public/assets/adam.jpg`)
-- **Blog — články** — nahrát `hlavniObrazek` u 3 demo článků (seed skript ho nenastavuje)
 
 ---
 
@@ -423,8 +422,8 @@ Na `pokladameee.cz/studio`:
 - [ ] Dřevěná podlaha — nahrát reálnou hero fotku realizace (Sanity → Podstránka: Dřevěná podlaha → Hero fotka)
 - [x] ~~Služby — přidat do navigace v Headeru (dropdown: Vinylová podlaha, PVC podlaha, Koberce, Dřevěná podlaha + odkaz na /sluzby)~~ ✓
 - [ ] Přidat PVC/Koberce/Dřevěná podlaha/FAQ/Blog do `app/sitemap.ts` (až budou finální — dnes tam záměrně nejsou, viz podstránky výše)
-- [ ] Blog — nahrát hlavní obrázky ke 3 demo článkům, přidat do navigace v Headeru (až bude finální)
-- [ ] Blog — napsat reálné články (demo obsah slouží jen jako ukázka struktury/designu)
+- [x] ~~Blog — napsat reálné články a nahrát hlavní obrázky~~ ✓ (4 reálné články nahradily demo obsah)
+- [ ] Blog — přidat do navigace v Headeru (až bude finální)
 - [ ] Vinylová podlaha — projít a případně přepsat texty podle klientova brief (zatím záměrně beze změny, na výslovné přání)
 - [x] ~~Vyplnit GDPR, obchodní podmínky a reklamační řád dle právní revize~~ ✓ (termín realizace ponechán, cookie souhlas řešen přes GTM mimo web)
 - [x] ~~Google Search Console — registrace domény (`www.pokladameee.cz`) + odeslání sitemap.xml~~ ✓
