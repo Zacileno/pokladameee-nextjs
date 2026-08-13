@@ -28,7 +28,7 @@ export default async function InspracePage() {
 
   return (
     <>
-      <Header />
+      <Header opaque />
       <main style={{ paddingTop: 100, minHeight: '60vh' }}>
         <div className="container section">
           <h1 className="section-title">Inspirace a <span>galerie</span></h1>
