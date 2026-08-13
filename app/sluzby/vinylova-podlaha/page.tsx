@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 import BenefityGrid from '@/app/components/BenefityGrid'
-import RemeselnikSekce from '@/app/components/RemeselnikSekce'
 import KontaktSekce from '@/app/components/KontaktSekce'
 import FaqItem from './FaqItem'
 import { client, VINYLOVA_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY } from '@/lib/sanity'
@@ -313,8 +312,6 @@ export default async function VinylovaPodlahaPage() {
           </div>
         </div>
       </section>
-
-      <RemeselnikSekce />
 
       <KontaktSekce kontakt={kontaktSekce} />
 
