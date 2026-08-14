@@ -346,13 +346,15 @@ npm run dev
 ```
 NEXT_PUBLIC_SANITY_PROJECT_ID=8cvsenqb
 NEXT_PUBLIC_SANITY_DATASET=production
-MAKE_WEBHOOK_URL=https://...   ← reálná URL z Make
+MAKE_WEBHOOK_URL=https://...            ← poptávka podlahy, reálná URL z Make
+MAKE_WEBHOOK_URL_KARIERA=https://...    ← přihláška na kariéru, samostatný Make scénář
 RESEND_API_KEY=re_...          ← z resend.com → API Keys
 ```
 
 **Vercel env vars** (projekt `pokladameee-nextjs` → Environment Variables):
 - `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET` — Production + Preview ✓
 - `RESEND_API_KEY`, `MAKE_WEBHOOK_URL` — Production + Preview ✓
+- `MAKE_WEBHOOK_URL_KARIERA` — Production + Preview + Development ✓ (`/api/kontakt` ho použije jen pro `typ:'kariera'`, jinak fallback na `MAKE_WEBHOOK_URL`)
 
 **Sanity token pro seed skripty:** `~/.config/sanity/config.json` → `authToken` (osobní CLI token, nikam nepushovat)
 
@@ -442,8 +444,8 @@ Na `pokladameee.cz/studio`:
 
 ## Technické poznámky
 
-- **Formuláře — flow (poptávka):** `KontaktForm` → POST `/api/kontakt` → Make webhook + Resend emaily → `pushDataLayerEvent('formular_odeslani', { typ_formulare: 'poptavka' })` → redirect `/dekujeme`
-- **Formuláře — flow (kariéra):** `KarieraKontaktForm` → POST `/api/kontakt` (pole `typ:'kariera'`, `pozice`) → Make webhook + Resend emaily → `pushDataLayerEvent('formular_odeslani', { typ_formulare: 'kariera', pozice })` → redirect `/dekujeme-kariera`
+- **Formuláře — flow (poptávka):** `KontaktForm` → POST `/api/kontakt` → Make webhook (`MAKE_WEBHOOK_URL`) + Resend emaily → `pushDataLayerEvent('formular_odeslani', { typ_formulare: 'poptavka' })` → redirect `/dekujeme`
+- **Formuláře — flow (kariéra):** `KarieraKontaktForm` → POST `/api/kontakt` (pole `typ:'kariera'`, `pozice`) → Make webhook (`MAKE_WEBHOOK_URL_KARIERA`, samostatný scénář — fallback na `MAKE_WEBHOOK_URL`, pokud není nastavený) + Resend emaily → `pushDataLayerEvent('formular_odeslani', { typ_formulare: 'kariera', pozice })` → redirect `/dekujeme-kariera`
 - **GTM dataLayer event:** `gtm.historyChange-v2` NENÍ spolehlivý signál odeslání formuláře — je to obecná GTM systémová událost při jakékoli klientské navigaci. Proto vlastní `formular_odeslani` (viz `lib/gtm.ts`), pushuje se až po potvrzeném `res.ok`, ne na klik tlačítka.
 - **Resend odesílací adresa:** `no-reply@pokladameee.cz` (doména ověřena)
 - **Notifikace o poptávce i přihlášce na kariéru:** chodí na `adam.hajdusek@pokladameee.cz` a `lucie.durcakova@pokladameee.cz` (Martin odebrán z obou)
