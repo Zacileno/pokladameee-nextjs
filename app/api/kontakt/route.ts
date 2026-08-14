@@ -81,7 +81,9 @@ export async function POST(req: NextRequest) {
   // selhání jednoho (např. výpadek Make.com) nesmí strhnout celý požadavek a připravit
   // Adama o notifikační e-mail, který dorazí i tak.
   let webhookOk = false
-  const webhookUrl = process.env.MAKE_WEBHOOK_URL
+  const webhookUrl = isPrihlaska
+    ? (process.env.MAKE_WEBHOOK_URL_KARIERA || process.env.MAKE_WEBHOOK_URL)
+    : process.env.MAKE_WEBHOOK_URL
   if (webhookUrl) {
     try {
       const webhookRes = await fetch(webhookUrl, {
