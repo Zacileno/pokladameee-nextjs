@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { pushDataLayerEvent } from '@/lib/gtm'
-import { onlyLetters, onlyPhoneChars } from '@/lib/formInput'
+import { onlyLetters, onlyPlace, onlyPhoneChars } from '@/lib/formInput'
 
 type FormData = {
   jmeno: string
@@ -95,7 +95,7 @@ export default function KarieraKontaktForm({ poziceNazev }: { poziceNazev?: stri
             <input style={inputStyle} type="email" placeholder="E-mail *" required value={form.email} onChange={set('email')} />
             <input style={inputStyle} type="tel" inputMode="tel" placeholder="Telefon *" required value={form.telefon} onChange={setFiltered('telefon', onlyPhoneChars)} />
           </div>
-          <input style={inputStyle} type="text" placeholder="Z jakého jsi města?" value={form.mesto} onChange={setFiltered('mesto', onlyLetters)} />
+          <input style={inputStyle} type="text" placeholder="Z jakého jsi města?" value={form.mesto} onChange={setFiltered('mesto', onlyPlace)} />
           <textarea
             style={{ ...inputStyle, resize: 'vertical' }}
             placeholder="Zkušenost a motivace pro práci s podlahami."

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
-import { isValidLetters, isValidPhoneChars, isValidDigitsSpace } from '@/lib/formInput'
+import { isValidLetters, isValidPlace, isValidPhoneChars, isValidDigitsSpace, leadFieldError } from '@/lib/formInput'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -61,11 +61,18 @@ export async function POST(req: NextRequest) {
   if (
     !isValidLetters(String(jmeno)) ||
     (prijmeni && !isValidLetters(String(prijmeni))) ||
-    (mesto && !isValidLetters(String(mesto))) ||
+    (mesto && !isValidPlace(String(mesto))) ||
     !isValidPhoneChars(String(telefon)) ||
     (psc && !isValidDigitsSpace(String(psc)))
   ) {
     return NextResponse.json({ error: 'Neplatný formát některého pole' }, { status: 400 })
+  }
+
+  // Poptávka jde do ERP, které e-mail, telefon a PSČ kontroluje přísněji
+  // (lib/formInput.ts) — stejná kontrola tady, ať chyba nepřijde až z ERP.
+  if (!isPrihlaska) {
+    const fieldError = leadFieldError({ email: String(email), telefon: String(telefon), psc: psc ? String(psc) : undefined })
+    if (fieldError) return NextResponse.json({ error: fieldError }, { status: 400 })
   }
 
   // Escapované verze pro vkládání do HTML e-mailů — surová data jdou jen do Make webhooku a `to:` pole Resendu
@@ -76,6 +83,45 @@ export async function POST(req: NextRequest) {
   const eMesto = escapeHtml(mesto)
   const eZprava = escapeHtml(zprava)
   const ePozice = escapeHtml(pozice)
+
+  // --- Poptávka rovnou do ERP (obchodní případ OP01) ---
+  // ERP každé doručení zaloguje (Nastavení → Webhook log). Kariérní přihlášky
+  // do ERP nepatří. Neplatná data (422) vracíme formuláři, ať je zákazník
+  // opraví — jinak by poptávka v ERP chyběla a nikdo by to nevěděl.
+  let erpOk = false
+  const erpUrl = process.env.ERP_WEB_LEAD_URL
+  const erpSecret = process.env.ERP_WEB_LEAD_SECRET
+  if (!isPrihlaska && erpUrl && erpSecret) {
+    try {
+      const erpRes = await fetch(erpUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Webhook-Secret': erpSecret },
+        body: JSON.stringify({
+          jmeno: celeJmeno,
+          email,
+          telefon,
+          ulice,
+          mesto,
+          psc,
+          zprava,
+          souhlas: true,
+          zdroj_url: req.headers.get('referer') || undefined,
+        }),
+        signal: AbortSignal.timeout(10_000),
+      })
+      if (erpRes.status === 422) {
+        const data = (await erpRes.json().catch(() => null)) as { fieldErrors?: Record<string, string[]> } | null
+        const first = Object.values(data?.fieldErrors ?? {})[0]?.[0]
+        return NextResponse.json({ error: first || 'Neplatný formát některého pole' }, { status: 400 })
+      }
+      erpOk = erpRes.ok
+      if (!erpRes.ok) {
+        console.error('ERP vrátilo chybu:', erpRes.status, await erpRes.text().catch(() => ''))
+      }
+    } catch (err) {
+      console.error('Odeslání do ERP selhalo:', err)
+    }
+  }
 
   // Webhook i e-maily níže jsou navzájem nezávislé (obalené vlastním try/catch) —
   // selhání jednoho (např. výpadek Make.com) nesmí strhnout celý požadavek a připravit
@@ -229,9 +275,9 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  // Pokud selhal jak webhook (Make), tak notifikace Adamovi, nemáme poptávku
+  // Pokud selhalo ERP, webhook (Make) i notifikace Adamovi, nemáme poptávku
   // zaznamenanou vůbec nikde — zákazník to musí vědět a zavolat přímo.
-  if (!webhookOk && !adamEmailOk) {
+  if (!erpOk && !webhookOk && !adamEmailOk) {
     return NextResponse.json(
       { error: 'Poptávku se nepodařilo doručit. Zavolejte nám prosím přímo na +420 790 388 487.' },
       { status: 502 }
