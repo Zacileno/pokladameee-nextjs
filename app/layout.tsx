@@ -33,16 +33,16 @@ const LOCAL_BUSINESS_JSON_LD = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.pokladameee.cz'),
   title: {
-    default: 'pokládámeee.cz – Vinylové podlahy v MSK | Pokládka do týdne',
+    default: 'pokládámeee.cz – Vinylové podlahy v MSK | Hotovo, než se nadějeteee',
     template: '%s | pokládámeee.cz',
   },
-  description: 'Profesionální pokládka vinylových podlah v Moravskoslezském, Zlínském a Olomouckém kraji. Zaměření zdarma do 48 hodin, realizace do týdne. Starou podlahu ekologicky odstraníme. Volejte Adama Hajdušek.',
+  description: 'Profesionální pokládka vinylových podlah v Moravskoslezském, Zlínském a Olomouckém kraji. Zaměření zdarma do 48 hodin, hotovo, než se nadějeteee. Starou podlahu ekologicky odstraníme. Volejte Adama Hajdušek.',
   keywords: ['vinylová podlaha', 'pokládka podlahy', 'Ostrava', 'MSK', 'Moravskoslezský kraj', 'Zlínský kraj', 'Olomoucký kraj', 'vinyl lepený', 'podlahy Opava', 'podlahy Frýdek-Místek', 'podlahy Zlín', 'podlahy Olomouc', 'pokládámeee'],
   authors: [{ name: 'pokládámeee.cz' }],
   icons: { icon: '/favicon.svg', shortcut: '/favicon.svg' },
   openGraph: {
     title: 'pokládámeee.cz – Vinylové podlahy v MSK',
-    description: 'Pokládka vinylových podlah v Moravskoslezském, Zlínském a Olomouckém kraji. Zaměření zdarma, hotovo do týdne.',
+    description: 'Pokládka vinylových podlah v Moravskoslezském, Zlínském a Olomouckém kraji. Zaměření zdarma, hotovo, než se nadějeteee.',
     url: 'https://www.pokladameee.cz',
     siteName: 'pokládámeee.cz',
     locale: 'cs_CZ',

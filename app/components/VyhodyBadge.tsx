@@ -2,7 +2,7 @@ type Vyhoda = { emoji?: string; title?: string; desc?: string }
 
 const FALLBACK_VYHODY: Vyhoda[] = [
   { emoji: '🏆', title: 'Prémiový vinyl UpFloor', desc: 'Pracujeme výhradně s ověřenými materiály s dlouhou zárukou.' },
-  { emoji: '⚡', title: 'Hotovo do týdne', desc: 'Od zaměření po položení v rekordním čase. Bez zdržování.' },
+  { emoji: '⚡', title: 'Hotovo, než se nadějeteee', desc: 'Od zaměření po položení v rekordním čase. Bez zdržování.' },
   { emoji: '♻️', title: 'Ekologická likvidace', desc: 'Starou podlahu odstraníme a ekologicky zlikvidujeme. Starost na nás.' },
   { emoji: '📍', title: 'MSK – známeee kraj', desc: 'Působíme v Moravskoslezském, Zlínském i Olomouckém kraji. Přijedeme k vám.' },
 ]
