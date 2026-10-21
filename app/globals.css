@@ -248,7 +248,7 @@ input, select, textarea { font-family: var(--font); }
 
 /* === BLACK FRIDAY === */
 
-.top-bar { display: flex; align-items: center; background: var(--black); color: white; font-size: 14px; font-weight: 700; transition: background 0.2s; }
+.top-bar { display: flex; align-items: center; background: var(--black); color: white; font-size: 17px; font-weight: 700; transition: background 0.2s; }
 .top-bar:hover { background: #1a1a1a; }
 .top-bar-obsah { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; }
 .top-bar-stitek { letter-spacing: 0.04em; white-space: nowrap; }
@@ -268,7 +268,7 @@ input, select, textarea { font-family: var(--font); }
 .bf-zdarma-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 720px; margin: 0 auto; }
 
 @media (max-width: 900px) {
-  .top-bar { font-size: 13px; }
+  .top-bar { font-size: 15px; }
   .top-bar-obsah { gap: 10px; }
   .top-bar-dovetek { display: none; }
 
