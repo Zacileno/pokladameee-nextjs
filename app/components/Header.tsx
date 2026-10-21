@@ -81,6 +81,14 @@ export default function Header({ opaque }: { opaque?: boolean }) {
           <a href="/kariera" style={{ color: pathname?.startsWith('/kariera') ? '#fff' : 'rgba(255,255,255,0.8)', fontWeight: pathname?.startsWith('/kariera') ? 700 : 600, fontSize: 15, transition: 'color 0.2s', textDecoration: pathname?.startsWith('/kariera') ? 'underline' : 'none', textUnderlineOffset: 4 }}
             onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
             onMouseLeave={e => (e.currentTarget.style.color = pathname?.startsWith('/kariera') ? '#fff' : 'rgba(255,255,255,0.8)')}>Kariéra</a>
+          <a href="/blog" style={{ color: pathname?.startsWith('/blog') ? '#fff' : 'rgba(255,255,255,0.8)', fontWeight: pathname?.startsWith('/blog') ? 700 : 600, fontSize: 15, transition: 'color 0.2s', textDecoration: pathname?.startsWith('/blog') ? 'underline' : 'none', textUnderlineOffset: 4 }}
+            onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+            onMouseLeave={e => (e.currentTarget.style.color = pathname?.startsWith('/blog') ? '#fff' : 'rgba(255,255,255,0.8)')}>Blog</a>
+          <a href="tel:+420790388487" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: 'rgba(255,255,255,0.9)', fontWeight: 700, fontSize: 15 }}>
+            <Image src="/assets/adam.jpg" alt="Adam Hajdušek" width={28} height={28} unoptimized
+              style={{ width: 28, height: 28, borderRadius: '50%', objectFit: 'cover', border: '1.5px solid rgba(255,255,255,0.6)' }} />
+            +420 790 388 487
+          </a>
           <a href="/#kontakt" className="btn-primary" style={{ padding: '10px 22px', fontSize: 15 }}>Chci podlahu →</a>
         </nav>
         <button onClick={() => setMenuOpen(!menuOpen)} className="hamburger"
@@ -105,9 +113,14 @@ export default function Header({ opaque }: { opaque?: boolean }) {
               </div>
             )}
           </div>
-          {[['/#jak-to-funguje', 'Jak to funguje'], ['/#reference', 'Reference'], ['/faq', 'FAQ'], ['/#kontakt', 'Kontakt'], ['/kariera', 'Kariéra']].map(([href, label]) => (
+          {[['/#jak-to-funguje', 'Jak to funguje'], ['/#reference', 'Reference'], ['/faq', 'FAQ'], ['/#kontakt', 'Kontakt'], ['/kariera', 'Kariéra'], ['/blog', 'Blog']].map(([href, label]) => (
             <a key={href} href={href} onClick={() => setMenuOpen(false)} style={{ color: 'white', fontWeight: 600, fontSize: 18 }}>{label}</a>
           ))}
+          <a href="tel:+420790388487" onClick={() => setMenuOpen(false)} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, color: 'white', fontWeight: 700, fontSize: 18 }}>
+            <Image src="/assets/adam.jpg" alt="Adam Hajdušek" width={32} height={32} unoptimized
+              style={{ width: 32, height: 32, borderRadius: '50%', objectFit: 'cover', border: '1.5px solid rgba(255,255,255,0.6)' }} />
+            +420 790 388 487
+          </a>
           <a href="/#kontakt" className="btn-primary" onClick={() => setMenuOpen(false)} style={{ textAlign: 'center', justifyContent: 'center' }}>Chci podlahu →</a>
         </div>
       )}

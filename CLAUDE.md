@@ -137,7 +137,7 @@ Na `main` i `dev`.
 - **Renderování Portable Textu:** `@portabletext/react` + `app/components/PortableTextComponents.tsx` (mapování H2/H3/odkazy/obrázky na styl webu)
 - **Fallback:** `lib/blog-fallback.ts` — 3 demo články použité, pokud Sanity nevrátí žádný `blogPost` (stejný vzor jako u ostatních podstránek)
 - **Reálné články** — 4 skutečné články (nahradily demo obsah), všechny s `pouzitHtmlKod: true` a nahraným `hlavniObrazek`
-- **Bez odkazu v navigaci** — zatím se drží stejné konvence jako PVC/koberce/dřevo: přístupné přímou URL (`/blog`), zvážit přidání do Headeru a `sitemap.ts`
+- **V navigaci** — odkaz „Blog" je v Headeru (desktop i mobil, napravo od „Kariéra") i ve Footeru, a `/blog` + všechny články jsou v `app/sitemap.ts` (dynamicky ze Sanity, fallback na `lib/blog-fallback.ts`)
 
 ### Skryté prvky — vrátit až bude GalerieSekce viditelná
 
@@ -153,6 +153,8 @@ app/components/
   Header.tsx          # Fixed, průhledný → modrý rgba(21,76,134,0.97) po scrollu
                       # onScroll() voláno při mountu (fix pro refresh na #anchor)
                       # "Služby" — hover dropdown (desktop) / rozbalovací sekce (mobil) na 4 podstránky + /sluzby
+                      # Telefonní kontakt — Adamova fotka (/assets/adam.jpg, statická, bez Sanity) + tel: odkaz
+                      #   na +420 790 388 487, v nav liště mezi "Kariéra" a "Chci podlahu →" (desktop i mobil)
   HeroSection.tsx     # Fullscreen foto + formulář vpravo (skrytý na mobilu)
                       # Button "Zobrazit výsledky" zakomentován — vrátit s GalerieSekce
   VyhodySekce.tsx     # Ikonová lišta 5 ikon, mobil: 2-sloupcový grid
@@ -423,9 +425,9 @@ Na `pokladameee.cz/studio`:
 - [ ] Koberce — nahrát reálnou hero fotku realizace (Sanity → Podstránka: Kobercová podlaha → Hero fotka)
 - [ ] Dřevěná podlaha — nahrát reálnou hero fotku realizace (Sanity → Podstránka: Dřevěná podlaha → Hero fotka)
 - [x] ~~Služby — přidat do navigace v Headeru (dropdown: Vinylová podlaha, PVC podlaha, Koberce, Dřevěná podlaha + odkaz na /sluzby)~~ ✓
-- [ ] Přidat PVC/Koberce/Dřevěná podlaha/FAQ/Blog do `app/sitemap.ts` (až budou finální — dnes tam záměrně nejsou, viz podstránky výše)
+- [ ] Přidat PVC/Koberce/Dřevěná podlaha/FAQ do `app/sitemap.ts` (až budou finální — dnes tam záměrně nejsou, viz podstránky výše). Blog už v sitemapu je ✓
 - [x] ~~Blog — napsat reálné články a nahrát hlavní obrázky~~ ✓ (4 reálné články nahradily demo obsah)
-- [ ] Blog — přidat do navigace v Headeru (až bude finální)
+- [x] ~~Blog — přidat do navigace v Headeru~~ ✓ (desktop + mobil + footer)
 - [ ] Vinylová podlaha — projít a případně přepsat texty podle klientova brief (zatím záměrně beze změny, na výslovné přání)
 - [x] ~~Vyplnit GDPR, obchodní podmínky a reklamační řád dle právní revize~~ ✓ (termín realizace ponechán, cookie souhlas řešen přes GTM mimo web)
 - [x] ~~Google Search Console — registrace domény (`www.pokladameee.cz`) + odeslání sitemap.xml~~ ✓
