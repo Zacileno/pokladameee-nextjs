@@ -7,10 +7,10 @@ import PredPoKarta from '../components/PredPoKarta'
 
 export const metadata: Metadata = {
   title: 'Inspirace a galerie',
-  description: 'Skutečné realizace vinylových, PVC, kobercových a dřevěných podlah po celém Moravskoslezském kraji — žádné katalogové fotky, jen naše vlastní práce.',
+  description: 'Skutečné realizace vinylových, PVC, kobercových a dřevěných podlah v Moravskoslezském, Zlínském a Olomouckém kraji — žádné katalogové fotky, jen naše vlastní práce.',
   openGraph: {
     title: 'Inspirace a galerie | pokládámeee.cz',
-    description: 'Skutečné realizace podlah po celém Moravskoslezském kraji — žádné katalogové fotky, jen naše vlastní práce.',
+    description: 'Skutečné realizace podlah v Moravskoslezském, Zlínském a Olomouckém kraji — žádné katalogové fotky, jen naše vlastní práce.',
     url: 'https://www.pokladameee.cz/inspirace',
   },
   alternates: { canonical: 'https://www.pokladameee.cz/inspirace' },
@@ -22,7 +22,7 @@ const ISTRIP = [
   { emoji: '⚡', text: 'U vás do 48 hodin' },
   { emoji: '🚛', text: 'Odvoz staré podlahy zdarma' },
   { emoji: '🛡️', text: 'Záruka na práci' },
-  { emoji: '📍', text: 'Celý Moravskoslezský kraj' },
+  { emoji: '📍', text: 'MSK, Zlínský i Olomoucký kraj' },
 ]
 
 type Inspirace = {
@@ -53,13 +53,13 @@ export default async function InspracePage() {
       <section style={{ background: 'var(--blue)', paddingTop: 100, paddingBottom: 64 }}>
         <div className="container">
           <p style={{ fontSize: 13, fontWeight: 600, letterSpacing: '2px', color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', marginBottom: 16 }}>
-            Galerie realizací · MSK
+            Galerie realizací · MSK, Zlínsko, Olomoucko
           </p>
           <h1 style={{ fontSize: 'clamp(36px, 5vw, 54px)', fontWeight: 900, color: 'white', lineHeight: 1.1, marginBottom: 20, maxWidth: 720 }}>
             Inspirace a galerie
           </h1>
           <p style={{ fontSize: 18, color: 'rgba(255,255,255,0.8)', lineHeight: 1.7, marginBottom: 12, maxWidth: 620 }}>
-            Prohlédněte si, jak vypadají naše realizace naživo. Žádné vizualizace ani katalogové fotky — jen skutečné podlahy, které jsme položili zákazníkům po celém Moravskoslezském kraji.
+            Prohlédněte si, jak vypadají naše realizace naživo. Žádné vizualizace ani katalogové fotky — jen skutečné podlahy, které jsme položili zákazníkům po celém Moravskoslezském, Zlínském a Olomouckém kraji.
           </p>
           <p style={{ fontSize: 15, color: 'var(--orange)', fontWeight: 700, marginBottom: 36 }}>
             📸 Skutečné realizace, žádné stock fotky

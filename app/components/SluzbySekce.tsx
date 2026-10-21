@@ -20,7 +20,7 @@ const FALLBACK_SLUZBY: (Sluzba & { href: string })[] = [
   { emoji: '🪵', title: 'Vinylová podlaha lepená', desc: 'Nejtrvanlivější varianta. Ideální do kuchyní, koupelen a prostor s vyšší zátěží. Lepíme pouze prémiové kolekce UpFloor.', detail: 'Od 346 Kč/m² materiál', href: '/sluzby/vinylova-podlaha' },
   { emoji: '🏠', title: 'Vinylová podlaha plovoucí', desc: 'Rychlá montáž bez lepidla. Skvělá volba pro obývací pokoje a ložnice. Perfektní imitace dřeva i kamene.', detail: 'Montáž do 1 dne', href: '/sluzby/drevena-podlaha' },
   { emoji: '♻️', title: 'Výměna staré podlahy', desc: 'Ekologicky odstraníme vaši starou podlahu a připravíme podklad. Vše v jedné návštěvě bez zbytečného čekání.', detail: 'Ekologická likvidace zdarma', href: '/sluzby/pvc-podlaha' },
-  { emoji: '📐', title: 'Zaměření a konzultace', desc: 'Přijedeme se podívat, poradíme s výběrem materiálu, barvy i vzoru. Připravíme nezávaznou kalkulaci do 24 hodin.', detail: 'Zdarma po celém MSK', href: '/sluzby/koberec' },
+  { emoji: '📐', title: 'Zaměření a konzultace', desc: 'Přijedeme se podívat, poradíme s výběrem materiálu, barvy i vzoru. Připravíme nezávaznou kalkulaci do 24 hodin.', detail: 'Zdarma po MSK, Zlínsku a Olomoucku', href: '/sluzby/koberec' },
 ]
 
 export default function SluzbySekce({ data }: Props) {

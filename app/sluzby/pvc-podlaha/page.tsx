@@ -10,10 +10,10 @@ export const revalidate = 0
 
 export const metadata: Metadata = {
   title: 'PVC podlaha — pokládka bez starostí',
-  description: 'Profesionální pokládka PVC podlah v Moravskoslezském kraji. Zaměření a konzultace zdarma do 48 hodin, kompletní servis od výběru materiálu po úklid. Odvoz staré podlahy zdarma.',
+  description: 'Profesionální pokládka PVC podlah v Moravskoslezském, Zlínském a Olomouckém kraji. Zaměření a konzultace zdarma do 48 hodin, kompletní servis od výběru materiálu po úklid. Odvoz staré podlahy zdarma.',
   openGraph: {
     title: 'PVC podlaha — pokládka bez starostí | pokládámeee.cz',
-    description: 'Profesionální pokládka PVC podlah v Moravskoslezském kraji. Zaměření zdarma do 48 hodin, kompletní servis od výběru materiálu po úklid.',
+    description: 'Profesionální pokládka PVC podlah v Moravskoslezském, Zlínském a Olomouckém kraji. Zaměření zdarma do 48 hodin, kompletní servis od výběru materiálu po úklid.',
     url: 'https://www.pokladameee.cz/sluzby/pvc-podlaha',
   },
   alternates: { canonical: 'https://www.pokladameee.cz/sluzby/pvc-podlaha' },
@@ -160,7 +160,7 @@ export default async function PvcPodlahaPage() {
           <div className="hero-sluzby-grid" style={{ paddingBottom: 64 }}>
             <div>
               <p style={{ fontSize: 13, fontWeight: 600, letterSpacing: '2px', color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', marginBottom: 16 }}>
-                PVC podlahy · MSK
+                PVC podlahy · MSK, Zlínsko, Olomoucko
               </p>
               <h1 style={{ fontSize: 'clamp(36px, 5vw, 54px)', fontWeight: 900, color: 'white', lineHeight: 1.1, marginBottom: 20 }}>
                 {heroNadpis}

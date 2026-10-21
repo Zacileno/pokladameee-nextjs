@@ -18,15 +18,11 @@ export default function HeroSection({ heroFotkaUrl }: { heroFotkaUrl?: string | 
         <div className="hero-grid">
           {/* Levá strana */}
           <div>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,136,0,0.15)', border: '1px solid rgba(255,136,0,0.35)', borderRadius: 100, padding: '6px 16px', marginBottom: 28 }}>
-              <span style={{ width: 8, height: 8, background: 'var(--orange)', borderRadius: '50%', display: 'inline-block' }} />
-              <span style={{ color: 'var(--orange)', fontWeight: 700, fontSize: 13, letterSpacing: '0.05em' }}>MORAVSKOSLEZSKÝ KRAJ</span>
-            </div>
             <h1 style={{ fontSize: 'clamp(44px, 6vw, 88px)', fontWeight: 900, color: 'white', lineHeight: 1.0, marginBottom: 24 }}>
               Podlahy<br />b<span style={{ color: 'var(--orange)' }}>eee</span>zstarostně
             </h1>
             <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: 'clamp(16px, 2vw, 20px)', lineHeight: 1.65, maxWidth: 520, marginBottom: 32 }}>
-              Pokládáme podlahy po celém Moravskoslezském kraji. Přijedeme zaměřit zdarma, hotovo do týdne. Starou podlahu ekologicky odstraníme.
+              Pokládáme podlahy po celém Moravskoslezském, Zlínském a Olomouckém kraji. Přijedeme zaměřit zdarma, hotovo do týdne. Starou podlahu ekologicky odstraníme.
             </p>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 32 }}>
               {[{ num: '48h', label: 'zaměření' }, { num: '1 týden', label: 'realizace' }, { num: '0 Kč', label: 'zaměření' }].map(({ num, label }) => (

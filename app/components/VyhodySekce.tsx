@@ -9,7 +9,7 @@ const FALLBACK: Ikonka[] = [
   { emoji: '⚡', title: 'U vás do 48 hod', sub: 'dojedeme v expresním čase' },
   { emoji: '♻️', title: 'Odvoz staré podlahy', sub: 'ekologická likvidace' },
   { emoji: '🎨', title: 'Výběr na míru', sub: 'vzory, barvy, materiály' },
-  { emoji: '📍', title: 'Celý MSK', sub: 'ověřeno zákazníky' },
+  { emoji: '📍', title: '3 kraje', sub: 'MSK, Zlínsko i Olomoucko' },
 ]
 
 interface Props {

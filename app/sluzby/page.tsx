@@ -10,10 +10,10 @@ export const revalidate = 0
 
 export const metadata: Metadata = {
   title: 'Naše služby',
-  description: 'Pokládka vinylových, PVC, kobercových a dřevěných podlah v Moravskoslezském kraji. Zaměření zdarma, odvoz staré podlahy zdarma.',
+  description: 'Pokládka vinylových, PVC, kobercových a dřevěných podlah v Moravskoslezském, Zlínském a Olomouckém kraji. Zaměření zdarma, odvoz staré podlahy zdarma.',
   openGraph: {
     title: 'Naše služby | pokládámeee.cz',
-    description: 'Pokládka vinylových, PVC, kobercových a dřevěných podlah v Moravskoslezském kraji.',
+    description: 'Pokládka vinylových, PVC, kobercových a dřevěných podlah v Moravskoslezském, Zlínském a Olomouckém kraji.',
     url: 'https://www.pokladameee.cz/sluzby',
   },
   alternates: { canonical: 'https://www.pokladameee.cz/sluzby' },
@@ -24,7 +24,7 @@ const ISTRIP = [
   { emoji: '⚡', text: 'U vás do 48 hodin' },
   { emoji: '🚛', text: 'Odvoz staré podlahy zdarma' },
   { emoji: '🛡️', text: 'Záruka na práci' },
-  { emoji: '📍', text: 'Celý Moravskoslezský kraj' },
+  { emoji: '📍', text: 'MSK, Zlínský i Olomoucký kraj' },
 ]
 
 const SLUZBY = [

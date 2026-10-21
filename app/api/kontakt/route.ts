@@ -202,7 +202,7 @@ export async function POST(req: NextRequest) {
               <a href="tel:+420790388487" style="color: #154C86; font-weight: 800; font-size: 20px; text-decoration: none;">+420 790 388 487</a>
               <p style="margin: 6px 0 0; color: #9a9a96; font-size: 13px;">Adam Hajdušek — Po–Pá 7:00–18:00</p>
             </div>
-            <p style="color: #9a9a96; font-size: 13px; margin: 0;">pokládámeee.cz · Moravskoslezský kraj</p>
+            <p style="color: #9a9a96; font-size: 13px; margin: 0;">pokládámeee.cz · Moravskoslezský, Zlínský a Olomoucký kraj</p>
           </div>
         </div>
       `,
@@ -265,7 +265,7 @@ export async function POST(req: NextRequest) {
               <a href="tel:+420790388487" style="color: #154C86; font-weight: 800; font-size: 20px; text-decoration: none;">+420 790 388 487</a>
               <p style="margin: 6px 0 0; color: #9a9a96; font-size: 13px;">Adam Hajdušek — Po–Pá 7:00–18:00</p>
             </div>
-            <p style="color: #9a9a96; font-size: 13px; margin: 0;">pokládámeee.cz · Moravskoslezský kraj</p>
+            <p style="color: #9a9a96; font-size: 13px; margin: 0;">pokládámeee.cz · Moravskoslezský, Zlínský a Olomoucký kraj</p>
           </div>
         </div>
       `,

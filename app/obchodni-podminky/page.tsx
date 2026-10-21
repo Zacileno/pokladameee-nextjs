@@ -4,7 +4,7 @@ import Footer from '@/app/components/Footer'
 
 export const metadata: Metadata = {
   title: 'Obchodní podmínky | pokládámeee.cz',
-  description: 'Všeobecné obchodní podmínky společnosti SYSPOD s.r.o. — pokládka vinylových podlah v Moravskoslezském kraji.',
+  description: 'Všeobecné obchodní podmínky společnosti SYSPOD s.r.o. — pokládka vinylových podlah v Moravskoslezském, Zlínském a Olomouckém kraji.',
   alternates: { canonical: 'https://www.pokladameee.cz/obchodni-podminky' },
 }
 

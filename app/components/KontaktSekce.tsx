@@ -21,7 +21,7 @@ interface Props {
 
 export default function KontaktSekce({ kontakt }: Props) {
   const nadpis = kontakt?.nadpis || 'Napište přímo nám'
-  const podnadpis = kontakt?.podnadpis || 'Zaměření je zdarma. Odpovíme do 24 hodin, obvykle dřív. Přijedeme k vám v celém MSK.'
+  const podnadpis = kontakt?.podnadpis || 'Zaměření je zdarma. Odpovíme do 24 hodin, obvykle dřív. Přijedeme k vám po celém MSK, Zlínsku i Olomoucku.'
   const jmeno = kontakt?.jmeno || 'Adam Hajdušek'
   const role = kontakt?.role || 'Zakladatel & hlavní technik'
   const citat = kontakt?.citat || 'Každou podlahu řešíme osobně. Přijedeme se podívat.'
@@ -30,7 +30,7 @@ export default function KontaktSekce({ kontakt }: Props) {
   const telefonTechnicke = kontakt?.telefonTechnicke || '+420 730 454 309'
   const email = kontakt?.email || 'adam.hajdusek@pokladameee.cz'
   const pracovniDoba = kontakt?.pracovniDoba || 'Po–Pá 7:00–18:00'
-  const region = kontakt?.region || 'Moravskoslezský kraj'
+  const region = kontakt?.region || 'Moravskoslezský, Zlínský a Olomoucký kraj'
 
   const nadpisSlova = nadpis.split(' ')
   const posledniSlovo = nadpisSlova.pop()
