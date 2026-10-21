@@ -21,7 +21,7 @@ const FALLBACK_PROJEKTY: Projekt[] = [
     _id: 'fb-1',
     nazev: 'Malujemeee',
     claim: 'Malujeme byty, domy a kanceláře v celém MSK.',
-    popis: 'Čistě, rychle, bez zápachu. Hotovo, než se nadějeteee.',
+    popis: 'Čistě, rychle, bez zápachu. Hotovo do týdne.',
     url: 'https://www.malujemeee.cz',
     pocetKlientu: 3200,
     hodnoceni: 4.9,
