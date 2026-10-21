@@ -10,10 +10,10 @@ export const revalidate = 0
 
 export const metadata: Metadata = {
   title: 'Vinylová podlaha — pokládka a montáž',
-  description: 'Profesionální pokládka vinylových podlah v Moravskoslezském kraji. Lepená i plovoucí varianta, zaměření zdarma do 48 hodin, realizace do týdne. Odvoz staré podlahy zdarma.',
+  description: 'Profesionální pokládka vinylových podlah v Moravskoslezském kraji. Lepená i plovoucí varianta, zaměření zdarma do 48 hodin, hotovo, než se nadějeteee. Odvoz staré podlahy zdarma.',
   openGraph: {
     title: 'Vinylová podlaha — pokládka a montáž | pokládámeee.cz',
-    description: 'Profesionální pokládka vinylových podlah v Moravskoslezském kraji. Zaměření zdarma do 48 hodin, realizace do týdne.',
+    description: 'Profesionální pokládka vinylových podlah v Moravskoslezském kraji. Zaměření zdarma do 48 hodin, hotovo, než se nadějeteee.',
     url: 'https://www.pokladameee.cz/sluzby/vinylova-podlaha',
   },
   alternates: { canonical: 'https://www.pokladameee.cz/sluzby/vinylova-podlaha' },
