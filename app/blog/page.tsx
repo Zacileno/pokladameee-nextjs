@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
+import KontaktSekce from '@/app/components/KontaktSekce'
 import BlogCard, { type BlogPostSummary } from './BlogCard'
 import Pagination from './Pagination'
-import { client, BLOG_POSTS_QUERY } from '@/lib/sanity'
+import { client, BLOG_POSTS_QUERY, KONTAKT_SEKCE_QUERY } from '@/lib/sanity'
 import { BLOG_FALLBACK_POSTS } from '@/lib/blog-fallback'
 
 export const revalidate = 0
@@ -32,6 +33,11 @@ export default async function BlogPage({
   let posts: BlogPostSummary[] | null = null
   try {
     posts = await client.fetch<BlogPostSummary[]>(BLOG_POSTS_QUERY)
+  } catch {}
+
+  let kontaktSekce: any = null
+  try {
+    kontaktSekce = await client.fetch(KONTAKT_SEKCE_QUERY)
   } catch {}
 
   const allPosts: BlogPostSummary[] = posts?.length
@@ -82,6 +88,8 @@ export default async function BlogPage({
           )}
         </div>
       </section>
+
+      <KontaktSekce kontakt={kontaktSekce} />
 
       <Footer />
     </>

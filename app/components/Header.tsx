@@ -35,7 +35,7 @@ export default function Header({ opaque }: { opaque?: boolean }) {
       borderBottom: scrolled ? '1px solid rgba(255,255,255,0.1)' : 'none',
     }}>
       <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 72 }}>
-        <a href="/">
+        <a href="/" style={{ marginLeft: -12 }}>
           <Image
             src="/assets/logo/logo-inverzni-modre.svg"
             alt="pokládámeee.cz"
