@@ -25,7 +25,7 @@ const HERO_FALLBACK = 'https://images.unsplash.com/photo-1581858726788-75bc0f6a9
 
 const BODY = [
   { title: 'Odolná a voděodolná.', text: 'Vinyl i PVC zvládnou kuchyni, koupelnu i dětský pokoj a údržba je otázkou minuty.' },
-  { title: 'Hotovo do týdne.', text: 'Od zaměření po pokládku bez zbytečného čekání. Přijedeme ve smluvený den.' },
+  { title: 'Hotovo, než se nadějeteee.', text: 'Od zaměření po pokládku bez zbytečného čekání. Přijedeme ve smluvený den.' },
   { title: 'Bez starostí s úklidem.', text: 'Starou podlahu odstraníme, ekologicky zlikvidujeme a po sobě uklidíme.' },
 ]
 
