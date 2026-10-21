@@ -2,7 +2,8 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { pushDataLayerEvent } from '@/lib/gtm'
-import { onlyLetters, onlyPhoneChars, onlyDigitsSpace } from '@/lib/formInput'
+import { onlyLetters, onlyPlace, onlyPhoneChars, onlyDigitsSpace, leadFieldError } from '@/lib/formInput'
+import AdresaNaseptavac from './AdresaNaseptavac'
 
 type FormData = {
   jmeno: string
@@ -37,6 +38,11 @@ export default function KontaktForm() {
       setError('Pro odeslání musíte souhlasit se zpracováním osobních údajů.')
       return
     }
+    const fieldError = leadFieldError(form)
+    if (fieldError) {
+      setError(fieldError)
+      return
+    }
     setLoading(true)
     setError(null)
     try {
@@ -65,10 +71,15 @@ export default function KontaktForm() {
       <input className="form-input" type="text" placeholder="Jméno a příjmení *" required value={form.jmeno} onChange={setFiltered('jmeno', onlyLetters)} />
       <input className="form-input" type="email" placeholder="E-mail *" required value={form.email} onChange={set('email')} />
       <input className="form-input" type="tel" inputMode="tel" placeholder="Telefon *" required value={form.telefon} onChange={setFiltered('telefon', onlyPhoneChars)} />
-      <input className="form-input" type="text" placeholder="Ulice a č.p." value={form.ulice} onChange={set('ulice')} />
+      <AdresaNaseptavac
+        placeholder="Ulice a č.p."
+        value={form.ulice}
+        onChange={ulice => setForm(f => ({ ...f, ulice }))}
+        onSelect={a => setForm(f => ({ ...f, ulice: a.ulice, mesto: a.mesto || f.mesto, psc: a.psc || f.psc }))}
+      />
       <div className="kontakt-form-row3">
-        <input className="form-input" type="text" placeholder="Město" value={form.mesto} onChange={setFiltered('mesto', onlyLetters)} />
-        <input className="form-input" type="text" inputMode="numeric" placeholder="PSČ" value={form.psc} onChange={setFiltered('psc', onlyDigitsSpace)} />
+        <input className="form-input" type="text" placeholder="Město" value={form.mesto} onChange={setFiltered('mesto', onlyPlace)} />
+        <input className="form-input" type="text" inputMode="numeric" placeholder="PSČ" maxLength={6} value={form.psc} onChange={setFiltered('psc', onlyDigitsSpace)} />
       </div>
       <textarea className="form-input form-textarea" placeholder="Zpráva (rozloha, lokalita...)" rows={3} value={form.zprava} onChange={set('zprava')} />
       <label className="form-gdpr">

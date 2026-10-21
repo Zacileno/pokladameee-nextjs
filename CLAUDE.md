@@ -51,7 +51,7 @@ Výchozí větev pro práci: `dev`. Push vždy do `origin dev` (vývoj) nebo `or
 - **Styly:** Inline styles + CSS třídy v `globals.css` — žádný Tailwind
 - **CMS:** Sanity (`projectId: 8cvsenqb`, dataset: `production`)
 - **Rich text:** `@portabletext/react` — renderování Sanity Portable Text (zatím jen blog)
-- **Formuláře:** vlastní API route `/api/kontakt` → Make webhook + Resend emaily
+- **Formuláře:** vlastní API route `/api/kontakt` → ERP (poptávky) + Make webhook + Resend emaily
 - **Emaily:** Resend — transakční emaily z `/api/kontakt` (Adamovi + zákazníkovi)
 - **Deployment:** Vercel — větev `dev` → Preview, větev `main` → Production (`pokladameee.cz`)
 - **Font:** Barlow (Google Fonts, načítán přes `<link>` v layout.tsx — ne next/font)
@@ -165,6 +165,8 @@ app/components/
   ReferenceSekce.tsx  # Recenze (aktivni==true), fallback placeholder
   KontaktSekce.tsx    # Kontaktní sekce s formulářem
   KontaktForm.tsx     # Sdílený formulář — POST /api/kontakt, redirect /dekujeme
+                      # Před odesláním kontroluje e-mail/telefon/PSČ pravidly ERP (lib/formInput.ts)
+  AdresaNaseptavac.tsx # Pole „Ulice a č.p.“ s našeptávačem (GET /api/adresa) — výběr doplní město a PSČ
   Footer.tsx          # 3-sloupcový footer
   PortableTextComponents.tsx  # Mapování Sanity Portable Text bloků na styl webu (blog)
   JsonLd.tsx           # Vykreslení <script type="application/ld+json"> — structured data
@@ -180,7 +182,7 @@ app/
   globals.css                       # CSS proměnné + VŠECHNY media queries (breakpoint 900px)
   page.tsx                          # Homepage — fetchuje vše ze Sanity paralelně
   components/                       # Viz sekce Komponenty výše
-  api/kontakt/route.ts              # POST → Make webhook + Resend emaily
+  api/kontakt/route.ts              # POST → ERP (jen poptávky) + Make webhook + Resend emaily
                                     #   typ='kariera' → email přihlášky, jinak email poptávky
   dekujeme/page.tsx                 # Děkovná stránka po odeslání poptávky zákazníka
   dekujeme-kariera/page.tsx         # Děkovná stránka po odeslání přihlášky na kariéru
@@ -349,11 +351,16 @@ NEXT_PUBLIC_SANITY_DATASET=production
 MAKE_WEBHOOK_URL=https://...            ← poptávka podlahy, reálná URL z Make
 MAKE_WEBHOOK_URL_KARIERA=https://...    ← přihláška na kariéru, samostatný Make scénář
 RESEND_API_KEY=re_...          ← z resend.com → API Keys
+ERP_WEB_LEAD_URL=https://api-pokladame-production.up.railway.app/integrations/web-lead
+ERP_WEB_LEAD_SECRET=...        ← WEB_LEAD_SECRET ze služby API-pokladame (Railway)
+MAPY_API_KEY=...               ← našeptávač adres (Mapy.cz), stejný klíč jako v ERP; bez něj formulář funguje bez návrhů
 ```
 
 **Vercel env vars** (projekt `pokladameee-nextjs` → Environment Variables):
 - `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET` — Production + Preview ✓
 - `RESEND_API_KEY`, `MAKE_WEBHOOK_URL` — Production + Preview ✓
+- `ERP_WEB_LEAD_URL`, `ERP_WEB_LEAD_SECRET` — poptávky rovnou do ERP; bez nich se do ERP nic neposílá
+- `MAPY_API_KEY` — našeptávač adres v poptávkovém formuláři (`/api/adresa` → Mapy.cz `/v1/suggest`)
 - `MAKE_WEBHOOK_URL_KARIERA` — Production + Preview + Development ✓ (`/api/kontakt` ho použije jen pro `typ:'kariera'`, jinak fallback na `MAKE_WEBHOOK_URL`)
 
 **Sanity token pro seed skripty:** `~/.config/sanity/config.json` → `authToken` (osobní CLI token, nikam nepushovat)
@@ -444,7 +451,7 @@ Na `pokladameee.cz/studio`:
 
 ## Technické poznámky
 
-- **Formuláře — flow (poptávka):** `KontaktForm` → POST `/api/kontakt` → Make webhook (`MAKE_WEBHOOK_URL`) + Resend emaily → `pushDataLayerEvent('formular_odeslani', { typ_formulare: 'poptavka' })` → redirect `/dekujeme`
+- **Formuláře — flow (poptávka):** `KontaktForm` → POST `/api/kontakt` → ERP (`ERP_WEB_LEAD_URL` + `ERP_WEB_LEAD_SECRET`, založí obchodní případ OP01, zaloguje se v ERP Nastavení → Webhook log; neplatná data z ERP se vrátí formuláři) + Make webhook (`MAKE_WEBHOOK_URL`) + Resend emaily → `pushDataLayerEvent('formular_odeslani', { typ_formulare: 'poptavka' })` → redirect `/dekujeme`
 - **Formuláře — flow (kariéra):** `KarieraKontaktForm` → POST `/api/kontakt` (pole `typ:'kariera'`, `pozice`) → Make webhook (`MAKE_WEBHOOK_URL_KARIERA`, samostatný scénář — fallback na `MAKE_WEBHOOK_URL`, pokud není nastavený) + Resend emaily → `pushDataLayerEvent('formular_odeslani', { typ_formulare: 'kariera', pozice })` → redirect `/dekujeme-kariera`
 - **GTM dataLayer event:** `gtm.historyChange-v2` NENÍ spolehlivý signál odeslání formuláře — je to obecná GTM systémová událost při jakékoli klientské navigaci. Proto vlastní `formular_odeslani` (viz `lib/gtm.ts`), pushuje se až po potvrzeném `res.ok`, ne na klik tlačítka.
 - **Resend odesílací adresa:** `no-reply@pokladameee.cz` (doména ověřena)
