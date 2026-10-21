@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import Image from 'next/image'
+import { TOP_BAR_VYSKA, zobrazitTopBar } from '@/lib/black-friday'
 
 const SLUZBY_LINKS: [string, string][] = [
   ['/sluzby/vinylova-podlaha', 'Vinylová podlaha'],
@@ -16,19 +17,25 @@ export default function Header({ opaque }: { opaque?: boolean }) {
   const [sluzbyOpen, setSluzbyOpen] = useState(false)
   const [sluzbyMobileOpen, setSluzbyMobileOpen] = useState(false)
   const pathname = usePathname()
+  // Nad hlavičkou je TopBar — dokud je vidět, Header sedí pod ním, po odscrollování vyjede nahoru
+  const topBarVyska = zobrazitTopBar(pathname) ? TOP_BAR_VYSKA : 0
+  const [top, setTop] = useState(topBarVyska)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
+    const onScroll = () => {
+      setScrolled(window.scrollY > 40)
+      setTop(Math.max(0, topBarVyska - window.scrollY))
+    }
     onScroll()
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  }, [topBarVyska])
 
   const navLinkStyle = { color: 'rgba(255,255,255,0.8)', fontWeight: 600, fontSize: 15, transition: 'color 0.2s', cursor: 'pointer', background: 'none', border: 'none', fontFamily: 'inherit' }
 
   return (
     <header style={{
-      position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
+      position: 'fixed', top, left: 0, right: 0, zIndex: 100,
       background: (scrolled || opaque) ? 'rgba(21,76,134,0.97)' : 'transparent',
       backdropFilter: (scrolled || opaque) ? 'blur(12px)' : 'none',
       transition: 'background 0.3s',
