@@ -10,10 +10,10 @@ export const revalidate = 0
 
 export const metadata: Metadata = {
   title: 'Dřevěná podlaha — pokládka bez starostí',
-  description: 'Profesionální pokládka dřevěných podlah v Moravskoslezském kraji. Zaměření a konzultace zdarma do 48 hodin, kompletní servis od výběru dřeviny po úklid. Odvoz staré podlahy zdarma.',
+  description: 'Profesionální pokládka dřevěných podlah v Moravskoslezském, Zlínském a Olomouckém kraji. Zaměření a konzultace zdarma do 48 hodin, kompletní servis od výběru dřeviny po úklid. Odvoz staré podlahy zdarma.',
   openGraph: {
     title: 'Dřevěná podlaha — pokládka bez starostí | pokládámeee.cz',
-    description: 'Profesionální pokládka dřevěných podlah v Moravskoslezském kraji. Zaměření zdarma do 48 hodin, kompletní servis od výběru dřeviny po úklid.',
+    description: 'Profesionální pokládka dřevěných podlah v Moravskoslezském, Zlínském a Olomouckém kraji. Zaměření zdarma do 48 hodin, kompletní servis od výběru dřeviny po úklid.',
     url: 'https://www.pokladameee.cz/sluzby/drevena-podlaha',
   },
   alternates: { canonical: 'https://www.pokladameee.cz/sluzby/drevena-podlaha' },
@@ -160,7 +160,7 @@ export default async function DrevenaPodlahaPage() {
           <div className="hero-sluzby-grid" style={{ paddingBottom: 64 }}>
             <div>
               <p style={{ fontSize: 13, fontWeight: 600, letterSpacing: '2px', color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', marginBottom: 16 }}>
-                Dřevěné podlahy · MSK
+                Dřevěné podlahy · MSK, Zlínsko, Olomoucko
               </p>
               <h1 style={{ fontSize: 'clamp(36px, 5vw, 54px)', fontWeight: 900, color: 'white', lineHeight: 1.1, marginBottom: 20 }}>
                 {heroNadpis}

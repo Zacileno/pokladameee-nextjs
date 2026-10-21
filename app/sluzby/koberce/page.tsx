@@ -10,10 +10,10 @@ export const revalidate = 0
 
 export const metadata: Metadata = {
   title: 'Koberce — pokládka bez starostí',
-  description: 'Profesionální pokládka koberců v Moravskoslezském kraji. Zaměření a konzultace zdarma do 48 hodin, kompletní servis od výběru materiálu po úklid. Odvoz staré podlahy zdarma.',
+  description: 'Profesionální pokládka koberců v Moravskoslezském, Zlínském a Olomouckém kraji. Zaměření a konzultace zdarma do 48 hodin, kompletní servis od výběru materiálu po úklid. Odvoz staré podlahy zdarma.',
   openGraph: {
     title: 'Koberce — pokládka bez starostí | pokládámeee.cz',
-    description: 'Profesionální pokládka koberců v Moravskoslezském kraji. Zaměření zdarma do 48 hodin, kompletní servis od výběru materiálu po úklid.',
+    description: 'Profesionální pokládka koberců v Moravskoslezském, Zlínském a Olomouckém kraji. Zaměření zdarma do 48 hodin, kompletní servis od výběru materiálu po úklid.',
     url: 'https://www.pokladameee.cz/sluzby/koberce',
   },
   alternates: { canonical: 'https://www.pokladameee.cz/sluzby/koberce' },
@@ -160,7 +160,7 @@ export default async function KobercovaPodlahaPage() {
           <div className="hero-sluzby-grid" style={{ paddingBottom: 64 }}>
             <div>
               <p style={{ fontSize: 13, fontWeight: 600, letterSpacing: '2px', color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', marginBottom: 16 }}>
-                Koberce · MSK
+                Koberce · MSK, Zlínsko, Olomoucko
               </p>
               <h1 style={{ fontSize: 'clamp(36px, 5vw, 54px)', fontWeight: 900, color: 'white', lineHeight: 1.1, marginBottom: 20 }}>
                 {heroNadpis}

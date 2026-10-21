@@ -10,10 +10,10 @@ export const revalidate = 0
 
 export const metadata: Metadata = {
   title: 'Vinylová podlaha — pokládka a montáž',
-  description: 'Profesionální pokládka vinylových podlah v Moravskoslezském kraji. Lepená i plovoucí varianta, zaměření zdarma do 48 hodin, realizace do týdne. Odvoz staré podlahy zdarma.',
+  description: 'Profesionální pokládka vinylových podlah v Moravskoslezském, Zlínském a Olomouckém kraji. Lepená i plovoucí varianta, zaměření zdarma do 48 hodin, realizace do týdne. Odvoz staré podlahy zdarma.',
   openGraph: {
     title: 'Vinylová podlaha — pokládka a montáž | pokládámeee.cz',
-    description: 'Profesionální pokládka vinylových podlah v Moravskoslezském kraji. Zaměření zdarma do 48 hodin, realizace do týdne.',
+    description: 'Profesionální pokládka vinylových podlah v Moravskoslezském, Zlínském a Olomouckém kraji. Zaměření zdarma do 48 hodin, realizace do týdne.',
     url: 'https://www.pokladameee.cz/sluzby/vinylova-podlaha',
   },
   alternates: { canonical: 'https://www.pokladameee.cz/sluzby/vinylova-podlaha' },
@@ -37,7 +37,7 @@ const ISTRIP = [
   { emoji: '⚡', text: 'U vás do 48 hodin' },
   { emoji: '🚛', text: 'Odvoz staré podlahy zdarma' },
   { emoji: '🛡️', text: 'Záruka na práci' },
-  { emoji: '📍', text: 'Celý Moravskoslezský kraj' },
+  { emoji: '📍', text: 'MSK, Zlínský i Olomoucký kraj' },
 ]
 
 const TYPY = [
@@ -149,7 +149,7 @@ export default async function VinylovaPodlahaPage() {
           <div className="hero-sluzby-grid" style={{ paddingBottom: 64 }}>
             <div>
               <p style={{ fontSize: 13, fontWeight: 600, letterSpacing: '2px', color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', marginBottom: 16 }}>
-                Vinylové podlahy · MSK
+                Vinylové podlahy · MSK, Zlínsko, Olomoucko
               </p>
               <h1 style={{ fontSize: 'clamp(36px, 5vw, 54px)', fontWeight: 900, color: 'white', lineHeight: 1.1, marginBottom: 20 }}>
                 {heroNadpis}
