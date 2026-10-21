@@ -5,6 +5,7 @@ import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 import Odpocet from '@/app/components/Odpocet'
 import AkcePopup from './AkcePopup'
+import { BF_KONEC } from '@/lib/black-friday'
 import { client, HERO_SEKCE_QUERY, VINYLOVA_PODLAHA_QUERY, PVC_PODLAHA_QUERY, KOBERCOVA_PODLAHA_QUERY, DREVENA_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY } from '@/lib/sanity'
 
 export const revalidate = 0
@@ -19,9 +20,6 @@ export const metadata: Metadata = {
   },
   alternates: { canonical: 'https://www.pokladameee.cz/black-friday' },
 }
-
-// Akce běží 14 dní: od pátku 23. 10. 2026 do konce čtvrtka 5. 11. 2026 (00:00 6. 11., středoevropský čas)
-const KONEC_AKCE = '2026-11-06T00:00:00+01:00'
 
 const HERO_FALLBACK = 'https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?w=1600&q=85'
 
@@ -78,7 +76,7 @@ export default async function BlackFridayPage() {
 
           <div className="container" style={{ position: 'relative', zIndex: 2, width: '100%', textAlign: 'center' }}>
             <div className="bf-odpocet-obal">
-              <Odpocet konec={KONEC_AKCE} />
+              <Odpocet konec={BF_KONEC} />
             </div>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,136,0,0.15)', border: '1px solid rgba(255,136,0,0.35)', borderRadius: 100, padding: '6px 16px', marginBottom: 24 }}>
               <span style={{ width: 8, height: 8, background: 'var(--orange)', borderRadius: '50%', display: 'inline-block' }} />
