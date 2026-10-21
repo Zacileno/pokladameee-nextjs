@@ -26,10 +26,10 @@ export default function HeroSection({ heroFotkaUrl }: { heroFotkaUrl?: string | 
               Podlahy<br />b<span style={{ color: 'var(--orange)' }}>eee</span>zstarostně
             </h1>
             <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: 'clamp(16px, 2vw, 20px)', lineHeight: 1.65, maxWidth: 520, marginBottom: 32 }}>
-              Pokládáme podlahy po celém Moravskoslezském kraji. Přijedeme zaměřit zdarma, hotovo do týdne. Starou podlahu ekologicky odstraníme.
+              Pokládáme podlahy po celém Moravskoslezském kraji. Přijedeme zaměřit zdarma, hotovo, než se nadějet<span style={{ color: 'var(--orange)' }}>eee</span>. Starou podlahu ekologicky odstraníme.
             </p>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 32 }}>
-              {[{ num: '48h', label: 'zaměření' }, { num: '1 týden', label: 'realizace' }, { num: '0 Kč', label: 'zaměření' }].map(({ num, label }) => (
+              {[{ num: '48h', label: 'zaměření' }, { num: 'Hotovo', label: 'než se nadějeteee' }, { num: '0 Kč', label: 'zaměření' }].map(({ num, label }) => (
                 <div key={num} style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 8, padding: '12px 20px', textAlign: 'center', backdropFilter: 'blur(8px)' }}>
                   <div style={{ color: 'var(--orange)', fontWeight: 900, fontSize: 22, lineHeight: 1 }}>{num}</div>
                   <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: 13, marginTop: 4 }}>{label}</div>
