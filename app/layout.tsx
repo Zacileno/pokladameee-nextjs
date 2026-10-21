@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import JsonLd from './components/JsonLd'
+import TopBar from './components/TopBar'
 
 const LOCAL_BUSINESS_JSON_LD = {
   '@context': 'https://schema.org',
@@ -63,6 +64,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MK4KFBF8" height="0" width="0" style={{ display: 'none', visibility: 'hidden' }} /></noscript>
+        <TopBar />
         {children}
       </body>
     </html>
