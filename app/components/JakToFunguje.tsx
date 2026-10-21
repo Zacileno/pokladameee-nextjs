@@ -44,7 +44,7 @@ export default function JakToFunguje({ data }: { data?: { kroky?: Krok[] } }) {
         <div style={{ marginTop: 56, display: 'flex', alignItems: 'center', gap: 24, flexWrap: 'wrap' }}>
           <a href="#kontakt" className="btn-primary" style={{ fontSize: 16 }}>Začít teď →</a>
           <div style={{ display: 'flex', gap: 32 }}>
-            {[['⚡', 'Do 48 hodin', 'zaměříme'], ['📋', 'Zdarma', 'kalkulace'], ['✅', 'Do týdne', 'hotovo']].map(([icon, num, label]) => (
+            {[['⚡', 'Do 48 hodin', 'zaměříme'], ['📋', 'Zdarma', 'kalkulace'], ['✅', 'Hotovo', 'než se nadějeteee']].map(([icon, num, label]) => (
               <div key={num} style={{ color: 'white' }}>
                 <div style={{ fontSize: 20 }}>{icon} <strong style={{ color: 'var(--orange)' }}>{num}</strong></div>
                 <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', marginTop: 2 }}>{label}</div>
