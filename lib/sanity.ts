@@ -149,3 +149,16 @@ export const KARIERNI_POZICE_DETAIL_QUERY = `*[_type == "karierniPozice" && slug
 }`
 
 export const KARIERNI_POZICE_SLUGS_QUERY = `*[_type == "karierniPozice" && aktivni != false]{ "slug": slug.current }`
+
+export const BLACK_FRIDAY_QUERY = `*[_type == "blackFriday"][0] {
+  heroBadge, heroSleva, heroNadpisZbytek, heroPodnadpis, heroTlacitko,
+  "heroFotkaUrl": heroFotka.asset->url,
+  "bannerObrazekUrl": bannerObrazek.asset->url,
+  videoNadpis,
+  body[] { titul, text },
+  odstavec, zvyrazenyText, ctaPopupText, adamText,
+  produktyNadpis, slevaBadge,
+  zdarmaNadpis, zdarmaPopisek,
+  zdarmaPolozky[] { emoji, title },
+  seoTitle, seoDescription
+}`
