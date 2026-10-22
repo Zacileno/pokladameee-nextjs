@@ -61,6 +61,12 @@ export default function BlackFridayPopup() {
             priority
             style={{ display: 'block', width: '100%', height: 'auto' }}
           />
+          <span
+            className="btn-primary"
+            style={{ position: 'absolute', left: '50%', bottom: 20, transform: 'translateX(-50%)', boxShadow: '0 6px 18px rgba(0,0,0,0.35)' }}
+          >
+            Využít akci
+          </span>
         </Link>
         <button
           type="button"
