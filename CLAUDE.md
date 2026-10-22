@@ -250,6 +250,11 @@ sanity/
     karierniPozice.ts    # Kariéra — pozice (kolekce, ne singleton): nazev, slug, region,
                           #   regionLabel, typ, typLabel, perex, naplnPrace[], pozadujeme[],
                           #   nabizime[], datumZverejneni (i pro JobPosting JSON-LD), aktivni
+    blackFriday.ts       # Podstránka Black Friday — singleton, vše editovatelné
+                          #   hero (badge/sleva/nadpis/podnadpis/tlačítko/fotka), banner obrázek + text,
+                          #   produkty (nadpis, sleva badge), zdarma sekce, SEO
+                          #   ⚠️ Schema/Studio je na main i dev, ale samotná stránka /black-friday
+                          #   (app/black-friday/) existuje zatím jen na dev — na main se nepoužívá
   schemaTypes/
     index.ts            # Registrace schémat pro Next.js stránky (import v app/)
   lib/
@@ -293,6 +298,7 @@ Každý typ má právě jeden dokument s pevným `_id` (singletons):
 | `pvcPodlaha` | Podstránka: PVC podlaha | hero, istrip[], typy[], benefity[], kroky[], referenceStrip, faq[] |
 | `kobercovaPodlaha` | Podstránka: Kobercová podlaha | hero, istrip[], typy[], benefity[], kroky[], referenceStrip, faq[] |
 | `drevenaPodlaha` | Podstránka: Dřevěná podlaha | hero, istrip[], typy[], benefity[], kroky[], referenceStrip, faq[] |
+| `blackFriday` | Podstránka: Black Friday (schema na main i dev, stránka jen na dev) | hero, banner + text, produkty, zdarma sekce, SEO |
 
 Kolekce (více dokumentů): `projekt`, `inspirace`, `akce`, `reference`, `blogPost`, `karierniPozice`
 
