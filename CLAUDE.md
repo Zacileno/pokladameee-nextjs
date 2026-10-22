@@ -209,6 +209,9 @@ app/
     Pagination.tsx                  # Číslované stránkování
     [slug]/page.tsx                 # Detail článku — breadcrumb, obsah (Portable Text nebo HTML), související, KontaktSekce CTA
   akce/page.tsx
+  black-friday/
+    page.tsx                        # Akční landing page — fetchuje BLACK_FRIDAY_QUERY, fallback na hardcoded texty
+    AkcePopup.tsx                    # Client component — tlačítko otevírá modal s KontaktForm
   inspirace/page.tsx
   ochrana-osobnich-udaju/page.tsx
   obchodni-podminky/page.tsx
@@ -253,8 +256,6 @@ sanity/
     blackFriday.ts       # Podstránka Black Friday — singleton, vše editovatelné
                           #   hero (badge/sleva/nadpis/podnadpis/tlačítko/fotka), banner obrázek + text,
                           #   produkty (nadpis, sleva badge), zdarma sekce, SEO
-                          #   ⚠️ Schema/Studio je na main i dev, ale samotná stránka /black-friday
-                          #   (app/black-friday/) existuje zatím jen na dev — na main se nepoužívá
   schemaTypes/
     index.ts            # Registrace schémat pro Next.js stránky (import v app/)
   lib/
@@ -269,6 +270,7 @@ scripts/
   seed-vinylova-podlaha.ts  # Seed vinylovaPodlaha dokumentu (demo obsah)
   seed-blog.ts               # Seed 3 demo blogPost dokumentů (bez hlavniObrazek — nahrát přes Studio)
   seed-kariera.ts             # Seed 4 karierniPozice dokumentů z lib/kariera-data.ts + datumZverejneni
+  seed-black-friday.ts        # Seed blackFriday dokumentu — nahrává i banner.png jako Sanity image asset
 
 public/
   favicon.svg
@@ -298,7 +300,7 @@ Každý typ má právě jeden dokument s pevným `_id` (singletons):
 | `pvcPodlaha` | Podstránka: PVC podlaha | hero, istrip[], typy[], benefity[], kroky[], referenceStrip, faq[] |
 | `kobercovaPodlaha` | Podstránka: Kobercová podlaha | hero, istrip[], typy[], benefity[], kroky[], referenceStrip, faq[] |
 | `drevenaPodlaha` | Podstránka: Dřevěná podlaha | hero, istrip[], typy[], benefity[], kroky[], referenceStrip, faq[] |
-| `blackFriday` | Podstránka: Black Friday (schema na main i dev, stránka jen na dev) | hero, banner + text, produkty, zdarma sekce, SEO |
+| `blackFriday` | Podstránka: Black Friday | hero (badge/sleva/nadpis/podnadpis/tlačítko/fotka), banner obrázek + text (nadpis, body[], odstavec, zvýrazněný text, CTA, Adam text), produkty (nadpis, sleva badge), zdarma sekce (nadpis, popisek, položky[]), SEO |
 
 Kolekce (více dokumentů): `projekt`, `inspirace`, `akce`, `reference`, `blogPost`, `karierniPozice`
 
