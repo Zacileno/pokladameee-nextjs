@@ -16,6 +16,7 @@ import VyhodyBadge from './components/VyhodyBadge'
 import ReferenceSekce from './components/ReferenceSekce'
 import KontaktSekce from './components/KontaktSekce'
 import Footer from './components/Footer'
+import BlackFridayPopup from './components/BlackFridayPopup'
 
 export const revalidate = 0
 
@@ -57,6 +58,7 @@ export default async function Home() {
         <KontaktSekce kontakt={kontaktSekce} />
       </main>
       <Footer nastaveni={obecneNastaveni} />
+      <BlackFridayPopup />
     </>
   )
 }
