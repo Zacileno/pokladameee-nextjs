@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
+import KontaktSekce from '@/app/components/KontaktSekce'
 import Odpocet from '@/app/components/Odpocet'
 import AkcePopup from './AkcePopup'
 import { BF_KONEC } from '@/lib/black-friday'
@@ -96,9 +97,10 @@ export default async function BlackFridayPage() {
 
   // Stejná fotka Adama jako v KontaktSekce — lokální adam.jpg má useknutou hlavu, proto jen jako záloha
   let adamFotoUrl = '/assets/adam.jpg'
+  let kontaktSekce: any = null
   try {
-    const kontakt = await client.fetch<{ fotoUrl?: string } | null>(KONTAKT_SEKCE_QUERY)
-    if (kontakt?.fotoUrl) adamFotoUrl = kontakt.fotoUrl
+    kontaktSekce = await client.fetch(KONTAKT_SEKCE_QUERY)
+    if (kontaktSekce?.fotoUrl) adamFotoUrl = kontaktSekce.fotoUrl
   } catch {}
 
   const heroBadge = data.heroBadge || 'BLACK FRIDAY JE TADY'
@@ -232,6 +234,9 @@ export default async function BlackFridayPage() {
           </div>
         </section>
       </main>
+
+      <KontaktSekce kontakt={kontaktSekce} />
+
       <Footer />
     </>
   )
