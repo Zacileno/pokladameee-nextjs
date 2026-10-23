@@ -10,7 +10,7 @@ type Nastaveni = {
 
 export default function Footer({ nastaveni }: { nastaveni?: Nastaveni }) {
   const telefon = nastaveni?.telefon || '+420 790 388 487'
-  const email = nastaveni?.email || 'adam.hajdusek@pokladameee.cz'
+  const email = nastaveni?.email || 'zakazky@pokladameee.cz'
   const pracovniDoba = nastaveni?.pracovniDoba || 'Po–Pá 7:00–18:00'
   const region = nastaveni?.region || 'Moravskoslezský, Zlínský a Olomoucký kraj'
   const popis = nastaveni?.popisFooter || 'Profesionální pokládka vinylových podlah v Moravskoslezském, Zlínském a Olomouckém kraji. Zaměření zdarma, hotovo, než se nadějeteee.'
