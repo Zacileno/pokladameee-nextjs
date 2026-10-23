@@ -20,6 +20,7 @@ import { drevenaPodlahaSchema } from './sanity/schemas/drevenaPodlaha'
 import { blogPostSchema } from './sanity/schemas/blogPost'
 import { karierniPoziceSchema } from './sanity/schemas/karierniPozice'
 import { blackFridaySchema } from './sanity/schemas/blackFriday'
+import { formatovanyTextSchema } from './sanity/schemas/objects/formatovanyText'
 
 export default defineConfig({
   name: 'pokladameee',
@@ -28,5 +29,5 @@ export default defineConfig({
   projectId: '8cvsenqb',
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
   plugins: [structureTool(), visionTool()],
-  schema: { types: [akceSchema, inspiraceSchema, referenceSchema, projektSchema, heroSekceSchema, heroIkonkySchema, sluzbySekceSchema, jakToFungujeSchema, procNasVybratSchema, rodinaZnacekSchema, obecneNastaveniSchema, kontaktSekceSchema, vinylovaPodlahaSchema, pvcPodlahaSchema, kobercovaPodlahaSchema, drevenaPodlahaSchema, blogPostSchema, karierniPoziceSchema, blackFridaySchema] },
+  schema: { types: [akceSchema, inspiraceSchema, referenceSchema, projektSchema, heroSekceSchema, heroIkonkySchema, sluzbySekceSchema, jakToFungujeSchema, procNasVybratSchema, rodinaZnacekSchema, obecneNastaveniSchema, kontaktSekceSchema, vinylovaPodlahaSchema, pvcPodlahaSchema, kobercovaPodlahaSchema, drevenaPodlahaSchema, blogPostSchema, karierniPoziceSchema, blackFridaySchema, formatovanyTextSchema] },
 })

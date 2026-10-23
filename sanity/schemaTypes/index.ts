@@ -18,7 +18,8 @@ import { drevenaPodlahaSchema } from '../schemas/drevenaPodlaha'
 import { blogPostSchema } from '../schemas/blogPost'
 import { karierniPoziceSchema } from '../schemas/karierniPozice'
 import { blackFridaySchema } from '../schemas/blackFriday'
+import { formatovanyTextSchema } from '../schemas/objects/formatovanyText'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [inspiraceSchema, akceSchema, referenceSchema, projektSchema, heroSekceSchema, heroIkonkySchema, sluzbySekceSchema, jakToFungujeSchema, procNasVybratSchema, rodinaZnacekSchema, obecneNastaveniSchema, kontaktSekceSchema, vinylovaPodlahaSchema, pvcPodlahaSchema, kobercovaPodlahaSchema, drevenaPodlahaSchema, blogPostSchema, karierniPoziceSchema, blackFridaySchema],
+  types: [inspiraceSchema, akceSchema, referenceSchema, projektSchema, heroSekceSchema, heroIkonkySchema, sluzbySekceSchema, jakToFungujeSchema, procNasVybratSchema, rodinaZnacekSchema, obecneNastaveniSchema, kontaktSekceSchema, vinylovaPodlahaSchema, pvcPodlahaSchema, kobercovaPodlahaSchema, drevenaPodlahaSchema, blogPostSchema, karierniPoziceSchema, blackFridaySchema, formatovanyTextSchema],
 }

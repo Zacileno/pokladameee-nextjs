@@ -170,6 +170,11 @@ app/components/
   Footer.tsx          # 3-sloupcový footer
   PortableTextComponents.tsx  # Mapování Sanity Portable Text bloků na styl webu (blog)
   JsonLd.tsx           # Vykreslení <script type="application/ld+json"> — structured data
+  TopBar.tsx           # Oznamovací lišta nad Headerem — text editovatelný ze Studia (blackFriday.topBar*
+                      #   pole, fetch v app/layout.tsx), zobrazení/skrytí a datum konce stále v lib/black-friday.ts
+  FormatovanyText.tsx  # Vykreslí pole typu "formatovanyText" (1 Portable Text blok, marks tučně/kurzíva/
+                      #   barva/velikost) inline — nebo fallback, pokud Sanity nic nevrátí. Zatím jen
+                      #   blackFriday schema (viz Sanity schemas níže)
 ```
 
 ---
@@ -251,9 +256,16 @@ sanity/
     karierniPozice.ts    # Kariéra — pozice (kolekce, ne singleton): nazev, slug, region,
                           #   regionLabel, typ, typLabel, perex, naplnPrace[], pozadujeme[],
                           #   nabizime[], datumZverejneni (i pro JobPosting JSON-LD), aktivni
-    blackFriday.ts       # Podstránka Black Friday — singleton, vše editovatelné
-                          #   hero (badge/sleva/nadpis/podnadpis/tlačítko/fotka), banner obrázek + text,
-                          #   produkty (nadpis, sleva badge), zdarma sekce, SEO
+    blackFriday.ts       # Podstránka Black Friday — singleton, vše editovatelné, pole typu
+                          #   "formatovanyText" (viz objects/formatovanyText.ts) místo prostého stringu:
+                          #   horní lišta (štítek/sleva/zbytek/dovětek/CTA — zobrazuje TopBar.tsx),
+                          #   hero (badge/sleva/nadpis/podnadpis/2 tlačítka/fotka), banner obrázek + text,
+                          #   produkty (nadpis, sleva badge, info řádek o působnosti), SEO (zůstává plain string)
+    objects/
+      formatovanyText.ts  # Sdílený typ pole — 1 Portable Text blok (validation max 1, vykresluje se
+                          #   inline přes FormatovanyText.tsx), marks: tučně/kurzíva + custom annotations
+                          #   "barva" (oranžová/modrá/černá/bílá/šedá) a "velikost" (4 stupně).
+                          #   Zatím použito jen v blackFriday.ts — na ostatní schémata vědomě nerozšiřováno
   schemaTypes/
     index.ts            # Registrace schémat pro Next.js stránky (import v app/)
   lib/
@@ -298,7 +310,7 @@ Každý typ má právě jeden dokument s pevným `_id` (singletons):
 | `pvcPodlaha` | Podstránka: PVC podlaha | hero, istrip[], typy[], benefity[], kroky[], referenceStrip, faq[] |
 | `kobercovaPodlaha` | Podstránka: Kobercová podlaha | hero, istrip[], typy[], benefity[], kroky[], referenceStrip, faq[] |
 | `drevenaPodlaha` | Podstránka: Dřevěná podlaha | hero, istrip[], typy[], benefity[], kroky[], referenceStrip, faq[] |
-| `blackFriday` | Podstránka: Black Friday | hero (badge/sleva/nadpis/podnadpis/tlačítko/fotka), banner obrázek + text (nadpis, body[], odstavec, zvýrazněný text, CTA, Adam text), produkty (nadpis, sleva badge), zdarma sekce (nadpis, popisek, položky[]), SEO |
+| `blackFriday` | Podstránka: Black Friday | horní lišta (štítek/sleva/zbytek/dovětek/CTA), hero (badge/sleva/nadpis/podnadpis/2 tlačítka/fotka), banner obrázek + text (nadpis, body[], odstavec, zvýrazněný text, CTA, Adam text), produkty (nadpis, sleva badge, info řádek o působnosti), SEO — většina textových polí typu `formatovanyText` (tučně/kurzíva/barva/velikost editovatelné ve Studiu) |
 
 Kolekce (více dokumentů): `projekt`, `inspirace`, `akce`, `reference`, `blogPost`, `karierniPozice`
 

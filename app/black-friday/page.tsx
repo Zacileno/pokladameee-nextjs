@@ -5,31 +5,38 @@ import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 import KontaktSekce from '@/app/components/KontaktSekce'
 import Odpocet from '@/app/components/Odpocet'
+import FormatovanyText from '@/app/components/FormatovanyText'
 import AkcePopup from './AkcePopup'
 import { BF_KONEC } from '@/lib/black-friday'
 import { client, HERO_SEKCE_QUERY, VINYLOVA_PODLAHA_QUERY, PVC_PODLAHA_QUERY, KOBERCOVA_PODLAHA_QUERY, DREVENA_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY, BLACK_FRIDAY_QUERY } from '@/lib/sanity'
 
 export const revalidate = 0
 
+type RT = { _type: 'block'; children?: { _type: 'span'; text: string; marks?: string[] }[] }[] | undefined
+
 type BlackFridayData = {
-  heroBadge?: string
-  heroSleva?: string
-  heroNadpisZbytek?: string
-  heroPodnadpis?: string
-  heroTlacitko?: string
+  topBarOznaceni?: RT
+  topBarSleva?: RT
+  topBarZbytek?: RT
+  topBarDovetek?: RT
+  topBarCta?: RT
+  heroBadge?: RT
+  heroSleva?: RT
+  heroNadpisZbytek?: RT
+  heroPodnadpis?: RT
+  heroTlacitko?: RT
+  heroTlacitkoSekundarni?: RT
   heroFotkaUrl?: string
   bannerObrazekUrl?: string
-  videoNadpis?: string
-  body?: { titul?: string; text?: string }[]
-  odstavec?: string
-  zvyrazenyText?: string
-  ctaPopupText?: string
-  adamText?: string
-  produktyNadpis?: string
-  slevaBadge?: string
-  zdarmaNadpis?: string
-  zdarmaPopisek?: string
-  zdarmaPolozky?: { emoji?: string; title?: string }[]
+  videoNadpis?: RT
+  body?: { titul?: RT; text?: RT }[]
+  odstavec?: RT
+  zvyrazenyText?: RT
+  ctaPopupText?: RT
+  adamText?: RT
+  produktyNadpis?: RT
+  slevaBadge?: RT
+  zdarmaPopisek?: RT
   seoTitle?: string
   seoDescription?: string
 }
@@ -74,12 +81,6 @@ const PRODUKTY = [
   { slug: 'koberce', title: 'Koberce', emoji: '🧶', query: KOBERCOVA_PODLAHA_QUERY, barva: 'linear-gradient(160deg, var(--blue), #FF8800)' },
 ]
 
-const SLUZBY_ZDARMA_FALLBACK = [
-  { title: 'Odvoz staré podlahy', emoji: '♻️' },
-  { title: 'Zaměření a kalkulace', emoji: '📐' },
-]
-const ZDARMA_BARVY = ['linear-gradient(160deg, var(--blue), var(--blue-dark))', 'linear-gradient(160deg, #FF8800, #c66300)']
-
 export default async function BlackFridayPage() {
   const data = await getData()
 
@@ -103,23 +104,8 @@ export default async function BlackFridayPage() {
     if (kontaktSekce?.fotoUrl) adamFotoUrl = kontaktSekce.fotoUrl
   } catch {}
 
-  const heroBadge = data.heroBadge || 'BLACK FRIDAY JE TADY'
-  const heroSleva = data.heroSleva || '25 %'
-  const heroNadpisZbytek = data.heroNadpisZbytek || 'na podlahové krytiny'
-  const heroPodnadpis = data.heroPodnadpis || 'Vinylové, PVC i dřevěné podlahy a koberce se slevou 25 %. Zaměření i odvoz staré podlahy máte zdarma.'
-  const heroTlacitko = data.heroTlacitko || 'Podlahy v akci ↓'
   const bannerObrazekUrl = data.bannerObrazekUrl || BANNER_FALLBACK
-  const videoNadpis = data.videoNadpis || 'Dopřejteee domovu novou podlahu'
   const body = data.body?.length ? data.body : BODY_FALLBACK
-  const odstavec = data.odstavec || 'Pokud o nové podlaze přemýšlíte, právě teď je nejlepší chvíle posunout ji z „někdy“ na „teď“. Stačí vyplnit nezávazný formulář.'
-  const zvyrazenyText = data.zvyrazenyText || 'BLACK FRIDAY = nová podlaha za méně peněz. Starosti necháte na nás.'
-  const ctaPopupText = data.ctaPopupText || 'Využít akci →'
-  const adamText = data.adamText || 'Přijedeme a ZDARMA zaměříme'
-  const produktyNadpis = data.produktyNadpis || 'V Black Friday náladě jsou všechny podlahy'
-  const slevaBadge = data.slevaBadge || '-25 %'
-  const zdarmaNadpis = data.zdarmaNadpis || 'A k tomu služby zdarma'
-  const zdarmaPopisek = data.zdarmaPopisek || 'Pokládáme v celém Moravskoslezském, Zlínském a Olomouckém kraji'
-  const zdarmaPolozky = data.zdarmaPolozky?.length ? data.zdarmaPolozky : SLUZBY_ZDARMA_FALLBACK
 
   return (
     <>
@@ -140,15 +126,25 @@ export default async function BlackFridayPage() {
             </div>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,136,0,0.15)', border: '1px solid rgba(255,136,0,0.35)', borderRadius: 100, padding: '6px 16px', marginBottom: 24 }}>
               <span style={{ width: 8, height: 8, background: 'var(--orange)', borderRadius: '50%', display: 'inline-block' }} />
-              <span style={{ color: 'var(--orange)', fontWeight: 700, fontSize: 13, letterSpacing: '0.05em' }}>{heroBadge}</span>
+              <span style={{ color: 'var(--orange)', fontWeight: 700, fontSize: 13, letterSpacing: '0.05em' }}>
+                <FormatovanyText value={data.heroBadge} fallback="BLACK FRIDAY JE TADY" />
+              </span>
             </div>
             <h1 style={{ fontSize: 'clamp(44px, 6vw, 88px)', fontWeight: 900, color: 'white', lineHeight: 1.0, marginBottom: 24 }}>
-              <span style={{ color: 'var(--orange)' }}>{heroSleva}</span> {heroNadpisZbytek}
+              <span style={{ color: 'var(--orange)' }}><FormatovanyText value={data.heroSleva} fallback={<>25&nbsp;%</>} /></span>{' '}
+              <FormatovanyText value={data.heroNadpisZbytek} fallback="na podlahové krytiny" />
             </h1>
             <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: 'clamp(16px, 2vw, 20px)', lineHeight: 1.65, maxWidth: 620, margin: '0 auto 32px' }}>
-              {heroPodnadpis}
+              <FormatovanyText value={data.heroPodnadpis} fallback="Vinylové, PVC i dřevěné podlahy a koberce se slevou 25 %. Zaměření i odvoz staré podlahy máte zdarma." />
             </p>
-            <a href="#bfprodukty" className="btn-primary" style={{ fontSize: 17, padding: '15px 32px' }}>{heroTlacitko}</a>
+            <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
+              <a href="#bfprodukty" className="btn-primary" style={{ fontSize: 17, padding: '15px 32px' }}>
+                <FormatovanyText value={data.heroTlacitko} fallback="Podlahy v akci ↓" />
+              </a>
+              <a href="#kontakt" className="btn-primary" style={{ fontSize: 17, padding: '15px 32px', background: '#154C86' }}>
+                <FormatovanyText value={data.heroTlacitkoSekundarni} fallback="ZAMĚŘENÍ ZDARMA" />
+              </a>
+            </div>
           </div>
         </section>
 
@@ -162,27 +158,29 @@ export default async function BlackFridayPage() {
 
               <div>
                 <h2 className="section-title" style={{ fontSize: 'clamp(28px, 3.4vw, 44px)' }}>
-                  {videoNadpis}
+                  <FormatovanyText value={data.videoNadpis} fallback="Dopřejteee domovu novou podlahu" />
                 </h2>
                 <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 14, margin: '24px 0' }}>
                   {body.map((b, i) => (
-                    <li key={b.titul || i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                    <li key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
                       <span style={{ color: 'var(--orange)', fontWeight: 900, fontSize: 18, lineHeight: 1.5, flexShrink: 0 }}>✓</span>
-                      <p style={{ fontSize: 16 }}><strong style={{ color: 'var(--black)' }}>{b.titul}</strong> {b.text}</p>
+                      <p style={{ fontSize: 16 }}><strong style={{ color: 'var(--black)' }}><FormatovanyText value={b.titul} fallback="" /></strong> <FormatovanyText value={b.text} fallback="" /></p>
                     </li>
                   ))}
                 </ul>
                 <p style={{ fontSize: 16, marginBottom: 16 }}>
-                  {odstavec}
+                  <FormatovanyText value={data.odstavec} fallback="Pokud o nové podlaze přemýšlíte, právě teď je nejlepší chvíle posunout ji z „někdy“ na „teď“. Stačí vyplnit nezávazný formulář." />
                 </p>
                 <p style={{ fontSize: 16, fontWeight: 700, color: 'var(--black)', marginBottom: 32 }}>
-                  {zvyrazenyText}
+                  <FormatovanyText value={data.zvyrazenyText} fallback="BLACK FRIDAY = nová podlaha za méně peněz. Starosti necháte na nás." />
                 </p>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 24, flexWrap: 'wrap' }}>
-                  <AkcePopup label={ctaPopupText} />
+                  <AkcePopup label={<FormatovanyText value={data.ctaPopupText} fallback="Využít akci →" />} />
                   <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                     <Image src={adamFotoUrl} alt="Adam Hajdušek" width={52} height={52} unoptimized style={{ borderRadius: '50%', objectFit: 'cover', objectPosition: 'center top', border: '2px solid var(--orange)', flexShrink: 0 }} />
-                    <span style={{ fontWeight: 800, fontSize: 15, color: 'var(--blue)' }}>{adamText}</span>
+                    <span style={{ fontWeight: 800, fontSize: 15, color: 'var(--blue)' }}>
+                      <FormatovanyText value={data.adamText} fallback="Přijedeme a ZDARMA zaměříme" />
+                    </span>
                   </div>
                 </div>
               </div>
@@ -194,7 +192,7 @@ export default async function BlackFridayPage() {
         <section id="bfprodukty" className="section" style={{ background: 'var(--blue)', scrollMarginTop: 72 }}>
           <div className="container">
             <h2 className="section-title" style={{ color: 'white', textAlign: 'center', marginBottom: 48 }}>
-              {produktyNadpis}
+              <FormatovanyText value={data.produktyNadpis} fallback="V Black Friday náladě jsou všechny podlahy" />
             </h2>
             <div className="sluzby-prehled-grid">
               {PRODUKTY.map((p, i) => (
@@ -207,30 +205,15 @@ export default async function BlackFridayPage() {
                     </div>
                   )}
                   <div className="sluzby-prehled-overlay" />
-                  <span className="bf-sleva-badge">{slevaBadge}</span>
+                  <span className="bf-sleva-badge"><FormatovanyText value={data.slevaBadge} fallback="-25 %" /></span>
                   <span className="sluzby-prehled-label">{p.title}</span>
                 </Link>
               ))}
             </div>
 
-            <h2 className="section-title" style={{ color: 'white', textAlign: 'center', marginTop: 80, marginBottom: 12, fontSize: 'clamp(26px, 3vw, 40px)' }}>
-              {zdarmaNadpis}
-            </h2>
-            <p style={{ color: 'rgba(255,255,255,0.65)', textAlign: 'center', marginBottom: 40 }}>
-              {zdarmaPopisek}
+            <p style={{ color: 'rgba(255,255,255,0.65)', textAlign: 'center', marginTop: 40 }}>
+              📍 <FormatovanyText value={data.zdarmaPopisek} fallback="Pokládáme v celém Moravskoslezském, Zlínském a Olomouckém kraji" />
             </p>
-            <div className="bf-zdarma-grid">
-              {zdarmaPolozky.map((s, i) => (
-                <div key={s.title || i} className="sluzby-prehled-karta" style={{ aspectRatio: '4/3' }}>
-                  <div style={{ position: 'absolute', inset: 0, background: ZDARMA_BARVY[i % ZDARMA_BARVY.length], display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 64 }}>
-                    {s.emoji}
-                  </div>
-                  <div className="sluzby-prehled-overlay" />
-                  <span className="bf-sleva-badge" style={{ fontSize: 15 }}>ZDARMA</span>
-                  <span className="sluzby-prehled-label">{s.title}</span>
-                </div>
-              ))}
-            </div>
           </div>
         </section>
       </main>
