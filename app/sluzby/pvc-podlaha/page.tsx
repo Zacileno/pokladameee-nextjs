@@ -5,6 +5,7 @@ import BenefityGrid from '@/app/components/BenefityGrid'
 import KontaktSekce from '@/app/components/KontaktSekce'
 import FaqItem from './FaqItem'
 import { client, PVC_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY } from '@/lib/sanity'
+import { BF_KONEC } from '@/lib/black-friday'
 
 export const revalidate = 0
 
@@ -150,6 +151,8 @@ export default async function PvcPodlahaPage() {
 
   const faq = data?.faq?.length ? data.faq : FAQ
 
+  const zobrazitBfBadge = Date.now() < new Date(BF_KONEC).getTime()
+
   return (
     <>
       <Header opaque />
@@ -159,6 +162,12 @@ export default async function PvcPodlahaPage() {
         <div className="container">
           <div className="hero-sluzby-grid" style={{ paddingBottom: 64 }}>
             <div>
+              {zobrazitBfBadge && (
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,136,0,0.15)', border: '1px solid rgba(255,136,0,0.35)', borderRadius: 100, padding: '6px 16px', marginBottom: 16 }}>
+                  <span style={{ fontSize: 14 }}>🔥</span>
+                  <span style={{ color: 'var(--orange)', fontWeight: 700, fontSize: 13, letterSpacing: '0.05em' }}>BLACK FRIDAY SLEVA</span>
+                </div>
+              )}
               <p style={{ fontSize: 13, fontWeight: 600, letterSpacing: '2px', color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', marginBottom: 16 }}>
                 PVC podlahy · MSK, Zlínsko, Olomoucko
               </p>
@@ -187,24 +196,32 @@ export default async function PvcPodlahaPage() {
               </div>
             </div>
             {/* Foto realizace / placeholder */}
-            {heroFotkaUrl ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={heroFotkaUrl}
-                alt={heroNadpis}
-                style={{ borderRadius: '12px 12px 0 0', width: '100%', height: '100%', objectFit: 'cover', minHeight: 320 }}
-              />
-            ) : (
-              <div style={{
-                background: 'rgba(255,255,255,0.07)',
-                borderRadius: '12px 12px 0 0',
-                minHeight: 320,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: 'rgba(255,255,255,0.3)', fontSize: 14, textAlign: 'center', padding: 32,
-              }}>
-                Foto realizace<br />(bude doplněno)
-              </div>
-            )}
+            <div style={{ position: 'relative' }}>
+              {zobrazitBfBadge && (
+                <div className="bf-sleva-badge" style={{ flexDirection: 'column', gap: 0, lineHeight: 1.1 }}>
+                  <span style={{ fontSize: 11, fontWeight: 700 }}>SLEVA</span>
+                  <span style={{ fontSize: 20, fontWeight: 900 }}>25%</span>
+                </div>
+              )}
+              {heroFotkaUrl ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={heroFotkaUrl}
+                  alt={heroNadpis}
+                  style={{ borderRadius: '12px 12px 0 0', width: '100%', height: '100%', objectFit: 'cover', minHeight: 320 }}
+                />
+              ) : (
+                <div style={{
+                  background: 'rgba(255,255,255,0.07)',
+                  borderRadius: '12px 12px 0 0',
+                  minHeight: 320,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  color: 'rgba(255,255,255,0.3)', fontSize: 14, textAlign: 'center', padding: 32,
+                }}>
+                  Foto realizace<br />(bude doplněno)
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </section>
