@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import JsonLd from './components/JsonLd'
 import TopBar from './components/TopBar'
+import { client, BLACK_FRIDAY_QUERY } from '@/lib/sanity'
 
 const LOCAL_BUSINESS_JSON_LD = {
   '@context': 'https://schema.org',
@@ -52,7 +53,12 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://www.pokladameee.cz' },
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  let topBarData = null
+  try {
+    topBarData = await client.fetch(BLACK_FRIDAY_QUERY)
+  } catch {}
+
   return (
     <html lang="cs">
       <head>
@@ -64,7 +70,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MK4KFBF8" height="0" width="0" style={{ display: 'none', visibility: 'hidden' }} /></noscript>
-        <TopBar />
+        <TopBar data={topBarData} />
         {children}
       </body>
     </html>
