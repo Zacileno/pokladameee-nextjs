@@ -71,9 +71,9 @@ export default async function ReferenceSekce() {
                   background: 'var(--blue)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   color: 'white', fontWeight: 800, fontSize: 15,
-                }}>{r.jmeno[0]}</div>
+                }}>{r.jmeno.trim()[0]}</div>
                 <div>
-                  <div style={{ fontWeight: 700, fontSize: 14 }}>{r.jmeno}</div>
+                  <div style={{ fontWeight: 700, fontSize: 14 }}>{r.jmeno.trim()}</div>
                 </div>
               </div>
             </div>
