@@ -369,25 +369,20 @@ const ICONS: Record<string, (f: string) => ReactNode> = {
       <path d="M14 74h72" />
     </>
   ),
-  // Cena — mince
+  // Cena — peněženka
   '💰': f => (
     <>
-      <rect x="18" y="56" width="42" height="12" rx="6" fill={f} />
-      <rect x="18" y="44" width="42" height="12" rx="6" fill={f} />
-      <rect x="18" y="32" width="42" height="12" rx="6" fill={f} />
-      <circle cx="70" cy="30" r="14" fill={f} />
-      <circle cx="70" cy="30" r="7" />
+      <path d="M26 30l34-14 6 14" fill={f} />
+      <rect x="16" y="30" width="64" height="42" rx="6" fill={f} />
+      <rect x="56" y="42" width="28" height="18" rx="5" fill={f} />
+      <circle cx="66" cy="51" r="2.5" />
     </>
   ),
-  // Měkká na chůzi — chodidlo
+  // Měkký došlap — noha zboku na pružné vrstvě
   '🦶': f => (
     <>
-      <path d="M42 78c-9 0-13-8-11-18 1-8 1-15 4-22 3-7 8-10 14-9 8 2 11 9 10 17-1 7-4 12-4 18 0 8-4 14-13 14z" fill={f} />
-      <circle cx="33" cy="22" r="6" fill={f} />
-      <circle cx="45" cy="15" r="5" fill={f} />
-      <circle cx="55" cy="14" r="4.5" fill={f} />
-      <circle cx="63" cy="18" r="4" fill={f} />
-      <circle cx="68" cy="25" r="3.5" fill={f} />
+      <path d="M30 14v32c0 8 3 14 10 14h38c5 0 8-3 7-7-1-4-5-6-10-7l-22-6c-6-2-9-7-9-13V14" fill={f} />
+      <path d="M12 70q9-6 19 0t19 0 19 0 19 0" />
     </>
   ),
   // Snadná údržba — koště
