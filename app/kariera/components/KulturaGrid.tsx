@@ -1,3 +1,5 @@
+import BrandIcon from '@/app/components/BrandIcon'
+
 const kultura = [
   {
     emoji: '🎉',
@@ -36,7 +38,7 @@ export default function KulturaGrid() {
               padding: 32,
               boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
             }}>
-              <div style={{ fontSize: 48, marginBottom: 16 }}>{emoji}</div>
+              <div style={{ marginBottom: 16 }}><BrandIcon emoji={emoji} size={64} /></div>
               <h3 style={{ fontSize: 22, fontWeight: 700 }}>
                 {nadpisBase}<span style={{ color: 'var(--orange)' }}>eee</span>
               </h3>
