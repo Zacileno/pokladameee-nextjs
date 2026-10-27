@@ -138,6 +138,14 @@ input, select, textarea { font-family: var(--font); }
 .blog-clanek-obsah img { width: 100%; border-radius: 12px; margin: 8px 0 28px; }
 .blog-souvisejici-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
 
+/* ── HLAVIČKA ── */
+.desk-nav a { white-space: nowrap; }
+/* celé menu se vejde od cca 1200 px — pod tím hamburger */
+@media (max-width: 1199px) {
+  .desk-nav { display: none !important; }
+  .hamburger { display: block !important; }
+}
+
 /* ── INSPIRACE ── */
 .insp-hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
 .insp-hero-foto { border-radius: 16px; overflow: hidden; aspect-ratio: 4/3; background: var(--gray-50); }
