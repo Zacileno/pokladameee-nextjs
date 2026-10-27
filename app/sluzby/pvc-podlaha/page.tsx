@@ -3,6 +3,7 @@ import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 import BenefityGrid from '@/app/components/BenefityGrid'
 import KontaktSekce from '@/app/components/KontaktSekce'
+import BrandIcon, { IkonaText } from '@/app/components/BrandIcon'
 import FaqItem from './FaqItem'
 import { client, PVC_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY } from '@/lib/sanity'
 import { BF_KONEC } from '@/lib/black-friday'
@@ -178,7 +179,7 @@ export default async function PvcPodlahaPage() {
                 {heroPodnadpis}
               </p>
               <p style={{ fontSize: 15, color: 'var(--orange)', fontWeight: 700, marginBottom: 36 }}>
-                {heroBadge}
+                <IkonaText text={heroBadge} size={30} tone="onBlue" />
               </p>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                 <a href="#kontakt" className="btn-primary" style={{ borderRadius: 10, padding: '15px 28px' }}>
@@ -191,7 +192,8 @@ export default async function PvcPodlahaPage() {
                   borderRadius: 10, border: '1px solid rgba(255,255,255,0.25)',
                   textDecoration: 'none', transition: 'background 0.2s',
                 }}>
-                  📞 +420 790 388 487
+                  <BrandIcon emoji="📞" size={24} tone="onBlue" fill="#316195" />
+                  +420 790 388 487
                 </a>
               </div>
             </div>
@@ -232,7 +234,7 @@ export default async function PvcPodlahaPage() {
           <div className="sluzby-istripgrid">
             {istrip.map(({ emoji, text }, i) => (
               <div key={text || i} className="sluzby-istrip-item">
-                <span style={{ fontSize: 28, flexShrink: 0 }}>{emoji}</span>
+                <BrandIcon emoji={emoji} size={48} />
                 <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--gray-700)', lineHeight: 1.3 }}>{text}</span>
               </div>
             ))}
