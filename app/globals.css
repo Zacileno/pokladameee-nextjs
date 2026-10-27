@@ -32,6 +32,7 @@ input, select, textarea { font-family: var(--font); }
 .section-subtitle { font-size: 18px; color: var(--gray-400); max-width: 560px; line-height: 1.6; }
 
 .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--orange); color: var(--white); font-weight: 700; font-size: 16px; padding: 14px 28px; border-radius: var(--radius); transition: background 0.2s, transform 0.15s; white-space: nowrap; }
+.header-logo { position: relative; top: -6px; } /* spodní linka textu loga = spodní linka položek menu */
 .btn-primary:hover { background: #e67a00; transform: translateY(-1px); }
 .btn-secondary { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--white); font-weight: 700; font-size: 16px; padding: 13px 28px; border-radius: var(--radius); border: 2px solid rgba(255,255,255,0.4); transition: border-color 0.2s, background 0.2s; white-space: nowrap; }
 .btn-secondary:hover { border-color: var(--white); background: rgba(255,255,255,0.1); }
@@ -182,6 +183,7 @@ input, select, textarea { font-family: var(--font); }
 
   .desk-nav { display: none !important; }
   .hamburger { display: block !important; }
+  .header-logo { top: 0; }
 
   .sluzby-prehled-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
   .sluzby-prehled-label { font-size: 18px; left: 14px; bottom: 14px; right: 14px; }
