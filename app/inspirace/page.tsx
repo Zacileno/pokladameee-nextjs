@@ -1,9 +1,11 @@
 import type { Metadata } from 'next'
-import { client, INSPIRACE_QUERY, KONTAKT_SEKCE_QUERY } from '../../lib/sanity'
+import { client, INSPIRACE_QUERY, INSPIRACE_STRANKA_QUERY, KONTAKT_SEKCE_QUERY } from '../../lib/sanity'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import KontaktSekce from '../components/KontaktSekce'
 import PredPoKarta from '../components/PredPoKarta'
+import ReferenceSekce from '../components/ReferenceSekce'
+import BrandIcon from '../components/BrandIcon'
 
 export const metadata: Metadata = {
   title: 'Inspirace a galerie',
@@ -25,6 +27,12 @@ const ISTRIP = [
   { emoji: '📍', text: 'MSK, Zlínský i Olomoucký kraj' },
 ]
 
+const PROC = [
+  { emoji: '📐', title: 'Zaměřímeee zdarma', desc: 'Po vyplnění formuláře se vám ozveme, domluvíme termín a přijedeme. Zaměříme prostor a připravíme kalkulaci. Na naše náklady.' },
+  { emoji: '🎨', title: 'Poradímeee s výběrem', desc: 'Pomůžeme vybrat podlahu, která sedne k vašemu provozu i interiéru — vinyl, PVC, dřevo nebo koberec.' },
+  { emoji: '✨', title: 'Položímeee a uklidímeee', desc: 'Ve smluvený den dorazí naše parta, odstraní starou podlahu, připraví podklad a položí novou. Po sobě uklidíme.' },
+]
+
 type Inspirace = {
   _id: string
   nazev: string
@@ -35,48 +43,56 @@ type Inspirace = {
   fotoPred?: { asset: { url: string } }
 }
 
+type InspiraceStranka = { heroFotka?: { asset?: { url?: string } } }
+
 export default async function InspracePage() {
   let projekty: Inspirace[] = []
+  let stranka: InspiraceStranka | null = null
   let kontaktSekce: any = null
   try {
-    ;[projekty, kontaktSekce] = await Promise.all([
+    ;[projekty, stranka, kontaktSekce] = await Promise.all([
       client.fetch<Inspirace[]>(INSPIRACE_QUERY),
+      client.fetch<InspiraceStranka | null>(INSPIRACE_STRANKA_QUERY),
       client.fetch(KONTAKT_SEKCE_QUERY),
     ])
   } catch {}
+  const heroFotka = stranka?.heroFotka?.asset?.url
 
   return (
     <>
       <Header opaque />
 
       {/* HERO */}
-      <section style={{ background: 'var(--blue)', paddingTop: 100, paddingBottom: 64 }}>
+      <section style={{ background: 'white', paddingTop: 128, paddingBottom: 64 }}>
         <div className="container">
-          <p style={{ fontSize: 13, fontWeight: 600, letterSpacing: '2px', color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', marginBottom: 16 }}>
-            Galerie realizací · MSK, Zlínsko, Olomoucko
-          </p>
-          <h1 style={{ fontSize: 'clamp(36px, 5vw, 54px)', fontWeight: 900, color: 'white', lineHeight: 1.1, marginBottom: 20, maxWidth: 720 }}>
-            Inspirace a galerie
+          <h1 style={{ fontSize: 'clamp(36px, 5vw, 54px)', fontWeight: 900, color: 'var(--black)', lineHeight: 1.1, marginBottom: 40, textAlign: 'center' }}>
+            Inspirac<span style={{ color: 'var(--orange)' }}>eee</span>
           </h1>
-          <p style={{ fontSize: 18, color: 'rgba(255,255,255,0.8)', lineHeight: 1.7, marginBottom: 12, maxWidth: 620 }}>
-            Prohlédněte si, jak vypadají naše realizace naživo. Žádné vizualizace ani katalogové fotky — jen skutečné podlahy, které jsme položili zákazníkům po celém Moravskoslezském, Zlínském a Olomouckém kraji.
-          </p>
-          <p style={{ fontSize: 15, color: 'var(--orange)', fontWeight: 700, marginBottom: 36 }}>
-            📸 Skutečné realizace, žádné stock fotky
-          </p>
-          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-            <a href="#kontakt" className="btn-primary" style={{ borderRadius: 10, padding: '15px 28px' }}>
-              Nezávazná poptávka
-            </a>
-            <a href="tel:+420790388487" style={{
-              display: 'inline-flex', alignItems: 'center', gap: 8,
-              background: 'rgba(255,255,255,0.12)', color: 'white',
-              fontWeight: 700, fontSize: 16, padding: '14px 24px',
-              borderRadius: 10, border: '1px solid rgba(255,255,255,0.25)',
-              textDecoration: 'none', transition: 'background 0.2s',
-            }}>
-              📞 +420 790 388 487
-            </a>
+          <div className="insp-hero-grid">
+            <div>
+              <p style={{ fontSize: 14, fontWeight: 600, marginBottom: 20 }}>
+                <a href="/" style={{ color: 'var(--orange)' }}>Domů</a>
+                <span style={{ color: 'var(--gray-400)' }}> / Inspirace</span>
+              </p>
+              <p style={{ fontSize: 18, color: 'var(--gray-700)', lineHeight: 1.7, marginBottom: 20 }}>
+                Prohlédněte si, jak vypadají naše realizace naživo. Žádné vizualizace ani katalogové fotky — jen skutečné podlahy, které jsme položili zákazníkům po celém Moravskoslezském, Zlínském a Olomouckém kraji.
+              </p>
+              <p style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 15, color: 'var(--blue)', fontWeight: 700, marginBottom: 32 }}>
+                <BrandIcon emoji="📸" size={32} /> Skutečné realizace, žádné stock fotky
+              </p>
+              <a href="#realizace" className="btn-primary" style={{ borderRadius: 10, padding: '15px 28px' }}>
+                Naše realizaceee
+              </a>
+            </div>
+            <div className="insp-hero-foto">
+              {heroFotka ? (
+                <img src={heroFotka} alt="Realizace podlahy od pokládámeee" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              ) : (
+                <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '2px dashed var(--gray-100)', borderRadius: 16 }}>
+                  <BrandIcon emoji="📸" size={96} />
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </section>
@@ -87,7 +103,7 @@ export default async function InspracePage() {
           <div className="sluzby-istripgrid">
             {ISTRIP.map(({ emoji, text }, i) => (
               <div key={text || i} className="sluzby-istrip-item">
-                <span style={{ fontSize: 28, flexShrink: 0 }}>{emoji}</span>
+                <BrandIcon emoji={emoji} size={48} />
                 <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--gray-700)', lineHeight: 1.3 }}>{text}</span>
               </div>
             ))}
@@ -96,9 +112,9 @@ export default async function InspracePage() {
       </section>
 
       {/* GALERIE */}
-      <section className="section">
+      <section id="realizace" className="section" style={{ scrollMarginTop: 80 }}>
         <div className="container">
-          <h2 className="section-title">Naše <span>realizace</span></h2>
+          <h2 className="section-title">Naše <span>realizaceee</span></h2>
           <p className="section-subtitle" style={{ marginTop: 16 }}>
             Výběr z podlah, které jsme v poslední době položili. U některých realizací si můžete prokliknout stav před a po.
           </p>
@@ -124,6 +140,27 @@ export default async function InspracePage() {
           )}
         </div>
       </section>
+
+      {/* PROČ POKLÁDÁMEEE */}
+      <section className="section" style={{ background: 'var(--gray-50)' }}>
+        <div className="container">
+          <h2 className="section-title" style={{ textAlign: 'center' }}>Proč <span>pokládámeee</span></h2>
+          <div className="insp-proc-grid">
+            {PROC.map(({ emoji, title, desc }) => (
+              <div key={title} style={{ background: 'white', borderRadius: 12, padding: '32px 28px', border: '1px solid var(--gray-100)' }}>
+                <div style={{ marginBottom: 16 }}><BrandIcon emoji={emoji} size={64} /></div>
+                <h3 style={{ fontSize: 20, fontWeight: 800, color: 'var(--black)', marginBottom: 10 }}>{title}</h3>
+                <p style={{ fontSize: 15, lineHeight: 1.65, color: 'var(--gray-700)' }}>{desc}</p>
+              </div>
+            ))}
+          </div>
+          <div style={{ marginTop: 40, textAlign: 'center' }}>
+            <a href="#kontakt" className="btn-primary">Chci zaměření zdarma</a>
+          </div>
+        </div>
+      </section>
+
+      <ReferenceSekce />
 
       <KontaktSekce kontakt={kontaktSekce} />
 
