@@ -139,7 +139,7 @@ export default async function RemeselnikSekce({ data }: { data?: RodinaData }) {
                   {/* CTA tlačítko */}
                   <a href={p.url} target="_blank" rel="noopener noreferrer" className="rem-pruh-btn"
                     style={{ background: btnBg, color: btnColor }}>
-                    {p.url.replace(/https?:\/\//, '').replace(/\/$/, '')} →
+                    {p.url.replace(/https?:\/\//, '').replace(/\/$/, '')}
                   </a>
                 </div>
 

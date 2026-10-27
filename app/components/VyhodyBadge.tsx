@@ -1,3 +1,5 @@
+import BrandIcon from './BrandIcon'
+
 type Vyhoda = { emoji?: string; title?: string; desc?: string }
 
 const FALLBACK_VYHODY: Vyhoda[] = [
@@ -21,7 +23,7 @@ export default function VyhodyBadge({ data }: { data?: { nadpis?: string; podnad
             <h2 className="section-title">{nadpis.split(' ').slice(0, -2).join(' ')}<br /><span>{nadpis.split(' ').slice(-2).join(' ')}</span></h2>
             <p style={{ marginTop: 20, fontSize: 17, lineHeight: 1.7, color: 'var(--gray-700)', maxWidth: 420 }}>{podnadpis}</p>
             <div style={{ marginTop: 32 }}>
-              <a href="#kontakt" className="btn-primary">Zaměřit zdarma →</a>
+              <a href="#kontakt" className="btn-primary">Zaměřit zdarma</a>
             </div>
           </div>
           <div className="vyhody-badge-karty">
@@ -31,7 +33,7 @@ export default function VyhodyBadge({ data }: { data?: { nadpis?: string; podnad
                 background: i === 0 ? 'var(--orange)' : i === 1 ? 'var(--blue)' : 'var(--gray-50)',
                 border: i >= 2 ? '1px solid var(--gray-100)' : 'none',
               }}>
-                <div style={{ fontSize: 28, marginBottom: 12 }}>{v.emoji}</div>
+                <div style={{ marginBottom: 12 }}><BrandIcon emoji={v.emoji} size={52} tone={i === 0 ? 'onOrange' : i === 1 ? 'onBlue' : 'default'} /></div>
                 <h3 style={{ fontSize: 16, fontWeight: 800, color: i < 2 ? 'white' : 'var(--black)', marginBottom: 8 }}>{v.title}</h3>
                 <p style={{ fontSize: 14, lineHeight: 1.55, color: i < 2 ? 'rgba(255,255,255,0.75)' : 'var(--gray-400)' }}>{v.desc}</p>
               </div>

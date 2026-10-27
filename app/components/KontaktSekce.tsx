@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import KontaktForm from './KontaktForm'
+import BrandIcon from './BrandIcon'
 
 interface KontaktData {
   nadpis?: string
@@ -79,7 +80,7 @@ export default function KontaktSekce({ kontakt }: Props) {
                 { icon: '📍', label: 'Kde pokládáme', val: region },
               ].map(({ icon, label, val, href }) => (
                 <div key={label} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
-                  <span style={{ fontSize: 20, flexShrink: 0 }}>{icon}</span>
+                  <BrandIcon emoji={icon} size={36} />
                   <div>
                     <div style={{ fontSize: 12, color: 'var(--gray-400)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{label}</div>
                     {href ? <a href={href} style={{ fontWeight: 700, color: 'var(--blue)', fontSize: 16 }}>{val}</a>

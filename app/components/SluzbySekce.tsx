@@ -1,5 +1,6 @@
 'use client'
 import Link from 'next/link'
+import BrandIcon from './BrandIcon'
 
 type Sluzba = {
   emoji?: string
@@ -51,7 +52,7 @@ export default function SluzbySekce({ data }: Props) {
               onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)'; e.currentTarget.style.transform = 'scale(1.01)' }}
               onMouseLeave={e => { e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'scale(1)' }}
             >
-              <div className="sluzba-ikona">{s.emoji}</div>
+              <div className="sluzba-ikona"><BrandIcon emoji={s.emoji} size={56} /></div>
               <div className="sluzba-obsah">
                 <h3 style={{ fontSize: 18, fontWeight: 800, marginBottom: 6 }}>{s.title}</h3>
                 <p style={{ fontSize: 14, lineHeight: 1.6, marginBottom: 12, color: 'var(--gray-700)' }}>{s.desc}</p>
@@ -62,7 +63,7 @@ export default function SluzbySekce({ data }: Props) {
         </div>
 
         <div style={{ marginTop: 40, textAlign: 'center' }}>
-          <a href="#kontakt" className="btn-primary" style={{ fontSize: 16 }}>Nezávazně poptat →</a>
+          <a href="#kontakt" className="btn-primary" style={{ fontSize: 16 }}>Nezávazně poptat</a>
         </div>
       </div>
     </section>
