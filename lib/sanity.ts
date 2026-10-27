@@ -17,6 +17,10 @@ export const INSPIRACE_QUERY = `*[_type == "inspirace"] | order(poradiZobrazeni 
   fotoPred { asset->{ url } }
 }`
 
+export const INSPIRACE_STRANKA_QUERY = `*[_type == "inspiraceStranka"][0] {
+  heroFotka { asset->{ url } }
+}`
+
 export const AKCE_QUERY = `*[_type == "akce" && aktivni == true] | order(_createdAt desc) {
   _id, nazev, popis, platnostDo, badge
 }`
