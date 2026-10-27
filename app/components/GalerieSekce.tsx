@@ -91,7 +91,7 @@ export default async function GalerieSekce() {
 
         <div style={{ marginTop: 48, textAlign: 'center' }}>
           <a href="#kontakt" className="btn-primary" style={{ fontSize: 16 }}>
-            Chci taky novou podlahu →
+            Chci taky novou podlahu
           </a>
         </div>
       </div>

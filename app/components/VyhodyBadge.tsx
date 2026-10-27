@@ -23,7 +23,7 @@ export default function VyhodyBadge({ data }: { data?: { nadpis?: string; podnad
             <h2 className="section-title">{nadpis.split(' ').slice(0, -2).join(' ')}<br /><span>{nadpis.split(' ').slice(-2).join(' ')}</span></h2>
             <p style={{ marginTop: 20, fontSize: 17, lineHeight: 1.7, color: 'var(--gray-700)', maxWidth: 420 }}>{podnadpis}</p>
             <div style={{ marginTop: 32 }}>
-              <a href="#kontakt" className="btn-primary">Zaměřit zdarma →</a>
+              <a href="#kontakt" className="btn-primary">Zaměřit zdarma</a>
             </div>
           </div>
           <div className="vyhody-badge-karty">

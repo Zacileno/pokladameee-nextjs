@@ -63,7 +63,7 @@ export default function SluzbySekce({ data }: Props) {
         </div>
 
         <div style={{ marginTop: 40, textAlign: 'center' }}>
-          <a href="#kontakt" className="btn-primary" style={{ fontSize: 16 }}>Nezávazně poptat →</a>
+          <a href="#kontakt" className="btn-primary" style={{ fontSize: 16 }}>Nezávazně poptat</a>
         </div>
       </div>
     </section>
