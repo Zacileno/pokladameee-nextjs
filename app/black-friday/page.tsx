@@ -60,6 +60,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: `${title} | pokládámeee.cz`,
       description: 'Sleva 25 % na vinylové, PVC, dřevěné podlahy i koberce. Zaměření zdarma.',
       url: 'https://www.pokladameee.cz/black-friday',
+      images: [{ url: '/opengraph-image.png', width: 1200, height: 630, alt: 'pokládámeee.cz – Hotovo, než se nadějeteee.' }],
     },
     alternates: { canonical: 'https://www.pokladameee.cz/black-friday' },
   }
