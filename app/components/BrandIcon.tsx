@@ -401,6 +401,24 @@ const ICONS: Record<string, (f: string) => ReactNode> = {
       <path d="M38 56a12 12 0 0 0 9 11" />
     </>
   ),
+  // Skutečné realizace — fotoaparát
+  '📸': f => (
+    <>
+      <path d="M36 30l6-10h16l6 10" fill={f} />
+      <rect x="14" y="30" width="72" height="42" rx="8" fill={f} />
+      <circle cx="50" cy="51" r="13" fill={f} />
+      <circle cx="50" cy="51" r="5" />
+      <path d="M74 40h2" />
+    </>
+  ),
+  // Hotovo a uklizeno — jiskřičky
+  '✨': f => (
+    <>
+      <path d="M44 14c2 18 6 22 24 24-18 2-22 6-24 24-2-18-6-22-24-24 18-2 22-6 24-24z" fill={f} />
+      <path d="M72 50c1 6 2 7 8 8-6 1-7 2-8 8-1-6-2-7-8-8 6-1 7-2 8-8z" fill={f} />
+      <path d="M76 14v8M72 18h8" />
+    </>
+  ),
 }
 
 // Barevné varianty podle pozadí, na kterém ikona leží
