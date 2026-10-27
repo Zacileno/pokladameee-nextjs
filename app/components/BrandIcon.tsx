@@ -130,6 +130,156 @@ const ICONS: Record<string, (f: string) => ReactNode> = {
       <path d="M50 16v4M50 68v4M22 44h4M74 44h4" />
     </>
   ),
+  // Bonusy — bankovky + mince
+  '🤑': f => (
+    <>
+      <path d="M10 26h56v34H10z" fill={f} />
+      <circle cx="38" cy="43" r="8" />
+      <path d="M18 34v0M58 52v0" />
+      <circle cx="70" cy="58" r="16" fill={f} />
+      <circle cx="70" cy="58" r="9" />
+      <path d="M70 53v10" />
+    </>
+  ),
+  // Auto — osobní auto
+  '🚘': f => (
+    <>
+      <path d="M10 62V50l8-4 10-14h30l12 14 14 4v12z" fill={f} />
+      <path d="M32 36h12v10H24zM50 36h6l8 10H50z" />
+      <circle cx="28" cy="64" r="7" fill={f} />
+      <circle cx="72" cy="64" r="7" fill={f} />
+    </>
+  ),
+  // Provize — rostoucí graf
+  '🍰': f => (
+    <>
+      <path d="M14 70V14M14 70h70" />
+      <path d="M24 70V52h10v18M42 70V40h10v18M60 70V28h10v42" fill={f} />
+      <path d="M22 40l16-12 12 6 22-16M64 18h8v8" />
+    </>
+  ),
+  // Manažer — postava s kravatou
+  '🧑‍💼': f => (
+    <>
+      <circle cx="50" cy="26" r="13" fill={f} />
+      <path d="M22 74c0-18 12-28 28-28s28 10 28 28z" fill={f} />
+      <path d="M46 46l4 6 4-6M50 52l-4 14 4 6 4-6z" />
+    </>
+  ),
+  // Mobilní telefon
+  '📱': f => (
+    <>
+      <rect x="32" y="10" width="36" height="64" rx="6" fill={f} />
+      <path d="M44 18h12" />
+      <circle cx="50" cy="64" r="3" />
+    </>
+  ),
+  // Sleva — štítek s procenty
+  '🔥': f => (
+    <>
+      <path d="M50 10l10 8 12-2 3 12 10 7-6 11 6 11-10 7-3 12-12-2-10 8-10-8-12 2-3-12-10-7 6-11-6-11 10-7 3-12 12 2z" fill={f} />
+      <path d="M40 58l20-24" />
+      <circle cx="40" cy="36" r="4" />
+      <circle cx="60" cy="56" r="4" />
+    </>
+  ),
+  // Flexibilní doba — hodiny se šipkou
+  '🕗': f => (
+    <>
+      <circle cx="50" cy="44" r="22" fill={f} />
+      <path d="M50 32v12l8 6" />
+      <path d="M20 26a34 34 0 0 1 60 2M80 18v10H70" />
+    </>
+  ),
+  // Doprava — tankovací stojan
+  '⛽': f => (
+    <>
+      <path d="M18 74V16h36v58z" fill={f} />
+      <path d="M26 24h20v16H26z" />
+      <path d="M54 32h8l8 8v24a4 4 0 0 0 8 0V30l-8-8" />
+      <path d="M12 74h48" />
+    </>
+  ),
+  // Paušál — bublina s voláním
+  '🤳': f => (
+    <>
+      <path d="M14 18h60v38H40l-14 12V56H14z" fill={f} />
+      <circle cx="32" cy="37" r="3" />
+      <circle cx="44" cy="37" r="3" />
+      <circle cx="56" cy="37" r="3" />
+    </>
+  ),
+  // Ubytování — postel
+  '🛏': f => (
+    <>
+      <path d="M10 72V22M90 72V50M10 50h80" />
+      <path d="M10 50V40h22v10z" fill={f} />
+      <path d="M34 50V38h50a6 6 0 0 1 6 6v6z" fill={f} />
+      <path d="M10 62h80" />
+    </>
+  ),
+  // Školení — absolventská čepice
+  '👨‍💻': f => (
+    <>
+      <path d="M8 34l42-18 42 18-42 18z" fill={f} />
+      <path d="M26 42v18c0 6 12 10 24 10s24-4 24-10V42" fill={f} />
+      <path d="M86 37v20" />
+      <circle cx="86" cy="60" r="3" />
+    </>
+  ),
+  // Firemní akce — přípitek
+  '🍻': f => (
+    <>
+      <path d="M14 24h26v44H14z" fill={f} />
+      <path d="M40 32h6a5 5 0 0 1 5 5v14a5 5 0 0 1-5 5h-6" />
+      <path d="M54 24h26v44H54z" fill={f} />
+      <path d="M80 32h6a5 5 0 0 1 5 5v14a5 5 0 0 1-5 5h-6" />
+      <path d="M14 32h26M54 32h26" />
+      <path d="M42 12l2 6M50 8v6M58 12l-2 6" />
+    </>
+  ),
+  // Sport — míč
+  '⚽': f => (
+    <>
+      <circle cx="50" cy="44" r="30" fill={f} />
+      <path d="M50 32l11 8-4 13H43l-4-13z" />
+      <path d="M50 32V15M61 40l16-5M57 53l9 14M43 53l-9 14M39 40l-16-5" />
+    </>
+  ),
+  // Volné víkendy — pohovka
+  '🛋': f => (
+    <>
+      <path d="M20 50V30a6 6 0 0 1 6-6h48a6 6 0 0 1 6 6v20" fill={f} />
+      <path d="M10 48a6 6 0 0 1 12 0v6h56v-6a6 6 0 0 1 12 0v20H10z" fill={f} />
+      <path d="M22 54v14M78 54v14M16 68v6M84 68v6" />
+    </>
+  ),
+  // Bavíme — kornout s konfetami
+  '🎉': f => (
+    <>
+      <path d="M12 74l18-48 30 30z" fill={f} />
+      <path d="M24 42l14 14M20 54l8 8" />
+      <path d="M54 22c4-6 10-6 12 0M70 36c6-4 12 0 10 6M44 14l2-6M78 22l6-4M62 50h8" />
+      <circle cx="64" cy="12" r="2.5" />
+      <circle cx="86" cy="54" r="2.5" />
+    </>
+  ),
+  // Smějeme se — smajlík
+  '😄': f => (
+    <>
+      <circle cx="50" cy="44" r="30" fill={f} />
+      <path d="M38 36v4M62 36v4" />
+      <path d="M34 52c8 12 24 12 32 0z" />
+    </>
+  ),
+  // Sdílíme — dvě bubliny
+  '🤝': f => (
+    <>
+      <path d="M8 16h48v30H28l-12 10V46H8z" fill={f} />
+      <path d="M44 36h48v30h-8v10L72 66H44z" fill={f} />
+      <path d="M18 28h26M18 36h16M54 48h28M54 56h18" />
+    </>
+  ),
 }
 
 // Barevné varianty podle pozadí, na kterém ikona leží
@@ -148,9 +298,11 @@ interface Props {
   emoji?: string
   size?: number
   tone?: BrandIconTone
+  // výplň vnitřku ikony, když pozadí neodpovídá žádné variantě (např. poloprůhledná dlaždice)
+  fill?: string
 }
 
-export default function BrandIcon({ emoji, size = 48, tone = 'default' }: Props) {
+export default function BrandIcon({ emoji, size = 48, tone = 'default', fill }: Props) {
   if (!emoji) return null
   const icon = ICONS[normalize(emoji)]
 
@@ -163,7 +315,7 @@ export default function BrandIcon({ emoji, size = 48, tone = 'default' }: Props)
     <svg width={size} height={size} viewBox="0 0 100 100" aria-hidden="true" style={{ display: 'block', flexShrink: 0 }}>
       <path d="M20 76h60l12 14H8z" fill={t.accent} />
       <g fill="none" stroke={t.line} strokeWidth={size < 40 ? 5 : 3.4} strokeLinecap="round" strokeLinejoin="round">
-        {icon(t.fill)}
+        {icon(fill ?? t.fill)}
       </g>
     </svg>
   )
