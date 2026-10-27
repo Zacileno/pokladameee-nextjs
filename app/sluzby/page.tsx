@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 import KontaktSekce from '@/app/components/KontaktSekce'
+import BrandIcon from '@/app/components/BrandIcon'
 import { client, VINYLOVA_PODLAHA_QUERY, PVC_PODLAHA_QUERY, KOBERCOVA_PODLAHA_QUERY, DREVENA_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY } from '@/lib/sanity'
 
 export const revalidate = 0
@@ -73,8 +74,8 @@ export default async function SluzbyPage() {
                   {fotky[i] ? (
                     <Image src={fotky[i] as string} alt={s.title} fill unoptimized style={{ objectFit: 'cover' }} />
                   ) : (
-                    <div style={{ position: 'absolute', inset: 0, background: s.barva, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 64 }}>
-                      {s.emoji}
+                    <div style={{ position: 'absolute', inset: 0, background: s.barva, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <BrandIcon emoji={s.emoji} size={96} tone="onBlue" fill="none" />
                     </div>
                   )}
                   <div className="sluzby-prehled-overlay" />
@@ -90,7 +91,7 @@ export default async function SluzbyPage() {
             <div className="sluzby-istripgrid">
               {ISTRIP.map(({ emoji, text }, i) => (
                 <div key={text || i} className="sluzby-istrip-item">
-                  <span style={{ fontSize: 28, flexShrink: 0 }}>{emoji}</span>
+                  <BrandIcon emoji={emoji} size={48} />
                   <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--gray-700)', lineHeight: 1.3 }}>{text}</span>
                 </div>
               ))}
