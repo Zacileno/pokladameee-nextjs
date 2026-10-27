@@ -16,7 +16,7 @@ export const blackFridaySchema = defineType({
     defineField({ name: 'topBarSleva', title: 'Horní lišta — sleva (zvýrazněná oranžově, např. "25 %")', type: 'formatovanyText', group: 'topBar' }),
     defineField({ name: 'topBarZbytek', title: 'Horní lišta — zbytek textu (za slevou)', type: 'formatovanyText', group: 'topBar' }),
     defineField({ name: 'topBarDovetek', title: 'Horní lišta — dovětek (skrytý na mobilu)', type: 'formatovanyText', group: 'topBar' }),
-    defineField({ name: 'topBarCta', title: 'Horní lišta — text odkazu (např. "DETAIL AKCE →")', type: 'formatovanyText', group: 'topBar' }),
+    defineField({ name: 'topBarCta', title: 'Horní lišta — text odkazu (např. "DETAIL AKCE")', type: 'formatovanyText', group: 'topBar' }),
 
     defineField({ name: 'heroBadge', title: 'Hero — badge (nad nadpisem)', type: 'formatovanyText', group: 'hero' }),
     defineField({ name: 'heroSleva', title: 'Hero — výše slevy (zvýrazněná oranžově, např. "25 %")', type: 'formatovanyText', group: 'hero' }),
