@@ -13,6 +13,13 @@ export type TopBarData = {
   topBarCta?: RT
 }
 
+// CTA tlačítka na webu nemají šipku — odstraníme ji i z textu ze Sanity (např. "DETAIL AKCE →")
+const bezSipky = (value: RT): RT =>
+  value?.map(block => ({
+    ...block,
+    children: block.children?.map(span => ({ ...span, text: span.text.replace(/\s*→\s*$/, '') })),
+  }))
+
 // Oznamovací lišta nad hlavičkou — je v normálním toku stránky, Header se pod ni posouvá (viz Header.tsx)
 export default function TopBar({ data }: { data?: TopBarData }) {
   const pathname = usePathname()
@@ -32,7 +39,7 @@ export default function TopBar({ data }: { data?: TopBarData }) {
           <span className="top-bar-dovetek">. <FormatovanyText value={data?.topBarDovetek} fallback="A to není vše." /></span>
         </span>
         <span className="top-bar-cta">
-          <FormatovanyText value={data?.topBarCta} fallback="DETAIL AKCE" />
+          <FormatovanyText value={bezSipky(data?.topBarCta)} fallback="DETAIL AKCE" />
         </span>
       </div>
     </a>
