@@ -52,7 +52,7 @@ export default function Header({ opaque }: { opaque?: boolean }) {
             priority
           />
         </a>
-        <nav style={{ display: 'flex', alignItems: 'center', gap: 32 }} className="desk-nav">
+        <nav style={{ display: 'flex', alignItems: 'center', gap: 22 }} className="desk-nav">
           <div
             style={{ position: 'relative' }}
             onMouseEnter={() => setSluzbyOpen(true)}
