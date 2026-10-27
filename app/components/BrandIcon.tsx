@@ -280,6 +280,127 @@ const ICONS: Record<string, (f: string) => ReactNode> = {
       <path d="M18 28h26M18 36h16M54 48h28M54 56h18" />
     </>
   ),
+  // Odvoz — dodávka (stejná jako ♻)
+  '🚛': f => (
+    <>
+      <path d="M8 36h46v30H8z" fill={f} />
+      <path d="M54 44h17l12 12v10H54z" fill={f} />
+      <path d="M60 44v12h23" />
+      <path d="M4 30h44l-3-6H4M8 24l-2-6h38" />
+      <circle cx="22" cy="68" r="7" fill={f} />
+      <circle cx="68" cy="68" r="7" fill={f} />
+      <path d="M24 46a8 8 0 1 1 7 10M28 59l3-3-3-3" />
+    </>
+  ),
+  // Zaměření — úhelník (stejný jako 📐)
+  '📏': f => (
+    <>
+      <path d="M16 80V20l60 60z" />
+      <path d="M28 68V49l19 19z" />
+      <path d="M16 32h6M16 44h9M16 56h6M16 68h9M28 80v-6M40 80v-9M52 80v-6M64 80v-9" />
+      <path d="M56 50l26-26 6 6-26 26-9 3z" />
+      <path d="M77 29l6 6" />
+    </>
+  ),
+  // Záruka — štít s fajfkou
+  '🛡': f => (
+    <>
+      <path d="M50 10l30 10v22c0 18-13 30-30 36-17-6-30-18-30-36V20z" fill={f} />
+      <path d="M36 44l10 10 18-20" />
+    </>
+  ),
+  // Životnost — přesýpací hodiny
+  '📊': f => (
+    <>
+      <path d="M28 12h44M28 74h44" />
+      <path d="M33 12c0 18 17 22 17 31s-17 13-17 31h34c0-18-17-22-17-31s17-13 17-31z" fill={f} />
+      <path d="M42 66h16M46 30h8" />
+    </>
+  ),
+  // Dřevo — strom
+  '🌳': f => (
+    <>
+      <path d="M50 58l-8-6M50 54l8-6" />
+      <path d="M50 10a16 16 0 0 1 15 10 14 14 0 0 1 4 27H31a14 14 0 0 1 4-27 16 16 0 0 1 15-10z" fill={f} />
+      <path d="M50 74V50" />
+    </>
+  ),
+  // Brousitelná — kladivo
+  '🔨': f => (
+    <>
+      <g transform="rotate(40 50 44)">
+      <rect x="45" y="34" width="10" height="44" rx="5" fill={f} />
+      <path d="M30 16h40v18H30z" fill={f} />
+      <path d="M30 22h-6v6h6" />
+      </g>
+    </>
+  ),
+  // Hodnota nemovitosti — dům se šipkou
+  '🏡': f => (
+    <>
+      <path d="M14 44L50 14l36 30" />
+      <path d="M22 38v34h56V38" fill={f} />
+      <path d="M50 64V40M40 50l10-10 10 10" />
+    </>
+  ),
+  // Koberec — role
+  '🧶': f => (
+    <>
+      <path d="M14 66l10-12h66l-10 12z" fill={f} />
+      <path d="M30 22h50a14 14 0 0 1 0 28H30" fill={f} />
+      <circle cx="30" cy="36" r="14" fill={f} />
+      <path d="M30 36a4 4 0 1 1 4 4 8 8 0 1 1-8-8" />
+    </>
+  ),
+  // Tichá — reproduktor ztlumený
+  '🔇': f => (
+    <>
+      <path d="M16 34h12l18-16v52L28 54H16z" fill={f} />
+      <path d="M60 34l18 18M78 34L60 52" />
+    </>
+  ),
+  // Komerční prostory — budova
+  '🏢': f => (
+    <>
+      <path d="M20 74V16h38v58z" fill={f} />
+      <path d="M58 34h22v40H58" fill={f} />
+      <path d="M29 26h6M43 26h6M29 38h6M43 38h6M29 50h6M43 50h6M66 46h6M66 58h6" />
+      <path d="M35 74V62h8v12" />
+      <path d="M14 74h72" />
+    </>
+  ),
+  // Cena — peněženka
+  '💰': f => (
+    <>
+      <path d="M26 30l34-14 6 14" fill={f} />
+      <rect x="16" y="30" width="64" height="42" rx="6" fill={f} />
+      <rect x="56" y="42" width="28" height="18" rx="5" fill={f} />
+      <circle cx="66" cy="51" r="2.5" />
+    </>
+  ),
+  // Měkký došlap — noha zboku na pružné vrstvě
+  '🦶': f => (
+    <>
+      <path d="M30 14v32c0 8 3 14 10 14h38c5 0 8-3 7-7-1-4-5-6-10-7l-22-6c-6-2-9-7-9-13V14" fill={f} />
+      <path d="M12 70q9-6 19 0t19 0 19 0 19 0" />
+    </>
+  ),
+  // Snadná údržba — koště
+  '🧹': f => (
+    <>
+      <path d="M74 8L54 44" />
+      <path d="M44 38l20 10-8 26-34-16z" fill={f} />
+      <path d="M30 60l-4 8M38 64l-4 9M46 67l-3 9M52 70l-2 7" />
+      <path d="M42 46l18 9" />
+    </>
+  ),
+  // Voděodolná — kapka
+  '💧': f => (
+    <>
+      <path d="M50 10S26 38 26 54a24 24 0 0 0 48 0C74 38 50 10 50 10z" fill={f} />
+      <path d="M38 56a12 12 0 0 0 9 11" />
+    </>
+  ),
 }
 
 // Barevné varianty podle pozadí, na kterém ikona leží
@@ -292,7 +413,7 @@ const TONES = {
 export type BrandIconTone = keyof typeof TONES
 
 // Emoji může přijít s variačním selektorem (např. '♻️' = '♻' + U+FE0F)
-const normalize = (emoji: string) => emoji.replace(/️/g, '').trim()
+const normalize = (emoji: string) => emoji.replace(/\uFE0F/g, '').trim()
 
 interface Props {
   emoji?: string
@@ -318,5 +439,17 @@ export default function BrandIcon({ emoji, size = 48, tone = 'default', fill }: 
         {icon(fill ?? t.fill)}
       </g>
     </svg>
+  )
+}
+
+// Text, který začíná emoji (např. "🚛 Odvoz staré podlahy zdarma" ze Sanity) → ikona + zbytek textu
+export function IkonaText({ text, size = 28, tone = 'default' }: { text: string; size?: number; tone?: BrandIconTone }) {
+  const [prvni = '', ...zbytek] = text.trim().split(/\s+/)
+  if (!ICONS[normalize(prvni)]) return <>{text}</>
+  return (
+    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+      <BrandIcon emoji={prvni} size={size} tone={tone} />
+      {zbytek.join(' ')}
+    </span>
   )
 }
