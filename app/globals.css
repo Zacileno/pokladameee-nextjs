@@ -138,6 +138,11 @@ input, select, textarea { font-family: var(--font); }
 .blog-clanek-obsah img { width: 100%; border-radius: 12px; margin: 8px 0 28px; }
 .blog-souvisejici-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
 
+/* ── INSPIRACE ── */
+.insp-hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+.insp-hero-foto { border-radius: 16px; overflow: hidden; aspect-ratio: 4/3; background: var(--gray-50); }
+.insp-proc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+
 /* ── FOOTER ── */
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.1); }
 
@@ -180,6 +185,8 @@ input, select, textarea { font-family: var(--font); }
   .sluzby-istrip-item:last-child { border-bottom: none; }
   .sluzby-ref-grid { grid-template-columns: 1fr; gap: 32px; }
   .hero-sluzby-grid { grid-template-columns: 1fr; gap: 0; }
+  .insp-hero-grid { grid-template-columns: 1fr; gap: 32px; }
+  .insp-proc-grid { grid-template-columns: 1fr; gap: 16px; }
 
   .desk-nav { display: none !important; }
   .hamburger { display: block !important; }
