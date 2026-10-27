@@ -154,7 +154,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
           <div className="blog-clanek-obsah">
             {data.pouzitHtmlKod && data.obsahHtml ? (
-              <div dangerouslySetInnerHTML={{ __html: data.obsahHtml.replace(/s*→s*(?=</a>)/g, '') }} />
+              <div dangerouslySetInnerHTML={{ __html: data.obsahHtml.replace(/\s*→\s*(?=<\/a>)/g, '') }} />
             ) : data.obsah?.length ? (
               <PortableText value={data.obsah} components={portableTextComponents} />
             ) : (
