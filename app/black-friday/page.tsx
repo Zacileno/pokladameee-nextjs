@@ -182,7 +182,7 @@ export default async function BlackFridayPage() {
                   <FormatovanyText value={data.zvyrazenyText} fallback="BLACK FRIDAY = nová podlaha za méně peněz. Starosti necháte na nás." />
                 </p>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 24, flexWrap: 'wrap' }}>
-                  <AkcePopup label={<FormatovanyText value={data.ctaPopupText} fallback="Využít akci →" />} />
+                  <AkcePopup label={<FormatovanyText value={data.ctaPopupText} fallback="Využít akci" />} />
                   <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                     <Image src={adamFotoUrl} alt="Adam Hajdušek" width={52} height={52} unoptimized style={{ borderRadius: '50%', objectFit: 'cover', objectPosition: 'center top', border: '2px solid var(--orange)', flexShrink: 0 }} />
                     <span style={{ fontWeight: 800, fontSize: 15, color: 'var(--blue)' }}>
