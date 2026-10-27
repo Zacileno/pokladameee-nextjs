@@ -1,3 +1,5 @@
+import BrandIcon from '@/app/components/BrandIcon'
+
 const benefity = [
   { emoji: '🤑', label: 'Bonusy / Prémie' },
   { emoji: '🚘', label: 'Auto i pro soukromé účely' },
@@ -37,7 +39,7 @@ export default function BenefityGrid({ compact = false }: { compact?: boolean })
               justifyContent: 'center',
               gap: 12,
             }}>
-              <span style={{ fontSize: 40 }}>{emoji}</span>
+              <BrandIcon emoji={emoji} size={56} tone="onBlue" fill="#2C5E92" />
               <span style={{ fontSize: 13, color: 'white', textAlign: 'center', fontWeight: 500 }}>{label}</span>
             </div>
           ))}
