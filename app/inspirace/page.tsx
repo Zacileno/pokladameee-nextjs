@@ -157,7 +157,7 @@ export default async function InspracePage() {
         </div>
       </section>
 
-      <ReferenceSekce nadpis={<>Jak to vypadá<br /><span>u našich zákazníkůůů</span></>} />
+      <ReferenceSekce nadpis={<>Jak to vypadá<br /><span>u našich zákazníků</span></>} />
 
       <KontaktSekce kontakt={kontaktSekce} />
 
