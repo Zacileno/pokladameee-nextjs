@@ -42,7 +42,7 @@ export default function Header({ opaque }: { opaque?: boolean }) {
       borderBottom: scrolled ? '1px solid rgba(255,255,255,0.1)' : 'none',
     }}>
       <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 72 }}>
-        <a href="/" style={{ marginLeft: -12 }}>
+        <a href="/" className="header-logo" style={{ marginLeft: -12 }}>
           <Image
             src="/assets/logo/logo-inverzni-modre.svg"
             alt="pokládámeee.cz"
@@ -52,7 +52,7 @@ export default function Header({ opaque }: { opaque?: boolean }) {
             priority
           />
         </a>
-        <nav style={{ display: 'flex', alignItems: 'center', gap: 32 }} className="desk-nav">
+        <nav style={{ display: 'flex', alignItems: 'center', gap: 22 }} className="desk-nav">
           <div
             style={{ position: 'relative' }}
             onMouseEnter={() => setSluzbyOpen(true)}
@@ -77,6 +77,9 @@ export default function Header({ opaque }: { opaque?: boolean }) {
               </div>
             )}
           </div>
+          <a href="/inspirace" style={{ color: pathname?.startsWith('/inspirace') ? '#fff' : 'rgba(255,255,255,0.8)', fontWeight: pathname?.startsWith('/inspirace') ? 700 : 600, fontSize: 15, transition: 'color 0.2s', textDecoration: pathname?.startsWith('/inspirace') ? 'underline' : 'none', textUnderlineOffset: 4 }}
+            onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+            onMouseLeave={e => (e.currentTarget.style.color = pathname?.startsWith('/inspirace') ? '#fff' : 'rgba(255,255,255,0.8)')}>Inspirace</a>
           {[['/#jak-to-funguje', 'Jak to funguje'], ['/#reference', 'Reference'], ['/faq', 'FAQ']].map(([href, label]) => (
             <a key={href} href={href} style={{ color: 'rgba(255,255,255,0.8)', fontWeight: 600, fontSize: 15, transition: 'color 0.2s' }}
               onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
@@ -120,7 +123,7 @@ export default function Header({ opaque }: { opaque?: boolean }) {
               </div>
             )}
           </div>
-          {[['/#jak-to-funguje', 'Jak to funguje'], ['/#reference', 'Reference'], ['/faq', 'FAQ'], ['/#kontakt', 'Kontakt'], ['/kariera', 'Kariéra'], ['/blog', 'Blog']].map(([href, label]) => (
+          {[['/inspirace', 'Inspirace'], ['/#jak-to-funguje', 'Jak to funguje'], ['/#reference', 'Reference'], ['/faq', 'FAQ'], ['/#kontakt', 'Kontakt'], ['/kariera', 'Kariéra'], ['/blog', 'Blog']].map(([href, label]) => (
             <a key={href} href={href} onClick={() => setMenuOpen(false)} style={{ color: 'white', fontWeight: 600, fontSize: 18 }}>{label}</a>
           ))}
           <a href="/#kontakt" className="btn-primary" onClick={() => setMenuOpen(false)} style={{ textAlign: 'center', justifyContent: 'center' }}>Chci podlahu</a>
