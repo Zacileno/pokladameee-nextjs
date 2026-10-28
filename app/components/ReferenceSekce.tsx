@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import { client, REFERENCE_QUERY } from '../../lib/sanity'
 
 export const revalidate = 60
@@ -19,7 +20,8 @@ const FALLBACK: Recenze[] = [
   { _id: 'f6', jmeno: 'Lenka M.', text: 'Přijeli rychle, zaměření i nabídka do druhého dne. Nakonec jsme zvolili tmavý vinyl — naprosto spokojeni.', hvezdicky: 5 },
 ]
 
-export default async function ReferenceSekce() {
+// nadpis lze přepsat (např. na Inspiraci), jinak "Co říkají naši zákazníci"
+export default async function ReferenceSekce({ nadpis }: { nadpis?: ReactNode } = {}) {
   let recenze: Recenze[] = FALLBACK
   try {
     const data = await client.fetch<Recenze[]>(REFERENCE_QUERY)
@@ -35,7 +37,7 @@ export default async function ReferenceSekce() {
               Hodnoceeení zákazníků
             </p>
             <h2 className="section-title">
-              Co říkají<br /><span>naši zákazníci</span>
+              {nadpis ?? <>Co říkají<br /><span>naši zákazníci</span></>}
             </h2>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
