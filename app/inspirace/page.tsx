@@ -74,11 +74,8 @@ export default async function InspracePage() {
                 <a href="/" style={{ color: 'var(--orange)' }}>Domů</a>
                 <span style={{ color: 'var(--gray-400)' }}> / Inspirace</span>
               </p>
-              <p style={{ fontSize: 18, color: 'var(--gray-700)', lineHeight: 1.7, marginBottom: 20 }}>
+              <p style={{ fontSize: 18, color: 'var(--gray-700)', lineHeight: 1.7, marginBottom: 32 }}>
                 Prohlédněte si, jak vypadají naše realizace naživo. Žádné vizualizace ani katalogové fotky — jen skutečné podlahy, které jsme položili zákazníkům po celém Moravskoslezském, Zlínském a Olomouckém kraji.
-              </p>
-              <p style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 15, color: 'var(--blue)', fontWeight: 700, marginBottom: 32 }}>
-                <BrandIcon emoji="📸" size={32} /> Skutečné realizace, žádné stock fotky
               </p>
               <a href="#realizace" className="btn-primary" style={{ borderRadius: 10, padding: '15px 28px' }}>
                 Naše realizaceee
@@ -144,7 +141,7 @@ export default async function InspracePage() {
       {/* PROČ POKLÁDÁMEEE */}
       <section className="section" style={{ background: 'var(--gray-50)' }}>
         <div className="container">
-          <h2 className="section-title" style={{ textAlign: 'center' }}>Proč <span>pokládámeee</span></h2>
+          <h2 className="section-title" style={{ textAlign: 'center' }}>Proč <span>Pokládámeee</span></h2>
           <div className="insp-proc-grid">
             {PROC.map(({ emoji, title, desc }) => (
               <div key={title} style={{ background: 'white', borderRadius: 12, padding: '32px 28px', border: '1px solid var(--gray-100)' }}>
@@ -160,7 +157,7 @@ export default async function InspracePage() {
         </div>
       </section>
 
-      <ReferenceSekce />
+      <ReferenceSekce nadpis={<>Jak to vypadá<br /><span>u našich zákazníkůůů</span></>} />
 
       <KontaktSekce kontakt={kontaktSekce} />
 
