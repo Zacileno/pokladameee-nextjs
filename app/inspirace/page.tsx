@@ -6,6 +6,8 @@ import KontaktSekce from '../components/KontaktSekce'
 import PredPoKarta from '../components/PredPoKarta'
 import ReferenceSekce from '../components/ReferenceSekce'
 import BrandIcon from '../components/BrandIcon'
+import YouTubeVideo from '../components/YouTubeVideo'
+import { VIDEO_PORUBACEK_VYSLEDEK } from '../../lib/videa'
 
 export const metadata: Metadata = {
   title: 'Inspirace a galerie',
@@ -135,6 +137,12 @@ export default async function InspracePage() {
               ))}
             </div>
           )}
+
+          {/* VELKÉ VIDEO pod galerií */}
+          <div className="velke-video">
+            <h3>Podívejte se na výsled<span>eee</span>k</h3>
+            <YouTubeVideo id={VIDEO_PORUBACEK_VYSLEDEK.id} nazev={VIDEO_PORUBACEK_VYSLEDEK.nazev} />
+          </div>
         </div>
       </section>
 
