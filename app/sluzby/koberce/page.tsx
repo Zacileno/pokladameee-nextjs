@@ -304,6 +304,16 @@ export default async function KobercovaPodlahaPage() {
         </div>
       </section>
 
+      {/* VIDEO Z REALIZACE */}
+      <section className="section">
+        <div className="container">
+          <h2 className="section-title" style={{ textAlign: 'center' }}>Jak vypadá hotový <span>koberec</span></h2>
+          <div className="velke-video" style={{ marginTop: 32 }}>
+            <YouTubeVideo id={VIDEO_PORUBACEK_VYSLEDEK.id} nazev={VIDEO_PORUBACEK_VYSLEDEK.nazev} />
+          </div>
+        </div>
+      </section>
+
       {/* REFERENCE STRIP */}
       <section className="section" style={{ background: 'var(--blue)' }}>
         <div className="container">
@@ -328,16 +338,6 @@ export default async function KobercovaPodlahaPage() {
               </p>
               <p style={{ fontWeight: 700, color: 'var(--orange)' }}>{referenceJmeno}</p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* VIDEA Z REALIZACE */}
-      <section className="section">
-        <div className="container">
-          <h2 className="section-title" style={{ textAlign: 'center' }}>Jak vypadá hotový <span>koberec</span></h2>
-          <div className="velke-video" style={{ marginTop: 32 }}>
-            <YouTubeVideo id={VIDEO_PORUBACEK_VYSLEDEK.id} nazev={VIDEO_PORUBACEK_VYSLEDEK.nazev} />
           </div>
         </div>
       </section>
