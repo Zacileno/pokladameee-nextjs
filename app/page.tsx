@@ -13,6 +13,7 @@ import JakToFunguje from './components/JakToFunguje'
 import GalerieSekce from './components/GalerieSekce'
 import RemeselnikSekce from './components/RemeselnikSekce'
 import VyhodyBadge from './components/VyhodyBadge'
+import MapaSekce from './components/MapaSekce'
 import ReferenceSekce from './components/ReferenceSekce'
 import KontaktSekce from './components/KontaktSekce'
 import Footer from './components/Footer'
@@ -54,6 +55,7 @@ export default async function Home() {
         {/* <GalerieSekce /> */}
         <RemeselnikSekce data={rodinaZnacekData} />
         <VyhodyBadge data={procNasVybratData} />
+        <MapaSekce />
         <ReferenceSekce />
         <KontaktSekce kontakt={kontaktSekce} />
       </main>
