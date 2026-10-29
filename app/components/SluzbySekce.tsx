@@ -32,6 +32,9 @@ export default function SluzbySekce({ data }: Props) {
   const nadpisSlova = nadpis.split(' ')
   const posledniDve = nadpisSlova.slice(-2).join(' ')
   const zbytek = nadpisSlova.slice(0, -2).join(' ')
+  // předložka „na" na konci prvního řádku se přesune na druhý (Specializujeme se / na vinylové podlahy)
+  const maNa = /(^|\s)na$/.test(zbytek)
+  const prvniRadek = maNa ? zbytek.replace(/\s*na$/, '') : zbytek
 
   return (
     <section id="sluzby" className="section" style={{ background: 'var(--gray-50)' }}>
@@ -39,8 +42,8 @@ export default function SluzbySekce({ data }: Props) {
         <div style={{ marginBottom: 48 }}>
           <p style={{ color: 'var(--orange)', fontWeight: 700, fontSize: 13, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Co pokládámeee</p>
           <h2 className="section-title">
-            {zbytek && <>{zbytek}<br /></>}
-            na <span>{posledniDve.replace(/^na /, '')}</span>
+            {prvniRadek && <>{prvniRadek}<br /></>}
+            {maNa && 'na '}<span>{posledniDve}</span>
           </h2>
           <p className="section-subtitle" style={{ marginTop: 16 }}>{podnadpis}</p>
         </div>
