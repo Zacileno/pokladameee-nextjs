@@ -42,7 +42,7 @@ const SLUZBY = [
   { slug: 'koberce', title: 'Koberce', emoji: '🧶', query: KOBERCOVA_PODLAHA_QUERY, barva: 'linear-gradient(160deg, var(--blue), #FF8800)',
     popis: <><strong>Teplo pod nohama</strong> a tlumení hluku. Široký výběr barev a struktur do ložnice, dětského pokoje i kanceláře.</> },
   { slug: 'drevena-podlaha', title: 'Dřevěná podlaha', emoji: '🌳', query: DREVENA_PODLAHA_QUERY, barva: 'linear-gradient(160deg, #3D3D3A, #000)',
-    popis: <><strong>Přírodní a nadčasová.</strong> Do interiéru přinese teplo, charakter a originalitu — každá podlaha je jedinečná.</> },
+    popis: <><strong>Přírodní a nadčasová.</strong> Do interiéru přinese teplo, charakter a originalitu.</> },
 ]
 
 export default async function SluzbyPage() {
