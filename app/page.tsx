@@ -53,11 +53,11 @@ export default async function Home() {
         <SluzbySekce data={sluzbySekce} />
         <JakToFunguje data={jakToFungujeData} />
         {/* <GalerieSekce /> */}
-        <RemeselnikSekce data={rodinaZnacekData} />
         <VyhodyBadge data={procNasVybratData} />
         <MapaSekce />
         <ReferenceSekce />
         <KontaktSekce kontakt={kontaktSekce} />
+        <RemeselnikSekce data={rodinaZnacekData} />
       </main>
       <Footer nastaveni={obecneNastaveni} />
       <BlackFridayPopup />
