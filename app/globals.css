@@ -102,6 +102,17 @@ input, select, textarea { font-family: var(--font); }
 .sluzby-prehled-karta:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.18); }
 .sluzby-prehled-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.15) 45%, transparent 70%); }
 .sluzby-prehled-label { position: absolute; left: 20px; bottom: 20px; right: 20px; color: white; font-weight: 800; font-size: 22px; line-height: 1.2; }
+.sluzby-uvod { display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center; margin: 8px 0 48px; }
+.sluzby-uvod strong { color: var(--black); }
+.sluzby-uvod-kroky { display: flex; justify-content: space-around; gap: 16px; }
+.sluzby-uvod-krok { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 800; color: var(--black); }
+.sluzby-dlazdice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.sluzby-dlazdice { display: grid; grid-template-columns: 1fr 1fr; min-height: 300px; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.12); }
+.sluzby-dlazdice-foto { position: relative; display: block; min-height: 220px; }
+.sluzby-dlazdice-obsah { padding: 32px 28px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+.sluzby-dlazdice-obsah h2 { font-size: 24px; font-weight: 900; text-transform: uppercase; color: var(--black); margin-bottom: 12px; }
+.sluzby-dlazdice-obsah p { font-size: 15px; line-height: 1.6; margin-bottom: 24px; }
+.sluzby-dlazdice-obsah strong { color: var(--black); }
 
 /* ── BLOG ── */
 .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
@@ -206,6 +217,13 @@ input, select, textarea { font-family: var(--font); }
 
   .sluzby-prehled-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
   .sluzby-prehled-label { font-size: 18px; left: 14px; bottom: 14px; right: 14px; }
+  .sluzby-uvod { grid-template-columns: 1fr; gap: 24px; margin-bottom: 32px; }
+  .sluzby-uvod-kroky { justify-content: space-between; }
+  .sluzby-uvod-krok { flex-direction: column; gap: 6px; font-size: 14px; }
+  .sluzby-dlazdice-grid { grid-template-columns: 1fr; gap: 16px; }
+  .sluzby-dlazdice { grid-template-columns: 1fr; }
+  .sluzby-dlazdice-obsah { padding: 24px 20px; }
+  .sluzby-dlazdice-obsah h2 { font-size: 20px; }
 
   .blog-grid { grid-template-columns: 1fr; gap: 20px; }
   .blog-souvisejici-grid { grid-template-columns: 1fr; gap: 20px; }
