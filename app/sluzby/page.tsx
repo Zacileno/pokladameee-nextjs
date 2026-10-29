@@ -28,11 +28,21 @@ const ISTRIP = [
   { emoji: '📍', text: 'MSK, Zlínský i Olomoucký kraj' },
 ]
 
+const KROKY = [
+  { emoji: '📐', slovo: 'Zaměřím' },
+  { emoji: '🎨', slovo: 'Poradím' },
+  { emoji: '✨', slovo: 'Položím' },
+]
+
 const SLUZBY = [
-  { slug: 'vinylova-podlaha', title: 'Vinylová podlaha', emoji: '🪵', query: VINYLOVA_PODLAHA_QUERY, barva: 'linear-gradient(160deg, var(--blue), var(--blue-dark))' },
-  { slug: 'pvc-podlaha', title: 'PVC podlaha', emoji: '💧', query: PVC_PODLAHA_QUERY, barva: 'linear-gradient(160deg, #FF8800, #c66300)' },
-  { slug: 'koberce', title: 'Koberce', emoji: '🧶', query: KOBERCOVA_PODLAHA_QUERY, barva: 'linear-gradient(160deg, var(--blue), #FF8800)' },
-  { slug: 'drevena-podlaha', title: 'Dřevěná podlaha', emoji: '🌳', query: DREVENA_PODLAHA_QUERY, barva: 'linear-gradient(160deg, #3D3D3A, #000)' },
+  { slug: 'vinylova-podlaha', title: 'Vinylová podlaha', emoji: '🪵', query: VINYLOVA_PODLAHA_QUERY, barva: 'linear-gradient(160deg, var(--blue), var(--blue-dark))',
+    popis: <>Lepená i plovoucí. <strong>Odolná a voděodolná</strong>, věrně napodobí dřevo i kámen. Skvělá do kuchyně, koupelny i obýváku.</> },
+  { slug: 'pvc-podlaha', title: 'PVC podlaha', emoji: '💧', query: PVC_PODLAHA_QUERY, barva: 'linear-gradient(160deg, #FF8800, #c66300)',
+    popis: <><strong>Praktická a cenově dostupná.</strong> Příjemná na chůzi a snadno se udržuje — zvládne i každodenní provoz celé rodiny.</> },
+  { slug: 'koberce', title: 'Koberce', emoji: '🧶', query: KOBERCOVA_PODLAHA_QUERY, barva: 'linear-gradient(160deg, var(--blue), #FF8800)',
+    popis: <><strong>Teplo pod nohama</strong> a tlumení hluku. Široký výběr barev a struktur do ložnice, dětského pokoje i kanceláře.</> },
+  { slug: 'drevena-podlaha', title: 'Dřevěná podlaha', emoji: '🌳', query: DREVENA_PODLAHA_QUERY, barva: 'linear-gradient(160deg, #3D3D3A, #000)',
+    popis: <><strong>Přírodní a nadčasová.</strong> Do interiéru přinese teplo, charakter a originalitu.</> },
 ]
 
 export default async function SluzbyPage() {
@@ -58,29 +68,47 @@ export default async function SluzbyPage() {
       <main>
         <section style={{ paddingTop: 120, paddingBottom: 80 }}>
           <div className="container">
-            <div style={{ marginBottom: 48, textAlign: 'center' }}>
-              <p style={{ color: 'var(--orange)', fontWeight: 700, fontSize: 13, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Co pokládámeee</p>
-              <h1 className="section-title">
-                Naše <span>služby</span>
-              </h1>
-              <p className="section-subtitle" style={{ margin: '16px auto 0' }}>
-                Vyberte si podlahu, o kterou máte zájem — na každé stránce najdete detaily, typy materiálů i časté otázky.
+            <p style={{ fontSize: 14, fontWeight: 600, marginBottom: 20 }}>
+              <a href="/" style={{ color: 'var(--orange)' }}>Domů</a>
+              <span style={{ color: 'var(--gray-400)' }}> / Služby</span>
+            </p>
+            <h1 className="section-title">Naše <span>služby</span></h1>
+            <div className="sluzby-uvod">
+              <p style={{ fontSize: 17, lineHeight: 1.7 }}>
+                Podlahu vám vyřešíme <strong>od A do Z</strong> — zaměříme, poradíme s výběrem, odvezeme tu starou a novou položíme.
+                Vyberte si <strong>vinyl</strong>, <strong>PVC</strong>, <strong>koberec</strong> nebo <strong>dřevo</strong> podle toho, co od podlahy čekáte doma i v kanceláři.
+                Nejste si něčím jistí? Sepsali jsme{' '}
+                <a href="/faq" style={{ color: 'var(--orange)', fontWeight: 700, textDecoration: 'underline', textUnderlineOffset: 3 }}>odpovědi na nejčastější dotazy</a>.
               </p>
+              <div className="sluzby-uvod-kroky">
+                {KROKY.map(k => (
+                  <div key={k.slovo} className="sluzby-uvod-krok">
+                    <BrandIcon emoji={k.emoji} size={44} />
+                    <span>{k.slovo}<span style={{ color: 'var(--orange)' }}>eee</span></span>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <div className="sluzby-prehled-grid">
+            {/* DLAŽDICE — fotka, krátký popis a proklik */}
+            <div className="sluzby-dlazdice-grid">
               {SLUZBY.map((s, i) => (
-                <Link key={s.slug} href={`/sluzby/${s.slug}`} className="sluzby-prehled-karta">
-                  {fotky[i] ? (
-                    <Image src={fotky[i] as string} alt={s.title} fill unoptimized style={{ objectFit: 'cover' }} />
-                  ) : (
-                    <div style={{ position: 'absolute', inset: 0, background: s.barva, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <BrandIcon emoji={s.emoji} size={96} tone="onBlue" fill="none" />
-                    </div>
-                  )}
-                  <div className="sluzby-prehled-overlay" />
-                  <span className="sluzby-prehled-label">{s.title}</span>
-                </Link>
+                <div key={s.slug} className="sluzby-dlazdice">
+                  <Link href={`/sluzby/${s.slug}`} className="sluzby-dlazdice-foto" aria-label={s.title}>
+                    {fotky[i] ? (
+                      <Image src={fotky[i] as string} alt={s.title} fill unoptimized style={{ objectFit: 'cover' }} />
+                    ) : (
+                      <div style={{ position: 'absolute', inset: 0, background: s.barva, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <BrandIcon emoji={s.emoji} size={72} tone="onBlue" fill="none" />
+                      </div>
+                    )}
+                  </Link>
+                  <div className="sluzby-dlazdice-obsah">
+                    <h2>{s.title}</h2>
+                    <p>{s.popis}</p>
+                    <Link href={`/sluzby/${s.slug}`} className="btn-primary">Zobrazit produkt</Link>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
