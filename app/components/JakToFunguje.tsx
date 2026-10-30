@@ -9,6 +9,15 @@ const FALLBACK_KROKY: Krok[] = [
   { title: 'Uklidímeee', desc: 'Po dokončení po sobě uklidíme. Odcházíme čistě — vy si jen užíváte novou podlahu.' },
 ]
 
+// ikony kroků podle pořadí: poptávka, zaměření, pokládka, úklid
+const IKONY_KROKU = ['📞', '📐', '🪵', '🧹']
+
+// "Poptáteee nás" → Poptát<span>eee</span> nás
+const sEee = (text = '') => {
+  const i = text.indexOf('eee')
+  return i < 0 ? text : <>{text.slice(0, i)}<span>eee</span>{text.slice(i + 3)}</>
+}
+
 export default function JakToFunguje({ data }: { data?: { kroky?: Krok[] } }) {
   const kroky = data?.kroky?.length ? data.kroky : FALLBACK_KROKY
 
@@ -19,37 +28,32 @@ export default function JakToFunguje({ data }: { data?: { kroky?: Krok[] } }) {
         width: 500, height: 500, background: 'rgba(255,136,0,0.06)', borderRadius: '50%', pointerEvents: 'none',
       }} />
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-        <div style={{ marginBottom: 56 }}>
+        <div style={{ marginBottom: 64 }}>
           <p style={{ color: 'var(--orange)', fontWeight: 700, fontSize: 13, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>
             Jak to fungujeee
           </p>
           <h2 className="section-title" style={{ color: 'white' }}>
-            Čtyři kroky<br />
+            Čtyři kroky{' '}
             <span style={{ color: 'var(--orange)' }}>k nové podlaze</span>
           </h2>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 2 }}>
+        <div className="kroky-grid">
           {kroky.map((k, i) => (
-            <div key={i} style={{
-              padding: '36px 32px',
-              background: i % 2 === 0 ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.03)',
-              position: 'relative',
-            }}>
-              <div style={{ fontSize: 72, fontWeight: 900, color: 'rgba(255,136,0,0.15)', lineHeight: 1, marginBottom: -16, position: 'relative', zIndex: 0 }}>
-                {String(i + 1).padStart(2, '0')}
-              </div>
-              <h3 style={{ fontSize: 22, fontWeight: 800, color: 'white', marginBottom: 12, position: 'relative', zIndex: 1 }}>{k.title}</h3>
-              <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 15, lineHeight: 1.65, position: 'relative', zIndex: 1 }}>{k.desc}</p>
+            <div key={i} className="krok-karta">
+              <span className="krok-cislo">{i + 1}</span>
+              <BrandIcon emoji={IKONY_KROKU[i] ?? '✅'} size={64} />
+              <h3>{sEee(k.title)}</h3>
+              <p>{k.desc}</p>
             </div>
           ))}
         </div>
         <div style={{ marginTop: 56, display: 'flex', alignItems: 'center', gap: 24, flexWrap: 'wrap' }}>
           <a href="#kontakt" className="btn-primary" style={{ fontSize: 16 }}>Začít teď</a>
-          <div style={{ display: 'flex', gap: 32 }}>
+          <div style={{ display: 'flex', gap: 32, flexWrap: 'wrap' }}>
             {[['⚡', 'Do 48 hodin', 'zaměříme'], ['📋', 'Zdarma', 'kalkulace'], ['✅', 'Hotovo', 'než se nadějeteee']].map(([icon, num, label]) => (
               <div key={num} style={{ color: 'white' }}>
                 <div style={{ fontSize: 20, display: 'flex', alignItems: 'center', gap: 8 }}><BrandIcon emoji={icon} size={32} tone="onBlue" /> <strong style={{ color: 'var(--orange)' }}>{num}</strong></div>
-                <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', marginTop: 2 }}>{label}</div>
+                <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)', marginTop: 2 }}>{label}</div>
               </div>
             ))}
           </div>
