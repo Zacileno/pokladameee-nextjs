@@ -156,7 +156,7 @@ export default async function PvcPodlahaPage() {
       <Header opaque />
 
       {/* HERO */}
-      <section style={{ background: 'var(--blue)', paddingTop: 100, paddingBottom: 0, overflow: 'hidden' }}>
+      <section style={{ background: 'var(--blue)', paddingTop: 'calc(100px + var(--hlavicka-navic))', paddingBottom: 0, overflow: 'hidden' }}>
         <div className="container">
           <div className="hero-sluzby-grid" style={{ paddingBottom: 64 }}>
             <div>

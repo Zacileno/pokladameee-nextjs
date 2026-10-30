@@ -11,6 +11,21 @@ const SLUZBY_LINKS: [string, string][] = [
   ['/sluzby/koberce', 'Koberce'],
 ]
 
+// hlavní menu (velký pruh) a vedlejší odkazy (malé, vpravo nahoře)
+const HLAVNI_LINKS: [string, string][] = [
+  ['/co-pokladame', 'Co pokládáme'],
+  ['/inspirace', 'Inspirace'],
+  ['/#kontakt', 'Kontakt'],
+]
+
+const VEDLEJSI_LINKS: [string, string][] = [
+  ['/#jak-to-funguje', 'Jak to funguje'],
+  ['/#reference', 'Reference'],
+  ['/faq', 'FAQ'],
+  ['/kariera', 'Kariéra'],
+  ['/blog', 'Blog'],
+]
+
 export default function Header({ opaque }: { opaque?: boolean }) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -31,7 +46,8 @@ export default function Header({ opaque }: { opaque?: boolean }) {
     return () => window.removeEventListener('scroll', onScroll)
   }, [topBarVyska])
 
-  const navLinkStyle = { color: 'rgba(255,255,255,0.8)', fontWeight: 600, fontSize: 15, transition: 'color 0.2s', cursor: 'pointer', background: 'none', border: 'none', fontFamily: 'inherit' }
+  // podstránky (/sluzby, /blog…) podtrhneme, odkazy na kotvy na homepage ne
+  const aktivni = (href: string) => !href.includes('#') && !!pathname?.startsWith(href)
 
   return (
     <header style={{
@@ -41,7 +57,8 @@ export default function Header({ opaque }: { opaque?: boolean }) {
       transition: 'background 0.3s',
       borderBottom: scrolled ? '1px solid rgba(255,255,255,0.1)' : 'none',
     }}>
-      <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 72 }}>
+      {/* 1. řádek — logo a vedlejší odkazy vpravo (podle Žaluzieee) */}
+      <div className="container hlavicka-radek">
         <a href="/" className="header-logo" style={{ marginLeft: -12 }}>
           <Image
             src="/assets/logo/logo-inverzni-modre.svg"
@@ -52,62 +69,56 @@ export default function Header({ opaque }: { opaque?: boolean }) {
             priority
           />
         </a>
-        <nav style={{ display: 'flex', alignItems: 'center', gap: 22 }} className="desk-nav">
-          <div
-            style={{ position: 'relative' }}
-            onMouseEnter={() => setSluzbyOpen(true)}
-            onMouseLeave={() => setSluzbyOpen(false)}
-          >
-            <a href="/sluzby" style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: pathname?.startsWith('/sluzby') ? '#fff' : 'rgba(255,255,255,0.8)', fontWeight: pathname?.startsWith('/sluzby') ? 700 : 600, fontSize: 15, transition: 'color 0.2s' }}
-              onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-              onMouseLeave={e => (e.currentTarget.style.color = pathname?.startsWith('/sluzby') ? '#fff' : 'rgba(255,255,255,0.8)')}>
-              Služby <span style={{ fontSize: 11, transform: sluzbyOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s', display: 'inline-block' }}>▾</span>
-            </a>
-            {sluzbyOpen && (
-              <div style={{ position: 'absolute', top: '100%', left: 0, paddingTop: 12, minWidth: 220 }}>
-                <div style={{ background: 'white', borderRadius: 10, boxShadow: '0 12px 32px rgba(0,0,0,0.18)', padding: 8, display: 'flex', flexDirection: 'column' }}>
-                  {SLUZBY_LINKS.map(([href, label]) => (
-                    <a key={href} href={href} style={{ color: 'var(--gray-700)', fontWeight: 600, fontSize: 14.5, padding: '10px 14px', borderRadius: 6, transition: 'background 0.15s, color 0.15s' }}
-                      onMouseEnter={e => { e.currentTarget.style.background = 'var(--gray-50)'; e.currentTarget.style.color = 'var(--orange)' }}
-                      onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--gray-700)' }}>
-                      {label}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-          <a href="/co-pokladame" style={{ color: pathname?.startsWith('/co-pokladame') ? '#fff' : 'rgba(255,255,255,0.8)', fontWeight: pathname?.startsWith('/co-pokladame') ? 700 : 600, fontSize: 15, transition: 'color 0.2s', textDecoration: pathname?.startsWith('/co-pokladame') ? 'underline' : 'none', textUnderlineOffset: 4 }}
-            onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-            onMouseLeave={e => (e.currentTarget.style.color = pathname?.startsWith('/co-pokladame') ? '#fff' : 'rgba(255,255,255,0.8)')}>Co pokládáme</a>
-          <a href="/inspirace" style={{ color: pathname?.startsWith('/inspirace') ? '#fff' : 'rgba(255,255,255,0.8)', fontWeight: pathname?.startsWith('/inspirace') ? 700 : 600, fontSize: 15, transition: 'color 0.2s', textDecoration: pathname?.startsWith('/inspirace') ? 'underline' : 'none', textUnderlineOffset: 4 }}
-            onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-            onMouseLeave={e => (e.currentTarget.style.color = pathname?.startsWith('/inspirace') ? '#fff' : 'rgba(255,255,255,0.8)')}>Inspirace</a>
-          {[['/#jak-to-funguje', 'Jak to funguje'], ['/#reference', 'Reference'], ['/faq', 'FAQ']].map(([href, label]) => (
-            <a key={href} href={href} style={{ color: 'rgba(255,255,255,0.8)', fontWeight: 600, fontSize: 15, transition: 'color 0.2s' }}
-              onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-              onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.8)')}>{label}</a>
+        <nav className="desk-nav hlavicka-vedlejsi">
+          {VEDLEJSI_LINKS.map(([href, label]) => (
+            <a key={href} href={href} className={aktivni(href) ? 'aktivni' : ''}>{label}</a>
           ))}
-          <a href="/#kontakt" style={{ color: 'rgba(255,255,255,0.8)', fontWeight: 600, fontSize: 15, transition: 'color 0.2s' }}
-            onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.8)')}>Kontakt</a>
-          <a href="/kariera" style={{ color: pathname?.startsWith('/kariera') ? '#fff' : 'rgba(255,255,255,0.8)', fontWeight: pathname?.startsWith('/kariera') ? 700 : 600, fontSize: 15, transition: 'color 0.2s', textDecoration: pathname?.startsWith('/kariera') ? 'underline' : 'none', textUnderlineOffset: 4 }}
-            onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-            onMouseLeave={e => (e.currentTarget.style.color = pathname?.startsWith('/kariera') ? '#fff' : 'rgba(255,255,255,0.8)')}>Kariéra</a>
-          <a href="/blog" style={{ color: pathname?.startsWith('/blog') ? '#fff' : 'rgba(255,255,255,0.8)', fontWeight: pathname?.startsWith('/blog') ? 700 : 600, fontSize: 15, transition: 'color 0.2s', textDecoration: pathname?.startsWith('/blog') ? 'underline' : 'none', textUnderlineOffset: 4 }}
-            onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-            onMouseLeave={e => (e.currentTarget.style.color = pathname?.startsWith('/blog') ? '#fff' : 'rgba(255,255,255,0.8)')}>Blog</a>
-          <a href="/#kontakt" className="btn-primary" style={{ padding: '10px 22px', fontSize: 15 }}>Chci podlahu</a>
-          <a href="tel:+420790388487" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: 'rgba(255,255,255,0.9)', fontWeight: 700, fontSize: 15 }}>
-            <Image src="https://cdn.sanity.io/images/8cvsenqb/production/306c4a22e24e1a5c96a6be2521d307acb1a0da87-120x120.png" alt="Adam Hajdušek" width={28} height={28} unoptimized
-              style={{ width: 28, height: 28, borderRadius: '50%', objectFit: 'cover', border: '1.5px solid rgba(255,255,255,0.6)' }} />
-            +420 790 388 487
-          </a>
         </nav>
         <button onClick={() => setMenuOpen(!menuOpen)} className="hamburger"
           style={{ display: 'none', background: 'none', border: 'none', color: 'white', fontSize: 24, cursor: 'pointer' }}>
           {menuOpen ? '✕' : '☰'}
         </button>
+      </div>
+
+      {/* 2. řádek — hlavní menu v zaobleném pruhu, vpravo tlačítko a telefon */}
+      <div className="container desk-nav">
+        <div className="hlavicka-lista">
+          <nav className="hlavicka-hlavni">
+            <div
+              style={{ position: 'relative' }}
+              onMouseEnter={() => setSluzbyOpen(true)}
+              onMouseLeave={() => setSluzbyOpen(false)}
+            >
+              <a href="/sluzby" className={aktivni('/sluzby') ? 'aktivni' : ''} style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                Služby <span style={{ fontSize: 12, transform: sluzbyOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s', display: 'inline-block' }}>▾</span>
+              </a>
+              {sluzbyOpen && (
+                <div style={{ position: 'absolute', top: '100%', left: 0, paddingTop: 12, minWidth: 220 }}>
+                  <div style={{ background: 'white', borderRadius: 10, boxShadow: '0 12px 32px rgba(0,0,0,0.18)', padding: 8, display: 'flex', flexDirection: 'column' }}>
+                    {SLUZBY_LINKS.map(([href, label]) => (
+                      <a key={href} href={href} style={{ color: 'var(--gray-700)', fontWeight: 600, fontSize: 14.5, padding: '10px 14px', borderRadius: 6, transition: 'background 0.15s, color 0.15s' }}
+                        onMouseEnter={e => { e.currentTarget.style.background = 'var(--gray-50)'; e.currentTarget.style.color = 'var(--orange)' }}
+                        onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--gray-700)' }}>
+                        {label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+            {HLAVNI_LINKS.map(([href, label]) => (
+              <a key={href} href={href} className={aktivni(href) ? 'aktivni' : ''}>{label}</a>
+            ))}
+          </nav>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+            <a href="/#kontakt" className="btn-primary" style={{ padding: '9px 20px', fontSize: 15 }}>Chci podlahu</a>
+            <a href="tel:+420790388487" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: 'white', fontWeight: 800, fontSize: 16, whiteSpace: 'nowrap' }}>
+              <Image src="https://cdn.sanity.io/images/8cvsenqb/production/306c4a22e24e1a5c96a6be2521d307acb1a0da87-120x120.png" alt="Adam Hajdušek" width={32} height={32} unoptimized
+                style={{ width: 32, height: 32, borderRadius: '50%', objectFit: 'cover', border: '1.5px solid rgba(255,255,255,0.6)' }} />
+              +420 790 388 487
+            </a>
+          </div>
+        </div>
       </div>
       {menuOpen && (
         <div style={{ background: 'rgba(21,76,134,0.98)', borderTop: '1px solid rgba(255,255,255,0.1)', padding: '24px', display: 'flex', flexDirection: 'column', gap: 20 }}>

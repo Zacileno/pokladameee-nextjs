@@ -68,7 +68,7 @@ export default async function CoPokladamePage() {
       <Header opaque />
       <main>
         {/* ÚVOD — nadpis a dlaždice skupin */}
-        <section style={{ paddingTop: 120, paddingBottom: 80 }}>
+        <section style={{ paddingTop: 'calc(120px + var(--hlavicka-navic))', paddingBottom: 80 }}>
           <div className="container">
             <p style={{ fontSize: 14, fontWeight: 600, marginBottom: 20 }}>
               <a href="/" style={{ color: 'var(--orange)' }}>Domů</a>

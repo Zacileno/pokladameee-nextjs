@@ -197,7 +197,7 @@ export default async function BlackFridayPage() {
         </section>
 
         {/* ── PRODUKTY V AKCI ── */}
-        <section id="bfprodukty" className="section" style={{ background: 'var(--blue)', scrollMarginTop: 72 }}>
+        <section id="bfprodukty" className="section" style={{ background: 'var(--blue)', scrollMarginTop: 'calc(72px + var(--hlavicka-navic))' }}>
           <div className="container">
             <h2 className="section-title" style={{ color: 'white', textAlign: 'center', marginBottom: 48 }}>
               <FormatovanyText value={data.produktyNadpis} fallback="V Black Friday náladě jsou všechny podlahy" />

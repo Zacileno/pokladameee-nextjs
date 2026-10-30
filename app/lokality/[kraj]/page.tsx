@@ -58,7 +58,7 @@ export default async function KrajPage({ params }: { params: Promise<{ kraj: str
       <Header opaque />
       <main>
         {/* HERO */}
-        <section style={{ background: 'white', paddingTop: 128, paddingBottom: 48 }}>
+        <section style={{ background: 'white', paddingTop: 'calc(128px + var(--hlavicka-navic))', paddingBottom: 48 }}>
           <div className="container">
             <p style={{ fontSize: 14, fontWeight: 600, marginBottom: 20 }}>
               <a href="/" style={{ color: 'var(--orange)' }}>Domů</a>

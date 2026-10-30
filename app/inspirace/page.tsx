@@ -65,7 +65,7 @@ export default async function InspracePage() {
       <Header opaque />
 
       {/* HERO */}
-      <section style={{ background: 'white', paddingTop: 128, paddingBottom: 64 }}>
+      <section style={{ background: 'white', paddingTop: 'calc(128px + var(--hlavicka-navic))', paddingBottom: 64 }}>
         <div className="container">
           <h1 style={{ fontSize: 'clamp(36px, 5vw, 54px)', fontWeight: 900, color: 'var(--black)', lineHeight: 1.1, marginBottom: 40, textAlign: 'center' }}>
             Inspirac<span style={{ color: 'var(--orange)' }}>eee</span>
@@ -111,7 +111,7 @@ export default async function InspracePage() {
       </section>
 
       {/* GALERIE */}
-      <section id="realizace" className="section" style={{ scrollMarginTop: 80 }}>
+      <section id="realizace" className="section" style={{ scrollMarginTop: 'calc(80px + var(--hlavicka-navic))' }}>
         <div className="container">
           <h2 className="section-title">Naše <span>realizaceee</span></h2>
           <p className="section-subtitle" style={{ marginTop: 16 }}>

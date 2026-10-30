@@ -58,7 +58,7 @@ export default async function BlogPage({
     <>
       <Header opaque />
 
-      <section style={{ background: 'var(--blue)', paddingTop: 140, paddingBottom: 64 }}>
+      <section style={{ background: 'var(--blue)', paddingTop: 'calc(140px + var(--hlavicka-navic))', paddingBottom: 64 }}>
         <div className="container">
           <p style={{ fontSize: 13, fontWeight: 600, letterSpacing: '2px', color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', marginBottom: 16 }}>
             Blog
