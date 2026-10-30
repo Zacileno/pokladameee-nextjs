@@ -175,8 +175,8 @@ input, select, textarea { font-family: var(--font); }
    o tuto hodnotu se posouvá obsah pod ní (--hlavicka-navic v paddingu stránek) */
 :root { --hlavicka-navic: 0px; }
 .hlavicka-radek { display: flex; align-items: center; justify-content: space-between; height: 72px; transition: height 0.3s; }
-.hlavicka-vedlejsi { display: flex; align-items: center; gap: 28px; }
-.hlavicka-vedlejsi a { color: rgba(255,255,255,0.75); font-weight: 600; font-size: 14px; transition: color 0.2s; }
+.hlavicka-vedlejsi { display: flex; align-items: center; gap: 32px; }
+.hlavicka-vedlejsi a { color: rgba(255,255,255,0.8); font-weight: 600; font-size: 16.5px; transition: color 0.2s; }
 .hlavicka-vedlejsi a:hover, .hlavicka-vedlejsi a.aktivni { color: #fff; }
 .hlavicka-vedlejsi a.aktivni { text-decoration: underline; text-underline-offset: 4px; }
 .hlavicka-lista { display: flex; align-items: center; justify-content: space-between; height: 52px; margin-bottom: 12px; padding: 0 10px 0 24px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); border-radius: 12px; }
