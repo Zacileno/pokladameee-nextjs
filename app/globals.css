@@ -171,6 +171,11 @@ input, select, textarea { font-family: var(--font); }
 
 /* ── HLAVIČKA ── */
 .desk-nav a { white-space: nowrap; }
+/* na užších noteboocích menší mezery mezi položkami, ať se menu vejde vedle loga */
+@media (max-width: 1399px) {
+  .desk-nav { gap: 12px !important; margin-left: 24px; }
+  .desk-nav a { font-size: 14px !important; }
+}
 /* celé menu se vejde od cca 1200 px — pod tím hamburger */
 @media (max-width: 1199px) {
   .desk-nav { display: none !important; }
@@ -446,3 +451,28 @@ input, select, textarea { font-family: var(--font); }
 @media (max-width: 480px) {
   .kroky-grid { grid-template-columns: 1fr; }
 }
+
+/* === CO POKLÁDÁME (app/co-pokladame) === */
+.cp-dlazdice-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.cp-dlazdice { display: flex; flex-direction: column; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.12); transition: transform 0.2s, box-shadow 0.2s; }
+.cp-dlazdice:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(0,0,0,0.18); }
+.cp-dlazdice-foto { position: relative; aspect-ratio: 4 / 3; }
+.cp-dlazdice-obsah { display: flex; align-items: center; gap: 12px; padding: 18px 20px; }
+.cp-dlazdice-obsah h2 { font-size: 19px; font-weight: 900; text-transform: uppercase; color: var(--black); line-height: 1.15; }
+.cp-dlazdice-obsah span { font-size: 14px; font-weight: 600; color: var(--orange); }
+.cp-blok { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; scroll-margin-top: 96px; }
+.cp-blok-obraceny .cp-blok-foto { order: 2; }
+.cp-blok-foto { position: relative; aspect-ratio: 4 / 3; border-radius: 16px; overflow: hidden; box-shadow: 0 12px 32px rgba(0,0,0,0.15); }
+.cp-blok-claim { color: var(--orange); font-weight: 700; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+.cp-blok-popis { font-size: 17px; line-height: 1.7; margin: 16px 0 20px; }
+.cp-blok-popis strong { color: var(--black); }
+.cp-blok-body { list-style: none; padding: 0; margin: 0 0 28px; display: flex; flex-direction: column; gap: 10px; }
+.cp-blok-body li { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 700; color: var(--gray-700); }
+.cp-blok-tlacitka { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.cp-blok-odkaz { color: var(--blue); font-weight: 700; font-size: 15px; text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 1199px) { .cp-dlazdice-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 900px) {
+  .cp-blok { grid-template-columns: 1fr; gap: 28px; }
+  .cp-blok-obraceny .cp-blok-foto { order: 0; }
+}
+@media (max-width: 480px) { .cp-dlazdice-grid { grid-template-columns: 1fr; } }
