@@ -2,28 +2,24 @@ import type { ReactNode } from 'react'
 import { client, REFERENCE_QUERY } from '../../lib/sanity'
 import { VIDEO_PORUBACEK_REFERENCE } from '../../lib/videa'
 import VideoDlazdice from './VideoDlazdice'
+import RecenzeSlider, { type Recenze } from './RecenzeSlider'
 
 export const revalidate = 60
 
-type Recenze = {
-  _id: string
-  jmeno: string
-  text: string
-  hvezdicky: number
-  datum?: string
-}
+// Google profil „Pokládámeee - Ostrava" — hodnocení a počet recenzí aktualizovat ručně
+const GOOGLE_HODNOCENI = 4.8
+const GOOGLE_POCET_RECENZI = 34
+const GOOGLE_PROFIL_URL = 'https://maps.google.com/?cid=8576817033522695571'
 
 const FALLBACK: Recenze[] = [
   { _id: 'f1', jmeno: 'Martin K.', text: 'Vinyl položen za jeden den, parta přišla přesně, po sobě uklidili. Doporučuji!', hvezdicky: 5 },
   { _id: 'f2', jmeno: 'Petra N.', text: 'Konečně firma, která splní co slíbí. Zaměřili v úterý, v pátek máme novou podlahu.', hvezdicky: 5 },
   { _id: 'f3', jmeno: 'Radek Š.', text: 'Skvělý výběr vinylu, poradili s barvou i s tím co vydrží se psem. Spokojenost.', hvezdicky: 5 },
-  { _id: 'f4', jmeno: 'Jana H.', text: 'Výborná práce, přesná komunikace. Starou kobercovku vzali s sebou, nemuseli jsme nic řešit.', hvezdicky: 5 },
-  { _id: 'f5', jmeno: 'Tomáš B.', text: 'Cena odpovídá kvalitě. Vinyl vypadá skvěle, montáž proběhla hladce. Rozhodně doporučuji.', hvezdicky: 5 },
-  { _id: 'f6', jmeno: 'Lenka M.', text: 'Přijeli rychle, zaměření i nabídka do druhého dne. Nakonec jsme zvolili tmavý vinyl — naprosto spokojeni.', hvezdicky: 5 },
 ]
 
-// nadpis lze přepsat (např. na Inspiraci), jinak "Co říkají naši zákazníci"
-export default async function ReferenceSekce({ nadpis }: { nadpis?: ReactNode } = {}) {
+// nadpis lze přepsat (např. na Inspiraci), jinak "Hodnoceeení našich zákazníků"
+// video=false skryje videoreferenci (podstránky služeb mají vlastní video)
+export default async function ReferenceSekce({ nadpis, video = true }: { nadpis?: ReactNode; video?: boolean } = {}) {
   let recenze: Recenze[] = FALLBACK
   try {
     const data = await client.fetch<Recenze[]>(REFERENCE_QUERY)
@@ -31,62 +27,34 @@ export default async function ReferenceSekce({ nadpis }: { nadpis?: ReactNode } 
   } catch {}
 
   return (
-    <section id="reference" className="section" style={{ background: 'var(--gray-50)' }}>
+    <section id="reference" className="section recenze-sekce">
       <div className="container">
-        <div style={{ marginBottom: 56, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 24 }}>
-          <div>
-            <p style={{ color: 'var(--orange)', fontWeight: 700, fontSize: 13, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>
-              Hodnoceeení zákazníků
-            </p>
-            <h2 className="section-title">
-              {nadpis ?? <>Co říkají<br /><span>naši zákazníci</span></>}
-            </h2>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-            <div>
-              <div style={{ fontSize: 48, fontWeight: 900, lineHeight: 1 }}>5.0</div>
-              <div style={{ color: 'var(--orange)', fontSize: 20, marginTop: 2 }}>★★★★★</div>
-              <div style={{ color: 'var(--gray-400)', fontSize: 13, marginTop: 4 }}>Google recenze</div>
-            </div>
-          </div>
-        </div>
-
-        <div style={{ marginBottom: 32 }}>
-          <VideoDlazdice video={VIDEO_PORUBACEK_REFERENCE} />
-        </div>
-
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-          gap: 20,
-        }}>
-          {recenze.map(r => (
-            <div key={r._id} style={{
-              background: 'white',
-              borderRadius: 12,
-              padding: '28px 24px',
-              border: '1px solid var(--gray-100)',
-            }}>
-              <div style={{ color: 'var(--orange)', fontSize: 18, marginBottom: 12 }}>
-                {'★'.repeat(r.hvezdicky)}
-              </div>
-              <p style={{ fontSize: 15, lineHeight: 1.65, marginBottom: 20, color: 'var(--gray-700)' }}>
-                „{r.text}"
-              </p>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <div style={{
-                  width: 40, height: 40, borderRadius: '50%',
-                  background: 'var(--blue)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: 'white', fontWeight: 800, fontSize: 15,
-                }}>{r.jmeno.trim()[0]}</div>
-                <div>
-                  <div style={{ fontWeight: 700, fontSize: 14 }}>{r.jmeno.trim()}</div>
-                </div>
+        <div className="recenze-grid">
+          <div className="recenze-souhrn">
+            <h2>{nadpis ?? <>Hodnoc<span>eee</span>ní<br />našich zákazníků</>}</h2>
+            <div className="recenze-souhrn-cislo">
+              <span>{GOOGLE_HODNOCENI.toFixed(1)}</span>
+              <div>
+                <div className="recenze-souhrn-hvezdy" aria-hidden="true">★★★★★</div>
+                <a href={GOOGLE_PROFIL_URL} target="_blank" rel="noopener noreferrer">{GOOGLE_POCET_RECENZI} recenzí</a>
               </div>
             </div>
-          ))}
+            <a href={GOOGLE_PROFIL_URL} target="_blank" rel="noopener noreferrer" className="recenze-google" aria-label="Recenze Pokládámeee na Googlu">
+              <span className="recenze-google-logo" aria-hidden="true">
+                <span style={{ color: '#4285F4' }}>G</span><span style={{ color: '#EA4335' }}>o</span><span style={{ color: '#FBBC05' }}>o</span><span style={{ color: '#4285F4' }}>g</span><span style={{ color: '#34A853' }}>l</span><span style={{ color: '#EA4335' }}>e</span>
+              </span>
+              <span className="recenze-google-pod">★★★★★ <small>Reviews</small></span>
+            </a>
+          </div>
+
+          <RecenzeSlider recenze={recenze} />
         </div>
+
+        {video && (
+          <div style={{ marginTop: 56 }}>
+            <VideoDlazdice video={VIDEO_PORUBACEK_REFERENCE} />
+          </div>
+        )}
       </div>
     </section>
   )
