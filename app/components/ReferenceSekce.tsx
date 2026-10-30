@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react'
 import { client, REFERENCE_QUERY } from '../../lib/sanity'
+import { VIDEO_PORUBACEK_REFERENCE } from '../../lib/videa'
+import VideoDlazdice from './VideoDlazdice'
 
 export const revalidate = 60
 
@@ -47,6 +49,10 @@ export default async function ReferenceSekce({ nadpis }: { nadpis?: ReactNode } 
               <div style={{ color: 'var(--gray-400)', fontSize: 13, marginTop: 4 }}>Google recenze</div>
             </div>
           </div>
+        </div>
+
+        <div style={{ marginBottom: 32 }}>
+          <VideoDlazdice video={VIDEO_PORUBACEK_REFERENCE} />
         </div>
 
         <div style={{
