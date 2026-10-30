@@ -33,7 +33,7 @@ export default function JakToFunguje({ data }: { data?: { kroky?: Krok[] } }) {
             Jak to fungujeee
           </p>
           <h2 className="section-title" style={{ color: 'white' }}>
-            Čtyři kroky<br />
+            Čtyři kroky{' '}
             <span style={{ color: 'var(--orange)' }}>k nové podlaze</span>
           </h2>
         </div>
