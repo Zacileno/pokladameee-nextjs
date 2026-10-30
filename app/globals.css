@@ -153,6 +153,26 @@ input, select, textarea { font-family: var(--font); }
 .blog-clanek-obsah img { width: 100%; border-radius: 12px; margin: 8px 0 28px; }
 .blog-souvisejici-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
 
+/* ── VIDEA (YouTubeVideo, VideoDlazdice) ── */
+.yt-video { position: relative; aspect-ratio: 16 / 9; border-radius: 16px; overflow: hidden; background: var(--black); }
+.yt-video iframe, .yt-video button { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; padding: 0; background: none; }
+.yt-video img, .video-dlazdice-foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.yt-video-play { position: absolute; left: 50%; top: 50%; width: 76px; height: 76px; margin: -38px 0 0 -38px; border-radius: 50%; background: var(--orange); box-shadow: 0 8px 24px rgba(0,0,0,0.3); transition: transform 0.2s; }
+.yt-video-play::after { content: ''; position: absolute; left: 31px; top: 24px; border-style: solid; border-width: 14px 0 14px 22px; border-color: transparent transparent transparent white; }
+.yt-video button:hover .yt-video-play, .video-dlazdice-foto:hover .yt-video-play { transform: scale(1.08); }
+.velke-video { max-width: 960px; margin: 64px auto 0; }
+.velke-video h3 { font-size: clamp(24px, 3vw, 34px); font-weight: 900; text-align: center; margin-bottom: 24px; color: var(--black); }
+.velke-video h3 span { color: var(--orange); }
+.video-dlazdice { display: grid; grid-template-columns: 1fr 1fr; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.12); }
+.video-dlazdice-foto { position: relative; min-height: 260px; border: 0; padding: 0; background: var(--black); cursor: pointer; }
+.video-dlazdice-foto img { position: absolute; inset: 0; }
+.video-dlazdice-obsah { padding: 36px 40px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+.video-dlazdice-obsah h3 { font-size: 26px; font-weight: 900; text-transform: uppercase; line-height: 1.15; color: var(--black); margin-bottom: 14px; }
+.video-dlazdice-obsah p { font-size: 16px; line-height: 1.65; margin-bottom: 24px; }
+.video-modal { position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; padding: 16px; }
+.video-modal-obsah { position: relative; width: 100%; max-width: 1000px; }
+.video-modal-zavrit { position: absolute; top: -48px; right: 0; width: 40px; height: 40px; border-radius: 50%; background: white; color: var(--black); font-size: 26px; line-height: 1; }
+
 /* ── HLAVIČKA ── */
 .desk-nav a { white-space: nowrap; }
 /* celé menu se vejde od cca 1200 px — pod tím hamburger */
@@ -210,6 +230,13 @@ input, select, textarea { font-family: var(--font); }
   .hero-sluzby-grid { grid-template-columns: 1fr; gap: 0; }
   .insp-hero-grid { grid-template-columns: 1fr; gap: 32px; }
   .insp-proc-grid { grid-template-columns: 1fr; gap: 16px; }
+  .video-dlazdice { grid-template-columns: 1fr; }
+  .video-dlazdice-foto { min-height: 0; aspect-ratio: 16 / 9; }
+  .video-dlazdice-obsah { padding: 24px 20px; }
+  .video-dlazdice-obsah h3 { font-size: 20px; }
+  .velke-video { margin-top: 40px; }
+  .yt-video-play { width: 60px; height: 60px; margin: -30px 0 0 -30px; }
+  .yt-video-play::after { left: 24px; top: 18px; border-width: 12px 0 12px 18px; }
 
   .desk-nav { display: none !important; }
   .hamburger { display: block !important; }
