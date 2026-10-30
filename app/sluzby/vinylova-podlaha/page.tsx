@@ -3,6 +3,7 @@ import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 import BenefityGrid from '@/app/components/BenefityGrid'
 import KontaktSekce from '@/app/components/KontaktSekce'
+import ReferenceSekce from '@/app/components/ReferenceSekce'
 import BrandIcon, { IkonaText } from '@/app/components/BrandIcon'
 import FaqItem from './FaqItem'
 import { client, VINYLOVA_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY } from '@/lib/sanity'
@@ -134,11 +135,6 @@ export default async function VinylovaPodlahaPage() {
   const krokyNadpis = data?.krokyNadpis || 'Jak to probíhá'
   const krokyPodnadpis = data?.krokyPodnadpis || 'Od prvního kontaktu po hotovou podlahu — bez stresu.'
   const kroky = data?.kroky?.length ? data.kroky : KROKY
-
-  const referenceHodnoceni = data?.referenceHodnoceni ?? 4.8
-  const referenceCitace = data?.referenceCitace || 'Adam přijel den po zavolání, zaměřil a rovnou přivezl vzorník. Podlahu položili za jeden den, uklidili po sobě a stará dlažba zmizela. Doporučuju.'
-  const referenceJmeno = data?.referenceJmeno || 'Markéta K. — Ostrava'
-
   const faq = data?.faq?.length ? data.faq : FAQ
 
   const zobrazitBfBadge = Date.now() < new Date(BF_KONEC).getTime()
@@ -291,33 +287,7 @@ export default async function VinylovaPodlahaPage() {
         </div>
       </section>
 
-      {/* REFERENCE STRIP */}
-      <section className="section" style={{ background: 'var(--blue)' }}>
-        <div className="container">
-          <div className="sluzby-ref-grid">
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: 72, fontWeight: 900, color: 'white', lineHeight: 1 }}>{referenceHodnoceni.toFixed(1)}</div>
-              <div style={{ display: 'flex', gap: 4, justifyContent: 'center', margin: '8px 0' }}>
-                {[1,2,3,4,5].map(i => (
-                  <span key={i} style={{ fontSize: 22, color: '#FBBC04', opacity: i === 5 ? 0.4 : 1 }}>★</span>
-                ))}
-              </div>
-              <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 13, marginBottom: 16 }}>Hodnocení zákazníků</p>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
-                <span style={{ fontSize: 20 }}>G</span>
-                <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: 13, fontWeight: 600 }}>Google recenze</span>
-              </div>
-            </div>
-            <div>
-              <div style={{ fontSize: 64, color: 'var(--orange)', lineHeight: 0, marginBottom: 24, fontFamily: 'Georgia, serif' }}>&quot;</div>
-              <p style={{ fontSize: 18, fontStyle: 'italic', color: 'rgba(255,255,255,0.9)', lineHeight: 1.7, marginBottom: 20 }}>
-                {referenceCitace}
-              </p>
-              <p style={{ fontWeight: 700, color: 'var(--orange)' }}>{referenceJmeno}</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ReferenceSekce video={false} />
 
       {/* FAQ */}
       <section className="section" style={{ background: 'var(--gray-50)' }}>
