@@ -10,7 +10,7 @@ const FALLBACK_KROKY: Krok[] = [
 ]
 
 // ikony kroků podle pořadí: poptávka, zaměření, pokládka, úklid
-const IKONY_KROKU = ['📞', '📐', '🪵', '🏠']
+const IKONY_KROKU = ['📞', '📐', '🪵', '🧹']
 
 // "Poptáteee nás" → Poptát<span>eee</span> nás
 const sEee = (text = '') => {
