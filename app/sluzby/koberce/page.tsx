@@ -7,6 +7,8 @@ import BrandIcon, { IkonaText } from '@/app/components/BrandIcon'
 import FaqItem from './FaqItem'
 import { client, KOBERCOVA_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY } from '@/lib/sanity'
 import { BF_KONEC } from '@/lib/black-friday'
+import YouTubeVideo from '@/app/components/YouTubeVideo'
+import { VIDEO_PORUBACEK_VYSLEDEK } from '@/lib/videa'
 
 export const revalidate = 0
 
@@ -298,6 +300,16 @@ export default async function KobercovaPodlahaPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* VIDEO Z REALIZACE */}
+      <section className="section">
+        <div className="container">
+          <h2 className="section-title" style={{ textAlign: 'center' }}>Jak vypadá hotový <span>koberec</span></h2>
+          <div className="velke-video" style={{ marginTop: 32 }}>
+            <YouTubeVideo id={VIDEO_PORUBACEK_VYSLEDEK.id} nazev={VIDEO_PORUBACEK_VYSLEDEK.nazev} />
           </div>
         </div>
       </section>
