@@ -26,7 +26,8 @@ export const AKCE_QUERY = `*[_type == "akce" && aktivni == true] | order(_create
 }`
 
 export const REFERENCE_QUERY = `*[_type == "recenze" && aktivni == true] | order(_createdAt desc) {
-  _id, jmeno, text, hvezdicky, datum
+  _id, jmeno, text, hvezdicky, datum, lokalita, odkaz,
+  "fotkaUrl": fotka.asset->url
 }`
 
 export const PROJEKTY_QUERY = `*[_type == "projekt" && aktivni == true] | order(_createdAt asc) {
