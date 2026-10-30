@@ -428,3 +428,21 @@ input, select, textarea { font-family: var(--font); }
   .recenze-foto { width: 75%; max-width: 300px; margin-top: 30px; }
   .recenze-text { font-size: 18px; }
 }
+
+/* === JAK TO FUNGUJE (kroky) === */
+
+.kroky-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px 24px; }
+.krok-karta { position: relative; background: white; border-radius: 16px; padding: 36px 28px 32px; box-shadow: 0 12px 32px rgba(0,0,0,0.18); transition: transform 0.2s; }
+.krok-karta:hover { transform: translateY(-6px); }
+.krok-cislo { position: absolute; top: -22px; left: 28px; width: 52px; height: 52px; border-radius: 50%; background: var(--orange); color: white; font-weight: 900; font-size: 22px; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 16px rgba(0,0,0,0.2); }
+.krok-karta h3 { font-size: 22px; font-weight: 900; color: var(--black); margin: 20px 0 10px; }
+.krok-karta h3 span { color: var(--orange); }
+.krok-karta p { font-size: 15px; line-height: 1.65; color: var(--gray-700); }
+
+@media (max-width: 1199px) {
+  .kroky-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .kroky-grid { grid-template-columns: 1fr; }
+}
