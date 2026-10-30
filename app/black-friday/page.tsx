@@ -6,6 +6,7 @@ import Footer from '@/app/components/Footer'
 import KontaktSekce from '@/app/components/KontaktSekce'
 import Odpocet from '@/app/components/Odpocet'
 import FormatovanyText from '@/app/components/FormatovanyText'
+import BrandIcon from '@/app/components/BrandIcon'
 import AkcePopup from './AkcePopup'
 import { BF_KONEC } from '@/lib/black-friday'
 import { client, HERO_SEKCE_QUERY, VINYLOVA_PODLAHA_QUERY, PVC_PODLAHA_QUERY, KOBERCOVA_PODLAHA_QUERY, DREVENA_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY, BLACK_FRIDAY_QUERY } from '@/lib/sanity'
@@ -218,8 +219,9 @@ export default async function BlackFridayPage() {
               ))}
             </div>
 
-            <p style={{ color: 'rgba(255,255,255,0.65)', textAlign: 'center', marginTop: 40 }}>
-              📍 <FormatovanyText value={data.zdarmaPopisek} fallback="Pokládáme v celém Moravskoslezském, Zlínském a Olomouckém kraji" />
+            <p style={{ color: 'rgba(255,255,255,0.65)', marginTop: 40, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, flexWrap: 'wrap', textAlign: 'center' }}>
+              <BrandIcon emoji="📍" size={32} tone="onBlue" />
+              <span><FormatovanyText value={data.zdarmaPopisek} fallback="Pokládáme v celém Moravskoslezském, Zlínském a Olomouckém kraji" /></span>
             </p>
           </div>
         </section>
