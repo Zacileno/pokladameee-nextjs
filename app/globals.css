@@ -171,7 +171,7 @@ input, select, textarea { font-family: var(--font); }
 
 /* ── HLAVIČKA ── */
 .desk-nav a { white-space: nowrap; }
-/* dvouřádková hlavička (podle Žaluzieee) — na počítači je o 80 px vyšší než na mobilu,
+/* dvouřádková hlavička (podle Žaluzieee) — na počítači je o 96 px vyšší než na mobilu,
    o tuto hodnotu se posouvá obsah pod ní (--hlavicka-navic v paddingu stránek) */
 :root { --hlavicka-navic: 0px; }
 .hlavicka-radek { display: flex; align-items: center; justify-content: space-between; height: 72px; transition: height 0.3s; }
@@ -179,12 +179,12 @@ input, select, textarea { font-family: var(--font); }
 .hlavicka-vedlejsi a { color: rgba(255,255,255,0.8); font-weight: 600; font-size: 16.5px; transition: color 0.2s; }
 .hlavicka-vedlejsi a:hover, .hlavicka-vedlejsi a.aktivni { color: #fff; }
 .hlavicka-vedlejsi a.aktivni { text-decoration: underline; text-underline-offset: 4px; }
-.hlavicka-lista { display: flex; align-items: center; justify-content: space-between; height: 52px; margin-bottom: 12px; padding: 0 10px 0 24px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); border-radius: 12px; }
+.hlavicka-lista { display: flex; align-items: center; justify-content: space-between; height: 68px; margin-bottom: 12px; padding: 0 24px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); border-radius: 12px; }
 .hlavicka-hlavni { display: flex; align-items: center; gap: 36px; }
 .hlavicka-hlavni a { color: #fff; font-weight: 800; font-size: 17px; transition: color 0.2s; }
 .hlavicka-hlavni a:hover, .hlavicka-hlavni a.aktivni { color: var(--orange); }
 @media (min-width: 1200px) {
-  :root { --hlavicka-navic: 80px; }
+  :root { --hlavicka-navic: 96px; }
   /* velké mezery nad a pod logem; po odscrollování se horní řádek zmenší, ať hlavička nezabírá půl obrazovky */
   .hlavicka-radek { height: 88px; }
   .hlavicka-odscrollovana .hlavicka-radek { height: 56px; }
