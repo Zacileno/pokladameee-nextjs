@@ -489,3 +489,48 @@ input, select, textarea { font-family: var(--font); }
   .cp-blok-obraceny .cp-blok-foto { order: 0; }
 }
 @media (max-width: 480px) { .cp-dlazdice-grid { grid-template-columns: 1fr; } }
+/* stránka O nás (podle Žaluzieee) */
+.onas-hero { position: relative; min-height: 640px; display: flex; align-items: center; overflow: hidden; background: var(--blue); }
+.onas-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,30,60,0.85) 0%, rgba(10,30,60,0.55) 60%, rgba(10,30,60,0.35) 100%); }
+.onas-hero-obsah { position: relative; z-index: 1; padding-top: calc(120px + var(--hlavicka-navic)); padding-bottom: 96px; color: white; }
+.onas-hero h1 { font-size: clamp(38px, 5.5vw, 68px); font-weight: 900; line-height: 1.05; max-width: 820px; }
+.onas-hero h1 span { color: var(--orange); }
+.onas-hero-podnadpis { font-size: clamp(24px, 3vw, 40px); font-weight: 400; margin: 8px 0 24px; }
+.onas-hero-text { font-size: 18px; line-height: 1.7; max-width: 620px; color: rgba(255,255,255,0.85); margin-bottom: 36px; }
+.onas-stitek { color: var(--orange); font-weight: 700; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+.onas-stitek span { color: inherit; }
+.onas-odstavec { font-size: 17px; line-height: 1.7; margin-bottom: 18px; max-width: 640px; }
+.onas-odstavec strong { color: var(--black); }
+.onas-pribeh { display: grid; grid-template-columns: 1.4fr 1fr; gap: 64px; align-items: center; }
+.onas-zakladatel { display: flex; align-items: center; gap: 14px; margin-top: 28px; }
+.onas-zakladatel img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 3px solid var(--orange); }
+.onas-zakladatel strong { display: block; font-size: 17px; color: var(--black); }
+.onas-zakladatel span { font-size: 14px; color: var(--gray-400); }
+.onas-cisla { display: flex; flex-direction: column; gap: 16px; }
+.onas-cislo { background: var(--blue); color: white; border-radius: 16px; padding: 24px 28px; }
+.onas-cislo strong { display: block; font-size: 40px; font-weight: 900; color: var(--orange); line-height: 1.1; }
+.onas-cislo span { font-size: 15px; color: rgba(255,255,255,0.8); }
+.onas-hodnoty { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.onas-hodnota { display: flex; gap: 20px; align-items: flex-start; background: white; border-radius: 16px; padding: 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+.onas-hodnota h3 { font-size: 21px; font-weight: 800; margin-bottom: 10px; line-height: 1.25; }
+.onas-hodnota h3 span { color: var(--orange); }
+.onas-hodnota p { font-size: 15px; line-height: 1.7; color: #555; }
+.onas-zasady { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+.onas-zasada { border: 1px solid #eee; border-top: 4px solid var(--orange); border-radius: 12px; padding: 28px 22px; }
+.onas-zasada h3 { font-size: 21px; font-weight: 800; margin-bottom: 10px; }
+.onas-zasada h3 span { color: var(--orange); }
+.onas-zasada p { font-size: 15px; line-height: 1.65; color: #555; }
+.onas-poradime { display: grid; grid-template-columns: 1fr 1.2fr; gap: 64px; align-items: center; }
+.onas-poradime-foto { position: relative; aspect-ratio: 4 / 5; max-height: 560px; border-radius: 16px; overflow: hidden; box-shadow: 0 12px 32px rgba(0,0,0,0.15); }
+@media (max-width: 1199px) { .onas-zasady { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 900px) {
+  .onas-hero { min-height: 0; }
+  .onas-pribeh, .onas-poradime { grid-template-columns: 1fr; gap: 32px; }
+  .onas-hodnoty { grid-template-columns: 1fr; }
+  .onas-zasady { grid-template-columns: repeat(2, 1fr); }
+  .onas-poradime-foto { aspect-ratio: 4 / 3; }
+}
+@media (max-width: 480px) {
+  .onas-zasady { grid-template-columns: 1fr; }
+  .onas-hodnota { flex-direction: column; padding: 24px; }
+}

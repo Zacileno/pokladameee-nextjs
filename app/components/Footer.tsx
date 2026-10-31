@@ -57,7 +57,7 @@ export default function Footer({ nastaveni }: { nastaveni?: Nastaveni }) {
           <div>
             <h4 style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 20 }}>Navigace</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              {[['/#sluzby','Služby'],['/#jak-to-funguje','Jak to funguje'],['/#reference','Reference'],['/#kontakt','Kontakt'],['/kariera','Kariéra'],['/blog','Blog']].map(([href, label]) => (
+              {[['/o-nas','O nás'],['/#sluzby','Služby'],['/#jak-to-funguje','Jak to funguje'],['/#reference','Reference'],['/#kontakt','Kontakt'],['/kariera','Kariéra'],['/blog','Blog']].map(([href, label]) => (
                 <a key={href} href={href} style={{ color: 'rgba(255,255,255,0.6)', fontSize: 15, fontWeight: 500 }}>{label}</a>
               ))}
             </div>
