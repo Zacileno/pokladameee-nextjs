@@ -11,10 +11,17 @@ const SLUZBY_LINKS: [string, string][] = [
   ['/sluzby/koberce', 'Koberce'],
 ]
 
+const CO_POKLADAME_LINKS: [string, string][] = [
+  ['/co-pokladame#byty', 'Byty'],
+  ['/co-pokladame#domy', 'Rodinné domy'],
+  ['/co-pokladame#firmy', 'Firmy'],
+  ['/co-pokladame#druzstva', 'Bytová družstva a SVJ'],
+]
 
 // položky s vysouvací nabídkou — na počítači při najetí myší, na mobilu po kliknutí
 const ROZBALOVACI: { href: string; label: string; vse: string; links: [string, string][] }[] = [
   { href: '/sluzby', label: 'Služby', vse: 'Všechny služby', links: SLUZBY_LINKS },
+  { href: '/co-pokladame', label: 'Co pokládáme', vse: 'Co pokládáme — přehled', links: CO_POKLADAME_LINKS },
 ]
 
 // hlavní menu (velký pruh) a vedlejší odkazy (malé, vpravo nahoře)

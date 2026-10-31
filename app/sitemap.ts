@@ -10,6 +10,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: 'https://www.pokladameee.cz', lastModified: new Date(), changeFrequency: 'weekly', priority: 1 },
     { url: 'https://www.pokladameee.cz/akce', lastModified: new Date(), changeFrequency: 'weekly', priority: 0.8 },
     { url: 'https://www.pokladameee.cz/inspirace', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
+    { url: 'https://www.pokladameee.cz/co-pokladame', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: 'https://www.pokladameee.cz/sluzby/vinylova-podlaha', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.9 },
     { url: 'https://www.pokladameee.cz/faq', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
     { url: 'https://www.pokladameee.cz/kariera', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
