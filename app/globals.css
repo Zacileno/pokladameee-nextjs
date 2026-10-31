@@ -456,6 +456,10 @@ input, select, textarea { font-family: var(--font); }
 .krok-karta h3 { font-size: 22px; font-weight: 900; color: var(--black); margin: 20px 0 10px; }
 .krok-karta h3 span { color: var(--orange); }
 .krok-karta p { font-size: 15px; line-height: 1.65; color: var(--gray-700); }
+/* stejné dlaždice v "Jak to probíhá" na podstránkách služeb (světlé pozadí) */
+.postup-kroky { padding-top: 22px; }
+.postup-kroky .krok-karta { box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+.postup-kroky .krok-karta h3 { font-size: 20px; }
 
 @media (max-width: 1199px) {
   .kroky-grid { grid-template-columns: repeat(2, 1fr); }

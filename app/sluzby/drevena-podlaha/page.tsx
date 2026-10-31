@@ -4,6 +4,7 @@ import Footer from '@/app/components/Footer'
 import BenefityGrid from '@/app/components/BenefityGrid'
 import KontaktSekce from '@/app/components/KontaktSekce'
 import ReferenceSekce from '@/app/components/ReferenceSekce'
+import PostupKroky from '@/app/components/PostupKroky'
 import MapaSekce from '@/app/components/MapaSekce'
 import BrandIcon, { IkonaText } from '@/app/components/BrandIcon'
 import FaqItem from './FaqItem'
@@ -279,23 +280,7 @@ export default async function DrevenaPodlahaPage() {
         <div className="container">
           <h2 className="section-title" style={{ marginBottom: 8 }}>{krokyNadpis}</h2>
           <p className="section-subtitle" style={{ marginBottom: 40 }}>{krokyPodnadpis}</p>
-          <div className="kroky-grid">
-            {kroky.map((k, i) => (
-              <div key={k.nadpis || i} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-                <div style={{
-                  width: 48, height: 48, borderRadius: '50%', background: 'var(--orange)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: '#fff', fontWeight: 900, fontSize: 20, flexShrink: 0,
-                }}>
-                  {i + 1}
-                </div>
-                <div>
-                  <h3 style={{ fontSize: 18, fontWeight: 800, marginBottom: 8 }}>{k.nadpis}</h3>
-                  <p style={{ fontSize: 15, lineHeight: 1.7, color: 'var(--gray-700)' }}>{k.text}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <PostupKroky kroky={kroky} />
         </div>
       </section>
 
