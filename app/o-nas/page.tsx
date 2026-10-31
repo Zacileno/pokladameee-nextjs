@@ -28,7 +28,7 @@ const FOTO = (id: string) => `https://cdn.sanity.io/images/8cvsenqb/production/$
 // struktura podle žaluzieee.cz/o-nas — texty k odsouhlasení
 const HODNOTY = [
   { emoji: '🛠', nadpis: <>Vracím<span>eee</span> dobré jméno řemeslu</>, text: 'Dobře položená podlaha je stejně důležitá jako férová domluva a dodržený termín. Postaráme se o vše na klíč — od zaměření po úklid — a vy nemusíte nic řešit.' },
-  { emoji: '🏡', nadpis: 'Podlaha bez zbytečných starostí', text: 'Přijedeme, zaměříme a poradíme s výběrem. Starou podlahu odvezeme, připravíme podklad, položíme novou a po sobě uklidíme.' },
+  { emoji: '✨', nadpis: 'Podlaha bez zbytečných starostí', text: 'Přijedeme, zaměříme a poradíme s výběrem. Starou podlahu odvezeme, připravíme podklad, položíme novou a po sobě uklidíme.' },
   { emoji: '🛡', nadpis: 'Důvěra a spolehlivost', text: 'Nehledáme výmluvy, hledáme řešení. Ať jde o kolegu, nebo zákazníka — dané slovo platí. Zákazník nám svěřuje podlahu svého domova.' },
   { emoji: '🤝', nadpis: 'Přátelské a profi prostředí', text: 'Každý z nás má svou roli. Spojujeme profesionalitu s přátelským přístupem — lidé se u nás cítí dobře a odvádějí špičkovou práci.' },
 ]
@@ -93,7 +93,7 @@ export default async function ONasPage() {
                 U nás to znamená podlahy. Vinyl, PVC, koberce i dřevo pokládáme v bytech, rodinných domech, firmách i bytových družstvech. Na každou zakázku máte jednoho člověka, který ji vede od zaměření až po úklid.
               </p>
               <div className="onas-zakladatel">
-                <Image src="/assets/adam.jpg" alt="Adam Hajdušek" width={64} height={64} />
+                <Image src="https://cdn.sanity.io/images/8cvsenqb/production/306c4a22e24e1a5c96a6be2521d307acb1a0da87-120x120.png" alt="Adam Hajdušek" width={64} height={64} unoptimized />
                 <div>
                   <strong>Adam Hajdušek</strong>
                   <span>Zakladatel & hlavní technik</span>
