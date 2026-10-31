@@ -96,7 +96,7 @@ export default async function ONasPage() {
                 <Image src="https://cdn.sanity.io/images/8cvsenqb/production/306c4a22e24e1a5c96a6be2521d307acb1a0da87-120x120.png" alt="Adam Hajdušek" width={64} height={64} unoptimized />
                 <div>
                   <strong>Adam Hajdušek</strong>
-                  <span>Zakladatel & hlavní technik</span>
+                  <span>Hlavní technik</span>
                 </div>
               </div>
             </div>

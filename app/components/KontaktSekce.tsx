@@ -24,7 +24,7 @@ export default function KontaktSekce({ kontakt }: Props) {
   const nadpis = kontakt?.nadpis || 'Napište přímo nám'
   const podnadpis = kontakt?.podnadpis || 'Zaměření je zdarma. Odpovíme do 24 hodin, obvykle dřív. Přijedeme k vám po celém MSK, Zlínsku i Olomoucku.'
   const jmeno = kontakt?.jmeno || 'Adam Hajdušek'
-  const role = kontakt?.role || 'Zakladatel & hlavní technik'
+  const role = kontakt?.role || 'Hlavní technik'
   const citat = kontakt?.citat || 'Každou podlahu řešíme osobně. Přijedeme se podívat.'
   const fotoUrl = kontakt?.fotoUrl || null
   const telefon = kontakt?.telefon || '+420 790 388 487'
