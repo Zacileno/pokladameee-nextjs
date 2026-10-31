@@ -7,7 +7,7 @@ const filozofie = [
   {
     cislo: '02',
     nadpis: 'Důvěra a spolehlivost',
-    text: 'Nehledáme výmluvy, hledáme řešení. Ať už jde o kolegu nebo zákazníka – slovo dané slibem platí. Zákazník nám důvěřuje s podlahou svého domova.',
+    text: 'Nehledáme výmluvy, hledáme řešení. Ať už jde o kolegu, nebo zákazníka – dané slovo platí. Zákazník nám svěřuje podlahu svého domova.',
   },
   {
     cislo: '03',

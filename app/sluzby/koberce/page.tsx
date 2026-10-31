@@ -201,7 +201,7 @@ export default async function KobercovaPodlahaPage() {
               {zobrazitBfBadge && (
                 <div className="bf-sleva-badge" style={{ flexDirection: 'column', gap: 0, lineHeight: 1.1 }}>
                   <span style={{ fontSize: 11, fontWeight: 700 }}>SLEVA</span>
-                  <span style={{ fontSize: 20, fontWeight: 900 }}>25%</span>
+                  <span style={{ fontSize: 20, fontWeight: 900 }}>25&nbsp;%</span>
                 </div>
               )}
               {heroFotkaUrl ? (

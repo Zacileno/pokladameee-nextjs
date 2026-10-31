@@ -47,7 +47,7 @@ export default function PredPoKarta({ po, pred, nazev, material, rozloha }: Prop
               background: 'rgba(0,0,0,0.5)', color: 'white',
               fontSize: 11, fontWeight: 600, padding: '3px 8px', borderRadius: 100,
             }}>
-              klikni pro přepnutí
+              klikněte pro přepnutí
             </div>
           </>
         )}

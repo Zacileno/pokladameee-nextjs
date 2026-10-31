@@ -68,7 +68,7 @@ export default function KontaktSekce({ kontakt }: Props) {
               <div>
                 <div style={{ fontWeight: 800, fontSize: 18 }}>{jmeno}</div>
                 <div style={{ color: 'var(--gray-400)', fontSize: 14 }}>{role}</div>
-                <div style={{ color: 'var(--gray-700)', fontSize: 14, marginTop: 6, fontStyle: 'italic' }}>„{citat}"</div>
+                <div style={{ color: 'var(--gray-700)', fontSize: 14, marginTop: 6, fontStyle: 'italic' }}>„{citat}“</div>
               </div>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>

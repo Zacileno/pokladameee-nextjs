@@ -33,7 +33,7 @@ export default async function ReferenceSekce({ nadpis, video = true }: { nadpis?
           <div className="recenze-souhrn">
             <h2>{nadpis ?? <>Hodnoc<span>eee</span>ní<br />našich zákazníků</>}</h2>
             <div className="recenze-souhrn-cislo">
-              <span>{GOOGLE_HODNOCENI.toFixed(1)}</span>
+              <span>{GOOGLE_HODNOCENI.toFixed(1).replace('.', ',')}</span>
               <div>
                 <div className="recenze-souhrn-hvezdy" aria-hidden="true">★★★★★</div>
                 <a href={GOOGLE_PROFIL_URL} target="_blank" rel="noopener noreferrer">{GOOGLE_POCET_RECENZI} recenzí</a>

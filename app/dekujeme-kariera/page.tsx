@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 export const metadata = {
-  title: 'Děkujeme za přihlášku — pokládámeee.cz',
+  title: 'Děkujeme za přihlášku',
   robots: { index: false, follow: true },
   alternates: { canonical: 'https://www.pokladameee.cz/dekujeme-kariera' },
 }

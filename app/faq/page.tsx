@@ -34,7 +34,7 @@ const OBECNE: FaqEntry[] = [
   { otazka: 'Řešíte i demontáž staré podlahy a odpad?', odpoved: 'Ano. Starou podlahu odborně odstraníme a odpad ekologicky zlikvidujeme — nemusíte shánět kontejner ani další firmu.' },
   { otazka: 'Co všechno je součástí ceny?', odpoved: 'Zaměření, konzultaci, materiál, přípravu podkladu, demontáž staré podlahy, pokládku i úklid po sobě. Podlahu řešíme kompletně od A do Z.' },
   { otazka: 'Máte na práci záruku?', odpoved: 'Ano, na odvedenou práci poskytujeme záruku. Pokud se cokoliv objeví, voláte přímo nás — neposíláme vás mezi výrobce, dodavatele a řemeslníky.' },
-  { otazka: 'Působíte v celém Moravskoslezském kraji?', odpoved: 'Ano, jezdíme po celém MSK — Ostrava, Opava, Frýdek-Místek, Havířov a okolí. Pokládáme také ve Zlínském a Olomouckém kraji.' },
+  { otazka: 'Kde všude pokládáte?', odpoved: 'Jezdíme po celém Moravskoslezském, Zlínském a Olomouckém kraji — například Ostrava, Opava, Frýdek-Místek, Havířov, Zlín nebo Olomouc a okolí.' },
 ]
 
 const VINYL_FALLBACK: FaqEntry[] = [
