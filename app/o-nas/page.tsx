@@ -27,9 +27,9 @@ const FOTO = (id: string) => `https://cdn.sanity.io/images/8cvsenqb/production/$
 
 // struktura podle žaluzieee.cz/o-nas — texty k odsouhlasení
 const HODNOTY = [
-  { emoji: '💪', nadpis: <>Vracím<span>eee</span> dobré jméno řemeslu</>, text: 'Dobře položená podlaha je stejně důležitá jako férová domluva a dodržený termín. Postaráme se o vše na klíč — od zaměření po úklid — a vy nemusíte nic řešit.' },
+  { emoji: '🛠', nadpis: <>Vracím<span>eee</span> dobré jméno řemeslu</>, text: 'Dobře položená podlaha je stejně důležitá jako férová domluva a dodržený termín. Postaráme se o vše na klíč — od zaměření po úklid — a vy nemusíte nic řešit.' },
   { emoji: '🏡', nadpis: 'Podlaha bez zbytečných starostí', text: 'Přijedeme, zaměříme a poradíme s výběrem. Starou podlahu odvezeme, připravíme podklad, položíme novou a po sobě uklidíme.' },
-  { emoji: '👍', nadpis: 'Důvěra a spolehlivost', text: 'Nehledáme výmluvy, hledáme řešení. Ať jde o kolegu, nebo zákazníka — dané slovo platí. Zákazník nám svěřuje podlahu svého domova.' },
+  { emoji: '🛡', nadpis: 'Důvěra a spolehlivost', text: 'Nehledáme výmluvy, hledáme řešení. Ať jde o kolegu, nebo zákazníka — dané slovo platí. Zákazník nám svěřuje podlahu svého domova.' },
   { emoji: '🤝', nadpis: 'Přátelské a profi prostředí', text: 'Každý z nás má svou roli. Spojujeme profesionalitu s přátelským přístupem — lidé se u nás cítí dobře a odvádějí špičkovou práci.' },
 ]
 
