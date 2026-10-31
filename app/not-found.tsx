@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 export const metadata = {
-  title: 'Stránka nenalezena — pokládámeee.cz',
+  title: 'Stránka nenalezena',
   robots: { index: false, follow: true },
 }
 

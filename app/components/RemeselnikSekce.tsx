@@ -126,7 +126,7 @@ export default async function RemeselnikSekce({ data }: { data?: RodinaData }) {
                     {p.hodnoceni && <Hvezdicky pocet={p.hodnoceni} accent={accent} />}
                     {p.hodnoceni && (
                       <span style={{ color: '#111', fontSize: 15, fontWeight: 800 }}>
-                        {p.hodnoceni.toFixed(1)}
+                        {p.hodnoceni.toFixed(1).replace('.', ',')}
                       </span>
                     )}
                     {p.pocetKlientu && (
