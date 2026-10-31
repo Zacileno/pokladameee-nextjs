@@ -118,7 +118,7 @@ export default async function FaqPage() {
       <Header opaque />
 
       {/* HERO */}
-      <section style={{ background: 'var(--blue)', paddingTop: 140, paddingBottom: 64 }}>
+      <section style={{ background: 'var(--blue)', paddingTop: 'calc(140px + var(--hlavicka-navic))', paddingBottom: 64 }}>
         <div className="container">
           <p style={{ fontSize: 13, fontWeight: 600, letterSpacing: '2px', color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', marginBottom: 16 }}>
             Časté otázky
@@ -145,7 +145,7 @@ export default async function FaqPage() {
 
       {/* FAQ SEKCE */}
       {sekce.map((s, i) => (
-        <section key={s.id} id={s.id} className="section" style={{ background: i % 2 === 0 ? 'var(--gray-50)' : 'white', scrollMarginTop: 90 }}>
+        <section key={s.id} id={s.id} className="section" style={{ background: i % 2 === 0 ? 'var(--gray-50)' : 'white', scrollMarginTop: 'calc(90px + var(--hlavicka-navic))' }}>
           <div className="container" style={{ maxWidth: 760 }}>
             <h2 className="section-title" style={{ marginBottom: 32 }}>{s.nadpis}</h2>
             <div className="faq-list">

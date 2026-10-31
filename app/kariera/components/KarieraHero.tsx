@@ -13,7 +13,7 @@ export default function KarieraHero() {
         background: 'rgba(0,0,0,0.35)',
         zIndex: 1,
       }} />
-      <div className="container" style={{ position: 'relative', zIndex: 2, paddingTop: 120, paddingBottom: 80 }}>
+      <div className="container" style={{ position: 'relative', zIndex: 2, paddingTop: 'calc(120px + var(--hlavicka-navic))', paddingBottom: 80 }}>
         <p style={{ fontSize: 14, fontWeight: 600, letterSpacing: '2px', color: 'var(--orange)', textTransform: 'uppercase', marginBottom: 16 }}>
           Kariéra
         </p>

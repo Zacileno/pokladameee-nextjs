@@ -38,7 +38,7 @@ input, select, textarea { font-family: var(--font); }
 .btn-secondary:hover { border-color: var(--white); background: rgba(255,255,255,0.1); }
 
 /* ── HERO ── */
-.hero-grid { display: grid; grid-template-columns: 1fr 420px; gap: 64px; align-items: center; padding-top: 100px; padding-bottom: 80px; }
+.hero-grid { display: grid; grid-template-columns: 1fr 420px; gap: 64px; align-items: center; padding-top: calc(100px + var(--hlavicka-navic)); padding-bottom: 80px; }
 .hero-form { /* visible desktop */ }
 
 /* ── VÝHODY LIŠTA ── */
@@ -175,6 +175,23 @@ input, select, textarea { font-family: var(--font); }
 
 /* ── HLAVIČKA ── */
 .desk-nav a { white-space: nowrap; }
+/* dvouřádková hlavička (podle Žaluzieee) — na počítači je o 96 px vyšší než na mobilu,
+   o tuto hodnotu se posouvá obsah pod ní (--hlavicka-navic v paddingu stránek) */
+:root { --hlavicka-navic: 0px; }
+.hlavicka-radek { display: flex; align-items: center; justify-content: space-between; height: 72px; transition: height 0.3s; }
+.hlavicka-vedlejsi { display: flex; align-items: center; gap: 32px; }
+.hlavicka-vedlejsi a { color: rgba(255,255,255,0.8); font-weight: 600; font-size: 16.5px; transition: color 0.2s; }
+.hlavicka-vedlejsi a:hover, .hlavicka-vedlejsi a.aktivni { color: #fff; }
+.hlavicka-vedlejsi a.aktivni { text-decoration: underline; text-underline-offset: 4px; }
+.hlavicka-lista { display: flex; align-items: center; justify-content: space-between; height: 68px; margin-bottom: 12px; padding: 0 24px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); border-radius: 12px; }
+.hlavicka-hlavni { display: flex; align-items: center; gap: 36px; }
+.hlavicka-hlavni a { color: #fff; font-weight: 800; font-size: 17px; transition: color 0.2s; }
+.hlavicka-hlavni a:hover, .hlavicka-hlavni a.aktivni { color: var(--orange); }
+@media (min-width: 1200px) {
+  :root { --hlavicka-navic: 96px; }
+  /* velké mezery nad a pod logem; po odscrollování se horní řádek zmenší, ať hlavička nezabírá půl obrazovky */
+  .hlavicka-radek { height: 88px; }
+  .hlavicka-odscrollovana .hlavicka-radek { height: 56px; }
 /* celé menu se vejde od cca 1200 px — pod tím hamburger */
 @media (max-width: 1199px) {
   .desk-nav { display: none !important; }
@@ -317,7 +334,7 @@ input, select, textarea { font-family: var(--font); }
 .top-bar-text { text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .top-bar-cta { color: var(--orange); letter-spacing: 0.04em; white-space: nowrap; }
 
-.bf-hero { min-height: 640px; padding: 120px 0 80px; }
+.bf-hero { min-height: 640px; padding: calc(120px + var(--hlavicka-navic)) 0 80px; }
 .bf-odpocet-obal { display: flex; justify-content: center; margin-bottom: 32px; }
 .bf-odpocet { position: relative; display: inline-flex; align-items: center; flex-wrap: wrap; justify-content: center; gap: 8px 16px; background: white; border-radius: var(--radius-lg); padding: 14px 24px; font-size: 18px; box-shadow: 0 12px 32px rgba(0,0,0,0.25); }
 .bf-odpocet::after { content: ''; position: absolute; left: 50%; bottom: -8px; transform: translateX(-50%); border: 8px solid transparent; border-bottom: 0; border-top-color: white; }

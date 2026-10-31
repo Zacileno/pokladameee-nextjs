@@ -123,7 +123,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       <JsonLd data={articleJsonLd} />
       <Header opaque />
 
-      <section style={{ paddingTop: 120, paddingBottom: 40 }}>
+      <section style={{ paddingTop: 'calc(120px + var(--hlavicka-navic))', paddingBottom: 40 }}>
         <div className="container">
           <div className="blog-clanek-hlavicka">
             <nav className="blog-breadcrumb">
