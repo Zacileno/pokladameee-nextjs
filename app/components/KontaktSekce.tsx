@@ -30,7 +30,7 @@ export default function KontaktSekce({ kontakt }: Props) {
   const telefon = kontakt?.telefon || '+420 790 388 487'
   const telefonTechnicke = kontakt?.telefonTechnicke || '+420 730 454 309'
   const email = kontakt?.email || 'adam.hajdusek@pokladameee.cz'
-  const pracovniDoba = kontakt?.pracovniDoba || 'Po–Pá 7:00–18:00'
+  const pracovniDoba = kontakt?.pracovniDoba || 'Po–Pá 8:00–16:30'
   const region = kontakt?.region || 'Moravskoslezský, Zlínský a Olomoucký kraj'
 
   const nadpisSlova = nadpis.split(' ')
