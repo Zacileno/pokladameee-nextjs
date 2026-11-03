@@ -152,7 +152,6 @@ export default async function InspracePage() {
       <RealizaceGalerie
         id="fotogalerie"
         fotky={FOTOGALERIE}
-        nadtitulek="Podívejte se, jak to řešili jiní"
         nadpis={<>Fotogaleri<span>eee</span> našich realizací</>}
         podnadpis="Vinyl, PVC, koberce i dřevo — hotové podlahy u našich zákazníků."
         velka
