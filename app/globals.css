@@ -227,7 +227,7 @@ a.kraj-mesto:hover { color: var(--orange); box-shadow: 0 4px 16px rgba(255,136,0
 
 /* slider realizací na produktových stránkách — aktivní fotka uprostřed, sousední vykukují */
 .realizace-slider { position: relative; --slide-w: min(760px, 62vw); }
-.realizace-slider.velka { --slide-w: min(832px, 58vw); }
+.realizace-slider.velka { --slide-w: min(700px, 50vw); }
 .realizace-draha { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 8px calc((100% - var(--slide-w)) / 2); }
 .realizace-draha::-webkit-scrollbar { display: none; }
 .realizace-slide { position: relative; flex: 0 0 var(--slide-w); aspect-ratio: 3 / 2; margin: 0; padding: 0; border: none; border-radius: 16px; overflow: hidden; scroll-snap-align: center; cursor: pointer; background: var(--gray-100); opacity: 0.45; transform: scale(0.92); transition: opacity 0.35s, transform 0.35s, box-shadow 0.35s; }
