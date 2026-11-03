@@ -87,11 +87,11 @@ export default async function KrajPage({ params }: { params: Promise<{ kraj: str
               <CeduleGrafika text={kraj.nazev} />
             </div>
 
-            {/* MĚSTA — zatím bez vlastních podstránek */}
+            {/* MĚSTA — proklik na podstránku města */}
             <div className="kraj-mesta">
               <div className="kraj-mesta-grid">
                 {kraj.mesta.map(m => (
-                  <div key={m} className="kraj-mesto">{m}</div>
+                  <a key={m.slug} href={`/lokality/${kraj.slug}/${m.slug}`} className="kraj-mesto">{m.nazev}</a>
                 ))}
               </div>
               <p style={{ fontSize: 14, marginTop: 16 }}>A v dalších městech a obcích {kraj.vKraji}…</p>

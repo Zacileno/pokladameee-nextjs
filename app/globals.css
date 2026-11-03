@@ -218,6 +218,9 @@ input, select, textarea { font-family: var(--font); }
 .kraj-mesta { background: var(--gray-50); border-radius: 16px; padding: 24px; margin-top: 56px; }
 .kraj-mesta-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; }
 .kraj-mesto { background: white; border-radius: 10px; padding: 14px 18px; font-size: 15px; font-weight: 700; color: var(--black); box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+a.kraj-mesto { transition: color 0.2s, box-shadow 0.2s; }
+a.kraj-mesto:hover { color: var(--orange); box-shadow: 0 4px 16px rgba(255,136,0,0.18); }
+.mesto-mapa-kraj { fill: var(--orange); }
 
 /* Adam s cedulí (CeduleGrafika) — Adam vpředu, cedule na tyči za ním */
 .cedule-grafika { position: relative; width: 100%; max-width: 500px; aspect-ratio: 10 / 11; margin: 0 auto; }
