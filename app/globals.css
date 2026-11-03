@@ -463,3 +463,6 @@ input, select, textarea { font-family: var(--font); }
   .cp-blok-obraceny .cp-blok-foto { order: 0; }
 }
 @media (max-width: 480px) { .cp-dlazdice-grid { grid-template-columns: 1fr; } }
+
+/* posuvník před/po — neviditelný range přes celou fotku */
+.predpo-posuvnik { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; touch-action: pan-y; }
