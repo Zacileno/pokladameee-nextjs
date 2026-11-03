@@ -217,6 +217,8 @@ input, select, textarea { font-family: var(--font); }
 .kraj-perex strong { color: var(--black); }
 .kraj-mesta { background: var(--gray-50); border-radius: 16px; padding: 24px; margin-top: 56px; }
 .kraj-mesta-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; }
+.mesto-dalsi-grid { display: flex; flex-wrap: wrap; justify-content: center; }
+.mesto-dalsi-grid .kraj-mesto { flex: 0 1 200px; }
 .kraj-mesto { background: white; border-radius: 10px; padding: 14px 18px; font-size: 15px; font-weight: 700; color: var(--black); box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
 a.kraj-mesto { transition: color 0.2s, box-shadow 0.2s; }
 a.kraj-mesto:hover { color: var(--orange); box-shadow: 0 4px 16px rgba(255,136,0,0.18); }
@@ -315,6 +317,7 @@ a.kraj-mesto:hover { color: var(--orange); box-shadow: 0 4px 16px rgba(255,136,0
   .kraj-hero-grid { grid-template-columns: 1fr; gap: 48px; }
   .kraj-mesta { margin-top: 64px; padding: 16px; }
   .kraj-mesta-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .mesto-dalsi-grid .kraj-mesto { flex-basis: calc(50% - 4px); }
   .cedule-odznak { left: 0; width: 104px; height: 104px; }
 
   .desk-nav { display: none !important; }

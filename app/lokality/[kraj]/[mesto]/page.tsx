@@ -127,9 +127,9 @@ export default async function MestoPage({ params }: { params: Params }) {
         {/* DALŠÍ MĚSTA V KRAJI */}
         <section className="section" style={{ background: 'white' }}>
           <div className="container">
-            <div className="kraj-mesta" style={{ marginTop: 0 }}>
+            <div className="kraj-mesta" style={{ marginTop: 0, textAlign: 'center' }}>
               <p style={{ fontSize: 17, fontWeight: 800, color: 'var(--black)', marginBottom: 16 }}>Pokládám<span style={{ color: 'var(--orange)' }}>eee</span> i v dalších městech {kraj.vKraji}</p>
-              <div className="kraj-mesta-grid">
+              <div className="kraj-mesta-grid mesto-dalsi-grid">
                 {dalsiMesta.map(m => (
                   <a key={m.slug} href={`/lokality/${kraj.slug}/${m.slug}`} className="kraj-mesto">{m.nazev}</a>
                 ))}
