@@ -7,6 +7,8 @@ import PredPoKarta from '../components/PredPoKarta'
 import ReferenceSekce from '../components/ReferenceSekce'
 import BrandIcon from '../components/BrandIcon'
 import YouTubeVideo from '../components/YouTubeVideo'
+import RealizaceGalerie from '../components/RealizaceGalerie'
+import { FOTOGALERIE } from '../../lib/realizace'
 import { VIDEO_PORUBACEK_VYSLEDEK } from '../../lib/videa'
 
 export const metadata: Metadata = {
@@ -145,6 +147,16 @@ export default async function InspracePage() {
           </div>
         </div>
       </section>
+
+      {/* FOTOGALERIE — mix typů podlah, velký slider přes celou šířku */}
+      <RealizaceGalerie
+        id="fotogalerie"
+        fotky={FOTOGALERIE}
+        nadtitulek="Podívejte se, jak to řešili jiní"
+        nadpis={<>Fotogaleri<span>eee</span> našich realizací</>}
+        podnadpis="Vinyl, PVC, koberce i dřevo — hotové podlahy u našich zákazníků."
+        velka
+      />
 
       {/* PROČ POKLÁDÁMEEE */}
       <section className="section" style={{ background: 'var(--gray-50)' }}>

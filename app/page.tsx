@@ -14,8 +14,10 @@ import GalerieSekce from './components/GalerieSekce'
 import RemeselnikSekce from './components/RemeselnikSekce'
 import VyhodyBadge from './components/VyhodyBadge'
 import ReferenceSekce from './components/ReferenceSekce'
+import RealizaceGalerie from './components/RealizaceGalerie'
 import KontaktSekce from './components/KontaktSekce'
 import Footer from './components/Footer'
+import { FOTOGALERIE } from '../lib/realizace'
 import BlackFridayPopup from './components/BlackFridayPopup'
 
 export const revalidate = 0
@@ -55,6 +57,14 @@ export default async function Home() {
         <RemeselnikSekce data={rodinaZnacekData} />
         <VyhodyBadge data={procNasVybratData} />
         <ReferenceSekce />
+        <RealizaceGalerie
+          id="fotogalerie"
+          fotky={FOTOGALERIE}
+          nadtitulek="Podívejte se, jak to řešili jiní"
+          nadpis={<>Fotogaleri<span>eee</span> našich realizací</>}
+          podnadpis="Vinyl, PVC, koberce i dřevo — hotové podlahy u našich zákazníků."
+          velka
+        />
         <KontaktSekce kontakt={kontaktSekce} />
       </main>
       <Footer nastaveni={obecneNastaveni} />

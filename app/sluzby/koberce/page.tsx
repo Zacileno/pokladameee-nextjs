@@ -4,6 +4,8 @@ import Footer from '@/app/components/Footer'
 import BenefityGrid from '@/app/components/BenefityGrid'
 import KontaktSekce from '@/app/components/KontaktSekce'
 import ReferenceSekce from '@/app/components/ReferenceSekce'
+import RealizaceGalerie from '@/app/components/RealizaceGalerie'
+import { REALIZACE } from '@/lib/realizace'
 import PostupKroky from '@/app/components/PostupKroky'
 import BrandIcon, { IkonaText } from '@/app/components/BrandIcon'
 import FaqItem from './FaqItem'
@@ -294,6 +296,8 @@ export default async function KobercovaPodlahaPage() {
           </div>
         </div>
       </section>
+
+      <RealizaceGalerie fotky={REALIZACE.koberce} podlaha="Kobercová podlaha" />
 
       <ReferenceSekce video={false} />
 
