@@ -10,7 +10,6 @@ interface KontaktData {
   citat?: string
   fotoUrl?: string
   telefon?: string
-  telefonTechnicke?: string
   email?: string
   pracovniDoba?: string
   region?: string
