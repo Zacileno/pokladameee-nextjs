@@ -221,11 +221,6 @@ input, select, textarea { font-family: var(--font); }
 a.kraj-mesto { transition: color 0.2s, box-shadow 0.2s; }
 a.kraj-mesto:hover { color: var(--orange); box-shadow: 0 4px 16px rgba(255,136,0,0.18); }
 .mesto-mapa-kraj { fill: var(--orange); }
-.mesto-dalsi { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; max-width: 900px; margin: 0 auto; }
-.mesto-dalsi a { display: inline-flex; align-items: center; gap: 10px; padding: 12px 22px; background: white; border: 2px solid var(--gray-100); border-radius: 100px; font-size: 16px; font-weight: 700; color: var(--black); transition: border-color 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s; }
-.mesto-dalsi a::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--orange); }
-.mesto-dalsi a::after { content: "→"; color: var(--orange); }
-.mesto-dalsi a:hover { border-color: var(--orange); color: var(--orange); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(255,136,0,0.18); }
 
 /* posuvník před/po — neviditelný range přes celou fotku */
 .predpo-posuvnik { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; touch-action: pan-y; }
