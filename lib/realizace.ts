@@ -28,7 +28,6 @@ export const REALIZACE: Record<TypPodlahy, RealizaceFoto[]> = {
     { soubor: 'pvc-frydek-mistek-kuchyn', mesto: 'Frýdek-Místek' },
     { soubor: 'pvc-stablovice-pokoj', mesto: 'Štáblovice' },
     { soubor: 'pvc-frydek-mistek-pokoj-2', mesto: 'Frýdek-Místek' },
-    { soubor: 'pvc-frydek-mistek-obyvak', mesto: 'Frýdek-Místek' },
     { soubor: 'pvc-frydek-mistek-kuchyn-2', mesto: 'Frýdek-Místek' },
     { soubor: 'pvc-posilovna-ostrava', mesto: 'Ostrava' },
     { soubor: 'pvc-frydek-mistek-pokoj', mesto: 'Frýdek-Místek' },
