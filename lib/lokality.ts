@@ -36,7 +36,7 @@ export const KRAJE: Kraj[] = [
         okoli: [
           'Ostrava je fajne město a my sem jezdíme dycky rádi. Proč? **Bo je tu prostě dobře!**',
           'Od Stodolní přes Dolní oblast Vítkovice až po Slezskou Ostravu — kaj jen potřebujete, tam přijedeme. Zaměříme zdarma, starou podlahu vyneseme a odvezeme a novou položíme tak, že ju budete mít ráda celá rodina.',
-          'Šak víte, jak to chodí: nikdo nechce mít doma bordel tři týdny. U nás je **hotovo, než se nadějeteee**.',
+          'Šak víte, jak to chodí: nikdo nechce mít doma nepořádek tři týdny. U nás je **hotovo, než se nadějeteee**.',
         ],
       },
       {
@@ -46,7 +46,7 @@ export const KRAJE: Kraj[] = [
         gps: [17.9045, 49.9387],
         perex: 'Ať bydlíte v historickém centru, na Kateřinkách nebo v domku za městem, **novou podlahu vám v Opavě položíme rychle, čistě a bez starostí**.',
         okoli: [
-          'Opava je Slezsko, a ne Ostrava — to víme a respektujeme. **Šak to tu má svoju noblesu!**',
+          'Opava je slezská metropola s dlouhou historií. **Šak to tu má svoju noblesu!**',
           'Jezdíme po celém Opavsku: Kateřinky, Kylešovice, Vávrovice i okolní obce jako Kravaře, Hradec nad Moravicí nebo Vítkov. Přijedeme, zaměříme zdarma a poradíme, jaká podlaha se k vám hodí.',
           'Starou podlahu odvezeme, podklad připravíme a novou položíme. A po sobě uklidíme — šak to je samozřejmost.',
         ],
@@ -104,9 +104,9 @@ export const KRAJE: Kraj[] = [
         nazev: 'Třinec',
         vMeste: 'v Třinci',
         gps: [18.6728, 49.6776],
-        perex: 'Na Lyžbicích, v Oldřichovicích nebo v chałpě pod Javorovým — **novou podlahu vám v Třinci položíme rychle a bez starostí**.',
+        perex: 'Na Lyžbicích, v Oldřichovicích nebo na chalupě pod Javorovým — **novou podlahu vám v Třinci položíme rychle a bez starostí**.',
         okoli: [
-          'Třinec mluví po naszymu, a my to mamy radzi. **Podlaha od nás bude fajnie — aj pro gorola, aj pro domácího.**',
+          'Na Těšínsku se mluví po našymu a my to mámy radzi. **Podlahu vám položíme fajnie — tak, aby vydržala roky.**',
           'Jezdíme po celém Třinecku: Konská, Kanada, Oldřichovice i obce jako Vendryně, Bystřice nebo Hrádek. Zaměříme zdarma a poradíme, co se k vám hodí.',
           'Starou podlahu odvezeme, novou položíme a po sobě uklidíme. Ani se nenadějete a je hotovo.',
         ],
@@ -153,7 +153,7 @@ export const KRAJE: Kraj[] = [
         okoli: [
           'Kroměříž je Haná jak vyšitá. A Hanák vé, co je dobré. **Tak pojte, podlahu vám položíme pěkně — tak akorát.**',
           'Jezdíme po celém Kroměřížsku: Hulín, Holešov, Chropyně, Bystřice pod Hostýnem i do okolních dědin. Zaměříme zdarma a domluvíme termín.',
-          'Hanák prej nespěchá. My jo — do 48 hodin jsme u vás.',
+          'A kdy přijedeme? Do 48 hodin jsme u vás.',
         ],
       },
       {
@@ -163,7 +163,7 @@ export const KRAJE: Kraj[] = [
         gps: [17.4597, 49.0697],
         perex: 'V Hradišti, ve Starém Městě nebo v Kunovicích — **novou podlahu vám na Uherskohradišťsku položíme rychle a bez starostí**.',
         okoli: [
-          'Na Slovácku sa umí dobře žít, dobře jest a dobře pít. **A dobrú podlahu k tomu přidáme my.**',
+          'Na Slovácku sa umí dobře žít aj pořádně oslavit. **A dobrú podlahu k tomu přidáme my.**',
           'Jezdíme do Uherského Hradiště, Starého Města, Kunovic, Uherského Brodu i do vinařských dědin kolem. Zaměříme zdarma a poradíme, co sa k vám hodí.',
           'Starú podlahu odvezeme, novú položíme a po sobě uklidíme. Potom enem pozvat chasu na hody.',
         ],
@@ -177,7 +177,7 @@ export const KRAJE: Kraj[] = [
         okoli: [
           'Na Valašsku sa nic nedělá napůl. **Šak co ogaři udělajú, to drží!**',
           'Jezdíme do Vsetína i po celém okolí: Karolinka, Velké Karlovice, Hovězí nebo Jablůnka. Paneláky, domky i chalupy na kopcoch.',
-          'Zaměření je zdarma, starú podlahu odvezeme a novú položíme. Na slivovicu už nám nalévat nemusíte.',
+          'Zaměření je zdarma, starú podlahu odvezeme a novú položíme. Potom si užijte nový domov.',
         ],
       },
       {
@@ -197,9 +197,9 @@ export const KRAJE: Kraj[] = [
         nazev: 'Rožnov pod Radhoštěm',
         vMeste: 'v Rožnově pod Radhoštěm',
         gps: [18.1430, 49.4585],
-        perex: 'V centru, na Koryčanských pasekách nebo na chalupě pod Radhoštěm — **novou podlahu vám v Rožnově položíme rychle a bez starostí**.',
+        perex: 'V centru, v Hážovicích nebo na chalupě pod Radhoštěm — **novou podlahu vám v Rožnově položíme rychle a bez starostí**.',
         okoli: [
-          'Pod Radhoštěm sa žije pomalu, ale pořádně. **Šak aj my děláme pořádně — enem rychlejší.**',
+          'Pod Radhoštěm sa žije v klidu a pořádně. **Šak aj my děláme pořádně — a k tomu rychle.**',
           'Jezdíme do Rožnova, Zubří, Horní Bečvy, Prostřední Bečvy i Frenštátu. Rodinné domy, roubenky aj penziony.',
           'Zaměření je zdarma, starú podlahu odvezeme a novú položíme. Potom hurá na Pustevny.',
         ],
@@ -254,7 +254,7 @@ export const KRAJE: Kraj[] = [
         nazev: 'Šumperk',
         vMeste: 'v Šumperku',
         gps: [16.9706, 49.9653],
-        perex: 'V centru, na Benátkách nebo na chalupě pod Jeseníky — **novou podlahu vám v Šumperku položíme rychle a bez starostí**.',
+        perex: 'V centru, na sídlišti nebo na chalupě pod Jeseníky — **novou podlahu vám v Šumperku položíme rychle a bez starostí**.',
         okoli: [
           'Šumperk je brána Jeseníků. **A my jsme brána k nové podlaze** — rychlé a bez starostí.',
           'Jezdíme do Šumperka i do okolí: Zábřeh, Mohelnice, Bludov, Velké Losiny nebo Loučná nad Desnou. Paneláky, rodinné domy i horské chalupy.',
@@ -266,7 +266,7 @@ export const KRAJE: Kraj[] = [
         nazev: 'Hranice',
         vMeste: 'v Hranicích',
         gps: [17.7348, 49.5480],
-        perex: 'V centru u zámku, na sídlišti Hromůvka nebo v domku v Drahotuších — **novou podlahu vám v Hranicích položíme rychle a bez starostí**.',
+        perex: 'V centru u zámku, na sídlišti nebo v domku v Drahotuších — **novou podlahu vám v Hranicích položíme rychle a bez starostí**.',
         okoli: [
           'Hranice mají nejhlubší propast u nás. **Ale s naší podlahou se do žádné propasti nepropadnete!**',
           'Jezdíme po celém Záhoří a Hranicku: Drahotuše, Teplice nad Bečvou, Potštát, Bělotín i Hustopeče nad Bečvou. Zaměříme zdarma a šak se domluvíme.',
