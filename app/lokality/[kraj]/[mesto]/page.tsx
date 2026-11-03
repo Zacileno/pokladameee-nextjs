@@ -125,16 +125,18 @@ export default async function MestoPage({ params }: { params: Params }) {
         <SluzbySekce data={sluzbySekce} />
 
         {/* DALŠÍ MĚSTA V KRAJI */}
-        <section style={{ background: 'white', paddingBottom: 24 }}>
-          <div className="container">
-            <div className="kraj-mesta" style={{ marginTop: 0 }}>
-              <p style={{ fontSize: 17, fontWeight: 800, color: 'var(--black)', marginBottom: 16 }}>Pokládáme i v dalších městech {kraj.vKraji}</p>
-              <div className="kraj-mesta-grid">
-                {dalsiMesta.map(m => (
-                  <a key={m.slug} href={`/lokality/${kraj.slug}/${m.slug}`} className="kraj-mesto">{m.nazev}</a>
-                ))}
-              </div>
+        <section className="section" style={{ background: 'white' }}>
+          <div className="container" style={{ textAlign: 'center' }}>
+            <h2 className="section-title">Pokládám<span>eee</span> i v dalších městech</h2>
+            <p className="section-subtitle" style={{ margin: '0 auto 32px' }}>Přijedeme k vám i jinde {kraj.vKraji}.</p>
+            <div className="mesto-dalsi">
+              {dalsiMesta.map(m => (
+                <a key={m.slug} href={`/lokality/${kraj.slug}/${m.slug}`}>{m.nazev}</a>
+              ))}
             </div>
+            <a href={`/lokality/${kraj.slug}`} style={{ display: 'inline-block', marginTop: 28, fontWeight: 700, color: 'var(--blue)', textDecoration: 'underline', textUnderlineOffset: 4 }}>
+              Všechna místa {kraj.vKraji} →
+            </a>
           </div>
         </section>
 
