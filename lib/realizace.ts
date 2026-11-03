@@ -31,8 +31,6 @@ export const REALIZACE: Record<TypPodlahy, RealizaceFoto[]> = {
     { soubor: 'pvc-frydek-mistek-obyvak', mesto: 'Frýdek-Místek' },
     { soubor: 'pvc-frydek-mistek-kuchyn-2', mesto: 'Frýdek-Místek' },
     { soubor: 'pvc-posilovna-ostrava', mesto: 'Ostrava' },
-    { soubor: 'pvc-frydek-mistek-pred-2', mesto: 'Frýdek-Místek' },
-    { soubor: 'pvc-stablovice-obyvak-2', mesto: 'Štáblovice' },
     { soubor: 'pvc-frydek-mistek-pokoj', mesto: 'Frýdek-Místek' },
   ],
   koberce: [
@@ -40,12 +38,10 @@ export const REALIZACE: Record<TypPodlahy, RealizaceFoto[]> = {
     { soubor: 'koberec-posilovna-ostrava', mesto: 'Ostrava' },
     { soubor: 'koberec-koprivnice-schody-2', mesto: 'Kopřivnice' },
     { soubor: 'koberec-posilovna-ostrava-2', mesto: 'Ostrava' },
-    { soubor: 'koberec-koprivnice-schody-3', mesto: 'Kopřivnice' },
   ],
   drevo: [
     { soubor: 'drevo-zabreh-pokoj', mesto: 'Zábřeh' },
     { soubor: 'drevo-zabreh-chodba', mesto: 'Zábřeh' },
     { soubor: 'drevo-zabreh-pokoj-2', mesto: 'Zábřeh' },
-    { soubor: 'drevo-zabreh-pred', mesto: 'Zábřeh – původní stav' },
   ],
 }
