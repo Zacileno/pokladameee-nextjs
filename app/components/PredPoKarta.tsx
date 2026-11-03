@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, type CSSProperties } from 'react'
 
 type Props = {
   po: string
@@ -9,47 +9,42 @@ type Props = {
   rozloha?: string
 }
 
+const stitek = (vpravo: boolean): CSSProperties => ({
+  position: 'absolute', top: 12, [vpravo ? 'right' : 'left']: 12,
+  padding: '4px 12px', borderRadius: 100, fontSize: 12, fontWeight: 700, color: 'white',
+  background: vpravo ? 'var(--orange)' : 'rgba(0,0,0,0.6)', pointerEvents: 'none',
+})
+
 export default function PredPoKarta({ po, pred, nazev, material, rozloha }: Props) {
-  const hasPred = Boolean(pred)
-  const [zobrazit, setZobrazit] = useState<'pred' | 'po'>('po')
+  const [pozice, setPozice] = useState(50)
 
   return (
     <div>
-      <div
-        style={{ position: 'relative', borderRadius: 12, overflow: 'hidden', aspectRatio: '4/3', cursor: hasPred ? 'pointer' : 'default' }}
-        onClick={() => hasPred && setZobrazit(z => z === 'pred' ? 'po' : 'pred')}
-      >
-        <img
-          src={zobrazit === 'pred' && pred ? pred : po}
-          alt={nazev}
-          style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'opacity 0.3s' }}
-        />
-        {hasPred && (
+      <div style={{ position: 'relative', borderRadius: 12, overflow: 'hidden', aspectRatio: '4/3', userSelect: 'none' }}>
+        {pred ? (
           <>
-            <div style={{ position: 'absolute', top: 12, left: 12, display: 'flex', gap: 4 }}>
-              {(['pred', 'po'] as const).map(stav => (
-                <button
-                  key={stav}
-                  onClick={e => { e.stopPropagation(); setZobrazit(stav) }}
-                  style={{
-                    padding: '4px 12px', borderRadius: 100, border: 'none',
-                    fontSize: 12, fontWeight: 700, cursor: 'pointer',
-                    background: zobrazit === stav ? 'var(--orange)' : 'rgba(0,0,0,0.5)',
-                    color: 'white', transition: 'background 0.2s',
-                  }}
-                >
-                  {stav === 'pred' ? 'Před' : 'Po'}
-                </button>
-              ))}
+            {/* posuvník: vlevo stav před, vpravo po */}
+            <img src={pred} alt={`${nazev} — před pokládkou`} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+            <img src={po} alt={`${nazev} — po pokládce`} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', clipPath: `inset(0 0 0 ${pozice}%)` }} />
+            <div style={{ position: 'absolute', top: 0, bottom: 0, left: `${pozice}%`, width: 3, marginLeft: -1.5, background: 'white', boxShadow: '0 0 6px rgba(0,0,0,0.4)', pointerEvents: 'none' }}>
+              <div style={{
+                position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
+                width: 40, height: 40, borderRadius: '50%', background: 'var(--orange)', color: 'white',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, fontWeight: 900,
+                boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
+              }}>‹ ›</div>
             </div>
-            <div style={{
-              position: 'absolute', bottom: 12, right: 12,
-              background: 'rgba(0,0,0,0.5)', color: 'white',
-              fontSize: 11, fontWeight: 600, padding: '3px 8px', borderRadius: 100,
-            }}>
-              klikněte pro přepnutí
-            </div>
+            <span style={stitek(false)}>Před</span>
+            <span style={stitek(true)}>Po</span>
+            <input
+              type="range" min={0} max={100} value={pozice}
+              onChange={e => setPozice(Number(e.target.value))}
+              aria-label={`Porovnání před a po — ${nazev}`}
+              className="predpo-posuvnik"
+            />
           </>
+        ) : (
+          <img src={po} alt={nazev} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         )}
       </div>
       <div style={{ marginTop: 14 }}>

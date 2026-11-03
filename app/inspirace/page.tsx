@@ -115,7 +115,7 @@ export default async function InspracePage() {
         <div className="container">
           <h2 className="section-title">Naše <span>realizaceee</span></h2>
           <p className="section-subtitle" style={{ marginTop: 16 }}>
-            Výběr z podlah, které jsme v poslední době položili. U některých realizací si můžete prokliknout stav před a po.
+            Výběr z podlah, které jsme v poslední době položili. U některých realizací můžete posuvníkem porovnat stav před a po.
           </p>
           {projekty.length === 0 ? (
             <p style={{ color: 'var(--gray-400)', marginTop: 32 }}>Brzy přidáme první realizace. Sledujte nás!</p>

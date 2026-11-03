@@ -6,6 +6,8 @@ import KontaktSekce from '@/app/components/KontaktSekce'
 import ReferenceSekce from '@/app/components/ReferenceSekce'
 import PostupKroky from '@/app/components/PostupKroky'
 import MapaSekce from '@/app/components/MapaSekce'
+import RealizaceGalerie from '@/app/components/RealizaceGalerie'
+import { REALIZACE } from '@/lib/realizace'
 import BrandIcon, { IkonaText } from '@/app/components/BrandIcon'
 import FaqItem from './FaqItem'
 import { client, VINYLOVA_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY } from '@/lib/sanity'
@@ -272,6 +274,8 @@ export default async function VinylovaPodlahaPage() {
           <PostupKroky kroky={kroky} />
         </div>
       </section>
+
+      <RealizaceGalerie fotky={REALIZACE.vinyl} podlaha="Vinylová podlaha" />
 
       <ReferenceSekce video={false} />
 
