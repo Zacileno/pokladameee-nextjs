@@ -47,7 +47,7 @@ const SKUPINY = [
   },
   {
     id: 'druzstva', title: 'Bytová družstva a SVJ', emoji: '🤝', claim: 'Kompletně a v termínu', cta: 'Chci podlahu do družstva',
-    foto: '/realizace/koberec-koprivnice-schody.jpg', alt: 'Nový koberec na schodišti a chodbě — Kopřivnice',
+    foto: FOTO('706ce44fcf63621ac7d8596c7cd100f88b047adf-3024x4032'), alt: 'Nová PVC podlaha s lištami — Frýdek-Místek',
     popis: <>Chodby, schodiště, společné prostory i jednotlivé byty. <strong>Postaráme se o vše od zaměření po úklid</strong> a dodržíme domluvené termíny. Pro celé družstvo máte jednoho člověka, který zakázku vede.</>,
     body: ['Jeden kontakt pro celou zakázku', 'Chodby, schodiště a společné prostory', 'Dodržené termíny a čistý dům'],
   },
