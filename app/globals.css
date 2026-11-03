@@ -226,19 +226,23 @@ a.kraj-mesto:hover { color: var(--orange); box-shadow: 0 4px 16px rgba(255,136,0
 .predpo-posuvnik { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; touch-action: pan-y; }
 
 /* slider realizací na produktových stránkách — aktivní fotka uprostřed, sousední vykukují */
-.realizace-slider { position: relative; }
-.realizace-draha { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 8px calc((100% - min(760px, 62vw)) / 2); }
+.realizace-slider { position: relative; --slide-w: min(760px, 62vw); }
+.realizace-slider.velka { --slide-w: min(1040px, 72vw); }
+.realizace-draha { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 8px calc((100% - var(--slide-w)) / 2); }
 .realizace-draha::-webkit-scrollbar { display: none; }
-.realizace-slide { position: relative; flex: 0 0 min(760px, 62vw); aspect-ratio: 3 / 2; margin: 0; padding: 0; border: none; border-radius: 16px; overflow: hidden; scroll-snap-align: center; cursor: pointer; background: var(--gray-100); opacity: 0.45; transform: scale(0.92); transition: opacity 0.35s, transform 0.35s, box-shadow 0.35s; }
+.realizace-slide { position: relative; flex: 0 0 var(--slide-w); aspect-ratio: 3 / 2; margin: 0; padding: 0; border: none; border-radius: 16px; overflow: hidden; scroll-snap-align: center; cursor: pointer; background: var(--gray-100); opacity: 0.45; transform: scale(0.92); transition: opacity 0.35s, transform 0.35s, box-shadow 0.35s; }
 .realizace-slide.aktivni { opacity: 1; transform: scale(1); cursor: zoom-in; box-shadow: 0 16px 40px rgba(0,0,0,0.18); }
 .realizace-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .realizace-slide span { position: absolute; left: 0; right: 0; bottom: 0; padding: 32px 20px 16px; color: white; font-weight: 800; font-size: 18px; text-align: left; background: linear-gradient(transparent, rgba(0,0,0,0.7)); opacity: 0; transition: opacity 0.35s; }
 .realizace-slide.aktivni span { opacity: 1; }
+.realizace-slider.velka .realizace-slide { aspect-ratio: 16 / 10; opacity: 0.8; transform: scale(0.95); }
+.realizace-slider.velka .realizace-slide.aktivni { opacity: 1; transform: scale(1); }
+.realizace-nadtitulek { text-align: center; color: var(--orange); font-weight: 700; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
 .realizace-sipka { position: absolute; top: 50%; transform: translateY(-50%); width: 52px; height: 52px; border-radius: 50%; border: none; background: var(--orange); color: white; font-size: 30px; line-height: 1; cursor: pointer; box-shadow: 0 4px 14px rgba(255,136,0,0.35); transition: opacity 0.2s, transform 0.2s; }
 .realizace-sipka:hover { transform: translateY(-50%) scale(1.08); }
 .realizace-sipka:disabled { opacity: 0.3; cursor: default; transform: translateY(-50%); }
-.realizace-sipka.vlevo { left: calc((100% - min(760px, 62vw)) / 2 - 26px); }
-.realizace-sipka.vpravo { right: calc((100% - min(760px, 62vw)) / 2 - 26px); }
+.realizace-sipka.vlevo { left: calc((100% - var(--slide-w)) / 2 - 26px); }
+.realizace-sipka.vpravo { right: calc((100% - var(--slide-w)) / 2 - 26px); }
 .realizace-tecky { display: flex; justify-content: center; gap: 8px; margin-top: 24px; }
 .realizace-tecky button { width: 10px; height: 10px; padding: 0; border: none; border-radius: 100px; background: var(--gray-100); cursor: pointer; transition: width 0.3s, background 0.3s; }
 .realizace-tecky button.aktivni { width: 28px; background: var(--orange); }
@@ -567,8 +571,9 @@ a.kraj-mesto:hover { color: var(--orange); box-shadow: 0 4px 16px rgba(255,136,0
   .onas-hodnota { flex-direction: column; padding: 24px; }
 }
 @media (max-width: 900px) {
-  .realizace-draha { padding: 8px 7.5vw; gap: 12px; }
-  .realizace-slide { flex-basis: 85vw; aspect-ratio: 4 / 3; }
+  .realizace-slider, .realizace-slider.velka { --slide-w: 85vw; }
+  .realizace-draha { gap: 12px; }
+  .realizace-slide, .realizace-slider.velka .realizace-slide { aspect-ratio: 4 / 3; }
   .realizace-slide span { font-size: 15px; padding: 24px 14px 12px; }
   .realizace-sipka { display: none; }
   .realizace-lightbox button { display: none; }

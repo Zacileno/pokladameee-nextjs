@@ -1,25 +1,40 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
-import type { RealizaceFoto } from '@/lib/realizace'
+import type { ReactNode } from 'react'
+import { TYP_NAZEV, type RealizaceFoto } from '@/lib/realizace'
 
 type Props = {
   fotky: RealizaceFoto[]
-  podlaha: string
+  podlaha?: string
+  id?: string
+  nadtitulek?: string
+  nadpis?: ReactNode
+  podnadpis?: string
+  velka?: boolean
 }
 
 const cesta = (f: RealizaceFoto) => `/realizace/${f.soubor}.jpg`
+const popisek = (f: RealizaceFoto) => (f.typ ? `${TYP_NAZEV[f.typ]} · ${f.mesto}` : f.mesto)
 
-export default function RealizaceGalerie({ fotky, podlaha }: Props) {
+export default function RealizaceGalerie({
+  fotky,
+  podlaha,
+  id = 'realizace',
+  nadtitulek,
+  nadpis = <>Kde naše podlahy dělají radost? Inspirujt<span>eee</span> se</>,
+  podnadpis = 'Fotky z našich realizací.',
+  velka = false,
+}: Props) {
   const draha = useRef<HTMLDivElement>(null)
   const [aktivni, setAktivni] = useState(0)
   const [otevrena, setOtevrena] = useState<number | null>(null)
 
   // posune slider tak, aby byla fotka i uprostřed
-  const najet = (i: number) => {
+  const najet = (i: number, chovani: ScrollBehavior = 'smooth') => {
     const el = draha.current
     const slide = el?.children[i] as HTMLElement | undefined
     if (!el || !slide) return
-    el.scrollTo({ left: slide.offsetLeft - (el.clientWidth - slide.clientWidth) / 2, behavior: 'smooth' })
+    el.scrollTo({ left: slide.offsetLeft - (el.clientWidth - slide.clientWidth) / 2, behavior: chovani })
   }
 
   // aktivní je fotka nejblíž středu
@@ -37,6 +52,11 @@ export default function RealizaceGalerie({ fotky, podlaha }: Props) {
     setAktivni(nejblizsi)
   }
 
+  // velká galerie začíná druhou fotkou, aby byly vidět sousední po obou stranách
+  useEffect(() => {
+    if (velka && fotky.length > 2) najet(1, 'instant')
+  }, [])
+
   // šipky a Esc v otevřeném náhledu
   useEffect(() => {
     if (otevrena === null) return
@@ -51,19 +71,21 @@ export default function RealizaceGalerie({ fotky, podlaha }: Props) {
 
   if (!fotky.length) return null
   const zvetsena = otevrena === null ? null : fotky[otevrena]
+  const alt = (f: RealizaceFoto) => `${f.typ ? TYP_NAZEV[f.typ] : podlaha} — realizace ${f.mesto}`
 
   return (
-    <section id="realizace" className="section">
+    <section id={id} className="section" style={{ scrollMarginTop: 'calc(80px + var(--hlavicka-navic))' }}>
       <div className="container">
+        {nadtitulek && <p className="realizace-nadtitulek">{nadtitulek}</p>}
         <h2 className="section-title" style={{ textAlign: 'center', marginBottom: 8 }}>
-          Kde naše podlahy dělají radost? Inspirujt<span>eee</span> se
+          {nadpis}
         </h2>
         <p className="section-subtitle" style={{ textAlign: 'center', margin: '0 auto 40px' }}>
-          Fotky z našich realizací.
+          {podnadpis}
         </p>
       </div>
 
-      <div className="realizace-slider">
+      <div className={`realizace-slider${velka ? ' velka' : ''}`}>
         <div className="realizace-draha" ref={draha} onScroll={priPosunu}>
           {fotky.map((f, i) => (
             <button
@@ -71,10 +93,10 @@ export default function RealizaceGalerie({ fotky, podlaha }: Props) {
               type="button"
               className={`realizace-slide${i === aktivni ? ' aktivni' : ''}`}
               onClick={() => (i === aktivni ? setOtevrena(i) : najet(i))}
-              aria-label={i === aktivni ? `Zvětšit fotku — ${f.mesto}` : `Zobrazit fotku — ${f.mesto}`}
+              aria-label={i === aktivni ? `Zvětšit fotku — ${popisek(f)}` : `Zobrazit fotku — ${popisek(f)}`}
             >
-              <img src={cesta(f)} alt={`${podlaha} — realizace ${f.mesto}`} loading={i < 3 ? 'eager' : 'lazy'} />
-              <span>{f.mesto}</span>
+              <img src={cesta(f)} alt={alt(f)} loading={i < 3 ? 'eager' : 'lazy'} />
+              <span>{popisek(f)}</span>
             </button>
           ))}
         </div>
@@ -96,7 +118,7 @@ export default function RealizaceGalerie({ fotky, podlaha }: Props) {
 
       {zvetsena && otevrena !== null && (
         <div className="realizace-lightbox" onClick={() => setOtevrena(null)} role="dialog" aria-label="Zvětšená fotka">
-          <img src={cesta(zvetsena)} alt={`${podlaha} — realizace ${zvetsena.mesto}`} />
+          <img src={cesta(zvetsena)} alt={alt(zvetsena)} />
           {fotky.length > 1 && (
             <>
               <button type="button" style={{ left: 20 }} aria-label="Předchozí fotka"
@@ -105,7 +127,7 @@ export default function RealizaceGalerie({ fotky, podlaha }: Props) {
                 onClick={e => { e.stopPropagation(); setOtevrena((otevrena + 1) % fotky.length) }}>›</button>
             </>
           )}
-          <p>{zvetsena.mesto}</p>
+          <p>{popisek(zvetsena)}</p>
         </div>
       )}
     </section>
