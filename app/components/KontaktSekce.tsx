@@ -28,7 +28,6 @@ export default function KontaktSekce({ kontakt }: Props) {
   const citat = kontakt?.citat || 'Každou podlahu řešíme osobně. Přijedeme se podívat.'
   const fotoUrl = kontakt?.fotoUrl || null
   const telefon = kontakt?.telefon || '+420 790 388 487'
-  const telefonTechnicke = kontakt?.telefonTechnicke || '+420 730 454 309'
   const email = kontakt?.email || 'adam.hajdusek@pokladameee.cz'
   const pracovniDoba = kontakt?.pracovniDoba || 'Po–Pá 8:00–16:30'
   const region = kontakt?.region || 'Moravskoslezský, Zlínský a Olomoucký kraj'
@@ -74,7 +73,6 @@ export default function KontaktSekce({ kontakt }: Props) {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               {[
                 { icon: '📞', label: 'Zavolejte', val: telefon, href: `tel:${telefon.replace(/\s/g, '')}` },
-                { icon: '🛠️', label: 'Pro technické dotazy', val: telefonTechnicke, href: `tel:${telefonTechnicke.replace(/\s/g, '')}` },
                 { icon: '✉️', label: 'Napište e-mail', val: email, href: `mailto:${email}` },
                 { icon: '🕐', label: 'Pracovní doba', val: pracovniDoba },
                 { icon: '📍', label: 'Kde pokládáme', val: region },

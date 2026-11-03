@@ -24,7 +24,6 @@ async function seed() {
       role: 'Zakladatel & hlavní technik',
       citat: 'Každou podlahu řešíme osobně. Přijedeme se podívat.',
       telefon: '+420 790 388 487',
-      telefonTechnicke: '+420 730 454 309',
       email: 'adam.hajdusek@pokladameee.cz',
       pracovniDoba: 'Po–Pá 8:00–16:30',
       region: 'Moravskoslezský kraj',
