@@ -39,12 +39,15 @@ export default function KontaktSekce({ kontakt }: Props) {
     <section id="kontakt" className="section" style={{ background: 'white' }}>
       <div className="container">
         <div className="kontakt-grid">
-          <div>
+          <div className="kontakt-info">
+            <div className="kontakt-hlavicka">
             <p style={{ color: 'var(--orange)', fontWeight: 700, fontSize: 13, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Nezávazná poptávka</p>
             <h2 className="section-title">
               {zbytek && <>{zbytek}<br /></>}
               <span>{posledniSlovo}</span>
             </h2>
+            </div>
+            <div className="kontakt-detail">
             <p style={{ marginTop: 20, fontSize: 17, lineHeight: 1.7, color: 'var(--gray-700)', marginBottom: 40 }}>
               {podnadpis}
             </p>
@@ -87,8 +90,9 @@ export default function KontaktSekce({ kontakt }: Props) {
               ))}
             </div>
           </div>
+          </div>
 
-          <div style={{ background: 'var(--gray-50)', borderRadius: 16, padding: '40px 36px', border: '1px solid var(--gray-100)' }}>
+          <div className="kontakt-formular">
             <h3 style={{ fontSize: 22, fontWeight: 900, marginBottom: 6 }}>Nezávazná poptávka</h3>
             <p style={{ color: 'var(--gray-400)', fontSize: 14, marginBottom: 28 }}>Odpovíme do 24 hodin. Zaměření zdarma.</p>
             <KontaktForm />

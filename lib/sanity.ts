@@ -160,6 +160,7 @@ export const BLACK_FRIDAY_QUERY = `*[_type == "blackFriday"][0] {
   heroBadge, heroSleva, heroNadpisZbytek, heroPodnadpis, heroTlacitko, heroTlacitkoSekundarni,
   "heroFotkaUrl": heroFotka.asset->url,
   "bannerObrazekUrl": bannerObrazek.asset->url,
+  videoYoutube,
   videoNadpis,
   body[] { titul, text },
   odstavec, zvyrazenyText, ctaPopupText, adamText,

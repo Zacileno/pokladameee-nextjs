@@ -15,3 +15,6 @@ export const VIDEO_PORUBACEK_VYSLEDEK: Video = {
 }
 
 export const youtubeNahled = (id: string) => `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`
+
+// ID videa z odkazu na YouTube (youtu.be/ID, watch?v=ID, shorts/ID, embed/ID)
+export const youtubeId = (url?: string) => url?.match(/(?:youtu\.be\/|v=|shorts\/|embed\/)([\w-]{11})/)?.[1]
