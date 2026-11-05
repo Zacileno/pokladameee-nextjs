@@ -611,7 +611,7 @@ a.kraj-mesto:hover { color: var(--orange); box-shadow: 0 4px 16px rgba(255,136,0
 
   /* rodina značek: text vlevo, osoba vpravo (nepřekrývá text) */
   .projekt-karta { min-height: 0; overflow: hidden; }
-  .projekt-karta-foto { display: block; right: 0; bottom: 0; width: 40%; height: auto; max-height: 92%; object-fit: contain; object-position: right bottom; }
+  .projekt-karta-foto { display: block; right: 0; bottom: 0; height: 100%; width: auto; max-width: 44%; max-height: none; object-fit: contain; object-position: right bottom; }
   .projekt-karta-obsah { padding: 28px 41% 28px 20px; }
   .projekt-karta-obsah p { font-size: 15px !important; }
 
