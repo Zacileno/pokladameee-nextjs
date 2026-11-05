@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import Image from 'next/image'
 import { TOP_BAR_VYSKA, zobrazitTopBar } from '@/lib/black-friday'
+import { useBfKonec } from './BfKonec'
 
 const SLUZBY_LINKS: [string, string][] = [
   ['/sluzby/vinylova-podlaha', 'Vinylová podlaha'],
@@ -46,7 +47,8 @@ export default function Header({ opaque }: { opaque?: boolean }) {
   const [mobilOtevreno, setMobilOtevreno] = useState<string | null>(null)
   const pathname = usePathname()
   // Nad hlavičkou je TopBar — dokud je vidět, Header sedí pod ním, po odscrollování vyjede nahoru
-  const topBarVyska = zobrazitTopBar(pathname) ? TOP_BAR_VYSKA : 0
+  const bfKonec = useBfKonec()
+  const topBarVyska = zobrazitTopBar(pathname, bfKonec) ? TOP_BAR_VYSKA : 0
   const [top, setTop] = useState(topBarVyska)
 
   useEffect(() => {

@@ -2,7 +2,8 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { BF_KONEC } from '@/lib/black-friday'
+import { bfBezi } from '@/lib/black-friday'
+import { useBfKonec } from './BfKonec'
 
 const ZPOZDENI_MS = 3000
 const KLIC_ZAVRENO = 'bf-popup-zavreno'
@@ -11,15 +12,16 @@ const KLIC_ZAVRENO = 'bf-popup-zavreno'
 // po zavření se v rámci návštěvy (session) už neukáže a po konci akce zmizí úplně
 export default function BlackFridayPopup() {
   const [open, setOpen] = useState(false)
+  const konec = useBfKonec()
 
   useEffect(() => {
-    if (Date.now() >= new Date(BF_KONEC).getTime()) return
+    if (!bfBezi(konec)) return
     try {
       if (sessionStorage.getItem(KLIC_ZAVRENO)) return
     } catch {}
     const t = setTimeout(() => setOpen(true), ZPOZDENI_MS)
     return () => clearTimeout(t)
-  }, [])
+  }, [konec])
 
   const zavrit = () => {
     setOpen(false)

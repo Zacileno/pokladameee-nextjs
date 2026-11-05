@@ -2,6 +2,7 @@
 import { usePathname } from 'next/navigation'
 import { TOP_BAR_VYSKA, zobrazitTopBar } from '@/lib/black-friday'
 import FormatovanyText from './FormatovanyText'
+import { useBfKonec } from './BfKonec'
 
 type RT = { _type: 'block'; children?: { _type: 'span'; text: string; marks?: string[] }[] }[] | undefined
 
@@ -23,7 +24,8 @@ const bezSipky = (value: RT): RT =>
 // Oznamovací lišta nad hlavičkou — je v normálním toku stránky, Header se pod ni posouvá (viz Header.tsx)
 export default function TopBar({ data }: { data?: TopBarData }) {
   const pathname = usePathname()
-  if (!zobrazitTopBar(pathname)) return null
+  const konec = useBfKonec()
+  if (!zobrazitTopBar(pathname, konec)) return null
 
   return (
     <a href="/black-friday" className="top-bar" style={{ height: TOP_BAR_VYSKA }}>
