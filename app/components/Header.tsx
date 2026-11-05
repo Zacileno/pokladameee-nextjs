@@ -21,8 +21,8 @@ const CO_POKLADAME_LINKS: [string, string][] = [
 
 // položky s vysouvací nabídkou — na počítači při najetí myší, na mobilu po kliknutí
 const ROZBALOVACI: { href: string; label: string; vse: string; links: [string, string][] }[] = [
-  { href: '/sluzby', label: 'Služby', vse: 'Všechny služby', links: SLUZBY_LINKS },
-  { href: '/co-pokladame', label: 'Co pokládáme', vse: 'Co pokládáme — přehled', links: CO_POKLADAME_LINKS },
+  { href: '/sluzby', label: 'Co pokládáme', vse: 'Všechny typy podlah', links: SLUZBY_LINKS },
+  { href: '/co-pokladame', label: 'Podlahy na míru', vse: 'Podlahy na míru — přehled', links: CO_POKLADAME_LINKS },
 ]
 
 // hlavní menu (velký pruh) a vedlejší odkazy (malé, vpravo nahoře)
