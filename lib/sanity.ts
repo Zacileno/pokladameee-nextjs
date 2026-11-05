@@ -18,7 +18,11 @@ export const INSPIRACE_QUERY = `*[_type == "inspirace"] | order(poradiZobrazeni 
 }`
 
 export const INSPIRACE_STRANKA_QUERY = `*[_type == "inspiraceStranka"][0] {
-  heroFotka { asset->{ url } }
+  heroFotka { asset->{ url } },
+  heroNadpis, heroText, heroTlacitko, ikonky[] { emoji, text },
+  realizaceNadpis, realizacePodnadpis, videoNadpis,
+  galerieNadpis, galeriePodnadpis,
+  procNadpis, procKarty[] { emoji, nadpis, text }, procTlacitko, recenzeNadpis
 }`
 
 export const AKCE_QUERY = `*[_type == "akce" && aktivni == true] | order(_createdAt desc) {

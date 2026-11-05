@@ -1,7 +1,7 @@
 import { defineType, defineField } from 'sanity'
 
 // ikony, které umí BrandIcon (app/components/BrandIcon.tsx)
-const IKONY = ['📐', '🎨', '✨', '⚡', '♻', '📍', '🪵', '🏠', '🏆', '📋', '✅', '📞', '🛠', '✉', '🕐', '🚛', '📏', '🛡', '📊', '🌳', '🔨', '🏡', '🧶', '🔇', '🏢', '💰', '🧹', '💧', '📸', '🤝', '🔥']
+export const IKONY = ['📐', '🎨', '✨', '⚡', '♻', '📍', '🪵', '🏠', '🏆', '📋', '✅', '📞', '🛠', '✉', '🕐', '🚛', '📏', '🛡', '📊', '🌳', '🔨', '🏡', '🧶', '🔇', '🏢', '💰', '🧹', '💧', '📸', '🤝', '🔥']
 
 export const sluzbyStrankaSchema = defineType({
   name: 'sluzbyStranka',

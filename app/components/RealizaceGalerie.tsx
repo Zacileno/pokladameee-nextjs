@@ -9,7 +9,7 @@ type Props = {
   id?: string
   nadtitulek?: string
   nadpis?: ReactNode
-  podnadpis?: string
+  podnadpis?: ReactNode
   velka?: boolean
 }
 
