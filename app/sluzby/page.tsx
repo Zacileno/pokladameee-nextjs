@@ -5,6 +5,7 @@ import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 import KontaktSekce from '@/app/components/KontaktSekce'
 import BrandIcon from '@/app/components/BrandIcon'
+import FormatovanyText from '@/app/components/FormatovanyText'
 import { client, VINYLOVA_PODLAHA_QUERY, PVC_PODLAHA_QUERY, KOBERCOVA_PODLAHA_QUERY, DREVENA_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY, SLUZBY_STRANKA_QUERY } from '@/lib/sanity'
 
 export const revalidate = 0
@@ -20,7 +21,22 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://www.pokladameee.cz/sluzby' },
 }
 
-const ISTRIP = [
+type RT = Parameters<typeof FormatovanyText>[0]['value']
+
+type SluzbyStranka = {
+  nadpis?: RT
+  uvodText?: RT
+  uvodOdkaz?: RT
+  kroky?: { emoji?: string; slovo?: string }[]
+  vinyl?: { nazev?: RT; popis?: RT }
+  pvc?: { nazev?: RT; popis?: RT }
+  koberce?: { nazev?: RT; popis?: RT }
+  drevo?: { nazev?: RT; popis?: RT }
+  tlacitkoProdukt?: RT
+  ikonky?: { emoji?: string; text?: RT }[]
+}
+
+const ISTRIP: { emoji?: string; text?: RT }[] = [
   { emoji: '📐', text: 'Zaměření zdarma' },
   { emoji: '⚡', text: 'U vás do 48 hodin' },
   { emoji: '🚛', text: 'Odvoz staré podlahy zdarma' },
@@ -35,13 +51,13 @@ const KROKY = [
 ]
 
 const SLUZBY = [
-  { slug: 'vinylova-podlaha', title: 'Vinylová podlaha', emoji: '🪵', query: VINYLOVA_PODLAHA_QUERY, barva: 'linear-gradient(160deg, var(--blue), var(--blue-dark))',
+  { slug: 'vinylova-podlaha', klic: 'vinyl' as const, title: 'Vinylová podlaha', emoji: '🪵', query: VINYLOVA_PODLAHA_QUERY, barva: 'linear-gradient(160deg, var(--blue), var(--blue-dark))',
     popis: <>Lepená i plovoucí. <strong>Odolná a voděodolná</strong>, věrně napodobí dřevo i kámen. Skvělá do kuchyně, koupelny i obýváku.</> },
-  { slug: 'pvc-podlaha', title: 'PVC podlaha', emoji: '💧', query: PVC_PODLAHA_QUERY, barva: 'linear-gradient(160deg, #FF8800, #c66300)',
+  { slug: 'pvc-podlaha', klic: 'pvc' as const, title: 'PVC podlaha', emoji: '💧', query: PVC_PODLAHA_QUERY, barva: 'linear-gradient(160deg, #FF8800, #c66300)',
     popis: <><strong>Praktická a cenově dostupná.</strong> Příjemná na chůzi a snadno se udržuje — zvládne i každodenní provoz celé rodiny.</> },
-  { slug: 'koberce', title: 'Koberce', emoji: '🧶', query: KOBERCOVA_PODLAHA_QUERY, barva: 'linear-gradient(160deg, var(--blue), #FF8800)',
+  { slug: 'koberce', klic: 'koberce' as const, title: 'Koberce', emoji: '🧶', query: KOBERCOVA_PODLAHA_QUERY, barva: 'linear-gradient(160deg, var(--blue), #FF8800)',
     popis: <><strong>Teplo pod nohama</strong> a tlumení hluku. Široký výběr barev a struktur do ložnice, dětského pokoje i kanceláře.</> },
-  { slug: 'drevena-podlaha', title: 'Dřevěná podlaha', emoji: '🌳', query: DREVENA_PODLAHA_QUERY, barva: 'linear-gradient(160deg, #3D3D3A, #000)',
+  { slug: 'drevena-podlaha', klic: 'drevo' as const, title: 'Dřevěná podlaha', emoji: '🌳', query: DREVENA_PODLAHA_QUERY, barva: 'linear-gradient(160deg, #3D3D3A, #000)',
     popis: <><strong>Přírodní a nadčasová.</strong> Do interiéru přinese teplo, charakter a originalitu.</> },
 ]
 
@@ -62,13 +78,16 @@ export default async function SluzbyPage() {
     kontaktSekce = await client.fetch(KONTAKT_SEKCE_QUERY)
   } catch {}
 
-  // slogan s ikonkami — ze Sanity (Služby — stránka), jinak výchozí Zaměřím / Poradím / Položím
+  // texty stránky ze Sanity (Služby — stránka); prázdné pole = výchozí text
+  let stranka: SluzbyStranka | null = null
   let kroky = KROKY
   try {
-    const stranka = await client.fetch<{ kroky?: { emoji?: string; slovo?: string }[] } | null>(SLUZBY_STRANKA_QUERY)
+    stranka = await client.fetch<SluzbyStranka | null>(SLUZBY_STRANKA_QUERY)
     const zeSanity = (stranka?.kroky || []).filter(k => k.slovo).map(k => ({ emoji: k.emoji || '✨', slovo: k.slovo as string }))
     if (zeSanity.length) kroky = zeSanity
   } catch {}
+
+  const ikonky = stranka?.ikonky?.length ? stranka.ikonky : ISTRIP
 
   return (
     <>
@@ -80,13 +99,15 @@ export default async function SluzbyPage() {
               <a href="/" style={{ color: 'var(--orange)' }}>Domů</a>
               <span style={{ color: 'var(--gray-400)' }}> / Služby</span>
             </p>
-            <h1 className="section-title">Naše <span>služby</span></h1>
+            <h1 className="section-title"><FormatovanyText value={stranka?.nadpis} fallback={<>Naše <span>služby</span></>} /></h1>
             <div className="sluzby-uvod">
               <p style={{ fontSize: 17, lineHeight: 1.7 }}>
-                Podlahu vám vyřešíme <strong>od A do Z</strong> — zaměříme, poradíme s výběrem, odvezeme tu starou a novou položíme.
-                Vyberte si <strong>vinyl</strong>, <strong>PVC</strong>, <strong>koberec</strong> nebo <strong>dřevo</strong> podle toho, co od podlahy čekáte doma i v kanceláři.
-                Nejste si něčím jistí? Sepsali jsme{' '}
-                <a href="/faq" style={{ color: 'var(--orange)', fontWeight: 700, textDecoration: 'underline', textUnderlineOffset: 3 }}>odpovědi na nejčastější dotazy</a>.
+                <FormatovanyText value={stranka?.uvodText} fallback={<>
+                  Podlahu vám vyřešíme <strong>od A do Z</strong> — zaměříme, poradíme s výběrem, odvezeme tu starou a novou položíme.
+                  Vyberte si <strong>vinyl</strong>, <strong>PVC</strong>, <strong>koberec</strong> nebo <strong>dřevo</strong> podle toho, co od podlahy čekáte doma i v kanceláři.
+                  Nejste si něčím jistí? Sepsali jsme
+                </>} />{' '}
+                <a href="/faq" style={{ color: 'var(--orange)', fontWeight: 700, textDecoration: 'underline', textUnderlineOffset: 3 }}><FormatovanyText value={stranka?.uvodOdkaz} fallback="odpovědi na nejčastější dotazy" /></a>.
               </p>
               <div className="sluzby-uvod-kroky">
                 {kroky.map(k => (
@@ -112,9 +133,9 @@ export default async function SluzbyPage() {
                     )}
                   </Link>
                   <div className="sluzby-dlazdice-obsah">
-                    <h2>{s.title}</h2>
-                    <p>{s.popis}</p>
-                    <Link href={`/sluzby/${s.slug}`} className="btn-primary">Zobrazit produkt</Link>
+                    <h2><FormatovanyText value={stranka?.[s.klic]?.nazev} fallback={s.title} /></h2>
+                    <p><FormatovanyText value={stranka?.[s.klic]?.popis} fallback={s.popis} /></p>
+                    <Link href={`/sluzby/${s.slug}`} className="btn-primary"><FormatovanyText value={stranka?.tlacitkoProdukt} fallback="Zobrazit produkt" /></Link>
                   </div>
                 </div>
               ))}
@@ -125,10 +146,10 @@ export default async function SluzbyPage() {
         <section style={{ background: 'white', borderTop: '1px solid var(--gray-100)', borderBottom: '1px solid var(--gray-100)' }}>
           <div className="container">
             <div className="sluzby-istripgrid">
-              {ISTRIP.map(({ emoji, text }, i) => (
-                <div key={text || i} className="sluzby-istrip-item">
-                  <BrandIcon emoji={emoji} size={48} />
-                  <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--gray-700)', lineHeight: 1.3 }}>{text}</span>
+              {ikonky.map(({ emoji, text }, i) => (
+                <div key={i} className="sluzby-istrip-item">
+                  <BrandIcon emoji={emoji || '✨'} size={48} />
+                  <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--gray-700)', lineHeight: 1.3 }}><FormatovanyText value={text} fallback={null} /></span>
                 </div>
               ))}
             </div>
