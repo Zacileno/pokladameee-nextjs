@@ -24,8 +24,8 @@ const bezSipky = (value: RT): RT =>
 // Oznamovací lišta nad hlavičkou — je v normálním toku stránky, Header se pod ni posouvá (viz Header.tsx)
 export default function TopBar({ data }: { data?: TopBarData }) {
   const pathname = usePathname()
-  const konec = useBfKonec()
-  if (!zobrazitTopBar(pathname, konec)) return null
+  const { konec, zacatek } = useBfKonec()
+  if (!zobrazitTopBar(pathname, konec, zacatek)) return null
 
   return (
     <a href="/black-friday" className="top-bar" style={{ height: TOP_BAR_VYSKA }}>

@@ -10,7 +10,7 @@ import BrandIcon from '@/app/components/BrandIcon'
 import YouTubeVideo from '@/app/components/YouTubeVideo'
 import { youtubeId } from '@/lib/videa'
 import AkcePopup from './AkcePopup'
-import { BF_KONEC } from '@/lib/black-friday'
+import { BF_KONEC, bfPredZacatkem } from '@/lib/black-friday'
 import { client, HERO_SEKCE_QUERY, VINYLOVA_PODLAHA_QUERY, PVC_PODLAHA_QUERY, KOBERCOVA_PODLAHA_QUERY, DREVENA_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY, BLACK_FRIDAY_QUERY } from '@/lib/sanity'
 
 export const revalidate = 0
@@ -33,6 +33,7 @@ type BlackFridayData = {
   bannerObrazekUrl?: string
   videoYoutube?: string
   konecAkce?: string
+  zacatekAkce?: string
   videoNadpis?: RT
   body?: { titul?: RT; text?: RT }[]
   odstavec?: RT
@@ -135,7 +136,9 @@ export default async function BlackFridayPage() {
 
           <div className="container" style={{ position: 'relative', zIndex: 2, width: '100%', textAlign: 'center' }}>
             <div className="bf-odpocet-obal">
-              <Odpocet konec={data.konecAkce || BF_KONEC} />
+              {bfPredZacatkem(data.zacatekAkce)
+                ? <Odpocet konec={data.zacatekAkce!} popisek="Akce začíná za" />
+                : <Odpocet konec={data.konecAkce || BF_KONEC} />}
             </div>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,136,0,0.15)', border: '1px solid rgba(255,136,0,0.35)', borderRadius: 100, padding: '6px 16px', marginBottom: 24 }}>
               <span style={{ width: 8, height: 8, background: 'var(--orange)', borderRadius: '50%', display: 'inline-block' }} />

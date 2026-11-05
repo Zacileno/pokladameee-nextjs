@@ -9,7 +9,7 @@ import { REALIZACE } from '@/lib/realizace'
 import PostupKroky from '@/app/components/PostupKroky'
 import BrandIcon, { IkonaText } from '@/app/components/BrandIcon'
 import FaqItem from './FaqItem'
-import { client, BF_KONEC_QUERY, DREVENA_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY } from '@/lib/sanity'
+import { client, BF_TERMIN_QUERY, DREVENA_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY } from '@/lib/sanity'
 import { bfBezi } from '@/lib/black-friday'
 
 export const revalidate = 0
@@ -151,7 +151,8 @@ export default async function DrevenaPodlahaPage() {
   const kroky = data?.kroky?.length ? data.kroky : KROKY
   const faq = data?.faq?.length ? data.faq : FAQ
 
-  const zobrazitBfBadge = bfBezi(await client.fetch<string | null>(BF_KONEC_QUERY).catch(() => null))
+  const bfTermin = await client.fetch<{ konecAkce?: string; zacatekAkce?: string } | null>(BF_TERMIN_QUERY).catch(() => null)
+  const zobrazitBfBadge = bfBezi(bfTermin?.konecAkce, bfTermin?.zacatekAkce)
 
   return (
     <>

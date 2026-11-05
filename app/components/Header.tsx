@@ -47,7 +47,7 @@ export default function Header({ opaque }: { opaque?: boolean }) {
   const pathname = usePathname()
   // Nad hlavičkou je TopBar — dokud je vidět, Header sedí pod ním, po odscrollování vyjede nahoru
   const bfKonec = useBfKonec()
-  const topBarVyska = zobrazitTopBar(pathname, bfKonec) ? TOP_BAR_VYSKA : 0
+  const topBarVyska = zobrazitTopBar(pathname, bfKonec.konec, bfKonec.zacatek) ? TOP_BAR_VYSKA : 0
   const [top, setTop] = useState(topBarVyska)
 
   useEffect(() => {

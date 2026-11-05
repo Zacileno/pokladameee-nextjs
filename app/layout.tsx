@@ -72,7 +72,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body>
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MK4KFBF8" height="0" width="0" style={{ display: 'none', visibility: 'hidden' }} /></noscript>
-        <BfKonecProvider konec={topBarData?.konecAkce}>
+        <BfKonecProvider konec={topBarData?.konecAkce} zacatek={topBarData?.zacatekAkce}>
           <TopBar data={topBarData} />
           {children}
           <PevneMezery />
