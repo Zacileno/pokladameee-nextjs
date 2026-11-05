@@ -619,9 +619,9 @@ a.kraj-mesto:hover { color: var(--orange); box-shadow: 0 4px 16px rgba(255,136,0
   /* produktové stránky — nadpis uprostřed, pod ním fotka se slevou, pak text a tlačítka */
   .hero-sluzby-grid > div:first-child { display: contents; }
   .hero-sluzby-grid > div:first-child > * { order: 3; }
-  .hero-sluzby-grid > div:first-child > div:not(:last-child) { display: none; }
+  .hero-sluzby-grid > div:first-child > div:not(:last-child) { display: none !important; }
   .hero-sluzby-grid > div:first-child > p:first-of-type { order: 0; text-align: center; }
-  .hero-sluzby-grid h1 { order: 1; text-align: center; }
+  .hero-sluzby-grid > div:first-child > h1 { order: 1; text-align: center; }
   .hero-sluzby-grid > div:last-child { order: 2; margin-bottom: 28px; }
   .hero-sluzby-grid > div:last-child img { height: 240px !important; min-height: 0 !important; border-radius: 12px !important; }
 }
