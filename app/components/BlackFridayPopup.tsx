@@ -12,16 +12,16 @@ const KLIC_ZAVRENO = 'bf-popup-zavreno'
 // po zavření se v rámci návštěvy (session) už neukáže a po konci akce zmizí úplně
 export default function BlackFridayPopup() {
   const [open, setOpen] = useState(false)
-  const konec = useBfKonec()
+  const { konec, zacatek } = useBfKonec()
 
   useEffect(() => {
-    if (!bfBezi(konec)) return
+    if (!bfBezi(konec, zacatek)) return
     try {
       if (sessionStorage.getItem(KLIC_ZAVRENO)) return
     } catch {}
     const t = setTimeout(() => setOpen(true), ZPOZDENI_MS)
     return () => clearTimeout(t)
-  }, [konec])
+  }, [konec, zacatek])
 
   const zavrit = () => {
     setOpen(false)
