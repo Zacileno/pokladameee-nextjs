@@ -7,6 +7,7 @@ import PredPoKarta from '../components/PredPoKarta'
 import ReferenceSekce from '../components/ReferenceSekce'
 import BrandIcon from '../components/BrandIcon'
 import YouTubeVideo from '../components/YouTubeVideo'
+import FormatovanyText from '../components/FormatovanyText'
 import RealizaceGalerie from '../components/RealizaceGalerie'
 import { FOTOGALERIE } from '../../lib/realizace'
 import { VIDEO_PORUBACEK_VYSLEDEK } from '../../lib/videa'
@@ -32,9 +33,9 @@ const ISTRIP = [
 ]
 
 const PROC = [
-  { emoji: '📐', title: 'Zaměřímeee zdarma', desc: 'Po vyplnění formuláře se vám ozveme, domluvíme termín a přijedeme. Zaměříme prostor a připravíme kalkulaci. Na naše náklady.' },
-  { emoji: '🎨', title: 'Poradímeee s výběrem', desc: 'Pomůžeme vybrat podlahu, která sedne k vašemu provozu i interiéru — vinyl, PVC, dřevo nebo koberec.' },
-  { emoji: '✨', title: 'Položímeee a uklidímeee', desc: 'Ve smluvený den dorazí naše parta, odstraní starou podlahu, připraví podklad a položí novou. Po sobě uklidíme.' },
+  { emoji: '📐', nadpis: 'Zaměřímeee zdarma', text: 'Po vyplnění formuláře se vám ozveme, domluvíme termín a přijedeme. Zaměříme prostor a připravíme kalkulaci. Na naše náklady.' },
+  { emoji: '🎨', nadpis: 'Poradímeee s výběrem', text: 'Pomůžeme vybrat podlahu, která sedne k vašemu provozu i interiéru — vinyl, PVC, dřevo nebo koberec.' },
+  { emoji: '✨', nadpis: 'Položímeee a uklidímeee', text: 'Ve smluvený den dorazí naše parta, odstraní starou podlahu, připraví podklad a položí novou. Po sobě uklidíme.' },
 ]
 
 type Inspirace = {
@@ -47,7 +48,16 @@ type Inspirace = {
   fotoPred?: { asset: { url: string } }
 }
 
-type InspiraceStranka = { heroFotka?: { asset?: { url?: string } } }
+// texty ze Sanity (Inspirace — stránka); prázdné pole = výchozí text níže
+type RT = Parameters<typeof FormatovanyText>[0]['value']
+type InspiraceStranka = {
+  heroFotka?: { asset?: { url?: string } }
+  heroNadpis?: RT; heroText?: RT; heroTlacitko?: RT
+  ikonky?: { emoji?: string; text?: RT }[]
+  realizaceNadpis?: RT; realizacePodnadpis?: RT; videoNadpis?: RT
+  galerieNadpis?: RT; galeriePodnadpis?: RT
+  procNadpis?: RT; procKarty?: { emoji?: string; nadpis?: RT; text?: RT }[]; procTlacitko?: RT; recenzeNadpis?: RT
+}
 
 export default async function InspracePage() {
   let projekty: Inspirace[] = []
@@ -61,6 +71,8 @@ export default async function InspracePage() {
     ])
   } catch {}
   const heroFotka = stranka?.heroFotka?.asset?.url
+  const ikonky = stranka?.ikonky?.length ? stranka.ikonky : ISTRIP
+  const procKarty = stranka?.procKarty?.length ? stranka.procKarty : PROC
 
   return (
     <>
@@ -70,7 +82,7 @@ export default async function InspracePage() {
       <section style={{ background: 'white', paddingTop: 'calc(128px + var(--hlavicka-navic))', paddingBottom: 64 }}>
         <div className="container">
           <h1 style={{ fontSize: 'clamp(36px, 5vw, 54px)', fontWeight: 900, color: 'var(--black)', lineHeight: 1.1, marginBottom: 40, textAlign: 'center' }}>
-            Inspirac<span style={{ color: 'var(--orange)' }}>eee</span>
+            <FormatovanyText value={stranka?.heroNadpis} fallback={<>Inspirac<span style={{ color: 'var(--orange)' }}>eee</span></>} />
           </h1>
           <div className="insp-hero-grid">
             <div>
@@ -79,10 +91,10 @@ export default async function InspracePage() {
                 <span style={{ color: 'var(--gray-400)' }}> / Inspirace</span>
               </p>
               <p style={{ fontSize: 18, color: 'var(--gray-700)', lineHeight: 1.7, marginBottom: 32 }}>
-                Prohlédněte si, jak vypadají naše realizace naživo. Žádné vizualizace ani katalogové fotky — jen skutečné podlahy, které jsme položili zákazníkům po celém Moravskoslezském, Zlínském a Olomouckém kraji.
+                <FormatovanyText value={stranka?.heroText} fallback="Prohlédněte si, jak vypadají naše realizace naživo. Žádné vizualizace ani katalogové fotky — jen skutečné podlahy, které jsme položili zákazníkům po celém Moravskoslezském, Zlínském a Olomouckém kraji." />
               </p>
               <a href="#realizace" className="btn-primary" style={{ borderRadius: 10, padding: '15px 28px' }}>
-                Naše realizaceee
+                <FormatovanyText value={stranka?.heroTlacitko} fallback="Naše realizaceee" />
               </a>
             </div>
             <div className="insp-hero-foto">
@@ -102,10 +114,10 @@ export default async function InspracePage() {
       <section style={{ background: 'white', borderTop: '1px solid var(--gray-100)', borderBottom: '1px solid var(--gray-100)' }}>
         <div className="container">
           <div className="sluzby-istripgrid">
-            {ISTRIP.map(({ emoji, text }, i) => (
-              <div key={text || i} className="sluzby-istrip-item">
-                <BrandIcon emoji={emoji} size={48} />
-                <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--gray-700)', lineHeight: 1.3 }}>{text}</span>
+            {ikonky.map(({ emoji, text }, i) => (
+              <div key={i} className="sluzby-istrip-item">
+                <BrandIcon emoji={emoji || '✨'} size={48} />
+                <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--gray-700)', lineHeight: 1.3 }}><FormatovanyText value={text} fallback="" /></span>
               </div>
             ))}
           </div>
@@ -115,9 +127,9 @@ export default async function InspracePage() {
       {/* GALERIE */}
       <section id="realizace" className="section" style={{ scrollMarginTop: 'calc(80px + var(--hlavicka-navic))' }}>
         <div className="container">
-          <h2 className="section-title">Naše <span>realizaceee</span></h2>
+          <h2 className="section-title"><FormatovanyText value={stranka?.realizaceNadpis} fallback={<>Naše <span>realizaceee</span></>} /></h2>
           <p className="section-subtitle" style={{ marginTop: 16 }}>
-            Výběr z podlah, které jsme v poslední době položili. U některých realizací můžete posuvníkem porovnat stav před a po.
+            <FormatovanyText value={stranka?.realizacePodnadpis} fallback="Výběr z podlah, které jsme v poslední době položili. U některých realizací můžete posuvníkem porovnat stav před a po." />
           </p>
           {projekty.length === 0 ? (
             <p style={{ color: 'var(--gray-400)', marginTop: 32 }}>Brzy přidáme první realizace. Sledujte nás!</p>
@@ -142,7 +154,7 @@ export default async function InspracePage() {
 
           {/* VELKÉ VIDEO pod galerií */}
           <div className="velke-video">
-            <h3>Podívejte se na výsled<span>eee</span>k</h3>
+            <h3><FormatovanyText value={stranka?.videoNadpis} fallback={<>Podívejte se na výsled<span>eee</span>k</>} /></h3>
             <YouTubeVideo id={VIDEO_PORUBACEK_VYSLEDEK.id} nazev={VIDEO_PORUBACEK_VYSLEDEK.nazev} />
           </div>
         </div>
@@ -152,31 +164,31 @@ export default async function InspracePage() {
       <RealizaceGalerie
         id="fotogalerie"
         fotky={FOTOGALERIE}
-        nadpis={<>Fotogaleri<span>eee</span> našich realizací</>}
-        podnadpis="Vinyl, PVC, koberce i dřevo — hotové podlahy u našich zákazníků."
+        nadpis={<FormatovanyText value={stranka?.galerieNadpis} fallback={<>Fotogaleri<span>eee</span> našich realizací</>} />}
+        podnadpis={<FormatovanyText value={stranka?.galeriePodnadpis} fallback="Vinyl, PVC, koberce i dřevo — hotové podlahy u našich zákazníků." />}
         velka
       />
 
       {/* PROČ POKLÁDÁMEEE */}
       <section className="section" style={{ background: 'var(--gray-50)' }}>
         <div className="container">
-          <h2 className="section-title" style={{ textAlign: 'center' }}>Proč <span>Pokládámeee</span></h2>
+          <h2 className="section-title" style={{ textAlign: 'center' }}><FormatovanyText value={stranka?.procNadpis} fallback={<>Proč <span>Pokládámeee</span></>} /></h2>
           <div className="insp-proc-grid">
-            {PROC.map(({ emoji, title, desc }) => (
-              <div key={title} style={{ background: 'white', borderRadius: 12, padding: '32px 28px', border: '1px solid var(--gray-100)' }}>
-                <div style={{ marginBottom: 16 }}><BrandIcon emoji={emoji} size={64} /></div>
-                <h3 style={{ fontSize: 20, fontWeight: 800, color: 'var(--black)', marginBottom: 10 }}>{title}</h3>
-                <p style={{ fontSize: 15, lineHeight: 1.65, color: 'var(--gray-700)' }}>{desc}</p>
+            {procKarty.map(({ emoji, nadpis, text }, i) => (
+              <div key={i} style={{ background: 'white', borderRadius: 12, padding: '32px 28px', border: '1px solid var(--gray-100)' }}>
+                <div style={{ marginBottom: 16 }}><BrandIcon emoji={emoji || '✨'} size={64} /></div>
+                <h3 style={{ fontSize: 20, fontWeight: 800, color: 'var(--black)', marginBottom: 10 }}><FormatovanyText value={nadpis} fallback="" /></h3>
+                <p style={{ fontSize: 15, lineHeight: 1.65, color: 'var(--gray-700)' }}><FormatovanyText value={text} fallback="" /></p>
               </div>
             ))}
           </div>
           <div style={{ marginTop: 40, textAlign: 'center' }}>
-            <a href="#kontakt" className="btn-primary">Chci zaměření zdarma</a>
+            <a href="#kontakt" className="btn-primary"><FormatovanyText value={stranka?.procTlacitko} fallback="Chci zaměření zdarma" /></a>
           </div>
         </div>
       </section>
 
-      <ReferenceSekce nadpis={<>Co o nás říkají<br /><span>zákazníci</span></>} />
+      <ReferenceSekce nadpis={<FormatovanyText value={stranka?.recenzeNadpis} fallback={<>Co o nás říkají<br /><span>zákazníci</span></>} />} />
 
       <KontaktSekce kontakt={kontaktSekce} />
 
