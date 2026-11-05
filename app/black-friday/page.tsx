@@ -169,7 +169,7 @@ export default async function BlackFridayPage() {
           <div className="container">
             <div className="bf-video-grid">
               {videoId ? (
-                <YouTubeVideo id={videoId} nazev="Black Friday — Pokládámeee" />
+                <YouTubeVideo id={videoId} nazev="Black Friday — Pokládámeee" nahled={bannerObrazekUrl} pomer="700 / 633" />
               ) : (
                 <div className="bf-video-placeholder" style={{ aspectRatio: '700/633', position: 'relative', overflow: 'hidden' }}>
                   <Image src={bannerObrazekUrl} alt="Black Friday jeee tady! 25 % sleva" fill unoptimized style={{ objectFit: 'cover', objectPosition: 'center' }} />
