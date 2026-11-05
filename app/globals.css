@@ -624,4 +624,10 @@ a.kraj-mesto:hover { color: var(--orange); box-shadow: 0 4px 16px rgba(255,136,0
   .hero-sluzby-grid > div:first-child > h1 { order: 1; text-align: center; }
   .hero-sluzby-grid > div:last-child { order: 2; margin-bottom: 28px; }
   .hero-sluzby-grid > div:last-child img { height: 240px !important; min-height: 0 !important; border-radius: 12px !important; }
+
+  /* inspirace — tlačítko Naše realizaceee uprostřed pod textem */
+  .insp-hero-grid .btn-primary { display: table; margin: 8px auto 0; }
+
+  /* kariéra — benefity po dvou vedle sebe */
+  .kariera-benefity-grid { grid-template-columns: repeat(2, 1fr); }
 }
