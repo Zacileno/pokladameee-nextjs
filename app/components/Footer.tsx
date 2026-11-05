@@ -65,6 +65,7 @@ export default function Footer({ nastaveni }: { nastaveni?: Nastaveni }) {
           <div>
             <h4 style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 20 }}>Kontakt</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <div style={{ color: 'white', fontSize: 15, fontWeight: 700 }}>Syspod s.r.o.</div>
               <a href={`tel:${telefon.replace(/\s/g, '')}`} style={{ color: 'rgba(255,255,255,0.6)', fontSize: 15 }}>{telefon}</a>
               <a href={`mailto:${email}`} style={{ color: 'rgba(255,255,255,0.6)', fontSize: 15 }}>{email}</a>
               <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: 15 }}>{pracovniDoba}</div>
