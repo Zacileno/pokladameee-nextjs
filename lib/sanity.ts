@@ -155,6 +155,8 @@ export const KARIERNI_POZICE_DETAIL_QUERY = `*[_type == "karierniPozice" && slug
 
 export const KARIERNI_POZICE_SLUGS_QUERY = `*[_type == "karierniPozice" && aktivni != false]{ "slug": slug.current }`
 
+export const SLUZBY_STRANKA_QUERY = `*[_type == "sluzbyStranka"][0] { kroky[] { emoji, slovo } }`
+
 export const BF_TERMIN_QUERY = `*[_type == "blackFriday"][0] { konecAkce, zacatekAkce }`
 
 export const BLACK_FRIDAY_QUERY = `*[_type == "blackFriday"][0] {
