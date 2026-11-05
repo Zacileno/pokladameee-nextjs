@@ -15,7 +15,9 @@ function formatDatum(iso?: string) {
   return new Date(iso).toLocaleDateString('cs-CZ', { day: 'numeric', month: 'long', year: 'numeric' })
 }
 
-export default function BlogCard({ post }: { post: BlogPostSummary }) {
+import FormatovanyText from '@/app/components/FormatovanyText'
+
+export default function BlogCard({ post, odkazText }: { post: BlogPostSummary; odkazText?: Parameters<typeof FormatovanyText>[0]['value'] }) {
   return (
     <a href={`/blog/${post.slug}`} className="blog-karta">
       <div className="blog-karta-obrazek">
@@ -34,7 +36,7 @@ export default function BlogCard({ post }: { post: BlogPostSummary }) {
         </div>
         <h3 className="blog-karta-nadpis">{post.title}</h3>
         <p className="blog-karta-perex">{post.perex}</p>
-        <span className="blog-karta-link">Číst dále →</span>
+        <span className="blog-karta-link"><FormatovanyText value={odkazText} fallback="Číst dále →" /></span>
       </div>
     </a>
   )
