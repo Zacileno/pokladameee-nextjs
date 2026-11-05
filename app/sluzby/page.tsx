@@ -5,7 +5,7 @@ import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 import KontaktSekce from '@/app/components/KontaktSekce'
 import BrandIcon from '@/app/components/BrandIcon'
-import { client, VINYLOVA_PODLAHA_QUERY, PVC_PODLAHA_QUERY, KOBERCOVA_PODLAHA_QUERY, DREVENA_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY } from '@/lib/sanity'
+import { client, VINYLOVA_PODLAHA_QUERY, PVC_PODLAHA_QUERY, KOBERCOVA_PODLAHA_QUERY, DREVENA_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY, SLUZBY_STRANKA_QUERY } from '@/lib/sanity'
 
 export const revalidate = 0
 
@@ -62,6 +62,14 @@ export default async function SluzbyPage() {
     kontaktSekce = await client.fetch(KONTAKT_SEKCE_QUERY)
   } catch {}
 
+  // slogan s ikonkami — ze Sanity (Služby — stránka), jinak výchozí Zaměřím / Poradím / Položím
+  let kroky = KROKY
+  try {
+    const stranka = await client.fetch<{ kroky?: { emoji?: string; slovo?: string }[] } | null>(SLUZBY_STRANKA_QUERY)
+    const zeSanity = (stranka?.kroky || []).filter(k => k.slovo).map(k => ({ emoji: k.emoji || '✨', slovo: k.slovo as string }))
+    if (zeSanity.length) kroky = zeSanity
+  } catch {}
+
   return (
     <>
       <Header opaque />
@@ -81,7 +89,7 @@ export default async function SluzbyPage() {
                 <a href="/faq" style={{ color: 'var(--orange)', fontWeight: 700, textDecoration: 'underline', textUnderlineOffset: 3 }}>odpovědi na nejčastější dotazy</a>.
               </p>
               <div className="sluzby-uvod-kroky">
-                {KROKY.map(k => (
+                {kroky.map(k => (
                   <div key={k.slovo} className="sluzby-uvod-krok">
                     <BrandIcon emoji={k.emoji} size={44} />
                     <span>{k.slovo}<span style={{ color: 'var(--orange)' }}>eee</span></span>
