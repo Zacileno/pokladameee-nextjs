@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import JsonLd from './components/JsonLd'
 import TopBar from './components/TopBar'
+import PevneMezery from './components/PevneMezery'
 import { client, BLACK_FRIDAY_QUERY } from '@/lib/sanity'
 
 const LOCAL_BUSINESS_JSON_LD = {
@@ -72,6 +73,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MK4KFBF8" height="0" width="0" style={{ display: 'none', visibility: 'hidden' }} /></noscript>
         <TopBar data={topBarData} />
         {children}
+        <PevneMezery />
       </body>
     </html>
   )
