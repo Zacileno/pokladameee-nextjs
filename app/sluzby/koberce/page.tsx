@@ -9,8 +9,8 @@ import { REALIZACE } from '@/lib/realizace'
 import PostupKroky from '@/app/components/PostupKroky'
 import BrandIcon, { IkonaText } from '@/app/components/BrandIcon'
 import FaqItem from './FaqItem'
-import { client, KOBERCOVA_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY } from '@/lib/sanity'
-import { BF_KONEC } from '@/lib/black-friday'
+import { client, BF_KONEC_QUERY, KOBERCOVA_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY } from '@/lib/sanity'
+import { bfBezi } from '@/lib/black-friday'
 import YouTubeVideo from '@/app/components/YouTubeVideo'
 import { VIDEO_PORUBACEK_VYSLEDEK } from '@/lib/videa'
 
@@ -153,7 +153,7 @@ export default async function KobercovaPodlahaPage() {
   const kroky = data?.kroky?.length ? data.kroky : KROKY
   const faq = data?.faq?.length ? data.faq : FAQ
 
-  const zobrazitBfBadge = Date.now() < new Date(BF_KONEC).getTime()
+  const zobrazitBfBadge = bfBezi(await client.fetch<string | null>(BF_KONEC_QUERY).catch(() => null))
 
   return (
     <>

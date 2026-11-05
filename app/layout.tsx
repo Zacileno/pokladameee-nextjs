@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import JsonLd from './components/JsonLd'
 import TopBar from './components/TopBar'
+import { BfKonecProvider } from './components/BfKonec'
 import PevneMezery from './components/PevneMezery'
 import { client, BLACK_FRIDAY_QUERY } from '@/lib/sanity'
 
@@ -71,9 +72,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body>
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MK4KFBF8" height="0" width="0" style={{ display: 'none', visibility: 'hidden' }} /></noscript>
-        <TopBar data={topBarData} />
-        {children}
-        <PevneMezery />
+        <BfKonecProvider konec={topBarData?.konecAkce}>
+          <TopBar data={topBarData} />
+          {children}
+          <PevneMezery />
+        </BfKonecProvider>
       </body>
     </html>
   )

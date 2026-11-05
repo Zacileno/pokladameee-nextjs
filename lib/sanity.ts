@@ -155,7 +155,10 @@ export const KARIERNI_POZICE_DETAIL_QUERY = `*[_type == "karierniPozice" && slug
 
 export const KARIERNI_POZICE_SLUGS_QUERY = `*[_type == "karierniPozice" && aktivni != false]{ "slug": slug.current }`
 
+export const BF_KONEC_QUERY = `*[_type == "blackFriday"][0].konecAkce`
+
 export const BLACK_FRIDAY_QUERY = `*[_type == "blackFriday"][0] {
+  konecAkce,
   topBarOznaceni, topBarSleva, topBarZbytek, topBarDovetek, topBarCta,
   heroBadge, heroSleva, heroNadpisZbytek, heroPodnadpis, heroTlacitko, heroTlacitkoSekundarni,
   "heroFotkaUrl": heroFotka.asset->url,

@@ -32,6 +32,7 @@ type BlackFridayData = {
   heroFotkaUrl?: string
   bannerObrazekUrl?: string
   videoYoutube?: string
+  konecAkce?: string
   videoNadpis?: RT
   body?: { titul?: RT; text?: RT }[]
   odstavec?: RT
@@ -134,7 +135,7 @@ export default async function BlackFridayPage() {
 
           <div className="container" style={{ position: 'relative', zIndex: 2, width: '100%', textAlign: 'center' }}>
             <div className="bf-odpocet-obal">
-              <Odpocet konec={BF_KONEC} />
+              <Odpocet konec={data.konecAkce || BF_KONEC} />
             </div>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,136,0,0.15)', border: '1px solid rgba(255,136,0,0.35)', borderRadius: 100, padding: '6px 16px', marginBottom: 24 }}>
               <span style={{ width: 8, height: 8, background: 'var(--orange)', borderRadius: '50%', display: 'inline-block' }} />
