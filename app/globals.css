@@ -514,6 +514,8 @@ input, select, textarea { font-family: var(--font); }
 
   /* BF úvod — víc místa pod tlačítky */
   .bf-hero { padding-bottom: 96px; }
+  /* odpočet — dny, hodiny, minuty i vteřiny v jednom řádku */
+  .bf-odpocet { flex-wrap: nowrap; white-space: nowrap; gap: 6px; padding: 10px 12px; font-size: clamp(11px, 3.4vw, 14px); }
 
   /* BF dlaždice podlah se slevou pod sebou */
   .sluzby-prehled-grid { grid-template-columns: 1fr; gap: 16px; }
@@ -525,11 +527,11 @@ input, select, textarea { font-family: var(--font); }
   .kontakt-formular { order: 2; padding: 28px 20px; }
   .kontakt-detail { order: 3; }
 
-  /* rodina značek: fotka mezi hodnocením a tlačítkem, nepřekrývá text */
-  .projekt-karta { min-height: 0; }
-  .projekt-karta-foto { display: none; }
-  .projekt-karta-foto-mobil { display: block; height: 220px; width: auto; max-width: 100%; margin: 0 auto 20px; object-fit: contain; }
-  .projekt-karta-obsah { padding: 28px 24px; }
+  /* rodina značek: text vlevo, osoba vpravo (nepřekrývá text) */
+  .projekt-karta { min-height: 0; overflow: hidden; }
+  .projekt-karta-foto { display: block; right: 0; bottom: 0; width: 40%; height: auto; max-height: 92%; object-fit: contain; object-position: right bottom; }
+  .projekt-karta-obsah { padding: 28px 41% 28px 20px; }
+  .projekt-karta-obsah p { font-size: 15px !important; }
 
   /* slidery fotek — bílá šipka v oranžovém kruhu i na mobilu */
   .realizace-sipka { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; font-size: 24px; }
