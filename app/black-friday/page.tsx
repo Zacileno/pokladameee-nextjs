@@ -7,6 +7,8 @@ import KontaktSekce from '@/app/components/KontaktSekce'
 import Odpocet from '@/app/components/Odpocet'
 import FormatovanyText from '@/app/components/FormatovanyText'
 import BrandIcon from '@/app/components/BrandIcon'
+import YouTubeVideo from '@/app/components/YouTubeVideo'
+import { youtubeId } from '@/lib/videa'
 import AkcePopup from './AkcePopup'
 import { BF_KONEC } from '@/lib/black-friday'
 import { client, HERO_SEKCE_QUERY, VINYLOVA_PODLAHA_QUERY, PVC_PODLAHA_QUERY, KOBERCOVA_PODLAHA_QUERY, DREVENA_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY, BLACK_FRIDAY_QUERY } from '@/lib/sanity'
@@ -29,6 +31,7 @@ type BlackFridayData = {
   heroTlacitkoSekundarni?: RT
   heroFotkaUrl?: string
   bannerObrazekUrl?: string
+  videoYoutube?: string
   videoNadpis?: RT
   body?: { titul?: RT; text?: RT }[]
   odstavec?: RT
@@ -113,6 +116,7 @@ export default async function BlackFridayPage() {
   } catch {}
 
   const bannerObrazekUrl = data.bannerObrazekUrl || BANNER_FALLBACK
+  const videoId = youtubeId(data.videoYoutube)
   const body = data.body?.length ? data.body : BODY_FALLBACK
 
   return (
@@ -160,9 +164,13 @@ export default async function BlackFridayPage() {
         <section className="section" style={{ background: 'white' }}>
           <div className="container">
             <div className="bf-video-grid">
-              <div className="bf-video-placeholder" style={{ aspectRatio: '700/633', position: 'relative', overflow: 'hidden' }}>
-                <Image src={bannerObrazekUrl} alt="Black Friday jeee tady! 25 % sleva" fill unoptimized style={{ objectFit: 'cover', objectPosition: 'center' }} />
-              </div>
+              {videoId ? (
+                <YouTubeVideo id={videoId} nazev="Black Friday — Pokládámeee" />
+              ) : (
+                <div className="bf-video-placeholder" style={{ aspectRatio: '700/633', position: 'relative', overflow: 'hidden' }}>
+                  <Image src={bannerObrazekUrl} alt="Black Friday jeee tady! 25 % sleva" fill unoptimized style={{ objectFit: 'cover', objectPosition: 'center' }} />
+                </div>
+              )}
 
               <div>
                 <h2 className="section-title" style={{ fontSize: 'clamp(28px, 3.4vw, 44px)' }}>

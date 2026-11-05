@@ -27,6 +27,7 @@ export const blackFridaySchema = defineType({
     defineField({ name: 'heroFotka', title: 'Hero — fotka pozadí (volitelné, jinak hlavní hero fotka webu)', type: 'image', options: { hotspot: true }, group: 'hero' }),
 
     defineField({ name: 'bannerObrazek', title: 'Banner — obrázek (místo videa)', type: 'image', options: { hotspot: true }, group: 'video' }),
+    defineField({ name: 'videoYoutube', title: 'Video — odkaz na YouTube (když je vyplněný, zobrazí se místo obrázku)', type: 'url', group: 'video' }),
     defineField({ name: 'videoNadpis', title: 'Text vedle banneru — nadpis', type: 'formatovanyText', group: 'video' }),
     defineField({
       name: 'body',

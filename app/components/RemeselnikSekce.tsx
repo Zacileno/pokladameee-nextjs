@@ -136,6 +136,12 @@ export default async function RemeselnikSekce({ data }: { data?: RodinaData }) {
                     )}
                   </div>
 
+                  {/* Fotka řemeslníka na mobilu — mezi hodnocením a tlačítkem */}
+                  {p.fotkaUrl && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={p.fotkaUrl} alt="" className="projekt-karta-foto-mobil" />
+                  )}
+
                   {/* CTA tlačítko */}
                   <a href={p.url} target="_blank" rel="noopener noreferrer" className="rem-pruh-btn"
                     style={{ background: btnBg, color: btnColor }}>
