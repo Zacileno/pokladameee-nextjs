@@ -13,10 +13,10 @@ import { client, JAK_TO_FUNGUJE_QUERY, KONTAKT_SEKCE_QUERY, CO_POKLADAME_STRANKA
 export const revalidate = 0
 
 export const metadata: Metadata = {
-  title: 'Co pokládáme',
+  title: 'Podlahy na míru',
   description: 'Pokládka podlah do bytů, rodinných domů, firem i bytových družstev v Moravskoslezském, Zlínském a Olomouckém kraji. Zaměření zdarma, odvoz staré podlahy zdarma.',
   openGraph: {
-    title: 'Co pokládáme | pokládámeee.cz',
+    title: 'Podlahy na míru | pokládámeee.cz',
     description: 'Podlahy do bytů, domů, firem i bytových družstev. Zaměříme, položíme a po sobě uklidíme.',
     url: 'https://www.pokladameee.cz/co-pokladame',
   },
@@ -89,9 +89,9 @@ export default async function CoPokladamePage() {
           <div className="container">
             <p style={{ fontSize: 14, fontWeight: 600, marginBottom: 20 }}>
               <a href="/" style={{ color: 'var(--orange)' }}>Domů</a>
-              <span style={{ color: 'var(--gray-400)' }}> / Co pokládáme</span>
+              <span style={{ color: 'var(--gray-400)' }}> / Podlahy na míru</span>
             </p>
-            <h1 className="section-title"><FormatovanyText value={stranka?.nadpis} fallback={<>Co pokládám<span>eee</span>? Všechno, co je potřeba.</>} /></h1>
+            <h1 className="section-title"><FormatovanyText value={stranka?.nadpis} fallback={<>Podlahy <span>na míru</span></>} /></h1>
             <p style={{ fontSize: 17, lineHeight: 1.7, maxWidth: 760, margin: '8px 0 48px' }}>
               <FormatovanyText value={stranka?.uvodText} fallback={<>
                 Novou podlahu vám položíme v <strong>bytě</strong>, <strong>rodinném domě</strong>, <strong>firmě</strong> i v celém <strong>bytovém družstvu</strong>.

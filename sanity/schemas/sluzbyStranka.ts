@@ -22,7 +22,7 @@ const dlazdice = (name: string, title: string) =>
 
 export const sluzbyStrankaSchema = defineType({
   name: 'sluzbyStranka',
-  title: 'Co pokládáme',
+  title: 'Co pokládámeee',
   type: 'document',
   groups: [
     { name: 'uvod', title: 'Úvod', default: true },
@@ -30,7 +30,7 @@ export const sluzbyStrankaSchema = defineType({
     { name: 'vyhody', title: 'Pruh s výhodami' },
   ],
   fields: [
-    text('nadpis', 'Nadpis stránky (např. „Naše služby“)', 'uvod'),
+    text('nadpis', 'Nadpis stránky (např. „Co pokládámeee“)', 'uvod'),
     text('uvodText', 'Úvodní text (před odkazem na FAQ)', 'uvod'),
     text('uvodOdkaz', 'Text odkazu na FAQ (na konci úvodního textu)', 'uvod'),
     defineField({
@@ -79,5 +79,5 @@ export const sluzbyStrankaSchema = defineType({
       { _key: 'polozim', emoji: '✨', slovo: 'Položím' },
     ],
   },
-  preview: { prepare: () => ({ title: 'Co pokládáme' }) },
+  preview: { prepare: () => ({ title: 'Co pokládámeee' }) },
 })

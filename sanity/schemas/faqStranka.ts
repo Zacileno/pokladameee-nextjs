@@ -21,7 +21,7 @@ const sekce = (name: string, title: string, group: string, description?: string)
 
 export const faqStrankaSchema = defineType({
   name: 'faqStranka',
-  title: 'FAQ — stránka',
+  title: 'FAQ',
   type: 'document',
   groups: [
     { name: 'uvod', title: 'Úvod', default: true },
@@ -52,5 +52,5 @@ export const faqStrankaSchema = defineType({
     sekce('koberce', 'Sekce Koberce', 'sluzby', 'Otázky a odpovědi se upravují v dokumentu „Podstránka: Kobercová podlaha“, záložka FAQ.'),
     sekce('drevo', 'Sekce Dřevěná podlaha', 'sluzby', 'Otázky a odpovědi se upravují v dokumentu „Podstránka: Dřevěná podlaha“, záložka FAQ.'),
   ],
-  preview: { prepare: () => ({ title: 'FAQ — stránka' }) },
+  preview: { prepare: () => ({ title: 'FAQ' }) },
 })
