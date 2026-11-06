@@ -4,7 +4,8 @@ import JsonLd from './components/JsonLd'
 import TopBar from './components/TopBar'
 import { BfKonecProvider } from './components/BfKonec'
 import PevneMezery from './components/PevneMezery'
-import { client, BLACK_FRIDAY_QUERY } from '@/lib/sanity'
+import { TlacitkaProvider, type TlacitkaData } from './components/Tlacitko'
+import { client, BLACK_FRIDAY_QUERY, TLACITKA_QUERY } from '@/lib/sanity'
 
 const LOCAL_BUSINESS_JSON_LD = {
   '@context': 'https://schema.org',
@@ -61,6 +62,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     topBarData = await client.fetch(BLACK_FRIDAY_QUERY)
   } catch {}
 
+  let tlacitka: TlacitkaData = null
+  try {
+    tlacitka = await client.fetch<TlacitkaData>(TLACITKA_QUERY)
+  } catch {}
+
   return (
     <html lang="cs">
       <head>
@@ -73,9 +79,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body>
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MK4KFBF8" height="0" width="0" style={{ display: 'none', visibility: 'hidden' }} /></noscript>
         <BfKonecProvider konec={topBarData?.konecAkce} zacatek={topBarData?.zacatekAkce}>
-          <TopBar data={topBarData} />
-          {children}
-          <PevneMezery />
+          <TlacitkaProvider data={tlacitka}>
+            <TopBar data={topBarData} />
+            {children}
+            <PevneMezery />
+          </TlacitkaProvider>
         </BfKonecProvider>
       </body>
     </html>

@@ -49,6 +49,7 @@ export const blackFridaySchema = defineType({
     defineField({ name: 'odstavec', title: 'Odstavec pod odrážkami', type: 'formatovanyText', group: 'video' }),
     defineField({ name: 'zvyrazenyText', title: 'Zvýrazněný řádek (BLACK FRIDAY = …)', type: 'formatovanyText', group: 'video' }),
     defineField({ name: 'ctaPopupText', title: 'Text tlačítka "Využít akci"', type: 'formatovanyText', group: 'video' }),
+    defineField({ name: 'popupTlacitko', title: 'Text tlačítka ve vyskakovacím okně na úvodní stránce', type: 'formatovanyText', group: 'video' }),
     defineField({ name: 'adamText', title: 'Text vedle Adamovy fotky', type: 'formatovanyText', group: 'video' }),
 
     defineField({ name: 'produktyNadpis', title: 'Nadpis sekce s produkty', type: 'formatovanyText', group: 'produkty' }),

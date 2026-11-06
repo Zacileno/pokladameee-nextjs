@@ -135,7 +135,7 @@ export default async function CoPokladamePage() {
                     ))}
                   </ul>
                   <div className="cp-blok-tlacitka">
-                    <a href="#kontakt" className="btn-primary"><FormatovanyText value={stranka?.[s.id]?.cta} fallback={s.cta} /></a>
+                    <a href="#kontakt" className="btn-primary"><span><FormatovanyText value={stranka?.[s.id]?.cta} fallback={s.cta} /></span></a>
                     <Link href="/inspirace" className="cp-blok-odkaz"><FormatovanyText value={stranka?.odkazRealizace} fallback="Naše realizace →" /></Link>
                   </div>
                 </div>

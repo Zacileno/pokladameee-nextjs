@@ -1,4 +1,5 @@
 'use client'
+import Tlacitko from '@/app/components/Tlacitko'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -67,7 +68,7 @@ export default function BlackFridayPopup() {
             className="btn-primary"
             style={{ position: 'absolute', left: '50%', bottom: 20, transform: 'translateX(-50%)', boxShadow: '0 6px 18px rgba(0,0,0,0.35)' }}
           >
-            Využít akci
+            <Tlacitko klic="bfPopup" fallback="Využít akci" />
           </span>
         </Link>
         <button

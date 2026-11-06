@@ -165,6 +165,29 @@ export const CO_POKLADAME_STRANKA_QUERY = `*[_type == "coPokladameStranka"][0]`
 
 export const FAQ_STRANKA_QUERY = `*[_type == "faqStranka"][0]`
 
+export const TLACITKA_QUERY = `{
+  "hlavicka": *[_type == "obecneNastaveni"][0].tlacitkoHlavicka,
+  "video": *[_type == "obecneNastaveni"][0].tlacitkoVideo,
+  "dekujemeZpet": *[_type == "obecneNastaveni"][0].tlacitkoDekujeme,
+  "notFoundZpet": *[_type == "obecneNastaveni"][0].tlacitko404,
+  "mapa": *[_type == "obecneNastaveni"][0].tlacitkoMapa,
+  "lokalityZamereni": *[_type == "obecneNastaveni"][0].tlacitkoLokalityZamereni,
+  "lokalityKonzultace": *[_type == "obecneNastaveni"][0].tlacitkoLokalityKonzultace,
+  "oNasKonzultace": *[_type == "obecneNastaveni"][0].tlacitkoONasKonzultace,
+  "oNasKariera": *[_type == "obecneNastaveni"][0].tlacitkoONasKariera,
+  "oNasKarieraOdkaz": *[_type == "obecneNastaveni"][0].tlacitkoONasKarieraOdkaz,
+  "hero": *[_type == "heroSekce"][0].tlacitko,
+  "sluzbySekce": *[_type == "sluzbySekce"][0].tlacitko,
+  "jakToFunguje": *[_type == "jakToFunguje"][0].tlacitko,
+  "vyhody": *[_type == "procNasVybrat"][0].tlacitko,
+  "formular": *[_type == "kontaktSekce"][0].tlacitkoFormular,
+  "poptavkaVinyl": *[_type == "vinylovaPodlaha"][0].tlacitkoPoptavka,
+  "poptavkaPvc": *[_type == "pvcPodlaha"][0].tlacitkoPoptavka,
+  "poptavkaKoberce": *[_type == "kobercovaPodlaha"][0].tlacitkoPoptavka,
+  "poptavkaDrevo": *[_type == "drevenaPodlaha"][0].tlacitkoPoptavka,
+  "bfPopup": *[_type == "blackFriday"][0].popupTlacitko
+}`
+
 export const BLOG_STRANKA_QUERY = `*[_type == "blogStranka"][0] { stitek, nadpis, podnadpis, odkazClanku, zadneClanky }`
 
 export const SLUZBY_STRANKA_QUERY = `*[_type == "sluzbyStranka"][0] { nadpis, uvodText, uvodOdkaz, kroky[] { emoji, slovo }, vinyl, pvc, koberce, drevo, tlacitkoProdukt, ikonky[] { emoji, text } }`

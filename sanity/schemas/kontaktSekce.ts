@@ -15,6 +15,7 @@ export const kontaktSekceSchema = defineType({
     defineField({ name: 'email', title: 'E-mail', type: 'string' }),
     defineField({ name: 'pracovniDoba', title: 'Pracovní doba', type: 'string' }),
     defineField({ name: 'region', title: 'Region', type: 'string' }),
+    defineField({ name: 'tlacitkoFormular', title: 'Text tlačítka formuláře (na všech stránkách)', type: 'formatovanyText' }),
   ],
   preview: { prepare: () => ({ title: 'Kontaktní sekce' }) },
 })

@@ -1,4 +1,5 @@
 'use client'
+import Tlacitko from '@/app/components/Tlacitko'
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import Image from 'next/image'
@@ -128,7 +129,7 @@ export default function Header({ opaque }: { opaque?: boolean }) {
             ))}
           </nav>
           <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
-            <a href="/#kontakt" className="btn-primary" style={{ padding: '9px 20px', fontSize: 15 }}>Chci podlahu</a>
+            <a href="/#kontakt" className="btn-primary" style={{ padding: '9px 20px', fontSize: 15 }}><Tlacitko klic="hlavicka" fallback="Chci podlahu" /></a>
             <a href="tel:+420790388487" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: 'white', fontWeight: 800, fontSize: 16, whiteSpace: 'nowrap' }}>
               <Image src="https://cdn.sanity.io/images/8cvsenqb/production/306c4a22e24e1a5c96a6be2521d307acb1a0da87-120x120.png" alt="Adam Hajdušek" width={32} height={32} unoptimized
                 style={{ width: 32, height: 32, borderRadius: '50%', objectFit: 'cover', border: '1.5px solid rgba(255,255,255,0.6)' }} />
@@ -159,7 +160,7 @@ export default function Header({ opaque }: { opaque?: boolean }) {
           {[['/inspirace', 'Inspirace'], ['/#jak-to-funguje', 'Jak to funguje'], ['/#reference', 'Reference'], ['/faq', 'FAQ'], ['/#kontakt', 'Kontakt'], ['/kariera', 'Kariéra'], ['/blog', 'Blog']].map(([href, label]) => (
             <a key={href} href={href} onClick={() => setMenuOpen(false)} style={{ color: 'white', fontWeight: 600, fontSize: 18 }}>{label}</a>
           ))}
-          <a href="/#kontakt" className="btn-primary" onClick={() => setMenuOpen(false)} style={{ textAlign: 'center', justifyContent: 'center' }}>Chci podlahu</a>
+          <a href="/#kontakt" className="btn-primary" onClick={() => setMenuOpen(false)} style={{ textAlign: 'center', justifyContent: 'center' }}><Tlacitko klic="hlavicka" fallback="Chci podlahu" /></a>
           <a href="tel:+420790388487" onClick={() => setMenuOpen(false)} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, color: 'white', fontWeight: 700, fontSize: 18 }}>
             <Image src="https://cdn.sanity.io/images/8cvsenqb/production/306c4a22e24e1a5c96a6be2521d307acb1a0da87-120x120.png" alt="Adam Hajdušek" width={32} height={32} unoptimized
               style={{ width: 32, height: 32, borderRadius: '50%', objectFit: 'cover', border: '1.5px solid rgba(255,255,255,0.6)' }} />

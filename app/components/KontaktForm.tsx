@@ -1,4 +1,5 @@
 'use client'
+import Tlacitko from '@/app/components/Tlacitko'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { pushDataLayerEvent } from '@/lib/gtm'
@@ -98,7 +99,7 @@ export default function KontaktForm() {
       </label>
       {error && <p className="form-error">{error}</p>}
       <button type="submit" disabled={loading} className="btn-primary form-submit">
-        {loading ? 'Odesílám...' : 'Odeslat poptávku'}
+        {loading ? 'Odesílám...' : <Tlacitko klic="formular" fallback="Odeslat poptávku" />}
       </button>
     </form>
   )

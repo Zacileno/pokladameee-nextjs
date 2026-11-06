@@ -1,4 +1,5 @@
 'use client'
+import Tlacitko from '@/app/components/Tlacitko'
 import { useEffect, useState } from 'react'
 import YouTubeVideo from './YouTubeVideo'
 import { youtubeNahled, type Video } from '../../lib/videa'
@@ -24,7 +25,7 @@ export default function VideoDlazdice({ video }: { video: Video }) {
         <div className="video-dlazdice-obsah">
           <h3>{video.nazev}</h3>
           <p>{video.popis}</p>
-          <button type="button" className="btn-primary" onClick={() => setOtevreno(true)}>Podívat se</button>
+          <button type="button" className="btn-primary" onClick={() => setOtevreno(true)}><Tlacitko klic="video" fallback="Podívat se" /></button>
         </div>
       </div>
 

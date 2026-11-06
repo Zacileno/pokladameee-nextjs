@@ -155,10 +155,10 @@ export default async function BlackFridayPage() {
             </p>
             <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
               <a href="#bfprodukty" className="btn-primary" style={{ fontSize: 17, padding: '15px 32px' }}>
-                <FormatovanyText value={data.heroTlacitko} fallback="Podlahy v akci ↓" />
+                <span><FormatovanyText value={data.heroTlacitko} fallback="Podlahy v akci ↓" /></span>
               </a>
               <a href="#kontakt" className="btn-primary" style={{ fontSize: 17, padding: '15px 32px', background: '#154C86' }}>
-                <FormatovanyText value={data.heroTlacitkoSekundarni} fallback="ZAMĚŘENÍ ZDARMA" />
+                <span><FormatovanyText value={data.heroTlacitkoSekundarni} fallback="ZAMĚŘENÍ ZDARMA" /></span>
               </a>
             </div>
           </div>

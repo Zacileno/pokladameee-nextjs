@@ -11,6 +11,7 @@ export const heroSekceSchema = defineType({
       type: 'image',
       options: { hotspot: true },
     }),
+    defineField({ name: 'tlacitko', title: 'Text tlačítka', type: 'formatovanyText' }),
   ],
   preview: { prepare: () => ({ title: 'Hero sekce' }) },
 })

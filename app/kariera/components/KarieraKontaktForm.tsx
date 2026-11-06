@@ -125,7 +125,7 @@ export default function KarieraKontaktForm({ poziceNazev, texty }: { poziceNazev
               className="btn-primary"
               style={{ borderRadius: 10, padding: '15px 32px', opacity: loading ? 0.7 : 1 }}
             >
-              {loading ? (texty?.formOdesilam || 'Odesílám...') : <FormatovanyText value={texty?.formTlacitko} fallback="Odeslat přihlášku" />}
+              {loading ? (texty?.formOdesilam || 'Odesílám...') : <span><FormatovanyText value={texty?.formTlacitko} fallback="Odeslat přihlášku" /></span>}
             </button>
           </div>
         </form>
