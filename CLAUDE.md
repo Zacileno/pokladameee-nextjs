@@ -316,7 +316,7 @@ Každý typ má právě jeden dokument s pevným `_id` (singletons):
 
 `coPokladameStranka` (Podlahy na míru): texty `/co-pokladame` (úvod a 4 skupiny zákazníků). Fotky zůstávají v kódu, sdílené sekce mají vlastní zdroje.
 
-`tlacitka` (Tlačítka (CTA)): texty tlačítek bez vlastního dokumentu stránky. Provider je v `app/layout.tsx`, vykresluje `app/components/Tlacitko.tsx`. Text uvnitř `.btn-primary` musí být v jednom `<span>`, jinak flex rozdělí barevné kousky. Tlačítka s telefonem zůstávají natvrdo (jediné číslo na webu).
+Tlačítka: text je vždy v dokumentu dané stránky nebo sekce, tlačítka bez vlastní stránky (hlavička, video, Děkujeme, 404, mapa, lokality, O nás) jsou v `obecneNastaveni`. `TLACITKA_QUERY` je posbírá, provider je v `app/layout.tsx`, vykresluje `app/components/Tlacitko.tsx`. Text uvnitř `.btn-primary` musí být v jednom `<span>`, jinak flex rozdělí barevné kousky. Tlačítka s telefonem zůstávají natvrdo (jediné číslo na webu).
 
 `faqStranka` (FAQ): hlavička `/faq`, štítky a nadpisy sekcí a obecné otázky. Otázky ke službám zůstávají v dokumentech „Podstránka: X“.
 

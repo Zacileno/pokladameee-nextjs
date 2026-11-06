@@ -1,7 +1,7 @@
 'use client'
 
-// Texty tlačítek ze Sanity (dokument „Tlačítka (CTA)“), dostupné na celém webu přes
-// provider v app/layout.tsx. Prázdné pole = na webu zůstane výchozí text z kódu.
+// Texty tlačítek z dokumentů jednotlivých stránek a sekcí v Sanity (TLACITKA_QUERY),
+// dostupné na celém webu přes provider v app/layout.tsx. Prázdné pole = na webu zůstane výchozí text z kódu.
 // Obal <span> drží text pohromadě: .btn-primary je flex, takže by se jinak každý
 // různě obarvený kousek textu stal samostatnou položkou s mezerou mezi nimi.
 
@@ -18,7 +18,10 @@ export type KlicTlacitka =
   | 'vyhody'
   | 'video'
   | 'formular'
-  | 'sluzbyPoptavka'
+  | 'poptavkaVinyl'
+  | 'poptavkaPvc'
+  | 'poptavkaKoberce'
+  | 'poptavkaDrevo'
   | 'bfPopup'
   | 'dekujemeZpet'
   | 'notFoundZpet'
@@ -27,6 +30,7 @@ export type KlicTlacitka =
   | 'lokalityKonzultace'
   | 'oNasKonzultace'
   | 'oNasKariera'
+  | 'oNasKarieraOdkaz'
 
 export type TlacitkaData = Partial<Record<KlicTlacitka, RT>> | null
 

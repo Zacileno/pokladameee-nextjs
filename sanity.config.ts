@@ -26,7 +26,6 @@ import { blogStrankaSchema } from './sanity/schemas/blogStranka'
 import { karieraStrankaSchema } from './sanity/schemas/karieraStranka'
 import { coPokladameStrankaSchema } from './sanity/schemas/coPokladameStranka'
 import { faqStrankaSchema } from './sanity/schemas/faqStranka'
-import { tlacitkaSchema } from './sanity/schemas/tlacitka'
 import { formatovanyTextSchema } from './sanity/schemas/objects/formatovanyText'
 
 export default defineConfig({
@@ -36,5 +35,5 @@ export default defineConfig({
   projectId: '8cvsenqb',
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
   plugins: [structureTool(), visionTool()],
-  schema: { types: [akceSchema, blackFridaySchema, inspiraceSchema, inspiraceStrankaSchema, referenceSchema, projektSchema, heroSekceSchema, heroIkonkySchema, sluzbySekceSchema, jakToFungujeSchema, procNasVybratSchema, rodinaZnacekSchema, obecneNastaveniSchema, kontaktSekceSchema, vinylovaPodlahaSchema, pvcPodlahaSchema, kobercovaPodlahaSchema, drevenaPodlahaSchema, karieraStrankaSchema, karierniPoziceSchema, blogStrankaSchema, blogPostSchema, sluzbyStrankaSchema, coPokladameStrankaSchema, faqStrankaSchema, tlacitkaSchema, formatovanyTextSchema] },
+  schema: { types: [akceSchema, blackFridaySchema, inspiraceSchema, inspiraceStrankaSchema, referenceSchema, projektSchema, heroSekceSchema, heroIkonkySchema, sluzbySekceSchema, jakToFungujeSchema, procNasVybratSchema, rodinaZnacekSchema, obecneNastaveniSchema, kontaktSekceSchema, vinylovaPodlahaSchema, pvcPodlahaSchema, kobercovaPodlahaSchema, drevenaPodlahaSchema, karieraStrankaSchema, karierniPoziceSchema, blogStrankaSchema, blogPostSchema, sluzbyStrankaSchema, coPokladameStrankaSchema, faqStrankaSchema, formatovanyTextSchema] },
 })

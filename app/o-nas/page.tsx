@@ -167,7 +167,7 @@ export default async function ONasPage() {
               </p>
               <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', alignItems: 'center' }}>
                 <a href="#kontakt" className="btn-primary"><Tlacitko klic="oNasKonzultace" fallback="Nezávazná konzultace" /></a>
-                <a href="/kariera" className="cp-blok-odkaz">Zajímá mě práce u vás →</a>
+                <a href="/kariera" className="cp-blok-odkaz"><Tlacitko klic="oNasKarieraOdkaz" fallback="Zajímá mě práce u vás →" /></a>
               </div>
             </div>
           </div>

@@ -17,6 +17,7 @@ export const drevenaPodlahaSchema = defineType({
     defineField({ name: 'heroNadpis', title: 'Hero — nadpis', type: 'string', group: 'hero' }),
     defineField({ name: 'heroPodnadpis', title: 'Hero — podnadpis', type: 'text', rows: 2, group: 'hero' }),
     defineField({ name: 'heroBadge', title: 'Hero — badge text (odvoz zdarma…)', type: 'string', group: 'hero' }),
+    defineField({ name: 'tlacitkoPoptavka', title: 'Hero — text tlačítka', type: 'formatovanyText', group: 'hero' }),
     defineField({ name: 'heroFotka', title: 'Hero — fotka realizace', type: 'image', options: { hotspot: true }, group: 'hero' }),
 
     defineField({

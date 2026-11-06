@@ -24,6 +24,7 @@ export const procNasVybratSchema = defineType({
       ],
       validation: r => r.max(4),
     }),
+    defineField({ name: 'tlacitko', title: 'Text tlačítka', type: 'formatovanyText' }),
   ],
   preview: { prepare: () => ({ title: 'Proč nás vybrat' }) },
 })
