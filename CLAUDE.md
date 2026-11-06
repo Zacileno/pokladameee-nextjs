@@ -124,7 +124,7 @@ Struktura je identická — všechny podstránky fetchují ze Sanity, mají fall
 
 Samostatná stránka `/faq` — dřív na ni Header odkazoval, ale neexistovala (404). Skládá se ze 2 částí:
 - **FAQ ze 4 podstránek služeb** — natahuje se živě ze Sanity (stejné GROQ query jako podstránky), needituje se samostatně — úpravy dělat přes „Podstránka: X" → FAQ v každém dokumentu.
-- **Sekce „Obecné otázky"** — natvrdo v kódu (`app/faq/page.tsx`, konstanta `OBECNE`), **není v Sanity** — vědomě odloženo, needitovatelné přes Studio.
+- **Hlavička, nadpisy a štítky sekcí a „Obecné otázky"** — dokument `faqStranka` (FAQ — stránka), pole typu `formatovanyText`. Konstanta `OBECNE` zůstává jako fallback.
 
 Na `main` i `dev`.
 
@@ -204,7 +204,7 @@ app/
   sluzby/koberce/                   # Stejná struktura jako vinylova-podlaha
   sluzby/drevena-podlaha/           # Stejná struktura jako vinylova-podlaha
   faq/
-    page.tsx                        # Agreguje FAQ ze 4 podstránek (živě ze Sanity) + hardcoded obecné otázky
+    page.tsx                        # Agreguje FAQ ze 4 podstránek (živě ze Sanity) + texty a obecné otázky z faqStranka
     FaqItem.tsx
   blog/
     page.tsx                        # /blog — grid článků + stránkování (?page=N)
@@ -313,6 +313,10 @@ Každý typ má právě jeden dokument s pevným `_id` (singletons):
 | `blackFriday` | Podstránka: Black Friday | horní lišta (štítek/sleva/zbytek/dovětek/CTA), hero (badge/sleva/nadpis/podnadpis/2 tlačítka/fotka), banner obrázek + text (nadpis, body[], odstavec, zvýrazněný text, CTA, Adam text), produkty (nadpis, sleva badge, info řádek o působnosti), SEO — většina textových polí typu `formatovanyText` (tučně/kurzíva/barva/velikost editovatelné ve Studiu) |
 
 `karieraStranka` (Kariéra — stránka): texty `/kariera`, detailu pozice a `/dekujeme-kariera`; příběhy a karty kultury sdílí i `/o-nas`. Pozice samotné jsou dál v kolekci `karierniPozice`.
+
+`coPokladameStranka` (Co pokládáme — stránka): texty `/co-pokladame` (úvod a 4 skupiny zákazníků). Fotky zůstávají v kódu, sdílené sekce mají vlastní zdroje.
+
+`faqStranka` (FAQ — stránka): hlavička `/faq`, štítky a nadpisy sekcí a obecné otázky. Otázky ke službám zůstávají v dokumentech „Podstránka: X“.
 
 Kolekce (více dokumentů): `projekt`, `inspirace`, `akce`, `reference`, `blogPost`, `karierniPozice`
 
@@ -462,7 +466,7 @@ Na `pokladameee.cz/studio`:
 - [ ] Google Analytics / GA4 — trigger + konverze v GTM UI pro kariérní formulář (`typ_formulare: kariera`) — zatím nenastaveno
 - [ ] On-demand revalidation ze Sanity webhooku
 - [ ] Kariéra — dořešit posílání životopisů v přihlašovacím formuláři (file upload → Resend attachment nebo odkaz na úložiště)
-- [ ] Sekce „Obecné otázky" na `/faq` — vytvořit Sanity schema, aby šla editovat přes Studio (zatím vědomě hardcoded v kódu, na výslovné přání ponecháno)
+- [x] ~~Sekce „Obecné otázky" na `/faq` — vytvořit Sanity schema, aby šla editovat přes Studio~~ ✓
 
 ---
 
