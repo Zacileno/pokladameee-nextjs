@@ -97,7 +97,7 @@ export default async function FaqPage() {
   let kobercovaData: { faq?: FaqEntry[] } | null = null
   let drevenaData: { faq?: FaqEntry[] } | null = null
   let kontaktSekce: any = null
-  // texty stránky ze Sanity (FAQ — stránka); prázdné pole = výchozí text
+  // texty stránky ze Sanity (FAQ); prázdné pole = výchozí text
   let stranka: FaqStranka | null = null
 
   try {

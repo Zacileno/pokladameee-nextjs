@@ -11,10 +11,10 @@ import { client, VINYLOVA_PODLAHA_QUERY, PVC_PODLAHA_QUERY, KOBERCOVA_PODLAHA_QU
 export const revalidate = 0
 
 export const metadata: Metadata = {
-  title: 'Naše služby',
+  title: 'Co pokládámeee',
   description: 'Pokládka vinylových, PVC, kobercových a dřevěných podlah v Moravskoslezském, Zlínském a Olomouckém kraji. Zaměření zdarma, odvoz staré podlahy zdarma.',
   openGraph: {
-    title: 'Naše služby | pokládámeee.cz',
+    title: 'Co pokládámeee | pokládámeee.cz',
     description: 'Pokládka vinylových, PVC, kobercových a dřevěných podlah v Moravskoslezském, Zlínském a Olomouckém kraji.',
     url: 'https://www.pokladameee.cz/sluzby',
   },
@@ -78,7 +78,7 @@ export default async function SluzbyPage() {
     kontaktSekce = await client.fetch(KONTAKT_SEKCE_QUERY)
   } catch {}
 
-  // texty stránky ze Sanity (Co pokládáme); prázdné pole = výchozí text
+  // texty stránky ze Sanity (Co pokládámeee); prázdné pole = výchozí text
   let stranka: SluzbyStranka | null = null
   let kroky = KROKY
   try {
@@ -97,9 +97,9 @@ export default async function SluzbyPage() {
           <div className="container">
             <p style={{ fontSize: 14, fontWeight: 600, marginBottom: 20 }}>
               <a href="/" style={{ color: 'var(--orange)' }}>Domů</a>
-              <span style={{ color: 'var(--gray-400)' }}> / Služby</span>
+              <span style={{ color: 'var(--gray-400)' }}> / Co pokládámeee</span>
             </p>
-            <h1 className="section-title"><FormatovanyText value={stranka?.nadpis} fallback={<>Naše <span>služby</span></>} /></h1>
+            <h1 className="section-title"><FormatovanyText value={stranka?.nadpis} fallback={<>Co pokládám<span>eee</span></>} /></h1>
             <div className="sluzby-uvod">
               <p style={{ fontSize: 17, lineHeight: 1.7 }}>
                 <FormatovanyText value={stranka?.uvodText} fallback={<>

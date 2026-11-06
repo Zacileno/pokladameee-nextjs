@@ -124,7 +124,7 @@ Struktura je identická — všechny podstránky fetchují ze Sanity, mají fall
 
 Samostatná stránka `/faq` — dřív na ni Header odkazoval, ale neexistovala (404). Skládá se ze 2 částí:
 - **FAQ ze 4 podstránek služeb** — natahuje se živě ze Sanity (stejné GROQ query jako podstránky), needituje se samostatně — úpravy dělat přes „Podstránka: X" → FAQ v každém dokumentu.
-- **Hlavička, nadpisy a štítky sekcí a „Obecné otázky"** — dokument `faqStranka` (FAQ — stránka), pole typu `formatovanyText`. Konstanta `OBECNE` zůstává jako fallback.
+- **Hlavička, nadpisy a štítky sekcí a „Obecné otázky"** — dokument `faqStranka` (FAQ), pole typu `formatovanyText`. Konstanta `OBECNE` zůstává jako fallback.
 
 Na `main` i `dev`.
 
@@ -316,7 +316,7 @@ Každý typ má právě jeden dokument s pevným `_id` (singletons):
 
 `coPokladameStranka` (Podlahy na míru): texty `/co-pokladame` (úvod a 4 skupiny zákazníků). Fotky zůstávají v kódu, sdílené sekce mají vlastní zdroje.
 
-`faqStranka` (FAQ — stránka): hlavička `/faq`, štítky a nadpisy sekcí a obecné otázky. Otázky ke službám zůstávají v dokumentech „Podstránka: X“.
+`faqStranka` (FAQ): hlavička `/faq`, štítky a nadpisy sekcí a obecné otázky. Otázky ke službám zůstávají v dokumentech „Podstránka: X“.
 
 Kolekce (více dokumentů): `projekt`, `inspirace`, `akce`, `reference`, `blogPost`, `karierniPozice`
 
