@@ -4,8 +4,8 @@ import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import JsonLd from '../../components/JsonLd'
 import PoziceDetail from './components/PoziceDetail'
-import { client, KARIERNI_POZICE_QUERY, KARIERNI_POZICE_DETAIL_QUERY, KARIERNI_POZICE_SLUGS_QUERY } from '@/lib/sanity'
-import { pozice as POZICE_FALLBACK, type Pozice } from '@/lib/kariera-data'
+import { client, KARIERNI_POZICE_QUERY, KARIERNI_POZICE_DETAIL_QUERY, KARIERNI_POZICE_SLUGS_QUERY, KARIERA_STRANKA_QUERY } from '@/lib/sanity'
+import { pozice as POZICE_FALLBACK, type KarieraStranka, type Pozice } from '@/lib/kariera-data'
 
 export const revalidate = 0
 
@@ -59,7 +59,11 @@ function seznamNaHtml(nadpis: string, polozky: string[]) {
 
 export default async function PozicePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const [p, vsechnyPozice] = await Promise.all([getPozice(slug), getVsechnyPozice()])
+  const [p, vsechnyPozice, texty] = await Promise.all([
+    getPozice(slug),
+    getVsechnyPozice(),
+    client.fetch<KarieraStranka | null>(KARIERA_STRANKA_QUERY).catch(() => null),
+  ])
   if (!p) notFound()
 
   const datumPosted = p.datumZverejneni || '2026-01-01'
@@ -94,7 +98,7 @@ export default async function PozicePage({ params }: { params: Promise<{ slug: s
       <JsonLd data={jobPostingJsonLd} />
       <Header opaque />
       <main>
-        <PoziceDetail pozice={p} vsechnyPozice={vsechnyPozice} />
+        <PoziceDetail pozice={p} vsechnyPozice={vsechnyPozice} texty={texty} />
       </main>
       <Footer />
     </>

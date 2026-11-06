@@ -1,14 +1,15 @@
 'use client'
 import { useState } from 'react'
-import type { Pozice } from '../../../lib/kariera-data'
+import FormatovanyText from '@/app/components/FormatovanyText'
+import type { KarieraStranka, Pozice } from '../../../lib/kariera-data'
 
-const FILTERS = [
-  { value: 'vse', label: 'Vše' },
-  { value: 'moravskoslezsky-kraj', label: 'Moravskoslezský kraj' },
-]
-
-export default function VolnePozice({ pozice, excludeSlug }: { pozice: Pozice[]; excludeSlug?: string }) {
+export default function VolnePozice({ pozice, excludeSlug, texty }: { pozice: Pozice[]; excludeSlug?: string; texty?: KarieraStranka | null }) {
   const [activeFilter, setActiveFilter] = useState('vse')
+
+  const FILTERS = [
+    { value: 'vse', label: texty?.filtrVse || 'Vše' },
+    { value: 'moravskoslezsky-kraj', label: texty?.filtrMsk || 'Moravskoslezský kraj' },
+  ]
 
   const filtered = pozice.filter(p => {
     if (excludeSlug && p.slug === excludeSlug) return false
@@ -21,12 +22,12 @@ export default function VolnePozice({ pozice, excludeSlug }: { pozice: Pozice[];
       <div className="container">
         {!excludeSlug && (
           <h2 className="section-title" style={{ marginBottom: 32 }}>
-            Volné pozic<span style={{ color: 'var(--orange)' }}>eee</span>
+            <FormatovanyText value={texty?.poziceNadpis} fallback={<>Volné pozic<span style={{ color: 'var(--orange)' }}>eee</span></>} />
           </h2>
         )}
         {excludeSlug && (
           <h2 className="section-title" style={{ marginBottom: 32 }}>
-            Další volné pozic<span style={{ color: 'var(--orange)' }}>eee</span>
+            <FormatovanyText value={texty?.poziceDalsiNadpis} fallback={<>Další volné pozic<span style={{ color: 'var(--orange)' }}>eee</span></>} />
           </h2>
         )}
 
