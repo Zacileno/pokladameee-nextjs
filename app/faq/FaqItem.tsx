@@ -1,10 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, type ReactNode } from 'react'
 
 interface FaqItemProps {
-  otazka: string
-  odpoved: string
+  otazka: ReactNode
+  odpoved: ReactNode
 }
 
 export default function FaqItem({ otazka, odpoved }: FaqItemProps) {

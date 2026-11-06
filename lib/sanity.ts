@@ -161,6 +161,10 @@ export const KARIERNI_POZICE_SLUGS_QUERY = `*[_type == "karierniPozice" && aktiv
 
 export const KARIERA_STRANKA_QUERY = `*[_type == "karieraStranka"][0]`
 
+export const CO_POKLADAME_STRANKA_QUERY = `*[_type == "coPokladameStranka"][0]`
+
+export const FAQ_STRANKA_QUERY = `*[_type == "faqStranka"][0]`
+
 export const BLOG_STRANKA_QUERY = `*[_type == "blogStranka"][0] { stitek, nadpis, podnadpis, odkazClanku, zadneClanky }`
 
 export const SLUZBY_STRANKA_QUERY = `*[_type == "sluzbyStranka"][0] { nadpis, uvodText, uvodOdkaz, kroky[] { emoji, slovo }, vinyl, pvc, koberce, drevo, tlacitkoProdukt, ikonky[] { emoji, text } }`
