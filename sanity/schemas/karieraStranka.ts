@@ -15,7 +15,7 @@ const prosty = (name: string, title: string, group: string) =>
 
 export const karieraStrankaSchema = defineType({
   name: 'karieraStranka',
-  title: 'Kariéra — stránka',
+  title: 'Kariéra',
   type: 'document',
   groups: [
     { name: 'uvod', title: 'Úvod', default: true },
@@ -134,5 +134,5 @@ export const karieraStrankaSchema = defineType({
     text('dekujemeTlacitko', 'Text tlačítka zpět na kariéru', 'dekujeme'),
     text('dekujemeSlogan', 'Text pod rámečkem', 'dekujeme'),
   ],
-  preview: { prepare: () => ({ title: 'Kariéra — stránka' }) },
+  preview: { prepare: () => ({ title: 'Kariéra' }) },
 })

@@ -312,7 +312,7 @@ Každý typ má právě jeden dokument s pevným `_id` (singletons):
 | `drevenaPodlaha` | Podstránka: Dřevěná podlaha | hero, istrip[], typy[], benefity[], kroky[], referenceStrip, faq[] |
 | `blackFriday` | Podstránka: Black Friday | horní lišta (štítek/sleva/zbytek/dovětek/CTA), hero (badge/sleva/nadpis/podnadpis/2 tlačítka/fotka), banner obrázek + text (nadpis, body[], odstavec, zvýrazněný text, CTA, Adam text), produkty (nadpis, sleva badge, info řádek o působnosti), SEO — většina textových polí typu `formatovanyText` (tučně/kurzíva/barva/velikost editovatelné ve Studiu) |
 
-`karieraStranka` (Kariéra — stránka): texty `/kariera`, detailu pozice a `/dekujeme-kariera`; příběhy a karty kultury sdílí i `/o-nas`. Pozice samotné jsou dál v kolekci `karierniPozice`.
+`karieraStranka` (Kariéra): texty `/kariera`, detailu pozice a `/dekujeme-kariera`; příběhy a karty kultury sdílí i `/o-nas`. Pozice samotné jsou dál v kolekci `karierniPozice`.
 
 `coPokladameStranka` (Co pokládáme — stránka): texty `/co-pokladame` (úvod a 4 skupiny zákazníků). Fotky zůstávají v kódu, sdílené sekce mají vlastní zdroje.
 
