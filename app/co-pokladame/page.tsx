@@ -70,7 +70,7 @@ const SKUPINY = [
 export default async function CoPokladamePage() {
   let jakToFungujeData: any = null
   let kontaktSekce: any = null
-  // texty stránky ze Sanity (Co pokládáme — stránka); prázdné pole = výchozí text
+  // texty stránky ze Sanity (Podlahy na míru); prázdné pole = výchozí text
   let stranka: CoPokladameStranka | null = null
   try {
     ;[jakToFungujeData, kontaktSekce, stranka] = await Promise.all([

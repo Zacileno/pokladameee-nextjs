@@ -31,7 +31,7 @@ const skupina = (name: string, title: string) =>
 
 export const coPokladameStrankaSchema = defineType({
   name: 'coPokladameStranka',
-  title: 'Co pokládáme — stránka',
+  title: 'Podlahy na míru',
   type: 'document',
   groups: [
     { name: 'uvod', title: 'Úvod', default: true },
@@ -46,5 +46,5 @@ export const coPokladameStrankaSchema = defineType({
     skupina('druzstva', 'Bytová družstva a SVJ'),
     text('odkazRealizace', 'Text odkazu na realizace (u všech skupin)', 'skupiny'),
   ],
-  preview: { prepare: () => ({ title: 'Co pokládáme — stránka' }) },
+  preview: { prepare: () => ({ title: 'Podlahy na míru' }) },
 })

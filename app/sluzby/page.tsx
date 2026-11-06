@@ -78,7 +78,7 @@ export default async function SluzbyPage() {
     kontaktSekce = await client.fetch(KONTAKT_SEKCE_QUERY)
   } catch {}
 
-  // texty stránky ze Sanity (Služby — stránka); prázdné pole = výchozí text
+  // texty stránky ze Sanity (Co pokládáme); prázdné pole = výchozí text
   let stranka: SluzbyStranka | null = null
   let kroky = KROKY
   try {
