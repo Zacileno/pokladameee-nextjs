@@ -3,7 +3,7 @@ import { defineType, defineField } from 'sanity'
 // Texty výpisu článků /blog — prázdné pole = na webu zůstane výchozí text.
 export const blogStrankaSchema = defineType({
   name: 'blogStranka',
-  title: 'Blog — stránka',
+  title: 'Blog',
   type: 'document',
   fields: [
     defineField({ name: 'stitek', title: 'Štítek nad nadpisem (např. „Blog“)', type: 'formatovanyText' }),
@@ -12,5 +12,5 @@ export const blogStrankaSchema = defineType({
     defineField({ name: 'odkazClanku', title: 'Text odkazu na článek (u každé karty)', type: 'formatovanyText' }),
     defineField({ name: 'zadneClanky', title: 'Text, když nejsou žádné články', type: 'formatovanyText' }),
   ],
-  preview: { prepare: () => ({ title: 'Blog — stránka' }) },
+  preview: { prepare: () => ({ title: 'Blog' }) },
 })
