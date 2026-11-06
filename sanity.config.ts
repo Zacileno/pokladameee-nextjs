@@ -35,5 +35,5 @@ export default defineConfig({
   projectId: '8cvsenqb',
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
   plugins: [structureTool(), visionTool()],
-  schema: { types: [akceSchema, inspiraceSchema, inspiraceStrankaSchema, referenceSchema, projektSchema, heroSekceSchema, heroIkonkySchema, sluzbySekceSchema, jakToFungujeSchema, procNasVybratSchema, rodinaZnacekSchema, obecneNastaveniSchema, kontaktSekceSchema, vinylovaPodlahaSchema, pvcPodlahaSchema, kobercovaPodlahaSchema, drevenaPodlahaSchema, karieraStrankaSchema, karierniPoziceSchema, blogStrankaSchema, blogPostSchema, blackFridaySchema, sluzbyStrankaSchema, coPokladameStrankaSchema, faqStrankaSchema, formatovanyTextSchema] },
+  schema: { types: [akceSchema, blackFridaySchema, inspiraceSchema, inspiraceStrankaSchema, referenceSchema, projektSchema, heroSekceSchema, heroIkonkySchema, sluzbySekceSchema, jakToFungujeSchema, procNasVybratSchema, rodinaZnacekSchema, obecneNastaveniSchema, kontaktSekceSchema, vinylovaPodlahaSchema, pvcPodlahaSchema, kobercovaPodlahaSchema, drevenaPodlahaSchema, karieraStrankaSchema, karierniPoziceSchema, blogStrankaSchema, blogPostSchema, sluzbyStrankaSchema, coPokladameStrankaSchema, faqStrankaSchema, formatovanyTextSchema] },
 })
