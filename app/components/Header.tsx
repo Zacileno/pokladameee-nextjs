@@ -20,8 +20,8 @@ const CO_POKLADAME_LINKS: [string, string][] = [
 ]
 
 // položky s vysouvací nabídkou — na počítači při najetí myší, na mobilu po kliknutí
-const ROZBALOVACI: { href: string; label: string; vse: string; links: [string, string][] }[] = [
-  { href: '/sluzby', label: 'Co pokládáme', vse: 'Všechny typy podlah', links: SLUZBY_LINKS },
+const ROZBALOVACI: { href: string; label: React.ReactNode; vse: string; links: [string, string][] }[] = [
+  { href: '/sluzby', label: <>Co pokládám<span style={{ color: 'var(--orange)' }}>eee</span></>, vse: 'Všechny typy podlah', links: SLUZBY_LINKS },
   { href: '/co-pokladame', label: 'Podlahy na míru', vse: 'Podlahy na míru — přehled', links: CO_POKLADAME_LINKS },
 ]
 
