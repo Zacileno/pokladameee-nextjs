@@ -314,7 +314,7 @@ Každý typ má právě jeden dokument s pevným `_id` (singletons):
 
 `karieraStranka` (Kariéra): texty `/kariera`, detailu pozice a `/dekujeme-kariera`; příběhy a karty kultury sdílí i `/o-nas`. Pozice samotné jsou dál v kolekci `karierniPozice`.
 
-`coPokladameStranka` (Co pokládáme — stránka): texty `/co-pokladame` (úvod a 4 skupiny zákazníků). Fotky zůstávají v kódu, sdílené sekce mají vlastní zdroje.
+`coPokladameStranka` (Podlahy na míru): texty `/co-pokladame` (úvod a 4 skupiny zákazníků). Fotky zůstávají v kódu, sdílené sekce mají vlastní zdroje.
 
 `faqStranka` (FAQ — stránka): hlavička `/faq`, štítky a nadpisy sekcí a obecné otázky. Otázky ke službám zůstávají v dokumentech „Podstránka: X“.
 

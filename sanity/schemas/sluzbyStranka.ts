@@ -22,7 +22,7 @@ const dlazdice = (name: string, title: string) =>
 
 export const sluzbyStrankaSchema = defineType({
   name: 'sluzbyStranka',
-  title: 'Služby — stránka',
+  title: 'Co pokládáme',
   type: 'document',
   groups: [
     { name: 'uvod', title: 'Úvod', default: true },
@@ -79,5 +79,5 @@ export const sluzbyStrankaSchema = defineType({
       { _key: 'polozim', emoji: '✨', slovo: 'Položím' },
     ],
   },
-  preview: { prepare: () => ({ title: 'Služby — stránka' }) },
+  preview: { prepare: () => ({ title: 'Co pokládáme' }) },
 })
