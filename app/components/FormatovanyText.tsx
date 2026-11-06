@@ -11,6 +11,7 @@ const BARVY: Record<string, string> = {
   black: 'var(--black)',
   white: '#fff',
   gray: 'var(--gray-400)',
+  cream: 'var(--orange-light)',
 }
 
 const VELIKOSTI: Record<string, string> = {

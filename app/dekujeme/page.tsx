@@ -1,3 +1,4 @@
+import Tlacitko from '@/app/components/Tlacitko'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -25,7 +26,7 @@ export default function Dekujeme() {
           Adam se vám ozve co nejdříve — obvykle do 24 hodin. Zaměření je zdarma.
         </p>
         <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-          <Link href="/" className="btn-primary" style={{ fontSize: 16, padding: '13px 28px' }}>← Zpět na hlavní stránku</Link>
+          <Link href="/" className="btn-primary" style={{ fontSize: 16, padding: '13px 28px' }}><Tlacitko klic="dekujemeZpet" fallback="← Zpět na hlavní stránku" /></Link>
           <a href="tel:+420790388487" className="btn-secondary" style={{ fontSize: 16, padding: '12px 28px', background: 'var(--blue)', color: 'white', borderRadius: 'var(--radius)', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
             📞 +420 790 388 487
           </a>

@@ -1,3 +1,4 @@
+import Tlacitko from '@/app/components/Tlacitko'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import {
@@ -97,7 +98,7 @@ export default async function MestoPage({ params }: { params: Params }) {
                     Pokládáme vinylové, PVC, kobercové i dřevěné podlahy. Vyplňte formulář a ozveme se vám s nejbližším volným termínem.
                   </p>
                 </div>
-                <a href="#kontakt" className="btn-primary" style={{ marginTop: 32, padding: '16px 32px' }}>Chci zaměření zdarma</a>
+                <a href="#kontakt" className="btn-primary" style={{ marginTop: 32, padding: '16px 32px' }}><Tlacitko klic="lokalityZamereni" fallback="Chci zaměření zdarma" /></a>
               </div>
               <CeduleGrafika text={mesto.nazev} />
             </div>
@@ -115,7 +116,7 @@ export default async function MestoPage({ params }: { params: Params }) {
             <div className="mapa-grid">
               <div className="kraj-perex">
                 {mesto.okoli.map((odstavec, i) => <p key={i}><Text text={odstavec} /></p>)}
-                <a href="#kontakt" className="btn-primary" style={{ marginTop: 18, padding: '16px 32px' }}>Konzultace zdarma</a>
+                <a href="#kontakt" className="btn-primary" style={{ marginTop: 18, padding: '16px 32px' }}><Tlacitko klic="lokalityKonzultace" fallback="Konzultace zdarma" /></a>
               </div>
               <MestoMapa kraj={kraj} mesto={mesto} />
             </div>

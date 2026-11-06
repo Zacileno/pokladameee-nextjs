@@ -135,7 +135,7 @@ export default async function SluzbyPage() {
                   <div className="sluzby-dlazdice-obsah">
                     <h2><FormatovanyText value={stranka?.[s.klic]?.nazev} fallback={s.title} /></h2>
                     <p><FormatovanyText value={stranka?.[s.klic]?.popis} fallback={s.popis} /></p>
-                    <Link href={`/sluzby/${s.slug}`} className="btn-primary"><FormatovanyText value={stranka?.tlacitkoProdukt} fallback="Zobrazit produkt" /></Link>
+                    <Link href={`/sluzby/${s.slug}`} className="btn-primary"><span><FormatovanyText value={stranka?.tlacitkoProdukt} fallback="Zobrazit produkt" /></span></Link>
                   </div>
                 </div>
               ))}

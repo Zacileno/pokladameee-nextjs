@@ -1,3 +1,4 @@
+import Tlacitko from '@/app/components/Tlacitko'
 import BrandIcon from './BrandIcon'
 
 type Sluzba = {
@@ -60,7 +61,7 @@ export default function SluzbySekce({ data }: Props) {
         </div>
 
         <div style={{ marginTop: 40, textAlign: 'center' }}>
-          <a href="#kontakt" className="btn-primary" style={{ fontSize: 16 }}>Nezávazně poptat</a>
+          <a href="#kontakt" className="btn-primary" style={{ fontSize: 16 }}><Tlacitko klic="sluzbySekce" fallback="Nezávazně poptat" /></a>
         </div>
       </div>
     </section>

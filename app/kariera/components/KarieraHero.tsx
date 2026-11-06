@@ -28,10 +28,10 @@ export default function KarieraHero({ texty }: { texty?: KarieraStranka | null }
         </p>
         <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
           <a href="#pozice" className="btn-primary" style={{ borderRadius: 10, padding: '15px 28px' }}>
-            <FormatovanyText value={texty?.heroTlacitkoPozice} fallback="Otevřené pozice" />
+            <span><FormatovanyText value={texty?.heroTlacitkoPozice} fallback="Otevřené pozice" /></span>
           </a>
           <a href="#benefity" className="btn-secondary" style={{ borderRadius: 10, padding: '15px 28px' }}>
-            <FormatovanyText value={texty?.heroTlacitkoProc} fallback="Proč pracovat s námi" />
+            <span><FormatovanyText value={texty?.heroTlacitkoProc} fallback="Proč pracovat s námi" /></span>
           </a>
         </div>
       </div>

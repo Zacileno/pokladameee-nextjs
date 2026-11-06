@@ -20,7 +20,7 @@ export default function AkcePopup({ label = 'Využít akci' }: { label?: React.R
   return (
     <>
       <button type="button" className="btn-primary" style={{ fontSize: 17, padding: '15px 32px' }} onClick={() => setOpen(true)}>
-        {label}
+        <span>{label}</span>
       </button>
 
       {open && (

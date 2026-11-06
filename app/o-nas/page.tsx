@@ -1,3 +1,4 @@
+import Tlacitko from '@/app/components/Tlacitko'
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Header from '@/app/components/Header'
@@ -78,8 +79,8 @@ export default async function ONasPage() {
               Spojuje nás hrdost na dobře odvedenou práci. Věříme, že pěkný domov dělá lepší každý den — proto pokládáme podlahy tak, abyste z nich měli radost roky.
             </p>
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-              <a href="#kontakt" className="btn-primary">Nezávazná konzultace</a>
-              <a href="/kariera" className="btn-secondary">Zajímá mě práce u vás</a>
+              <a href="#kontakt" className="btn-primary"><Tlacitko klic="oNasKonzultace" fallback="Nezávazná konzultace" /></a>
+              <a href="/kariera" className="btn-secondary"><Tlacitko klic="oNasKariera" fallback="Zajímá mě práce u vás" /></a>
             </div>
           </div>
         </section>
@@ -165,7 +166,7 @@ export default async function ONasPage() {
                 Přijedeme k vám, zaměříme a poradíme s výběrem materiálu, barvy i vzoru. Starou podlahu odstraníme a odvezeme, novou položíme a po sobě uklidíme.
               </p>
               <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', alignItems: 'center' }}>
-                <a href="#kontakt" className="btn-primary">Nezávazná konzultace</a>
+                <a href="#kontakt" className="btn-primary"><Tlacitko klic="oNasKonzultace" fallback="Nezávazná konzultace" /></a>
                 <a href="/kariera" className="cp-blok-odkaz">Zajímá mě práce u vás →</a>
               </div>
             </div>

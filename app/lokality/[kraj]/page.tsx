@@ -1,3 +1,4 @@
+import Tlacitko from '@/app/components/Tlacitko'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import {
@@ -82,7 +83,7 @@ export default async function KrajPage({ params }: { params: Promise<{ kraj: str
                     Jezdíme <strong>i do menších obcí</strong>. Vyplňte formulář a ozveme se vám s nejbližším volným termínem.
                   </p>
                 </div>
-                <a href="#kontakt" className="btn-primary" style={{ marginTop: 32, padding: '16px 32px' }}>Chci zaměření zdarma</a>
+                <a href="#kontakt" className="btn-primary" style={{ marginTop: 32, padding: '16px 32px' }}><Tlacitko klic="lokalityZamereni" fallback="Chci zaměření zdarma" /></a>
               </div>
               <CeduleGrafika text={kraj.nazev} />
             </div>

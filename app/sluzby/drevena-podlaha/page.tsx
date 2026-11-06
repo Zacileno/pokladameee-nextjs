@@ -1,3 +1,4 @@
+import Tlacitko from '@/app/components/Tlacitko'
 import type { Metadata } from 'next'
 import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
@@ -184,7 +185,7 @@ export default async function DrevenaPodlahaPage() {
               </p>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                 <a href="#kontakt" className="btn-primary" style={{ borderRadius: 10, padding: '15px 28px' }}>
-                  Nezávazná poptávka
+                  <Tlacitko klic="sluzbyPoptavka" fallback="Nezávazná poptávka" />
                 </a>
                 <a href="tel:+420790388487" style={{
                   display: 'inline-flex', alignItems: 'center', gap: 8,
