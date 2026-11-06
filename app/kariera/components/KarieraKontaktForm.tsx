@@ -1,8 +1,10 @@
 'use client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import FormatovanyText from '@/app/components/FormatovanyText'
 import { pushDataLayerEvent } from '@/lib/gtm'
 import { onlyLetters, onlyPhoneChars } from '@/lib/formInput'
+import type { KarieraStranka } from '@/lib/kariera-data'
 
 type FormData = {
   jmeno: string
@@ -17,7 +19,7 @@ type FormData = {
 
 const EMPTY: FormData = { jmeno: '', prijmeni: '', email: '', telefon: '', mesto: '', zprava: '', kontrolni_pole: '', souhlas: false }
 
-export default function KarieraKontaktForm({ poziceNazev }: { poziceNazev?: string }) {
+export default function KarieraKontaktForm({ poziceNazev, texty }: { poziceNazev?: string; texty?: KarieraStranka | null }) {
   const router = useRouter()
   const [form, setForm] = useState<FormData>(EMPTY)
   const [loading, setLoading] = useState(false)
@@ -33,7 +35,7 @@ export default function KarieraKontaktForm({ poziceNazev }: { poziceNazev?: stri
     e.preventDefault()
     if (form.kontrolni_pole) return
     if (!form.souhlas) {
-      setError('Pro odeslání musíš souhlasit se zpracováním osobních údajů.')
+      setError(texty?.formChybaSouhlas || 'Pro odeslání musíš souhlasit se zpracováním osobních údajů.')
       return
     }
     setLoading(true)
@@ -77,10 +79,10 @@ export default function KarieraKontaktForm({ poziceNazev }: { poziceNazev?: stri
     <section style={{ background: '#F8F5F0', padding: '80px 0' }}>
       <div className="container" style={{ maxWidth: 720 }}>
         <h2 className="section-title" style={{ marginBottom: 12 }}>
-          Máš zájem? Napiš nám
+          <FormatovanyText value={texty?.formNadpis} fallback="Máš zájem? Napiš nám" />
         </h2>
         <p style={{ fontSize: 16, color: '#555', lineHeight: 1.7, marginBottom: 40 }}>
-          Ať už jsi z Ostravy, Opavy, Havířova nebo okolí – se zkušenostmi nebo chutí se vše naučit, dej nám o sobě vědět! Ozvi se nám – stačí vyplnit krátký formulář.
+          <FormatovanyText value={texty?.formText} fallback="Ať už jsi z Ostravy, Opavy, Havířova nebo okolí – se zkušenostmi nebo chutí se vše naučit, dej nám o sobě vědět! Ozvi se nám – stačí vyplnit krátký formulář." />
         </p>
 
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
@@ -88,17 +90,17 @@ export default function KarieraKontaktForm({ poziceNazev }: { poziceNazev?: stri
           <input name="kontrolni_pole" style={{ position: 'absolute', left: -9999, width: 1, height: 1, opacity: 0, overflow: 'hidden' }} value={form.kontrolni_pole} onChange={set('kontrolni_pole')} tabIndex={-1} autoComplete="off" aria-hidden="true" />
 
           <div className="kariera-form-grid-2col">
-            <input style={inputStyle} type="text" placeholder="Jméno *" required value={form.jmeno} onChange={setFiltered('jmeno', onlyLetters)} />
-            <input style={inputStyle} type="text" placeholder="Příjmení *" required value={form.prijmeni} onChange={setFiltered('prijmeni', onlyLetters)} />
+            <input style={inputStyle} type="text" placeholder={texty?.formJmeno || 'Jméno *'} required value={form.jmeno} onChange={setFiltered('jmeno', onlyLetters)} />
+            <input style={inputStyle} type="text" placeholder={texty?.formPrijmeni || 'Příjmení *'} required value={form.prijmeni} onChange={setFiltered('prijmeni', onlyLetters)} />
           </div>
           <div className="kariera-form-grid-2col">
-            <input style={inputStyle} type="email" placeholder="E-mail *" required value={form.email} onChange={set('email')} />
-            <input style={inputStyle} type="tel" inputMode="tel" placeholder="Telefon *" required value={form.telefon} onChange={setFiltered('telefon', onlyPhoneChars)} />
+            <input style={inputStyle} type="email" placeholder={texty?.formEmail || 'E-mail *'} required value={form.email} onChange={set('email')} />
+            <input style={inputStyle} type="tel" inputMode="tel" placeholder={texty?.formTelefon || 'Telefon *'} required value={form.telefon} onChange={setFiltered('telefon', onlyPhoneChars)} />
           </div>
-          <input style={inputStyle} type="text" placeholder="Z jakého jsi města?" value={form.mesto} onChange={setFiltered('mesto', onlyLetters)} />
+          <input style={inputStyle} type="text" placeholder={texty?.formMesto || 'Z jakého jsi města?'} value={form.mesto} onChange={setFiltered('mesto', onlyLetters)} />
           <textarea
             style={{ ...inputStyle, resize: 'vertical' }}
-            placeholder="Zkušenost a motivace pro práci s podlahami."
+            placeholder={texty?.formZprava || 'Zkušenost a motivace pro práci s podlahami.'}
             rows={4}
             value={form.zprava}
             onChange={set('zprava')}
@@ -111,8 +113,8 @@ export default function KarieraKontaktForm({ poziceNazev }: { poziceNazev?: stri
               style={{ accentColor: 'var(--orange)', flexShrink: 0, marginTop: 2 }}
             />
             <span>
-              Souhlasím se zpracováním osobních údajů dle{' '}
-              <a href="/ochrana-osobnich-udaju" style={{ color: 'var(--orange)' }}>zásad ochrany osobních údajů</a>
+              <FormatovanyText value={texty?.formSouhlas} fallback="Souhlasím se zpracováním osobních údajů dle" />{' '}
+              <a href="/ochrana-osobnich-udaju" style={{ color: 'var(--orange)' }}><FormatovanyText value={texty?.formSouhlasOdkaz} fallback="zásad ochrany osobních údajů" /></a>
             </span>
           </label>
           {error && <p style={{ color: '#c00', fontSize: 14 }}>{error}</p>}
@@ -123,7 +125,7 @@ export default function KarieraKontaktForm({ poziceNazev }: { poziceNazev?: stri
               className="btn-primary"
               style={{ borderRadius: 10, padding: '15px 32px', opacity: loading ? 0.7 : 1 }}
             >
-              {loading ? 'Odesílám...' : 'Odeslat přihlášku'}
+              {loading ? (texty?.formOdesilam || 'Odesílám...') : <FormatovanyText value={texty?.formTlacitko} fallback="Odeslat přihlášku" />}
             </button>
           </div>
         </form>

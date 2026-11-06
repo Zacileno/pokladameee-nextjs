@@ -8,7 +8,8 @@ import RemeselnikSekce from '@/app/components/RemeselnikSekce'
 import KontaktSekce from '@/app/components/KontaktSekce'
 import KulturaGrid from '@/app/kariera/components/KulturaGrid'
 import TestimonialCarousel from '@/app/kariera/components/TestimonialCarousel'
-import { client, SLUZBY_SEKCE_QUERY, RODINA_ZNACEK_QUERY, KONTAKT_SEKCE_QUERY } from '@/lib/sanity'
+import { client, SLUZBY_SEKCE_QUERY, RODINA_ZNACEK_QUERY, KONTAKT_SEKCE_QUERY, KARIERA_STRANKA_QUERY } from '@/lib/sanity'
+import type { KarieraStranka } from '@/lib/kariera-data'
 
 export const revalidate = 0
 
@@ -58,6 +59,9 @@ export default async function ONasPage() {
       client.fetch(KONTAKT_SEKCE_QUERY),
     ])
   } catch {}
+
+  // bloky sdílené s kariérou berou texty z „Kariéra — stránka“
+  const karieraTexty = await client.fetch<KarieraStranka | null>(KARIERA_STRANKA_QUERY).catch(() => null)
 
   return (
     <>
@@ -144,8 +148,8 @@ export default async function ONasPage() {
           </div>
         </section>
 
-        <KulturaGrid />
-        <TestimonialCarousel />
+        <KulturaGrid texty={karieraTexty} />
+        <TestimonialCarousel texty={karieraTexty} />
         <SluzbySekce data={sluzbySekce} />
 
         {/* RÁDI PORADÍME */}

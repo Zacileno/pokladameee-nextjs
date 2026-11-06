@@ -8,8 +8,8 @@ import FilozofieSecce from './components/FilozofieSecce'
 import KulturaGrid from './components/KulturaGrid'
 import VolnePozice from './components/VolnePozice'
 import KarieraKontaktForm from './components/KarieraKontaktForm'
-import { client, KARIERNI_POZICE_QUERY } from '@/lib/sanity'
-import { pozice as POZICE_FALLBACK, type Pozice } from '@/lib/kariera-data'
+import { client, KARIERNI_POZICE_QUERY, KARIERA_STRANKA_QUERY } from '@/lib/sanity'
+import { pozice as POZICE_FALLBACK, type KarieraStranka, type Pozice } from '@/lib/kariera-data'
 
 export const revalidate = 0
 
@@ -34,17 +34,20 @@ export default async function KarieraPage() {
     if (data?.length) pozice = data
   } catch {}
 
+  // texty stránky ze Sanity (Kariéra — stránka); prázdné pole = výchozí text
+  const texty = await client.fetch<KarieraStranka | null>(KARIERA_STRANKA_QUERY).catch(() => null)
+
   return (
     <>
       <Header opaque />
       <main>
-        <KarieraHero />
-        <TestimonialCarousel />
-        <BenefityGrid />
-        <FilozofieSecce />
-        <KulturaGrid />
-        <VolnePozice pozice={pozice} />
-        <KarieraKontaktForm />
+        <KarieraHero texty={texty} />
+        <TestimonialCarousel texty={texty} />
+        <BenefityGrid texty={texty} />
+        <FilozofieSecce texty={texty} />
+        <KulturaGrid texty={texty} />
+        <VolnePozice pozice={pozice} texty={texty} />
+        <KarieraKontaktForm texty={texty} />
       </main>
       <Footer />
     </>
