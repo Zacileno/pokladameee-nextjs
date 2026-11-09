@@ -6,6 +6,7 @@ import Footer from '@/app/components/Footer'
 import BrandIcon from '@/app/components/BrandIcon'
 import JakToFunguje from '@/app/components/JakToFunguje'
 import ReferenceSekce from '@/app/components/ReferenceSekce'
+import MapaSekce from '@/app/components/MapaSekce'
 import KontaktSekce from '@/app/components/KontaktSekce'
 import FormatovanyText from '@/app/components/FormatovanyText'
 import { client, JAK_TO_FUNGUJE_QUERY, KONTAKT_SEKCE_QUERY, CO_POKLADAME_STRANKA_QUERY } from '@/lib/sanity'
@@ -146,6 +147,7 @@ export default async function CoPokladamePage() {
 
         <JakToFunguje data={jakToFungujeData} />
         <ReferenceSekce video={false} />
+        <MapaSekce />
         <KontaktSekce kontakt={kontaktSekce} />
       </main>
       <Footer />

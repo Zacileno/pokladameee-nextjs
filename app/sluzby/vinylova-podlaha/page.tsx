@@ -5,6 +5,7 @@ import Footer from '@/app/components/Footer'
 import BenefityGrid from '@/app/components/BenefityGrid'
 import KontaktSekce from '@/app/components/KontaktSekce'
 import ReferenceSekce from '@/app/components/ReferenceSekce'
+import MapaSekce from '@/app/components/MapaSekce'
 import RealizaceGalerie from '@/app/components/RealizaceGalerie'
 import { REALIZACE } from '@/lib/realizace'
 import PostupKroky from '@/app/components/PostupKroky'
@@ -279,6 +280,8 @@ export default async function VinylovaPodlahaPage() {
       <RealizaceGalerie fotky={REALIZACE.vinyl} podlaha="Vinylová podlaha" />
 
       <ReferenceSekce video={false} />
+
+      <MapaSekce />
 
       {/* FAQ */}
       <section className="section" style={{ background: 'var(--gray-50)' }}>

@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { client, BLOG_SLUGS_QUERY } from '@/lib/sanity'
 import { BLOG_FALLBACK_POSTS } from '@/lib/blog-fallback'
+import { KRAJE } from '@/lib/lokality'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const slugs: { slug: string }[] = await client.fetch(BLOG_SLUGS_QUERY).catch(() => [])
@@ -19,6 +20,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: 'https://www.pokladameee.cz/kariera/vedouci-pokladkove-party-msk', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.6 },
     { url: 'https://www.pokladameee.cz/kariera/koordinator-zakazek-msk', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.6 },
     { url: 'https://www.pokladameee.cz/blog', lastModified: new Date(), changeFrequency: 'weekly', priority: 0.8 },
+    ...KRAJE.flatMap(k => [
+      { url: `https://www.pokladameee.cz/lokality/${k.slug}`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.7 },
+      ...k.mesta.map(m => ({
+        url: `https://www.pokladameee.cz/lokality/${k.slug}/${m.slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly' as const,
+        priority: 0.6,
+      })),
+    ]),
     ...blogSlugs.map(slug => ({
       url: `https://www.pokladameee.cz/blog/${slug}`,
       lastModified: new Date(),
