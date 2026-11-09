@@ -7,7 +7,7 @@ export type Krok = { cislo: string; nadpis: string; faze: string; obsah: ReactNo
 const IKONY = ['📞', '📐', '💰', '🎨', '📋', '🚛', '🏠', '🛠', '🔨', '🪵', '✅', '🤝']
 
 // Cesta zakázky jako posuvník (inspirace Žaluzieee): časová osa s čísly + jedna karta.
-// Karta se přizpůsobí délce textu; šipky jsou nad ní, aby při přepnutí neuskakovaly.
+// Karta se přizpůsobí délce textu; čísla kroků nahoře, šipky pod kartou.
 export default function PrubehKroky({ kroky }: { kroky: Krok[] }) {
   const [aktivni, setAktivni] = useState(0)
   const posun = (o: number) => setAktivni(a => (a + o + kroky.length) % kroky.length)
@@ -30,12 +30,6 @@ export default function PrubehKroky({ kroky }: { kroky: Krok[] }) {
         ))}
       </div>
 
-      <div className="prk-ovladani">
-        <button type="button" className="prk-sipka" onClick={() => posun(-1)} aria-label="Předchozí krok">←</button>
-        <span className="prk-pocet"><strong>{aktivni + 1}</strong> / {kroky.length}</span>
-        <button type="button" className="prk-sipka" onClick={() => posun(1)} aria-label="Další krok">→</button>
-      </div>
-
       <div className="prk-karta">
         {kroky.map((k, i) => (
           <article key={k.cislo} className={`prk-krok${i === aktivni ? ' prk-krok-aktivni' : ''}`} aria-hidden={i !== aktivni} role="tabpanel">
@@ -48,6 +42,12 @@ export default function PrubehKroky({ kroky }: { kroky: Krok[] }) {
             <div className="prk-krok-text">{k.obsah}</div>
           </article>
         ))}
+      </div>
+
+      <div className="prk-ovladani">
+        <button type="button" className="prk-sipka" onClick={() => posun(-1)} aria-label="Předchozí krok">←</button>
+        <span className="prk-pocet"><strong>{aktivni + 1}</strong> / {kroky.length}</span>
+        <button type="button" className="prk-sipka" onClick={() => posun(1)} aria-label="Další krok">→</button>
       </div>
     </div>
   )

@@ -695,7 +695,7 @@ a.kraj-mesto:hover { color: var(--orange); box-shadow: 0 4px 16px rgba(255,136,0
 .prk-tecka:hover { border-color: var(--orange); }
 .prk-tecka-hotovo { border-color: var(--orange); color: var(--orange); }
 .prk-tecka-aktivni { background: var(--orange); border-color: var(--orange); color: white; transform: scale(1.18); box-shadow: 0 6px 18px rgba(255,136,0,0.45); }
-.prk-karta { background: white; border-radius: 24px; padding: 44px 56px; margin-top: 24px; box-shadow: 0 20px 48px rgba(0,0,0,0.25); }
+.prk-karta { background: white; border-radius: 24px; padding: 44px 56px; margin-top: 32px; box-shadow: 0 20px 48px rgba(0,0,0,0.25); }
 .prk-krok { display: none; grid-template-columns: 300px 1fr; gap: 48px; align-items: center; }
 .prk-krok-aktivni { display: grid; animation: prk-objeveni 0.35s ease; }
 @keyframes prk-objeveni { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
@@ -755,7 +755,7 @@ a.kraj-mesto:hover { color: var(--orange); box-shadow: 0 4px 16px rgba(255,136,0
   .prk-tecka-aktivni { transform: none; }
   .prk-karta { padding: 28px 22px; margin-top: 20px; border-radius: 20px; }
   .prk-krok { grid-template-columns: 1fr; gap: 16px; align-items: start; }
-  .prk-ovladani { margin-top: 16px; }
+  .prk-ovladani { margin-top: 20px; }
   .prk-velke-cislo { font-size: 64px; }
   .prk-krok-ikona svg { width: 56px; height: 56px; }
   .prk-krok h3 { font-size: 22px; }
