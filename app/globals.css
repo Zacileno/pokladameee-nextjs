@@ -673,6 +673,7 @@ a.kraj-mesto:hover { color: var(--orange); box-shadow: 0 4px 16px rgba(255,136,0
 .prk-sipka:hover { background: var(--orange); color: white; }
 .prk-pocet { color: rgba(255,255,255,0.8); font-size: 18px; min-width: 64px; text-align: center; }
 .prk-pocet strong { color: white; font-size: 24px; }
+.pr-cesta-video { margin-top: 64px; }
 /* dobré vědět */
 .pr-vedet-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .pr-vedet { display: flex; flex-direction: column; gap: 14px; background: white; border: 1px solid var(--gray-100); border-top: 5px solid var(--orange); border-radius: 16px; padding: 32px 28px; box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
@@ -719,6 +720,7 @@ a.kraj-mesto:hover { color: var(--orange); box-shadow: 0 4px 16px rgba(255,136,0
   .prk-karta { padding: 28px 22px; margin-top: 20px; border-radius: 20px; }
   .prk-krok { grid-template-columns: 1fr; gap: 16px; align-items: start; }
   .prk-ovladani { margin-top: 20px; }
+  .pr-cesta-video { margin-top: 44px; }
   .prk-velke-cislo { font-size: 64px; }
   .prk-krok-ikona svg { width: 56px; height: 56px; }
   .prk-krok h3 { font-size: 22px; }
@@ -737,7 +739,7 @@ a.kraj-mesto:hover { color: var(--orange); box-shadow: 0 4px 16px rgba(255,136,0
   .pr-cta-obsah { padding: 40px 0 8px; }
   .pr-cta p { margin-left: auto; margin-right: auto; }
   .pr-cta .pr-tlacitka { justify-content: center; }
-  .pr-cta-adam { height: 280px; margin-top: 0; }
+  .pr-cta-adam { height: 280px; margin-top: 36px; }
 }
 @media (max-width: 480px) {
   .pr-tlacitka { flex-direction: column; align-items: stretch; text-align: center; }
