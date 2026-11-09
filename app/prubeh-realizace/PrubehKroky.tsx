@@ -1,5 +1,5 @@
 'use client'
-import { useState, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import BrandIcon from '@/app/components/BrandIcon'
 
 export type Krok = { cislo: string; nadpis: string; faze: string; obsah: ReactNode }
@@ -11,10 +11,19 @@ const IKONY = ['📞', '📐', '💰', '🎨', '📋', '🚛', '🏠', '🛠', '
 export default function PrubehKroky({ kroky }: { kroky: Krok[] }) {
   const [aktivni, setAktivni] = useState(0)
   const posun = (o: number) => setAktivni(a => (a + o + kroky.length) % kroky.length)
+  const osa = useRef<HTMLDivElement>(null)
+
+  // na telefonu se osa nevejde — vybrané číslo vždy posuneme doprostřed (jen vodorovně, stránka neposkočí)
+  useEffect(() => {
+    const el = osa.current
+    const tecka = el?.children[aktivni] as HTMLElement | undefined
+    if (!el || !tecka || el.scrollWidth <= el.clientWidth) return
+    el.scrollTo({ left: tecka.offsetLeft - el.clientWidth / 2 + tecka.offsetWidth / 2, behavior: 'smooth' })
+  }, [aktivni])
 
   return (
     <div className="prk">
-      <div className="prk-osa" role="tablist" aria-label="Kroky zakázky">
+      <div className="prk-osa" ref={osa} role="tablist" aria-label="Kroky zakázky">
         {kroky.map((k, i) => (
           <button
             key={k.cislo}
