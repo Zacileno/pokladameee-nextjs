@@ -598,7 +598,6 @@ a.kraj-mesto:hover { color: var(--orange); box-shadow: 0 4px 16px rgba(255,136,0
   .mesto-dalsi-grid .kraj-mesto { flex-basis: calc(50% - 4px); }
   .cedule-odznak { left: 0; width: 104px; height: 104px; }
 }
-}
 
 /* ── MAPA + LOKALITY: mobil (vzor žaluzieee / malujemeee) ── */
 .mapa-kraj-odkaz { -webkit-tap-highlight-color: transparent; }
