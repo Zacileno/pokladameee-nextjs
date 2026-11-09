@@ -45,10 +45,10 @@ const FAKTA_IKONY = ['📐', '📋', '✅']
 const DOBRE_VEDET_IKONY = ['🛡', '📊', '🕐']
 // výchozí fotky k tématům pokládky (přepíše je fotka nahraná ve Studiu)
 const TEMA_FOTKY = [
-  { src: '/realizace/vinyl-lepeny-bruzovice-1.jpg', alt: 'Nová vinylová podlaha v rozestavěném domě — Bruzovice' },
-  { src: '/realizace/vinyl-lepeny-bruzovice-2.jpg', alt: 'Rovná podlaha v podkrovní místnosti po pokládce' },
-  { src: '/realizace/vinyl-karvina-chodba-seda.jpg', alt: 'Pokládka vinylové podlahy na chodbě — Karviná' },
-  { src: '/realizace/koberec-koprivnice-schody-2.jpg', alt: 'Koberec na schodišti s ukončovacími profily — Kopřivnice' },
+  { src: 'https://cdn.sanity.io/images/8cvsenqb/production/d8f0b094d972c0e205b096d91f98ec6fd70714ee-1500x2000.jpg?w=1000&auto=format', alt: 'Kontrola podkladu před pokládkou, rozbitý potěr a laserové měření — Štáblovice', pozice: '50% 70%' },
+  { src: 'https://cdn.sanity.io/images/8cvsenqb/production/87b4b6db7932b1c401425f2c77058c1aae2d53a2-4284x5712.jpg?w=1000&auto=format', alt: 'Čerstvě vyrovnaný podklad nivelační hmotou — Divadlo loutek Ostrava', pozice: '50% 75%' },
+  { src: '/realizace/vinyl-karvina-chodba-seda.jpg', alt: 'Rozpracovaná pokládka vinylové podlahy na chodbě — Karviná', pozice: '50% 50%' },
+  { src: '/realizace/vinyl-stanislavice-chodba.jpg', alt: 'Hotová chodba s obvodovými lištami a návazností na dveře — Stanislavice', pozice: '50% 60%' },
 ]
 
 export default async function PrubehRealizacePage() {
@@ -119,7 +119,6 @@ export default async function PrubehRealizacePage() {
         <section id="cesta-zakazky" className="section pr-cesta">
           <div className="container">
             <div className="pr-hlava pr-hlava-stred">
-              <p className="pr-stitek">{cesta[0]?.stitek}</p>
               <h2 className="section-title">{t('prehledNadpis')}</h2>
               {cestaUvod && <div className="pr-hlava-text"><Text value={cestaUvod} /></div>}
             </div>
@@ -152,7 +151,6 @@ export default async function PrubehRealizacePage() {
         <section className="section" style={{ background: 'var(--gray-50)' }}>
           <div className="container">
             <div className="pr-hlava pr-hlava-stred">
-              <p className="pr-stitek">{temata[0]?.stitek}</p>
               <h2 className="section-title">{t('pokladkaNadpis')}</h2>
               <p className="pr-hlava-text">{t('pokladkaText')}</p>
             </div>
@@ -164,7 +162,7 @@ export default async function PrubehRealizacePage() {
                     <div className="pr-tema-foto">
                       {foto
                         ? <Image src={urlFor(foto).width(1000).url()} alt={foto.alt || k.nadpis || ''} fill unoptimized style={{ objectFit: 'cover' }} />
-                        : <Image src={TEMA_FOTKY[i % TEMA_FOTKY.length].src} alt={TEMA_FOTKY[i % TEMA_FOTKY.length].alt} fill unoptimized style={{ objectFit: 'cover' }} />}
+                        : <Image src={TEMA_FOTKY[i % TEMA_FOTKY.length].src} alt={TEMA_FOTKY[i % TEMA_FOTKY.length].alt} fill unoptimized style={{ objectFit: 'cover', objectPosition: TEMA_FOTKY[i % TEMA_FOTKY.length].pozice }} />}
                       <span className="pr-tema-cislo">{String(i + 1).padStart(2, '0')}</span>
                     </div>
                     <div className="pr-tema-obsah">

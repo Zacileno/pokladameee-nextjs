@@ -92,7 +92,6 @@ export const prubehRealizaceStrankaSchema = defineType({
         type: 'object',
         name: 'kapitola',
         fields: [
-          defineField({ name: 'stitek', title: 'Štítek nad nadpisem', description: 'Např. „Část 1 · Profesionální pokládka“', type: 'string' }),
           defineField({ name: 'nadpis', title: 'Nadpis kapitoly', type: 'string' }),
           odstavce('uvod', 'Úvodní text kapitoly (nepovinné)'),
           defineField({
@@ -128,7 +127,7 @@ export const prubehRealizaceStrankaSchema = defineType({
             }],
           }),
         ],
-        preview: { select: { title: 'nadpis', subtitle: 'stitek' } },
+        preview: { select: { title: 'nadpis' } },
       }],
     }),
     defineField({ name: 'ctaNadpis', title: 'Nadpis výzvy', type: 'string', group: 'zaver' }),

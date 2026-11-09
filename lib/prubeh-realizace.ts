@@ -15,7 +15,7 @@ export type PtBlock = {
 
 export type PrubehBlok = { _key: string; _type: 'blok'; cislo?: string; nadpis?: string; obsah?: PtBlock[] }
 export type PrubehFoto = { asset?: { _ref: string }; alt?: string; popisek?: string }
-export type PrubehKapitola = { _key: string; _type: 'kapitola'; stitek?: string; nadpis?: string; uvod?: PtBlock[]; fotky?: PrubehFoto[]; bloky?: PrubehBlok[] }
+export type PrubehKapitola = { _key: string; _type: 'kapitola'; nadpis?: string; uvod?: PtBlock[]; fotky?: PrubehFoto[]; bloky?: PrubehBlok[] }
 export type PrubehFakt = { _key: string; _type: 'fakt'; nadpis?: string; text?: string }
 
 export type PrubehRealizaceStranka = {
@@ -50,10 +50,7 @@ function pt(zapis: string): PtBlock[] {
 }
 
 const blok = (nadpis: string, obsah: string, cislo?: string): PrubehBlok => ({ _key: key(), _type: 'blok', ...(cislo ? { cislo } : {}), nadpis, obsah: pt(obsah) })
-const kapitola = (stitek: string, nadpis: string, uvod: string, bloky: PrubehBlok[]): PrubehKapitola => ({ _key: key(), _type: 'kapitola', stitek, nadpis, uvod: uvod ? pt(uvod) : [], bloky })
-
-const C1 = 'Část 1 · Profesionální pokládka'
-const C2 = 'Část 2 · Cesta zakázky'
+const kapitola = (nadpis: string, uvod: string, bloky: PrubehBlok[]): PrubehKapitola => ({ _key: key(), _type: 'kapitola', nadpis, uvod: uvod ? pt(uvod) : [], bloky })
 
 export const PRUBEH_VYCHOZI: Required<Omit<PrubehRealizaceStranka, 'nadpis'>> = {
   uvod: pt(`
@@ -71,7 +68,7 @@ Konkrétní práce a související služby vždy pojmenujeme v nabídce, abyste 
   pokladkaNadpis: 'Co obnáší profesionální pokládka',
   pokladkaText: 'Podívejte se, co se u vás doma děje od odkrytí staré podlahy až po poslední lištu.',
   kapitoly: [
-    kapitola(C1, 'Co zahrnuje profesionální pokládka', '', [
+    kapitola('Co zahrnuje profesionální pokládka', '', [
       blok('Nejdříve zjistíme, co je pod podlahou', `
 Podklad je základ, na který přijde nová krytina. Může jít o beton, potěr, desky, parkety nebo původní dlažbu. Ověřujeme jeho **rovnost, pevnost, stabilitu a vlhkost**. Současně kontrolujeme výslednou výšku u dveří, prahů a sousedních místností. Každá krytina má jiné požadavky a podle nich volíme přípravu.
 `),
@@ -82,7 +79,7 @@ Pokud je to součástí zakázky, odstraníme starou podlahu a příslušné li�
 Podle stavu podkladu obrousíme výstupky, odstraníme nevhodné zbytky a nesoudržné části, opravíme poškozená místa a povrch zbavíme prachu. Pokud se podklad hýbe, rozpadá nebo zůstává vlhký, nejprve řešíme příčinu. **Nová podlaha tyto problémy sama neodstraní.** Potřebný postup vám vysvětlíme před pokračováním prací.
 `),
     ]),
-    kapitola(C1, 'Co znamená, když se bude nivelovat', `
+    kapitola('Co znamená, když se bude nivelovat', `
 **Nivelace znamená vyrovnání podkladu speciální hmotou.** Po přípravě povrchu ji naneseme a rozprostřeme tak, aby vznikl dostatečně rovný a hladký základ pro vybranou podlahu. Je to samostatná etapa realizace, která potřebuje materiál, práci a čas na vyschnutí.
 `, [
       blok('Proč může být vyrovnání potřeba', `
@@ -100,7 +97,7 @@ Možnost opatrně chodit po vyrovnávací vrstvě ještě neznamená, že na ni 
 Nivelace upravuje povrch vhodného podkladu. Pohybující se prkna, uvolněné parkety, zásadně poškozená konstrukce nebo zdroj vlhkosti mohou vyžadovat další zásah. Rovný povrch pro pokládku také nemusí znamenat dokonale vodorovnou podlahu celého staršího domu. Pokud potřebujete srovnat i celkový sklon, řešíme to výslovně při návrhu.
 `),
     ]),
-    kapitola(C1, 'Jak probíhá samotná pokládka', `
+    kapitola('Jak probíhá samotná pokládka', `
 Před začátkem ověříme připravenost podkladu, správnost materiálu a podmínky v místnosti. Krytinu podle pokynů výrobce necháme přizpůsobit prostředí. Rozvrhneme směr pokládky, návaznost dekoru a rozložení dílců nebo pásů. **Pečlivé rozměření pomáhá zvládnout i šikmé stěny, výklenky a přechody mezi místnostmi.**
 `, [
       blok('Lepený vinyl', `
@@ -120,7 +117,7 @@ U koberce řešíme rozvržení pásů, směr vlasu, případné napojení, při
 Krytinu musíme přizpůsobit místnosti, směru a vzoru. Část se spotřebuje na řezy; objednávku ovlivňuje také šířka role nebo celé balení dílců. Proto se dodané množství může lišit od skutečné plochy pokládky. **Potřebný prořez a zaokrouhlení zohledníme v nabídce.**
 `),
     ]),
-    kapitola(C1, 'Lištování a dokončení všech návazností', '', [
+    kapitola('Lištování a dokončení všech návazností', '', [
       blok('Obvodové lišty a přechodové profily', `
 Obvodové lišty dokončují napojení podlahy na stěny a zakrývají její okraj podle zvoleného systému. Řešíme jejich dekor, výšku, rohy, kouty i zakončení. Přechodové profily propojují různé krytiny, překrývají potřebné oddělení ploch nebo řeší výškový rozdíl. Jejich umístění a vzhled probíráme při zaměření, protože mají vliv na výsledek i pohodlné používání.
 `),
@@ -138,7 +135,7 @@ Krytinu přesně přizpůsobíme zárubním, trubkám a dalším konstrukcím. T
 Odstraníme zbytky po sjednaných pracích a zkontrolujeme podlahu, lišty, přechody a zakončení. Společně projdeme výsledek a vysvětlíme vám další používání. Pokud potřebujete větší rozsah úklidu nebo vrácení nábytku, dohodneme jej jako součást zakázky.
 `),
     ]),
-    kapitola(C2, 'Od zavolání po cenovou nabídku', `
+    kapitola('Od zavolání po cenovou nabídku', `
 Můžete se na nás obrátit s hotovou představou i jen s potřebou vyměnit podlahu. **Provedeme vás výběrem a zařídíme dohodnutou realizaci.** Předem vysvětlíme, co bude potřeba, kdo co zajistí a jak práce ovlivní provoz domácnosti.
 `, [
       blok('První zavolání nebo odeslání poptávky', `
@@ -158,7 +155,7 @@ Domluvený rozsah zaznamenáme a pořídíme potřebné fotografie pro příprav
 Na základě zaměření připravíme nabídku na domluvenou krytinu, přípravu podkladu, pokládku a dokončení. Uvedeme i sjednané související služby, například demontáž, odvoz, výnos nebo manipulaci s nábytkem. Pokud počítáme s určitou tloušťkou nivelace či stavem skrytých vrstev, uvedeme tento předpoklad a vysvětlíme postup při odlišném nálezu. **Máte rozumět celkové ceně i tomu, za co ji platíte.**
 `, '3'),
     ]),
-    kapitola(C2, 'Odsouhlasení a příprava realizace', '', [
+    kapitola('Odsouhlasení a příprava realizace', '', [
       blok('Projdeme nabídku a doladíme výběr', `
 Po zaslání nabídky s vámi dořešíme otázky, případné varianty materiálu, dekor a rozsah prací. Pokud se neozvete sami, třetí den se vám připomeneme. Jakoukoli změnu rozsahu nebo ceny promítneme do odsouhlasených podkladů. **Než začneme materiál objednávat, musí být jasné, na čem jsme se dohodli.**
 `, '4'),
@@ -178,7 +175,7 @@ Před zahájením si rozdělíme konkrétní úkoly. Navazující podlahářské
 Realizační tým od nás dostane zaměření, fotografie, odsouhlasený materiál a rozsah i důležité poznámky k podkladu a přístupu. **Při příjezdu party tak nemusíte znovu vysvětlovat celou zakázku.**
 `, '7'),
     ]),
-    kapitola(C2, 'Práce u vás a řešení zjištěných změn', '', [
+    kapitola('Práce u vás a řešení zjištěných změn', '', [
       blok('Příjezd a kontrola podmínek', `
 Na místě projdeme sjednaný rozsah, připravenost místností, přístup a materiál. Domluvíme organizaci práce a ochranu dotčených navazujících částí prostoru podle povahy zakázky. Víte, na koho se obrátit s dotazem a které místnosti bude možné používat.
 `, '8'),
@@ -201,7 +198,7 @@ Běžným cílem je **bezplatné zaměření do 48 hodin** a **nabídka do 1–2
 Podlahu do týdne zvládneme, pokud je materiál skladem, podklad je připravený, máme volnou kapacitu a technologické přestávky to dovolí. **Přesný termín vždy potvrdíme pro vaši konkrétní zakázku.** Dobu schnutí, nutnost nivelace ani doplňkové služby nelze slíbit univerzálně, určíme je podle skutečného stavu.
 `),
     ]),
-    kapitola(C2, 'Předání díla a následná péče', '', [
+    kapitola('Předání díla a následná péče', '', [
       blok('Společná kontrola a předávací protokol', `
 Hotovou realizaci projdeme společně. Zkontrolujeme vzhled a provedení podlahy, lišty, přechody a dohodnuté detaily. **Předání zaznamenáme do protokolu** včetně případných výhrad a dohodnutého řešení. Máte prostor se zeptat a víte, co přebíráte.
 Vysvětlíme, kdy je možné po podlaze chodit, vrátit nábytek a začít s běžným čištěním. Doporučíme vhodné ochranné podložky pod nábytek a způsob údržby konkrétní krytiny. U podlahového vytápění předáme potřebné pokyny k dalšímu provozu podle použitých materiálů.
