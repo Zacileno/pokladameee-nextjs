@@ -34,6 +34,7 @@ const HLAVNI_LINKS: [string, string][] = [
 
 const VEDLEJSI_LINKS: [string, string][] = [
   ['/#jak-to-funguje', 'Jak to funguje'],
+  ['/prubeh-realizace', 'Průběh realizace'],
   ['/#reference', 'Reference'],
   ['/faq', 'FAQ'],
   ['/kariera', 'Kariéra'],
@@ -157,7 +158,7 @@ export default function Header({ opaque }: { opaque?: boolean }) {
               )}
             </div>
           ))}
-          {[['/inspirace', 'Inspirace'], ['/#jak-to-funguje', 'Jak to funguje'], ['/#reference', 'Reference'], ['/faq', 'FAQ'], ['/#kontakt', 'Kontakt'], ['/kariera', 'Kariéra'], ['/blog', 'Blog']].map(([href, label]) => (
+          {[['/inspirace', 'Inspirace'], ['/#jak-to-funguje', 'Jak to funguje'], ['/prubeh-realizace', 'Průběh realizace'], ['/#reference', 'Reference'], ['/faq', 'FAQ'], ['/#kontakt', 'Kontakt'], ['/kariera', 'Kariéra'], ['/blog', 'Blog']].map(([href, label]) => (
             <a key={href} href={href} onClick={() => setMenuOpen(false)} style={{ color: 'white', fontWeight: 600, fontSize: 18 }}>{label}</a>
           ))}
           <a href="/#kontakt" className="btn-primary" onClick={() => setMenuOpen(false)} style={{ textAlign: 'center', justifyContent: 'center' }}><Tlacitko klic="hlavicka" fallback="Chci podlahu" /></a>

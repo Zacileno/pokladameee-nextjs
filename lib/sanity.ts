@@ -165,6 +165,8 @@ export const CO_POKLADAME_STRANKA_QUERY = `*[_type == "coPokladameStranka"][0]`
 
 export const FAQ_STRANKA_QUERY = `*[_type == "faqStranka"][0]`
 
+export const PRUBEH_REALIZACE_QUERY = `*[_type == "prubehRealizaceStranka"][0]`
+
 export const TLACITKA_QUERY = `{
   "hlavicka": *[_type == "obecneNastaveni"][0].tlacitkoHlavicka,
   "video": *[_type == "obecneNastaveni"][0].tlacitkoVideo,

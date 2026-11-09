@@ -623,3 +623,123 @@ a.kraj-mesto:hover { color: var(--orange); box-shadow: 0 4px 16px rgba(255,136,0
   a.kraj-mesto { display: flex; align-items: center; justify-content: space-between; min-height: 52px; padding: 0 20px; font-size: 16px; text-align: left; }
   a.kraj-mesto::after { content: '→'; color: var(--orange); font-size: 20px; }
 }
+/* === PRŮBĚH REALIZACE (app/prubeh-realizace) === */
+.pr-hero { background: var(--orange-light); padding-top: calc(120px + var(--hlavicka-navic)); padding-bottom: 72px; overflow: hidden; }
+.pr-hero-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 48px; align-items: center; }
+.pr-h1 { font-size: clamp(36px, 5vw, 62px); font-weight: 900; line-height: 1.05; color: var(--black); margin-bottom: 20px; }
+.pr-h1 span { color: var(--orange); }
+.pr-hero-text { max-width: 620px; margin-bottom: 32px; }
+.pr-hero-text .pr-text p { font-size: 17px; color: var(--gray-700); }
+.pr-tlacitka { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.pr-odkaz { color: var(--blue); font-weight: 700; font-size: 15px; text-decoration: underline; text-underline-offset: 4px; }
+.pr-fakta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 8px; }
+.pr-fakt { display: flex; align-items: center; gap: 16px; background: white; border-radius: 16px; padding: 22px 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+.pr-fakt h2 { font-size: 19px; font-weight: 900; color: var(--black); line-height: 1.2; margin-bottom: 4px; }
+.pr-fakt p { font-size: 14.5px; line-height: 1.5; }
+.pr-text p { font-size: 16px; line-height: 1.75; color: var(--gray-700); }
+.pr-text p + p, .pr-text p + ul, .pr-text ul + p { margin-top: 12px; }
+.pr-text strong { color: var(--black); }
+.pr-odrazky { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.pr-odrazky li { position: relative; padding-left: 26px; font-size: 16px; line-height: 1.65; color: var(--gray-700); }
+.pr-odrazky li::before { content: ""; position: absolute; left: 4px; top: 10px; width: 9px; height: 9px; border-radius: 2px; background: var(--orange); }
+.pr-hlava { max-width: 760px; margin-bottom: 40px; }
+.pr-hlava-stred { margin-left: auto; margin-right: auto; text-align: center; }
+.pr-stitek { color: var(--orange); font-weight: 700; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+.pr-hlava-text, .pr-hlava-text p { font-size: 17px; line-height: 1.7; }
+/* cesta zakázky — posuvník */
+.pr-cesta { background: var(--blue); }
+.pr-cesta .section-title { color: white; }
+.pr-cesta .pr-hlava-text p { color: rgba(255,255,255,0.85); }
+.pr-cesta .pr-hlava-text strong { color: white; }
+.pr-cesta-tip { text-align: center; color: rgba(255,255,255,0.65); font-size: 14px; margin: -12px 0 28px; }
+.prk-osa { position: relative; display: flex; justify-content: space-between; max-width: 1000px; margin: 0 auto; }
+.prk-osa::before { content: ""; position: absolute; left: 22px; right: 22px; top: 50%; height: 3px; background: rgba(255,255,255,0.25); transform: translateY(-50%); }
+.prk-tecka { position: relative; flex: 0 0 auto; width: 46px; height: 46px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.45); background: var(--blue); color: white; font-family: inherit; font-weight: 900; font-size: 16px; cursor: pointer; transition: transform 0.2s, background 0.2s, border-color 0.2s; }
+.prk-tecka:hover { border-color: var(--orange); }
+.prk-tecka-hotovo { border-color: var(--orange); color: var(--orange); }
+.prk-tecka-aktivni { background: var(--orange); border-color: var(--orange); color: white; transform: scale(1.18); box-shadow: 0 6px 18px rgba(255,136,0,0.45); }
+.prk-karta { background: white; border-radius: 24px; padding: 44px 56px; margin-top: 32px; box-shadow: 0 20px 48px rgba(0,0,0,0.25); }
+.prk-krok { display: none; grid-template-columns: 300px 1fr; gap: 48px; align-items: center; }
+.prk-krok-aktivni { display: grid; animation: prk-objeveni 0.35s ease; }
+@keyframes prk-objeveni { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.prk-krok-hlava { position: relative; }
+.prk-krok-ikona { position: absolute; top: 4px; right: 0; }
+.prk-velke-cislo { display: block; font-size: 96px; font-weight: 900; line-height: 0.9; color: var(--orange); letter-spacing: -0.03em; }
+.prk-faze { margin-top: 18px; color: var(--blue); font-weight: 800; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; }
+.prk-krok h3 { font-size: 27px; font-weight: 900; line-height: 1.15; color: var(--black); margin-top: 8px; }
+.prk-krok-text { border-left: 3px solid var(--orange-light); padding-left: 40px; }
+.prk-ovladani { display: flex; align-items: center; justify-content: center; gap: 24px; margin-top: 28px; }
+.prk-sipka { width: 52px; height: 52px; border-radius: 50%; border: none; background: white; color: var(--blue); font-size: 22px; font-weight: 900; cursor: pointer; transition: background 0.2s, color 0.2s; }
+.prk-sipka:hover { background: var(--orange); color: white; }
+.prk-pocet { color: rgba(255,255,255,0.8); font-size: 18px; min-width: 64px; text-align: center; }
+.prk-pocet strong { color: white; font-size: 24px; }
+/* dobré vědět */
+.pr-vedet-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.pr-vedet { display: flex; flex-direction: column; gap: 14px; background: white; border: 1px solid var(--gray-100); border-top: 5px solid var(--orange); border-radius: 16px; padding: 32px 28px; box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+.pr-vedet h3 { font-size: 21px; font-weight: 900; line-height: 1.2; color: var(--black); }
+.pr-vedet .pr-text p { font-size: 15px; }
+/* profesionální pokládka — témata */
+.pr-temata { display: flex; flex-direction: column; gap: 96px; }
+.pr-tema { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.pr-tema-obracene .pr-tema-foto { order: 2; }
+.pr-tema-foto { position: sticky; top: calc(150px + var(--hlavicka-navic)); aspect-ratio: 4 / 3; }
+.pr-tema-foto img { border-radius: 20px; box-shadow: 0 16px 40px rgba(0,0,0,0.15); }
+.pr-tema-cislo { position: absolute; left: 28px; bottom: -28px; width: 76px; height: 76px; border-radius: 50%; background: var(--orange); color: white; font-size: 28px; font-weight: 900; display: flex; align-items: center; justify-content: center; border: 5px solid var(--gray-50); }
+.pr-tema-obsah h3 { font-size: clamp(28px, 3vw, 38px); font-weight: 900; line-height: 1.1; color: var(--black); margin-bottom: 16px; }
+.pr-akordeon { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
+.pr-akordeon details { background: white; border: 1px solid var(--gray-100); border-radius: 14px; transition: box-shadow 0.2s; }
+.pr-akordeon details[open] { box-shadow: 0 8px 24px rgba(0,0,0,0.08); border-color: transparent; }
+.pr-akordeon summary { list-style: none; position: relative; cursor: pointer; padding: 20px 64px 20px 24px; font-size: 17px; font-weight: 800; color: var(--black); line-height: 1.3; }
+.pr-akordeon summary::-webkit-details-marker { display: none; }
+.pr-akordeon summary::after { content: "+"; position: absolute; right: 20px; top: 50%; transform: translateY(-50%); width: 30px; height: 30px; border-radius: 50%; background: var(--orange-light); color: var(--orange); font-size: 20px; font-weight: 900; display: flex; align-items: center; justify-content: center; }
+.pr-akordeon details[open] summary::after { content: "\2212"; background: var(--orange); color: white; }
+.pr-akordeon details > .pr-text { padding: 0 24px 22px; }
+/* výzva s Adamem */
+.pr-cta { padding: 120px 0 80px; }
+.pr-cta-box { position: relative; display: grid; grid-template-columns: 1.4fr 1fr; align-items: end; background: var(--blue); border-radius: 24px; padding: 0 64px; }
+.pr-cta-obsah { padding: 56px 0; }
+.pr-cta h2 { font-size: clamp(30px, 3.6vw, 46px); font-weight: 900; color: white; line-height: 1.1; margin-bottom: 14px; }
+.pr-cta p { color: rgba(255,255,255,0.85); font-size: 17px; max-width: 520px; margin-bottom: 28px; }
+.pr-cta-tel { color: white; font-weight: 800; font-size: 18px; white-space: nowrap; }
+.pr-cta-adam { justify-self: center; height: 420px; width: auto; margin-top: -90px; display: block; }
+@media (max-width: 1199px) {
+  .prk-krok { grid-template-columns: 240px 1fr; gap: 32px; }
+  .prk-karta { padding: 40px; }
+}
+@media (max-width: 900px) {
+  .pr-hero { padding-bottom: 48px; }
+  .pr-hero-grid { grid-template-columns: 1fr; gap: 8px; }
+  .pr-hero-grid .cedule-grafika { max-width: 300px; }
+  .pr-fakta { grid-template-columns: 1fr; gap: 12px; }
+  .pr-fakt { padding: 16px 18px; }
+  .prk-osa { justify-content: flex-start; gap: 10px; overflow-x: auto; padding: 8px 4px 12px; scrollbar-width: none; }
+  .prk-osa::before { display: none; }
+  .prk-tecka { width: 42px; height: 42px; font-size: 15px; }
+  .prk-tecka-aktivni { transform: none; }
+  .prk-karta { padding: 28px 22px; margin-top: 20px; border-radius: 20px; }
+  .prk-krok { grid-template-columns: 1fr; gap: 16px; align-items: start; }
+  .prk-ovladani { margin-top: 20px; }
+  .prk-velke-cislo { font-size: 64px; }
+  .prk-krok-ikona svg { width: 56px; height: 56px; }
+  .prk-krok h3 { font-size: 22px; }
+  .prk-krok-text { border-left: none; padding-left: 0; }
+  .pr-vedet-grid { grid-template-columns: 1fr; gap: 16px; }
+  .pr-vedet { padding: 26px 22px; }
+  .pr-temata { gap: 72px; }
+  .pr-tema { grid-template-columns: 1fr; gap: 44px; }
+  .pr-tema-obracene .pr-tema-foto { order: 0; }
+  .pr-tema-foto { position: relative; top: 0; }
+  .pr-tema-cislo { width: 64px; height: 64px; font-size: 24px; bottom: -24px; left: 20px; }
+  .pr-akordeon summary { padding: 18px 56px 18px 18px; font-size: 16px; }
+  .pr-akordeon details > .pr-text { padding: 0 18px 18px; }
+  .pr-cta { padding: 56px 0; }
+  .pr-cta-box { grid-template-columns: 1fr; padding: 0 22px; text-align: center; }
+  .pr-cta-obsah { padding: 40px 0 8px; }
+  .pr-cta p { margin-left: auto; margin-right: auto; }
+  .pr-cta .pr-tlacitka { justify-content: center; }
+  .pr-cta-adam { height: 280px; margin-top: 0; }
+}
+@media (max-width: 480px) {
+  .pr-tlacitka { flex-direction: column; align-items: stretch; text-align: center; }
+  .pr-tlacitka .btn-primary { justify-content: center; }
+}
