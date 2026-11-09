@@ -753,7 +753,7 @@ a.kraj-mesto:hover { color: var(--orange); box-shadow: 0 4px 16px rgba(255,136,0
   .prk-osa { justify-content: flex-start; gap: 10px; overflow-x: auto; padding: 8px 0 12px calc(50% - 21px); scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent); mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent); }
   .prk-osa::-webkit-scrollbar { display: none; }
   .prk-osa::before { display: none; }
-  .prk-osa::after { content: ""; flex: 0 0 calc(50% - 31px); }
+  .prk-osa::after { content: ""; flex: 0 0 calc(50vw - 47px); }
   .prk-tecka { width: 42px; height: 42px; font-size: 15px; }
   .prk-tecka-aktivni { transform: none; }
   .prk-karta { padding: 28px 22px; margin-top: 20px; border-radius: 20px; }
