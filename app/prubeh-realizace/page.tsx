@@ -6,6 +6,8 @@ import Footer from '@/app/components/Footer'
 import BrandIcon from '@/app/components/BrandIcon'
 import CeduleGrafika from '@/app/components/CeduleGrafika'
 import ReferenceSekce from '@/app/components/ReferenceSekce'
+import VideoDlazdice from '@/app/components/VideoDlazdice'
+import { VIDEO_PORUBACEK_REFERENCE } from '@/lib/videa'
 import KontaktSekce from '@/app/components/KontaktSekce'
 import FormatovanyText from '@/app/components/FormatovanyText'
 import PrubehKroky, { type Krok } from './PrubehKroky'
@@ -124,6 +126,10 @@ export default async function PrubehRealizacePage() {
             </div>
             <p className="pr-cesta-tip">{t('prehledText')}</p>
             <PrubehKroky kroky={kroky} />
+            {/* videoreference Porubáček hned po krocích — ukázka, jak to probíhá v praxi */}
+            <div className="pr-cesta-video">
+              <VideoDlazdice video={VIDEO_PORUBACEK_REFERENCE} />
+            </div>
           </div>
         </section>
 
@@ -201,7 +207,7 @@ export default async function PrubehRealizacePage() {
           </div>
         </section>
 
-        <ReferenceSekce />
+        <ReferenceSekce video={false} />
         <KontaktSekce kontakt={kontaktSekce} />
       </main>
       <Footer />
