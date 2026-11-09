@@ -84,7 +84,7 @@ export default async function MestoPage({ params }: { params: Params }) {
               <span style={{ color: 'var(--gray-400)' }}> / {mesto.nazev}</span>
             </p>
             <div className="kraj-hero-grid">
-              <div>
+              <div className="kraj-hero-text">
                 <h1 style={{ fontSize: 'clamp(32px, 4.4vw, 50px)', fontWeight: 900, color: 'var(--black)', lineHeight: 1.1, marginBottom: 28 }}>
                   Pokládám<span style={{ color: 'var(--orange)' }}>eee</span> podlahy – {mesto.nazev}
                 </h1>
@@ -98,7 +98,7 @@ export default async function MestoPage({ params }: { params: Params }) {
                     Pokládáme vinylové, PVC, kobercové i dřevěné podlahy. Vyplňte formulář a ozveme se vám s nejbližším volným termínem.
                   </p>
                 </div>
-                <a href="#kontakt" className="btn-primary" style={{ marginTop: 32, padding: '16px 32px' }}><Tlacitko klic="lokalityZamereni" fallback="Chci zaměření zdarma" /></a>
+                <a href="#kontakt" className="btn-primary kraj-cta" style={{ marginTop: 32, padding: '16px 32px' }}><Tlacitko klic="lokalityZamereni" fallback="Chci zaměření zdarma" /></a>
               </div>
               <CeduleGrafika text={mesto.nazev} />
             </div>
@@ -116,7 +116,7 @@ export default async function MestoPage({ params }: { params: Params }) {
             <div className="mapa-grid">
               <div className="kraj-perex">
                 {mesto.okoli.map((odstavec, i) => <p key={i}><Text text={odstavec} /></p>)}
-                <a href="#kontakt" className="btn-primary" style={{ marginTop: 18, padding: '16px 32px' }}><Tlacitko klic="lokalityKonzultace" fallback="Konzultace zdarma" /></a>
+                <a href="#kontakt" className="btn-primary kraj-cta" style={{ marginTop: 18, padding: '16px 32px' }}><Tlacitko klic="lokalityKonzultace" fallback="Konzultace zdarma" /></a>
               </div>
               <MestoMapa kraj={kraj} mesto={mesto} />
             </div>

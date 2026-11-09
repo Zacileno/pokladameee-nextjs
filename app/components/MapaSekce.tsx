@@ -34,7 +34,7 @@ export default function MapaSekce() {
               <a href="#kontakt" style={{ color: 'var(--orange)', textDecoration: 'underline', textUnderlineOffset: 3 }}>Vyplňte náš formulář</a>{' '}
               a my vám dáme vědět, jestli a kdy k vám zvládneme dorazit.
             </p>
-            <a href="#kontakt" className="btn-primary" style={{ padding: '16px 32px' }}><Tlacitko klic="mapa" fallback="Chci zaměření zdarma" /></a>
+            <a href="#kontakt" className="btn-primary mapa-cta" style={{ padding: '16px 32px' }}><Tlacitko klic="mapa" fallback="Chci zaměření zdarma" /></a>
             <div className="mapa-kraje-odkazy">
               {KRAJE.map(k => (
                 <a key={k.slug} href={`/lokality/${k.slug}`}>{k.nazev}</a>

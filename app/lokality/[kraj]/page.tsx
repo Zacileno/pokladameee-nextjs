@@ -66,7 +66,7 @@ export default async function KrajPage({ params }: { params: Promise<{ kraj: str
               <span style={{ color: 'var(--gray-400)' }}> / {kraj.nazev}</span>
             </p>
             <div className="kraj-hero-grid">
-              <div>
+              <div className="kraj-hero-text">
                 <h1 style={{ fontSize: 'clamp(32px, 4.4vw, 50px)', fontWeight: 900, color: 'var(--black)', lineHeight: 1.1, marginBottom: 28 }}>
                   Pokládám<span style={{ color: 'var(--orange)' }}>eee</span> podlahy – {kraj.nazev}
                 </h1>
@@ -83,7 +83,7 @@ export default async function KrajPage({ params }: { params: Promise<{ kraj: str
                     Jezdíme <strong>i do menších obcí</strong>. Vyplňte formulář a ozveme se vám s nejbližším volným termínem.
                   </p>
                 </div>
-                <a href="#kontakt" className="btn-primary" style={{ marginTop: 32, padding: '16px 32px' }}><Tlacitko klic="lokalityZamereni" fallback="Chci zaměření zdarma" /></a>
+                <a href="#kontakt" className="btn-primary kraj-cta" style={{ marginTop: 32, padding: '16px 32px' }}><Tlacitko klic="lokalityZamereni" fallback="Chci zaměření zdarma" /></a>
               </div>
               <CeduleGrafika text={kraj.nazev} />
             </div>

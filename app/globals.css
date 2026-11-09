@@ -205,7 +205,7 @@ input, select, textarea { font-family: var(--font); }
 /* ── MAPA KRAJŮ (homepage) ── */
 .mapa-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 56px; align-items: center; }
 .mapa-svg { width: 100%; height: auto; display: block; overflow: visible; }
-.mapa-kraj { fill: var(--orange-light); stroke: white; stroke-width: 1.2; stroke-linejoin: round; }
+.mapa-kraj { fill: #FFD6A8; stroke: white; stroke-width: 1.2; stroke-linejoin: round; }
 .mapa-kraj-aktivni { fill: var(--orange); transition: fill 0.2s; }
 .mapa-kraj-odkaz { cursor: pointer; }
 .mapa-kraj-odkaz:hover .mapa-kraj-aktivni, .mapa-kraj-odkaz:focus-visible .mapa-kraj-aktivni { fill: var(--blue-dark); }
@@ -634,4 +634,29 @@ a.kraj-mesto:hover { color: var(--orange); box-shadow: 0 4px 16px rgba(255,136,0
 
   /* kariéra — benefity po dvou vedle sebe */
   .kariera-benefity-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── MAPA + LOKALITY: mobil (vzor žaluzieee / malujemeee) ── */
+.mapa-kraj-odkaz { -webkit-tap-highlight-color: transparent; }
+@media (max-width: 900px) {
+  /* mapa na úvodu a podstránkách: větší mapa, velké tlačítko, kraje jako dlaždice na tap */
+  .mapa-svg { width: calc(100% + 16px); margin: 0 -8px; }
+  .mapa-cta { display: flex; width: 100%; justify-content: center; }
+  .mapa-kraje-odkazy { flex-direction: column; gap: 10px; margin-top: 20px; }
+  .mapa-kraje-odkazy a { display: flex; align-items: center; justify-content: space-between; min-height: 52px; padding: 0 20px; background: var(--gray-50); border-radius: 12px; font-size: 16px; color: var(--black); text-decoration: none; }
+  .mapa-kraje-odkazy a::after { content: '→'; color: var(--orange); font-size: 20px; }
+
+  /* kraj + město: nadpis → Adam s cedulí → text → tlačítko */
+  .kraj-hero-grid { gap: 0; }
+  .kraj-hero-text { display: contents; }
+  .kraj-hero-grid h1 { order: 1; margin-bottom: 8px !important; }
+  .kraj-hero-grid .cedule-grafika { order: 2; max-width: 300px; margin-bottom: 24px; }
+  .kraj-hero-grid .kraj-perex { order: 3; }
+  .kraj-cta { order: 4; display: flex; width: 100%; justify-content: center; }
+
+  /* seznam měst: řádky přes celou šířku se šipkou */
+  .kraj-mesta-grid { grid-template-columns: 1fr; }
+  .mesto-dalsi-grid .kraj-mesto { flex-basis: 100%; }
+  a.kraj-mesto { display: flex; align-items: center; justify-content: space-between; min-height: 52px; padding: 0 20px; font-size: 16px; text-align: left; }
+  a.kraj-mesto::after { content: '→'; color: var(--orange); font-size: 20px; }
 }
