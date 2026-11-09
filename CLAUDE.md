@@ -320,6 +320,8 @@ Tlačítka: text je vždy v dokumentu dané stránky nebo sekce, tlačítka bez 
 
 `faqStranka` (FAQ): hlavička `/faq`, štítky a nadpisy sekcí a obecné otázky. Otázky ke službám zůstávají v dokumentech „Podstránka: X“.
 
+`prubehRealizaceStranka` (Průběh realizace): texty `/prubeh-realizace` podle Adamova podkladu (29. 10. 2026). Kapitoly a bloky jsou seznamy (šetří limit atributů), bloky s číslem kroku tvoří přehled cesty zakázky nahoře. Výchozí texty a fallback: `lib/prubeh-realizace.ts`. Volitelné fotky ke každé kapitole.
+
 Kolekce (více dokumentů): `projekt`, `inspirace`, `akce`, `reference`, `blogPost`, `karierniPozice`
 
 ---

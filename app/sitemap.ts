@@ -15,6 +15,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: 'https://www.pokladameee.cz/inspirace', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
     { url: 'https://www.pokladameee.cz/sluzby/vinylova-podlaha', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.9 },
     { url: 'https://www.pokladameee.cz/faq', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
+    { url: 'https://www.pokladameee.cz/prubeh-realizace', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
     { url: 'https://www.pokladameee.cz/kariera', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
     { url: 'https://www.pokladameee.cz/kariera/podlahar-vinylove-podlahy-msk', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.6 },
     { url: 'https://www.pokladameee.cz/kariera/obchodne-technicky-zastupce-msk', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.6 },

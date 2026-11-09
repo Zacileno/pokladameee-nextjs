@@ -35,6 +35,7 @@ const HLAVNI_LINKS: [string, string][] = [
 const VEDLEJSI_LINKS: [string, string][] = [
   ['/o-nas', 'O nás'],
   ['/#jak-to-funguje', 'Jak to funguje'],
+  ['/prubeh-realizace', 'Průběh realizace'],
   ['/#reference', 'Reference'],
   ['/faq', 'FAQ'],
   ['/kariera', 'Kariéra'],
