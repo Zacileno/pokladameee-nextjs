@@ -24,6 +24,9 @@ export type PrubehRealizaceStranka = {
   fakta?: PrubehFakt[]
   prehledNadpis?: string
   prehledText?: string
+  dobreVedetNadpis?: string
+  pokladkaNadpis?: string
+  pokladkaText?: string
   kapitoly?: PrubehKapitola[]
   ctaNadpis?: string
   ctaText?: string
@@ -63,7 +66,10 @@ Konkrétní práce a související služby vždy pojmenujeme v nabídce, abyste 
     { _key: key(), _type: 'fakt', nadpis: 'Služba od A do Z', text: 'Koordinujeme celý dohodnutý rozsah, od výběru po předání.' },
   ],
   prehledNadpis: 'Cesta zakázky od zavolání po předání',
-  prehledText: 'Dvanáct kroků, kterými vás provedeme. Kliknutím na krok se dostanete k podrobnostem.',
+  prehledText: 'Dvanáct kroků, kterými vás provedeme. Klikněte na číslo kroku nebo použijte šipky.',
+  dobreVedetNadpis: 'Dobré vědět',
+  pokladkaNadpis: 'Co obnáší profesionální pokládka',
+  pokladkaText: 'Podívejte se, co se u vás doma děje od odkrytí staré podlahy až po poslední lištu.',
   kapitoly: [
     kapitola(C1, 'Co zahrnuje profesionální pokládka', '', [
       blok('Nejdříve zjistíme, co je pod podlahou', `

@@ -79,10 +79,13 @@ export const prubehRealizaceStrankaSchema = defineType({
     }),
     defineField({ name: 'prehledNadpis', title: 'Přehled kroků: nadpis', type: 'string', group: 'uvod' }),
     defineField({ name: 'prehledText', title: 'Přehled kroků: text', type: 'text', rows: 2, group: 'uvod' }),
+    defineField({ name: 'dobreVedetNadpis', title: 'Nadpis karet „Dobré vědět“', type: 'string', group: 'kapitoly' }),
+    defineField({ name: 'pokladkaNadpis', title: 'Profesionální pokládka: nadpis sekce', type: 'string', group: 'kapitoly' }),
+    defineField({ name: 'pokladkaText', title: 'Profesionální pokládka: text pod nadpisem', type: 'text', rows: 2, group: 'kapitoly' }),
     defineField({
       name: 'kapitoly',
       title: 'Kapitoly',
-      description: 'Každá kapitola je samostatný pruh stránky. Bloky s vyplněným číslem kroku se automaticky zobrazí i v přehledu kroků nahoře.',
+      description: 'Kapitoly s číslovanými kroky tvoří posuvník „Cesta zakázky“ (bloky bez čísla se ukážou jako karty „Dobré vědět“). Kapitoly bez čísel jsou témata v sekci „Profesionální pokládka“ (bloky = rozbalovací řádky).',
       type: 'array',
       group: 'kapitoly',
       of: [{
@@ -94,8 +97,8 @@ export const prubehRealizaceStrankaSchema = defineType({
           odstavce('uvod', 'Úvodní text kapitoly (nepovinné)'),
           defineField({
             name: 'fotky',
-            title: 'Fotky z realizace (nepovinné)',
-            description: 'Ideálně fotky jedné zakázky: původní stav, odkrytý podklad, nivelace, lišty, předání.',
+            title: 'Fotka kapitoly (nepovinné)',
+            description: 'Zobrazí se první fotka (u témat profesionální pokládky). Bez fotky se použije výchozí fotka z realizací.',
             type: 'array',
             of: [{
               type: 'image',
