@@ -205,10 +205,10 @@ input, select, textarea { font-family: var(--font); }
 /* ── MAPA KRAJŮ (homepage) ── */
 .mapa-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 56px; align-items: center; }
 .mapa-svg { width: 100%; height: auto; display: block; overflow: visible; }
-.mapa-kraj { fill: var(--orange-light); stroke: var(--orange); stroke-width: 1.2; stroke-linejoin: round; }
-.mapa-kraj-aktivni { transition: fill 0.2s; }
+.mapa-kraj { fill: var(--orange-light); stroke: white; stroke-width: 1.2; stroke-linejoin: round; }
+.mapa-kraj-aktivni { fill: var(--orange); transition: fill 0.2s; }
 .mapa-kraj-odkaz { cursor: pointer; }
-.mapa-kraj-odkaz:hover .mapa-kraj-aktivni, .mapa-kraj-odkaz:focus-visible .mapa-kraj-aktivni { fill: var(--orange); }
+.mapa-kraj-odkaz:hover .mapa-kraj-aktivni, .mapa-kraj-odkaz:focus-visible .mapa-kraj-aktivni { fill: var(--blue-dark); }
 .mapa-kraje-odkazy { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 20px; margin-top: 28px; }
 .mapa-kraje-odkazy a { font-size: 14px; font-weight: 700; color: var(--gray-700); text-decoration: underline; text-underline-offset: 3px; }
 .mapa-kraje-odkazy a:hover { color: var(--orange); }
