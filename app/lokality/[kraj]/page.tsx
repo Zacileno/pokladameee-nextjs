@@ -63,6 +63,8 @@ export default async function KrajPage({ params }: { params: Promise<{ kraj: str
           <div className="container">
             <p style={{ fontSize: 14, fontWeight: 600, marginBottom: 20 }}>
               <a href="/" style={{ color: 'var(--orange)' }}>Domů</a>
+              <span style={{ color: 'var(--gray-400)' }}> / </span>
+              <a href="/lokality" style={{ color: 'var(--orange)' }}>Lokality</a>
               <span style={{ color: 'var(--gray-400)' }}> / {kraj.nazev}</span>
             </p>
             <div className="kraj-hero-grid">

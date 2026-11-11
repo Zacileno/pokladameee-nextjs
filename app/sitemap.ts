@@ -22,6 +22,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: 'https://www.pokladameee.cz/kariera/vedouci-pokladkove-party-msk', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.6 },
     { url: 'https://www.pokladameee.cz/kariera/koordinator-zakazek-msk', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.6 },
     { url: 'https://www.pokladameee.cz/blog', lastModified: new Date(), changeFrequency: 'weekly', priority: 0.8 },
+    { url: 'https://www.pokladameee.cz/lokality', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     ...KRAJE.flatMap(k => [
       { url: `https://www.pokladameee.cz/lokality/${k.slug}`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.7 },
       ...k.mesta.map(m => ({
