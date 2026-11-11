@@ -1,3 +1,5 @@
+import BrandIcon from './BrandIcon'
+
 type Ikonka = {
   emoji?: string
   title?: string
@@ -25,7 +27,7 @@ export default function VyhodySekce({ ikonky }: Props) {
         <div className="vyhody-lista">
           {items.map((item, i) => (
             <div key={i} className="vyhody-item">
-              <div style={{ fontSize: 28, marginBottom: 8, lineHeight: 1 }}>{item.emoji}</div>
+              <div style={{ marginBottom: 8, lineHeight: 1 }}><BrandIcon emoji={item.emoji} size={52} /></div>
               <div style={{ fontWeight: 800, fontSize: 14, marginBottom: 3, color: 'var(--black)' }}>{item.title}</div>
               <div style={{ fontSize: 12, color: 'var(--gray-400)', lineHeight: 1.4 }}>{item.sub}</div>
             </div>

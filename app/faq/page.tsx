@@ -3,6 +3,7 @@ import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 import KontaktSekce from '@/app/components/KontaktSekce'
 import JsonLd from '@/app/components/JsonLd'
+import FormatovanyText from '@/app/components/FormatovanyText'
 import FaqItem from './FaqItem'
 import {
   client,
@@ -11,6 +12,7 @@ import {
   KOBERCOVA_PODLAHA_QUERY,
   DREVENA_PODLAHA_QUERY,
   KONTAKT_SEKCE_QUERY,
+  FAQ_STRANKA_QUERY,
 } from '@/lib/sanity'
 
 export const revalidate = 0
@@ -26,7 +28,27 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://www.pokladameee.cz/faq' },
 }
 
-type FaqEntry = { otazka?: string; odpoved?: string }
+type RT = Parameters<typeof FormatovanyText>[0]['value']
+
+type FaqEntry = { _key?: string; otazka?: RT; odpoved?: RT }
+
+type SekceTexty = { stitek?: RT; nadpis?: RT }
+
+type FaqStranka = {
+  nadpisMaly?: RT
+  nadpis?: RT
+  podnadpis?: RT
+  obecne?: SekceTexty
+  otazky?: FaqEntry[]
+  vinyl?: SekceTexty
+  pvc?: SekceTexty
+  koberce?: SekceTexty
+  drevo?: SekceTexty
+}
+
+// strukturovaná data (JSON-LD) potřebují prostý text bez formátování
+const prostyText = (value: RT): string =>
+  typeof value === 'string' ? value : (value?.[0]?.children || []).map(c => c.text).join('')
 
 const OBECNE: FaqEntry[] = [
   { otazka: 'Jak rychle k vám přijedete?', odpoved: 'Po poptávce vás navštívíme do 48 hodin. Prostor profesionálně zaměříme, zhodnotíme stav podkladu a rovnou na místě vám podlahu naceníme.' },
@@ -34,7 +56,7 @@ const OBECNE: FaqEntry[] = [
   { otazka: 'Řešíte i demontáž staré podlahy a odpad?', odpoved: 'Ano. Starou podlahu odborně odstraníme a odpad ekologicky zlikvidujeme — nemusíte shánět kontejner ani další firmu.' },
   { otazka: 'Co všechno je součástí ceny?', odpoved: 'Zaměření, konzultaci, materiál, přípravu podkladu, demontáž staré podlahy, pokládku i úklid po sobě. Podlahu řešíme kompletně od A do Z.' },
   { otazka: 'Máte na práci záruku?', odpoved: 'Ano, na odvedenou práci poskytujeme záruku. Pokud se cokoliv objeví, voláte přímo nás — neposíláme vás mezi výrobce, dodavatele a řemeslníky.' },
-  { otazka: 'Působíte v celém Moravskoslezském kraji?', odpoved: 'Ano, jezdíme po celém MSK — Ostrava, Opava, Frýdek-Místek, Havířov a okolí. Pokládáme také ve Zlínském a Olomouckém kraji.' },
+  { otazka: 'Kde všude pokládáte?', odpoved: 'Jezdíme po celém Moravskoslezském, Zlínském a Olomouckém kraji — například Ostrava, Opava, Frýdek-Místek, Havířov, Zlín nebo Olomouc a okolí.' },
 ]
 
 const VINYL_FALLBACK: FaqEntry[] = [
@@ -69,37 +91,34 @@ const DREVO_FALLBACK: FaqEntry[] = [
   { otazka: 'Jak se dřevěná podlaha udržuje?', odpoved: 'Pravidelné vysávání nebo zametání, otírání mírně navlhčeným hadrem. Jednou za čas doporučujeme obnovu oleje nebo laku. Vyvarujte se stojaté vodě a agresivním čisticím prostředkům.' },
 ]
 
-const KATEGORIE = [
-  { id: 'obecne', label: 'Obecné' },
-  { id: 'vinyl', label: 'Vinyl' },
-  { id: 'pvc', label: 'PVC' },
-  { id: 'koberce', label: 'Koberce' },
-  { id: 'drevo', label: 'Dřevo' },
-]
-
 export default async function FaqPage() {
   let vinylData: { faq?: FaqEntry[] } | null = null
   let pvcData: { faq?: FaqEntry[] } | null = null
   let kobercovaData: { faq?: FaqEntry[] } | null = null
   let drevenaData: { faq?: FaqEntry[] } | null = null
   let kontaktSekce: any = null
+  // texty stránky ze Sanity (FAQ); prázdné pole = výchozí text
+  let stranka: FaqStranka | null = null
 
   try {
-    ;[vinylData, pvcData, kobercovaData, drevenaData, kontaktSekce] = await Promise.all([
+    ;[vinylData, pvcData, kobercovaData, drevenaData, kontaktSekce, stranka] = await Promise.all([
       client.fetch(VINYLOVA_PODLAHA_QUERY),
       client.fetch(PVC_PODLAHA_QUERY),
       client.fetch(KOBERCOVA_PODLAHA_QUERY),
       client.fetch(DREVENA_PODLAHA_QUERY),
       client.fetch(KONTAKT_SEKCE_QUERY),
+      client.fetch<FaqStranka | null>(FAQ_STRANKA_QUERY),
     ])
   } catch {}
 
+  const obecne = (stranka?.otazky || []).filter(f => prostyText(f.otazka))
+
   const sekce = [
-    { id: 'obecne', nadpis: 'Obecné otázky', faq: OBECNE },
-    { id: 'vinyl', nadpis: 'Vinylová podlaha', faq: vinylData?.faq?.length ? vinylData.faq : VINYL_FALLBACK },
-    { id: 'pvc', nadpis: 'PVC podlaha', faq: pvcData?.faq?.length ? pvcData.faq : PVC_FALLBACK },
-    { id: 'koberce', nadpis: 'Koberce', faq: kobercovaData?.faq?.length ? kobercovaData.faq : KOBERCE_FALLBACK },
-    { id: 'drevo', nadpis: 'Dřevěná podlaha', faq: drevenaData?.faq?.length ? drevenaData.faq : DREVO_FALLBACK },
+    { id: 'obecne', label: 'Obecné', nadpis: 'Obecné otázky', texty: stranka?.obecne, faq: obecne.length ? obecne : OBECNE },
+    { id: 'vinyl', label: 'Vinyl', nadpis: 'Vinylová podlaha', texty: stranka?.vinyl, faq: vinylData?.faq?.length ? vinylData.faq : VINYL_FALLBACK },
+    { id: 'pvc', label: 'PVC', nadpis: 'PVC podlaha', texty: stranka?.pvc, faq: pvcData?.faq?.length ? pvcData.faq : PVC_FALLBACK },
+    { id: 'koberce', label: 'Koberce', nadpis: 'Koberce', texty: stranka?.koberce, faq: kobercovaData?.faq?.length ? kobercovaData.faq : KOBERCE_FALLBACK },
+    { id: 'drevo', label: 'Dřevo', nadpis: 'Dřevěná podlaha', texty: stranka?.drevo, faq: drevenaData?.faq?.length ? drevenaData.faq : DREVO_FALLBACK },
   ]
 
   const faqJsonLd = {
@@ -107,8 +126,8 @@ export default async function FaqPage() {
     '@type': 'FAQPage',
     mainEntity: sekce.flatMap(s => s.faq).map((f: FaqEntry) => ({
       '@type': 'Question',
-      name: f.otazka || '',
-      acceptedAnswer: { '@type': 'Answer', text: f.odpoved || '' },
+      name: prostyText(f.otazka),
+      acceptedAnswer: { '@type': 'Answer', text: prostyText(f.odpoved) },
     })),
   }
 
@@ -118,25 +137,25 @@ export default async function FaqPage() {
       <Header opaque />
 
       {/* HERO */}
-      <section style={{ background: 'var(--blue)', paddingTop: 140, paddingBottom: 64 }}>
+      <section style={{ background: 'var(--blue)', paddingTop: 'calc(140px + var(--hlavicka-navic))', paddingBottom: 64 }}>
         <div className="container">
           <p style={{ fontSize: 13, fontWeight: 600, letterSpacing: '2px', color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', marginBottom: 16 }}>
-            Časté otázky
+            <FormatovanyText value={stranka?.nadpisMaly} fallback="Časté otázky" />
           </p>
           <h1 style={{ fontSize: 'clamp(32px, 5vw, 48px)', fontWeight: 900, color: 'white', lineHeight: 1.1, marginBottom: 16, maxWidth: 700 }}>
-            Co lidé nejčastěji řeší, než si u nás objednají podlahu
+            <FormatovanyText value={stranka?.nadpis} fallback="Co lidé nejčastěji řeší, než si u nás objednají podlahu" />
           </h1>
           <p style={{ fontSize: 17, color: 'rgba(255,255,255,0.8)', lineHeight: 1.7, maxWidth: 600, marginBottom: 32 }}>
-            Nenašli jste odpověď? Zavolejte nebo napište — poradíme přímo na míru vašemu prostoru.
+            <FormatovanyText value={stranka?.podnadpis} fallback="Nenašli jste odpověď? Zavolejte nebo napište — poradíme přímo na míru vašemu prostoru." />
           </p>
           <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-            {KATEGORIE.map(k => (
+            {sekce.map(k => (
               <a key={k.id} href={`#${k.id}`} style={{
                 background: 'rgba(255,255,255,0.12)', color: 'white', fontWeight: 700, fontSize: 14,
                 padding: '8px 18px', borderRadius: 100, border: '1px solid rgba(255,255,255,0.25)',
                 textDecoration: 'none',
               }}>
-                {k.label}
+                <FormatovanyText value={k.texty?.stitek} fallback={k.label} />
               </a>
             ))}
           </div>
@@ -145,12 +164,16 @@ export default async function FaqPage() {
 
       {/* FAQ SEKCE */}
       {sekce.map((s, i) => (
-        <section key={s.id} id={s.id} className="section" style={{ background: i % 2 === 0 ? 'var(--gray-50)' : 'white', scrollMarginTop: 90 }}>
+        <section key={s.id} id={s.id} className="section" style={{ background: i % 2 === 0 ? 'var(--gray-50)' : 'white', scrollMarginTop: 'calc(90px + var(--hlavicka-navic))' }}>
           <div className="container" style={{ maxWidth: 760 }}>
-            <h2 className="section-title" style={{ marginBottom: 32 }}>{s.nadpis}</h2>
+            <h2 className="section-title" style={{ marginBottom: 32 }}><FormatovanyText value={s.texty?.nadpis} fallback={s.nadpis} /></h2>
             <div className="faq-list">
               {s.faq.map((f: FaqEntry, idx: number) => (
-                <FaqItem key={f.otazka || idx} otazka={f.otazka || ''} odpoved={f.odpoved || ''} />
+                <FaqItem
+                  key={f._key || idx}
+                  otazka={<FormatovanyText value={f.otazka} fallback={null} />}
+                  odpoved={<FormatovanyText value={f.odpoved} fallback={null} />}
+                />
               ))}
             </div>
           </div>

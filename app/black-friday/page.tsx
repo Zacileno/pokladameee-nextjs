@@ -6,8 +6,11 @@ import Footer from '@/app/components/Footer'
 import KontaktSekce from '@/app/components/KontaktSekce'
 import Odpocet from '@/app/components/Odpocet'
 import FormatovanyText from '@/app/components/FormatovanyText'
+import BrandIcon from '@/app/components/BrandIcon'
+import YouTubeVideo from '@/app/components/YouTubeVideo'
+import { youtubeId } from '@/lib/videa'
 import AkcePopup from './AkcePopup'
-import { BF_KONEC } from '@/lib/black-friday'
+import { BF_KONEC, bfPredZacatkem } from '@/lib/black-friday'
 import { client, HERO_SEKCE_QUERY, VINYLOVA_PODLAHA_QUERY, PVC_PODLAHA_QUERY, KOBERCOVA_PODLAHA_QUERY, DREVENA_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY, BLACK_FRIDAY_QUERY } from '@/lib/sanity'
 
 export const revalidate = 0
@@ -28,6 +31,9 @@ type BlackFridayData = {
   heroTlacitkoSekundarni?: RT
   heroFotkaUrl?: string
   bannerObrazekUrl?: string
+  videoYoutube?: string
+  konecAkce?: string
+  zacatekAkce?: string
   videoNadpis?: RT
   body?: { titul?: RT; text?: RT }[]
   odstavec?: RT
@@ -60,6 +66,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title: `${title} | pokládámeee.cz`,
       description: 'Sleva 25 % na vinylové, PVC, dřevěné podlahy i koberce. Zaměření zdarma.',
       url: 'https://www.pokladameee.cz/black-friday',
+      // Náhled = stejný banner jako na stránce; ze Sanity jako JPG (PNG má ~500 kB, WhatsApp bere jen menší)
+      images: [{
+        url: data.bannerObrazekUrl ? `${data.bannerObrazekUrl}?w=700&fm=jpg&q=85` : '/assets/black-friday-popup.jpg',
+        width: 700,
+        height: 633,
+        alt: 'Black Friday jeee tady! 25 % sleva',
+      }],
     },
     alternates: { canonical: 'https://www.pokladameee.cz/black-friday' },
   }
@@ -105,6 +118,7 @@ export default async function BlackFridayPage() {
   } catch {}
 
   const bannerObrazekUrl = data.bannerObrazekUrl || BANNER_FALLBACK
+  const videoId = youtubeId(data.videoYoutube)
   const body = data.body?.length ? data.body : BODY_FALLBACK
 
   return (
@@ -122,7 +136,9 @@ export default async function BlackFridayPage() {
 
           <div className="container" style={{ position: 'relative', zIndex: 2, width: '100%', textAlign: 'center' }}>
             <div className="bf-odpocet-obal">
-              <Odpocet konec={BF_KONEC} />
+              {bfPredZacatkem(data.zacatekAkce)
+                ? <Odpocet konec={data.zacatekAkce!} popisek="Akce začíná za" />
+                : <Odpocet konec={data.konecAkce || BF_KONEC} />}
             </div>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,136,0,0.15)', border: '1px solid rgba(255,136,0,0.35)', borderRadius: 100, padding: '6px 16px', marginBottom: 24 }}>
               <span style={{ width: 8, height: 8, background: 'var(--orange)', borderRadius: '50%', display: 'inline-block' }} />
@@ -139,10 +155,10 @@ export default async function BlackFridayPage() {
             </p>
             <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
               <a href="#bfprodukty" className="btn-primary" style={{ fontSize: 17, padding: '15px 32px' }}>
-                <FormatovanyText value={data.heroTlacitko} fallback="Podlahy v akci ↓" />
+                <span><FormatovanyText value={data.heroTlacitko} fallback="Podlahy v akci ↓" /></span>
               </a>
               <a href="#kontakt" className="btn-primary" style={{ fontSize: 17, padding: '15px 32px', background: '#154C86' }}>
-                <FormatovanyText value={data.heroTlacitkoSekundarni} fallback="ZAMĚŘENÍ ZDARMA" />
+                <span><FormatovanyText value={data.heroTlacitkoSekundarni} fallback="ZAMĚŘENÍ ZDARMA" /></span>
               </a>
             </div>
           </div>
@@ -152,9 +168,13 @@ export default async function BlackFridayPage() {
         <section className="section" style={{ background: 'white' }}>
           <div className="container">
             <div className="bf-video-grid">
-              <div className="bf-video-placeholder" style={{ aspectRatio: '700/633', position: 'relative', overflow: 'hidden' }}>
-                <Image src={bannerObrazekUrl} alt="Black Friday jeee tady! 25 % sleva" fill unoptimized style={{ objectFit: 'cover', objectPosition: 'center' }} />
-              </div>
+              {videoId ? (
+                <YouTubeVideo id={videoId} nazev="Black Friday — Pokládámeee" nahled={bannerObrazekUrl} pomer="700 / 633" />
+              ) : (
+                <div className="bf-video-placeholder" style={{ aspectRatio: '700/633', position: 'relative', overflow: 'hidden' }}>
+                  <Image src={bannerObrazekUrl} alt="Black Friday jeee tady! 25 % sleva" fill unoptimized style={{ objectFit: 'cover', objectPosition: 'center' }} />
+                </div>
+              )}
 
               <div>
                 <h2 className="section-title" style={{ fontSize: 'clamp(28px, 3.4vw, 44px)' }}>
@@ -175,7 +195,7 @@ export default async function BlackFridayPage() {
                   <FormatovanyText value={data.zvyrazenyText} fallback="BLACK FRIDAY = nová podlaha za méně peněz. Starosti necháte na nás." />
                 </p>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 24, flexWrap: 'wrap' }}>
-                  <AkcePopup label={<FormatovanyText value={data.ctaPopupText} fallback="Využít akci →" />} />
+                  <AkcePopup label={<FormatovanyText value={data.ctaPopupText} fallback="Využít akci" />} />
                   <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                     <Image src={adamFotoUrl} alt="Adam Hajdušek" width={52} height={52} unoptimized style={{ borderRadius: '50%', objectFit: 'cover', objectPosition: 'center top', border: '2px solid var(--orange)', flexShrink: 0 }} />
                     <span style={{ fontWeight: 800, fontSize: 15, color: 'var(--blue)' }}>
@@ -189,7 +209,7 @@ export default async function BlackFridayPage() {
         </section>
 
         {/* ── PRODUKTY V AKCI ── */}
-        <section id="bfprodukty" className="section" style={{ background: 'var(--blue)', scrollMarginTop: 72 }}>
+        <section id="bfprodukty" className="section" style={{ background: 'var(--blue)', scrollMarginTop: 'calc(72px + var(--hlavicka-navic))' }}>
           <div className="container">
             <h2 className="section-title" style={{ color: 'white', textAlign: 'center', marginBottom: 48 }}>
               <FormatovanyText value={data.produktyNadpis} fallback="V Black Friday náladě jsou všechny podlahy" />
@@ -211,8 +231,9 @@ export default async function BlackFridayPage() {
               ))}
             </div>
 
-            <p style={{ color: 'rgba(255,255,255,0.65)', textAlign: 'center', marginTop: 40 }}>
-              📍 <FormatovanyText value={data.zdarmaPopisek} fallback="Pokládáme v celém Moravskoslezském, Zlínském a Olomouckém kraji" />
+            <p style={{ color: 'rgba(255,255,255,0.65)', marginTop: 40, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, flexWrap: 'wrap', textAlign: 'center' }}>
+              <BrandIcon emoji="📍" size={32} tone="onBlue" />
+              <span><FormatovanyText value={data.zdarmaPopisek} fallback="Pokládáme v celém Moravskoslezském, Zlínském a Olomouckém kraji" /></span>
             </p>
           </div>
         </section>

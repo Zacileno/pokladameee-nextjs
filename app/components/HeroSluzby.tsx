@@ -30,7 +30,7 @@ export default function HeroSluzby({ nadpis, podnadpis, ctaText = 'Nezávazná k
           onMouseEnter={e => (e.currentTarget.style.transform = 'translateY(-1px)')}
           onMouseLeave={e => (e.currentTarget.style.transform = 'none')}
         >
-          {ctaText} →
+          {ctaText}
         </a>
       </div>
     </section>

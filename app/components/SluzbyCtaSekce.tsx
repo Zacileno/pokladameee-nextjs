@@ -37,7 +37,7 @@ export default function SluzbyCtaSekce({
             onMouseEnter={e => { e.currentTarget.style.background = '#e67a00'; e.currentTarget.style.transform = 'translateY(-1px)' }}
             onMouseLeave={e => { e.currentTarget.style.background = '#FF8800'; e.currentTarget.style.transform = 'none' }}
           >
-            Napište nám →
+            Napište nám
           </a>
         </div>
       </div>

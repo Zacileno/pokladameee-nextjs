@@ -1,8 +1,9 @@
+import Tlacitko from '@/app/components/Tlacitko'
 import Link from 'next/link'
 import Image from 'next/image'
 
 export const metadata = {
-  title: 'Stránka nenalezena — pokládámeee.cz',
+  title: 'Stránka nenalezena',
   robots: { index: false, follow: true },
 }
 
@@ -24,7 +25,7 @@ export default function NotFound() {
           Stránka, kterou hledáte, neexistuje nebo byla přesunuta. Zkuste se vrátit na hlavní stránku, nebo nám rovnou zavolejte.
         </p>
         <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 28 }}>
-          <Link href="/" className="btn-primary" style={{ fontSize: 16, padding: '13px 28px' }}>← Zpět na hlavní stránku</Link>
+          <Link href="/" className="btn-primary" style={{ fontSize: 16, padding: '13px 28px' }}><Tlacitko klic="notFoundZpet" fallback="← Zpět na hlavní stránku" /></Link>
           <a href="tel:+420790388487" className="btn-secondary" style={{ fontSize: 16, padding: '12px 28px', background: 'var(--blue)', color: 'white', borderRadius: 'var(--radius)', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
             📞 +420 790 388 487
           </a>

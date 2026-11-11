@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import KontaktForm from '../components/KontaktForm'
 
 // Tlačítko "Využít akci" — stejně jako na Žaluzieee otevře vyskakovací okno s poptávkovým formulářem
-export default function AkcePopup({ label = 'Využít akci →' }: { label?: React.ReactNode }) {
+export default function AkcePopup({ label = 'Využít akci' }: { label?: React.ReactNode }) {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
@@ -20,7 +20,7 @@ export default function AkcePopup({ label = 'Využít akci →' }: { label?: Rea
   return (
     <>
       <button type="button" className="btn-primary" style={{ fontSize: 17, padding: '15px 32px' }} onClick={() => setOpen(true)}>
-        {label}
+        <span>{label}</span>
       </button>
 
       {open && (

@@ -126,7 +126,7 @@ export default async function RemeselnikSekce({ data }: { data?: RodinaData }) {
                     {p.hodnoceni && <Hvezdicky pocet={p.hodnoceni} accent={accent} />}
                     {p.hodnoceni && (
                       <span style={{ color: '#111', fontSize: 15, fontWeight: 800 }}>
-                        {p.hodnoceni.toFixed(1)}
+                        {p.hodnoceni.toFixed(1).replace('.', ',')}
                       </span>
                     )}
                     {p.pocetKlientu && (
@@ -136,10 +136,16 @@ export default async function RemeselnikSekce({ data }: { data?: RodinaData }) {
                     )}
                   </div>
 
+                  {/* Fotka řemeslníka na mobilu — mezi hodnocením a tlačítkem */}
+                  {p.fotkaUrl && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={p.fotkaUrl} alt="" className="projekt-karta-foto-mobil" />
+                  )}
+
                   {/* CTA tlačítko */}
                   <a href={p.url} target="_blank" rel="noopener noreferrer" className="rem-pruh-btn"
                     style={{ background: btnBg, color: btnColor }}>
-                    {p.url.replace(/https?:\/\//, '').replace(/\/$/, '')} →
+                    {p.url.replace(/https?:\/\//, '').replace(/\/$/, '')}
                   </a>
                 </div>
 

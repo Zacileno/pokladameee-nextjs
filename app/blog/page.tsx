@@ -4,7 +4,8 @@ import Footer from '@/app/components/Footer'
 import KontaktSekce from '@/app/components/KontaktSekce'
 import BlogCard, { type BlogPostSummary } from './BlogCard'
 import Pagination from './Pagination'
-import { client, BLOG_POSTS_QUERY, KONTAKT_SEKCE_QUERY } from '@/lib/sanity'
+import { client, BLOG_POSTS_QUERY, BLOG_STRANKA_QUERY, KONTAKT_SEKCE_QUERY } from '@/lib/sanity'
+import FormatovanyText from '@/app/components/FormatovanyText'
 import { BLOG_FALLBACK_POSTS } from '@/lib/blog-fallback'
 
 export const revalidate = 0
@@ -40,6 +41,12 @@ export default async function BlogPage({
     kontaktSekce = await client.fetch(KONTAKT_SEKCE_QUERY)
   } catch {}
 
+  // texty stránky ze Sanity (Blog — stránka); prázdné pole = výchozí text
+  let stranka: Record<string, Parameters<typeof FormatovanyText>[0]['value']> | null = null
+  try {
+    stranka = await client.fetch(BLOG_STRANKA_QUERY)
+  } catch {}
+
   const allPosts: BlogPostSummary[] = posts?.length
     ? posts
     : BLOG_FALLBACK_POSTS.map(p => ({
@@ -58,16 +65,16 @@ export default async function BlogPage({
     <>
       <Header opaque />
 
-      <section style={{ background: 'var(--blue)', paddingTop: 140, paddingBottom: 64 }}>
+      <section style={{ background: 'var(--blue)', paddingTop: 'calc(140px + var(--hlavicka-navic))', paddingBottom: 64 }}>
         <div className="container">
           <p style={{ fontSize: 13, fontWeight: 600, letterSpacing: '2px', color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', marginBottom: 16 }}>
-            Blog
+            <FormatovanyText value={stranka?.stitek} fallback="Blog" />
           </p>
           <h1 style={{ fontSize: 'clamp(32px, 5vw, 48px)', fontWeight: 900, color: 'white', lineHeight: 1.1, marginBottom: 16, maxWidth: 700 }}>
-            Rady a tipy k podlahám z naší praxe
+            <FormatovanyText value={stranka?.nadpis} fallback="Rady a tipy k podlahám z naší praxe" />
           </h1>
           <p style={{ fontSize: 17, color: 'rgba(255,255,255,0.8)', lineHeight: 1.7, maxWidth: 600 }}>
-            Píšeme o výběru materiálu, pokládce i údržbě — ať víte, do čeho jdete, než si objednáte podlahu.
+            <FormatovanyText value={stranka?.podnadpis} fallback="Píšeme o výběru materiálu, pokládce i údržbě — ať víte, do čeho jdete, než si objednáte podlahu." />
           </p>
         </div>
       </section>
@@ -78,13 +85,13 @@ export default async function BlogPage({
             <>
               <div className="blog-grid">
                 {pagePosts.map((post, i) => (
-                  <BlogCard key={post._id || post.slug || i} post={post} />
+                  <BlogCard key={post._id || post.slug || i} post={post} odkazText={stranka?.odkazClanku} />
                 ))}
               </div>
               <Pagination currentPage={safePage} totalPages={totalPages} />
             </>
           ) : (
-            <p style={{ color: 'var(--gray-400)', textAlign: 'center' }}>Zatím tu nejsou žádné články.</p>
+            <p style={{ color: 'var(--gray-400)', textAlign: 'center' }}><FormatovanyText value={stranka?.zadneClanky} fallback="Zatím tu nejsou žádné články." /></p>
           )}
         </div>
       </section>

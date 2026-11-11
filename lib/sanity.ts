@@ -17,12 +17,21 @@ export const INSPIRACE_QUERY = `*[_type == "inspirace"] | order(poradiZobrazeni 
   fotoPred { asset->{ url } }
 }`
 
+export const INSPIRACE_STRANKA_QUERY = `*[_type == "inspiraceStranka"][0] {
+  heroFotka { asset->{ url } },
+  heroNadpis, heroText, heroTlacitko, ikonky[] { emoji, text },
+  realizaceNadpis, realizacePodnadpis, videoNadpis,
+  galerieNadpis, galeriePodnadpis,
+  procNadpis, procKarty[] { emoji, nadpis, text }, procTlacitko, recenzeNadpis
+}`
+
 export const AKCE_QUERY = `*[_type == "akce" && aktivni == true] | order(_createdAt desc) {
   _id, nazev, popis, platnostDo, badge
 }`
 
 export const REFERENCE_QUERY = `*[_type == "recenze" && aktivni == true] | order(_createdAt desc) {
-  _id, jmeno, text, hvezdicky, datum
+  _id, jmeno, text, hvezdicky, datum, lokalita, odkaz,
+  "fotkaUrl": fotka.asset->url
 }`
 
 export const PROJEKTY_QUERY = `*[_type == "projekt" && aktivni == true] | order(_createdAt asc) {
@@ -65,7 +74,7 @@ export const KONTAKT_SEKCE_QUERY = `*[_type == "kontaktSekce"][0] {
   nadpis, podnadpis,
   jmeno, role, citat,
   "fotoUrl": foto.asset->url,
-  telefon, telefonTechnicke, email,
+  telefon, email,
   pracovniDoba, region
 }`
 
@@ -150,11 +159,50 @@ export const KARIERNI_POZICE_DETAIL_QUERY = `*[_type == "karierniPozice" && slug
 
 export const KARIERNI_POZICE_SLUGS_QUERY = `*[_type == "karierniPozice" && aktivni != false]{ "slug": slug.current }`
 
+export const KARIERA_STRANKA_QUERY = `*[_type == "karieraStranka"][0]`
+
+export const CO_POKLADAME_STRANKA_QUERY = `*[_type == "coPokladameStranka"][0]`
+
+export const FAQ_STRANKA_QUERY = `*[_type == "faqStranka"][0]`
+
+export const PRUBEH_REALIZACE_QUERY = `*[_type == "prubehRealizaceStranka"][0]`
+
+export const TLACITKA_QUERY = `{
+  "hlavicka": *[_type == "obecneNastaveni"][0].tlacitkoHlavicka,
+  "video": *[_type == "obecneNastaveni"][0].tlacitkoVideo,
+  "dekujemeZpet": *[_type == "obecneNastaveni"][0].tlacitkoDekujeme,
+  "notFoundZpet": *[_type == "obecneNastaveni"][0].tlacitko404,
+  "mapa": *[_type == "obecneNastaveni"][0].tlacitkoMapa,
+  "lokalityZamereni": *[_type == "obecneNastaveni"][0].tlacitkoLokalityZamereni,
+  "lokalityKonzultace": *[_type == "obecneNastaveni"][0].tlacitkoLokalityKonzultace,
+  "oNasKonzultace": *[_type == "obecneNastaveni"][0].tlacitkoONasKonzultace,
+  "oNasKariera": *[_type == "obecneNastaveni"][0].tlacitkoONasKariera,
+  "oNasKarieraOdkaz": *[_type == "obecneNastaveni"][0].tlacitkoONasKarieraOdkaz,
+  "hero": *[_type == "heroSekce"][0].tlacitko,
+  "sluzbySekce": *[_type == "sluzbySekce"][0].tlacitko,
+  "jakToFunguje": *[_type == "jakToFunguje"][0].tlacitko,
+  "vyhody": *[_type == "procNasVybrat"][0].tlacitko,
+  "formular": *[_type == "kontaktSekce"][0].tlacitkoFormular,
+  "poptavkaVinyl": *[_type == "vinylovaPodlaha"][0].tlacitkoPoptavka,
+  "poptavkaPvc": *[_type == "pvcPodlaha"][0].tlacitkoPoptavka,
+  "poptavkaKoberce": *[_type == "kobercovaPodlaha"][0].tlacitkoPoptavka,
+  "poptavkaDrevo": *[_type == "drevenaPodlaha"][0].tlacitkoPoptavka,
+  "bfPopup": *[_type == "blackFriday"][0].popupTlacitko
+}`
+
+export const BLOG_STRANKA_QUERY = `*[_type == "blogStranka"][0] { stitek, nadpis, podnadpis, odkazClanku, zadneClanky }`
+
+export const SLUZBY_STRANKA_QUERY = `*[_type == "sluzbyStranka"][0] { nadpis, uvodText, uvodOdkaz, kroky[] { emoji, slovo }, vinyl, pvc, koberce, drevo, tlacitkoProdukt, ikonky[] { emoji, text } }`
+
+export const BF_TERMIN_QUERY = `*[_type == "blackFriday"][0] { konecAkce, zacatekAkce }`
+
 export const BLACK_FRIDAY_QUERY = `*[_type == "blackFriday"][0] {
+  konecAkce, zacatekAkce,
   topBarOznaceni, topBarSleva, topBarZbytek, topBarDovetek, topBarCta,
   heroBadge, heroSleva, heroNadpisZbytek, heroPodnadpis, heroTlacitko, heroTlacitkoSekundarni,
   "heroFotkaUrl": heroFotka.asset->url,
   "bannerObrazekUrl": bannerObrazek.asset->url,
+  videoYoutube,
   videoNadpis,
   body[] { titul, text },
   odstavec, zvyrazenyText, ctaPopupText, adamText,

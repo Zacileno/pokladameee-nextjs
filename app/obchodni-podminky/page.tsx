@@ -44,7 +44,7 @@ export default function ObchodniPodminkyPage() {
   return (
     <>
       <Header opaque />
-      <main style={{ maxWidth: 800, margin: '0 auto', padding: '120px 24px 80px' }}>
+      <main style={{ maxWidth: 800, margin: '0 auto', padding: 'calc(120px + var(--hlavicka-navic)) 24px 80px' }}>
         <h1 style={{ fontSize: 32, fontWeight: 800, color: '#154C86', marginBottom: 8 }}>
           Všeobecné obchodní podmínky
         </h1>

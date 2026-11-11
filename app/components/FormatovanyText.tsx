@@ -3,12 +3,15 @@
 // aby šlo vložit doprostřed existujícího <h1>/<p>. Když Sanity nic nevrátí
 // (nebo starý fallback), vykreslí se obyčejný text/JSX beze změny.
 
+import { Fragment } from 'react'
+
 const BARVY: Record<string, string> = {
   orange: 'var(--orange)',
   blue: 'var(--blue)',
   black: 'var(--black)',
   white: '#fff',
   gray: 'var(--gray-400)',
+  cream: 'var(--orange-light)',
 }
 
 const VELIKOSTI: Record<string, string> = {
@@ -38,7 +41,8 @@ function renderSpan(span: Span, markDefs: MarkDef[], key: number) {
   }
 
   if (Object.keys(style).length) node = <span style={style}>{node}</span>
-  return <span key={key}>{node}</span>
+  // bez obalového <span> — jinak by .section-title span obarvil oranžově celý nadpis
+  return <Fragment key={key}>{node}</Fragment>
 }
 
 export default function FormatovanyText({ value, fallback }: { value?: Block[] | string | null; fallback: React.ReactNode }) {

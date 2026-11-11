@@ -1,7 +1,9 @@
 'use client'
 import { useState, useEffect } from 'react'
+import FormatovanyText from '@/app/components/FormatovanyText'
+import type { KarieraStranka } from '@/lib/kariera-data'
 
-const testimonials = [
+const vychozi: NonNullable<KarieraStranka['pribehy']> = [
   {
     nadpis: 'Osobní růst a kariéra',
     citat: 'Každý projekt je jiný, pořád se učím. Tady nemáš šanci zašedivět – furt se něco děje a ty buď jdeš dopředu, nebo ti ujede vlak.',
@@ -19,13 +21,15 @@ const testimonials = [
   },
 ]
 
-export default function TestimonialCarousel() {
+export default function TestimonialCarousel({ texty }: { texty?: KarieraStranka | null }) {
+  const testimonials = texty?.pribehy?.length ? texty.pribehy : vychozi
+  const pocet = testimonials.length
   const [active, setActive] = useState(0)
 
   useEffect(() => {
-    const timer = setInterval(() => setActive(i => (i + 1) % testimonials.length), 5000)
+    const timer = setInterval(() => setActive(i => (i + 1) % pocet), 5000)
     return () => clearInterval(timer)
-  }, [])
+  }, [pocet])
 
   const t = testimonials[active]
 
@@ -33,7 +37,7 @@ export default function TestimonialCarousel() {
     <section style={{ background: 'white', padding: '80px 0' }}>
       <div className="container">
         <h2 className="section-title" style={{ textAlign: 'center', marginBottom: 48 }}>
-          Proč si nás naši lidé vybrali?
+          <FormatovanyText value={texty?.pribehyNadpis} fallback="Proč si nás naši lidé vybrali?" />
         </h2>
         <div style={{ maxWidth: 760, margin: '0 auto' }}>
           <div style={{
@@ -45,17 +49,17 @@ export default function TestimonialCarousel() {
           }}>
             <div style={{ fontSize: 80, color: 'var(--orange)', lineHeight: 0, marginBottom: 24, fontFamily: 'Georgia, serif' }}>"</div>
             <p style={{ fontSize: 13, fontWeight: 700, color: 'var(--blue)', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: 16 }}>
-              {t.nadpis}
+              <FormatovanyText value={t.nadpis} fallback={null} />
             </p>
             <p style={{ fontSize: 18, fontStyle: 'italic', color: '#444', lineHeight: 1.7, marginBottom: 24 }}>
-              {t.citat}
+              <FormatovanyText value={t.citat} fallback={null} />
             </p>
-            <p style={{ fontSize: 19, fontWeight: 700, color: 'var(--blue)' }}>{t.jmeno}</p>
+            <p style={{ fontSize: 19, fontWeight: 700, color: 'var(--blue)' }}><FormatovanyText value={t.jmeno} fallback={null} /></p>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16, marginTop: 24 }}>
             <button
-              onClick={() => setActive(i => (i - 1 + testimonials.length) % testimonials.length)}
+              onClick={() => setActive(i => (i - 1 + pocet) % pocet)}
               style={{
                 background: 'var(--orange)', color: 'white', border: 'none',
                 borderRadius: 10, width: 45, height: 60, fontSize: 20, cursor: 'pointer',
@@ -75,7 +79,7 @@ export default function TestimonialCarousel() {
               ))}
             </div>
             <button
-              onClick={() => setActive(i => (i + 1) % testimonials.length)}
+              onClick={() => setActive(i => (i + 1) % pocet)}
               style={{
                 background: 'var(--orange)', color: 'white', border: 'none',
                 borderRadius: 10, width: 45, height: 60, fontSize: 20, cursor: 'pointer',

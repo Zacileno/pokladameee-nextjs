@@ -1,11 +1,18 @@
+import Tlacitko from '@/app/components/Tlacitko'
 import type { Metadata } from 'next'
 import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 import BenefityGrid from '@/app/components/BenefityGrid'
 import KontaktSekce from '@/app/components/KontaktSekce'
+import ReferenceSekce from '@/app/components/ReferenceSekce'
+import PostupKroky from '@/app/components/PostupKroky'
+import MapaSekce from '@/app/components/MapaSekce'
+import RealizaceGalerie from '@/app/components/RealizaceGalerie'
+import { REALIZACE } from '@/lib/realizace'
+import BrandIcon, { IkonaText } from '@/app/components/BrandIcon'
 import FaqItem from './FaqItem'
-import { client, VINYLOVA_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY } from '@/lib/sanity'
-import { BF_KONEC } from '@/lib/black-friday'
+import { client, BF_TERMIN_QUERY, VINYLOVA_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY } from '@/lib/sanity'
+import { bfBezi } from '@/lib/black-friday'
 
 export const revalidate = 0
 
@@ -133,21 +140,17 @@ export default async function VinylovaPodlahaPage() {
   const krokyNadpis = data?.krokyNadpis || 'Jak to probíhá'
   const krokyPodnadpis = data?.krokyPodnadpis || 'Od prvního kontaktu po hotovou podlahu — bez stresu.'
   const kroky = data?.kroky?.length ? data.kroky : KROKY
-
-  const referenceHodnoceni = data?.referenceHodnoceni ?? 4.8
-  const referenceCitace = data?.referenceCitace || 'Adam přijel den po zavolání, zaměřil a rovnou přivezl vzorník. Podlahu položili za jeden den, uklidili po sobě a stará dlažba zmizela. Doporučuju.'
-  const referenceJmeno = data?.referenceJmeno || 'Markéta K. — Ostrava'
-
   const faq = data?.faq?.length ? data.faq : FAQ
 
-  const zobrazitBfBadge = Date.now() < new Date(BF_KONEC).getTime()
+  const bfTermin = await client.fetch<{ konecAkce?: string; zacatekAkce?: string } | null>(BF_TERMIN_QUERY).catch(() => null)
+  const zobrazitBfBadge = bfBezi(bfTermin?.konecAkce, bfTermin?.zacatekAkce)
 
   return (
     <>
       <Header opaque />
 
       {/* HERO */}
-      <section style={{ background: 'var(--blue)', paddingTop: 100, paddingBottom: 0, overflow: 'hidden' }}>
+      <section style={{ background: 'var(--blue)', paddingTop: 'calc(100px + var(--hlavicka-navic))', paddingBottom: 0, overflow: 'hidden' }}>
         <div className="container">
           <div className="hero-sluzby-grid" style={{ paddingBottom: 64 }}>
             <div>
@@ -167,11 +170,11 @@ export default async function VinylovaPodlahaPage() {
                 {heroPodnadpis}
               </p>
               <p style={{ fontSize: 15, color: 'var(--orange)', fontWeight: 700, marginBottom: 36 }}>
-                {heroBadge}
+                <IkonaText text={heroBadge} size={30} tone="onBlue" />
               </p>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                 <a href="#kontakt" className="btn-primary" style={{ borderRadius: 10, padding: '15px 28px' }}>
-                  Nezávazná poptávka →
+                  <Tlacitko klic="poptavkaVinyl" fallback="Nezávazná poptávka" />
                 </a>
                 <a href="tel:+420790388487" style={{
                   display: 'inline-flex', alignItems: 'center', gap: 8,
@@ -180,7 +183,8 @@ export default async function VinylovaPodlahaPage() {
                   borderRadius: 10, border: '1px solid rgba(255,255,255,0.25)',
                   textDecoration: 'none', transition: 'background 0.2s',
                 }}>
-                  📞 +420 790 388 487
+                  <BrandIcon emoji="📞" size={24} tone="onBlue" fill="#316195" />
+                  +420 790 388 487
                 </a>
               </div>
             </div>
@@ -189,7 +193,7 @@ export default async function VinylovaPodlahaPage() {
               {zobrazitBfBadge && (
                 <div className="bf-sleva-badge" style={{ flexDirection: 'column', gap: 0, lineHeight: 1.1 }}>
                   <span style={{ fontSize: 11, fontWeight: 700 }}>SLEVA</span>
-                  <span style={{ fontSize: 20, fontWeight: 900 }}>25%</span>
+                  <span style={{ fontSize: 20, fontWeight: 900 }}>25&nbsp;%</span>
                 </div>
               )}
               {heroFotkaUrl ? (
@@ -221,7 +225,7 @@ export default async function VinylovaPodlahaPage() {
           <div className="sluzby-istripgrid">
             {istrip.map(({ emoji, text }, i) => (
               <div key={text || i} className="sluzby-istrip-item">
-                <span style={{ fontSize: 28, flexShrink: 0 }}>{emoji}</span>
+                <BrandIcon emoji={emoji} size={48} />
                 <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--gray-700)', lineHeight: 1.3 }}>{text}</span>
               </div>
             ))}
@@ -269,53 +273,15 @@ export default async function VinylovaPodlahaPage() {
         <div className="container">
           <h2 className="section-title" style={{ marginBottom: 8 }}>{krokyNadpis}</h2>
           <p className="section-subtitle" style={{ marginBottom: 40 }}>{krokyPodnadpis}</p>
-          <div className="kroky-grid">
-            {kroky.map((k, i) => (
-              <div key={k.nadpis || i} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-                <div style={{
-                  width: 48, height: 48, borderRadius: '50%', background: 'var(--orange)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: '#fff', fontWeight: 900, fontSize: 20, flexShrink: 0,
-                }}>
-                  {i + 1}
-                </div>
-                <div>
-                  <h3 style={{ fontSize: 18, fontWeight: 800, marginBottom: 8 }}>{k.nadpis}</h3>
-                  <p style={{ fontSize: 15, lineHeight: 1.7, color: 'var(--gray-700)' }}>{k.text}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <PostupKroky kroky={kroky} />
         </div>
       </section>
 
-      {/* REFERENCE STRIP */}
-      <section className="section" style={{ background: 'var(--blue)' }}>
-        <div className="container">
-          <div className="sluzby-ref-grid">
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: 72, fontWeight: 900, color: 'white', lineHeight: 1 }}>{referenceHodnoceni.toFixed(1)}</div>
-              <div style={{ display: 'flex', gap: 4, justifyContent: 'center', margin: '8px 0' }}>
-                {[1,2,3,4,5].map(i => (
-                  <span key={i} style={{ fontSize: 22, color: '#FBBC04', opacity: i === 5 ? 0.4 : 1 }}>★</span>
-                ))}
-              </div>
-              <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 13, marginBottom: 16 }}>Hodnocení zákazníků</p>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
-                <span style={{ fontSize: 20 }}>G</span>
-                <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: 13, fontWeight: 600 }}>Google recenze</span>
-              </div>
-            </div>
-            <div>
-              <div style={{ fontSize: 64, color: 'var(--orange)', lineHeight: 0, marginBottom: 24, fontFamily: 'Georgia, serif' }}>&quot;</div>
-              <p style={{ fontSize: 18, fontStyle: 'italic', color: 'rgba(255,255,255,0.9)', lineHeight: 1.7, marginBottom: 20 }}>
-                {referenceCitace}
-              </p>
-              <p style={{ fontWeight: 700, color: 'var(--orange)' }}>{referenceJmeno}</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <RealizaceGalerie fotky={REALIZACE.vinyl} podlaha="Vinylová podlaha" />
+
+      <ReferenceSekce video={false} />
+
+      <MapaSekce />
 
       {/* FAQ */}
       <section className="section" style={{ background: 'var(--gray-50)' }}>

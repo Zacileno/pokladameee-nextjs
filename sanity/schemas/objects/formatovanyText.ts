@@ -32,6 +32,7 @@ export const formatovanyTextSchema = defineType({
                   list: [
                     { title: 'Oranžová (brand)', value: 'orange' },
                     { title: 'Modrá (brand)', value: 'blue' },
+                    { title: 'Krémová (brand)', value: 'cream' },
                     { title: 'Černá', value: 'black' },
                     { title: 'Bílá', value: 'white' },
                     { title: 'Šedá', value: 'gray' },

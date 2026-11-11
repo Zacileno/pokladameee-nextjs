@@ -67,7 +67,7 @@ export default async function GalerieSekce() {
               Výsledky mluví<br /><span>samy za sebe</span>
             </h2>
             <p style={{ color: 'var(--gray-400)', fontSize: 15, maxWidth: 360, lineHeight: 1.6 }}>
-              Kliknutím na fotku přepínáš mezi stavem před a po pokládce.
+              Posunutím jezdce porovnáš stav před a po pokládce.
             </p>
           </div>
         </div>
@@ -91,7 +91,7 @@ export default async function GalerieSekce() {
 
         <div style={{ marginTop: 48, textAlign: 'center' }}>
           <a href="#kontakt" className="btn-primary" style={{ fontSize: 16 }}>
-            Chci taky novou podlahu →
+            Chci taky novou podlahu
           </a>
         </div>
       </div>

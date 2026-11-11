@@ -1,3 +1,49 @@
+import type FormatovanyText from '@/app/components/FormatovanyText'
+
+type RT = Parameters<typeof FormatovanyText>[0]['value']
+
+// Texty ze Sanity (Kariéra — stránka); prázdné pole = výchozí text v komponentě
+export type KarieraStranka = {
+  heroStitek?: RT
+  heroNadpis?: RT
+  heroPodnadpis?: RT
+  heroTlacitkoPozice?: RT
+  heroTlacitkoProc?: RT
+  pribehyNadpis?: RT
+  pribehy?: { nadpis?: RT; citat?: RT; jmeno?: RT }[]
+  benefityNadpis?: RT
+  benefity?: { emoji?: string; text?: RT }[]
+  benefityTlacitko?: RT
+  filozofieNadpis?: RT
+  filozofie?: { nadpis?: RT; text?: RT }[]
+  kulturaNadpis?: RT
+  kultura?: { emoji?: string; nadpis?: RT; text?: RT }[]
+  poziceNadpis?: RT
+  poziceDalsiNadpis?: RT
+  filtrVse?: string
+  filtrMsk?: string
+  formNadpis?: RT
+  formText?: RT
+  formJmeno?: string
+  formPrijmeni?: string
+  formEmail?: string
+  formTelefon?: string
+  formMesto?: string
+  formZprava?: string
+  formSouhlas?: RT
+  formSouhlasOdkaz?: RT
+  formTlacitko?: RT
+  formOdesilam?: string
+  formChybaSouhlas?: string
+  detailNaplnNadpis?: RT
+  detailPozadujemeNadpis?: RT
+  detailNabizimeNadpis?: RT
+  dekujemeNadpis?: RT
+  dekujemeText?: RT
+  dekujemeTlacitko?: RT
+  dekujemeSlogan?: RT
+}
+
 export type Pozice = {
   slug: string
   nazev: string

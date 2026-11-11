@@ -1,4 +1,5 @@
-import type { Pozice } from '../../../../lib/kariera-data'
+import type { KarieraStranka, Pozice } from '../../../../lib/kariera-data'
+import FormatovanyText from '@/app/components/FormatovanyText'
 import BenefityGrid from '../../components/BenefityGrid'
 import KarieraKontaktForm from '../../components/KarieraKontaktForm'
 import VolnePozice from '../../components/VolnePozice'
@@ -24,7 +25,7 @@ function BulletList({ items }: { items: string[] }) {
   )
 }
 
-export default function PoziceDetail({ pozice, vsechnyPozice }: { pozice: Pozice; vsechnyPozice: Pozice[] }) {
+export default function PoziceDetail({ pozice, vsechnyPozice, texty }: { pozice: Pozice; vsechnyPozice: Pozice[]; texty?: KarieraStranka | null }) {
   return (
     <>
       <section style={{ background: 'white', padding: '48px 0 0' }}>
@@ -51,31 +52,31 @@ export default function PoziceDetail({ pozice, vsechnyPozice }: { pozice: Pozice
 
           <div style={sectionStyle}>
             <h2 style={{ fontSize: 20, fontWeight: 700, marginBottom: 20 }}>
-              Náplň prác<span style={{ color: 'var(--orange)' }}>eee</span>:
+              <FormatovanyText value={texty?.detailNaplnNadpis} fallback={<>Náplň prác<span style={{ color: 'var(--orange)' }}>eee</span>:</>} />
             </h2>
             <BulletList items={pozice.naplnPrace} />
           </div>
 
           <div style={sectionStyle}>
             <h2 style={{ fontSize: 20, fontWeight: 700, marginBottom: 20 }}>
-              Požadujem<span style={{ color: 'var(--orange)' }}>eee</span>:
+              <FormatovanyText value={texty?.detailPozadujemeNadpis} fallback={<>Požadujem<span style={{ color: 'var(--orange)' }}>eee</span>:</>} />
             </h2>
             <BulletList items={pozice.pozadujeme} />
           </div>
 
           <div style={sectionStyle}>
             <h2 style={{ fontSize: 20, fontWeight: 700, marginBottom: 20 }}>
-              Nabízím<span style={{ color: 'var(--orange)' }}>eee</span>:
+              <FormatovanyText value={texty?.detailNabizimeNadpis} fallback={<>Nabízím<span style={{ color: 'var(--orange)' }}>eee</span>:</>} />
             </h2>
             <BulletList items={pozice.nabizime} />
           </div>
         </div>
       </section>
 
-      <BenefityGrid compact />
-      <KarieraKontaktForm poziceNazev={pozice.nazev} />
-      <VolnePozice pozice={vsechnyPozice} excludeSlug={pozice.slug} />
-      <TestimonialCarousel />
+      <BenefityGrid compact texty={texty} />
+      <KarieraKontaktForm poziceNazev={pozice.nazev} texty={texty} />
+      <VolnePozice pozice={vsechnyPozice} excludeSlug={pozice.slug} texty={texty} />
+      <TestimonialCarousel texty={texty} />
     </>
   )
 }

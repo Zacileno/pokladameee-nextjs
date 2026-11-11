@@ -1,8 +1,10 @@
 'use client'
+import Tlacitko from '@/app/components/Tlacitko'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { BF_KONEC } from '@/lib/black-friday'
+import { bfBezi } from '@/lib/black-friday'
+import { useBfKonec } from './BfKonec'
 
 const ZPOZDENI_MS = 3000
 const KLIC_ZAVRENO = 'bf-popup-zavreno'
@@ -11,15 +13,16 @@ const KLIC_ZAVRENO = 'bf-popup-zavreno'
 // po zavření se v rámci návštěvy (session) už neukáže a po konci akce zmizí úplně
 export default function BlackFridayPopup() {
   const [open, setOpen] = useState(false)
+  const { konec, zacatek } = useBfKonec()
 
   useEffect(() => {
-    if (Date.now() >= new Date(BF_KONEC).getTime()) return
+    if (!bfBezi(konec, zacatek)) return
     try {
       if (sessionStorage.getItem(KLIC_ZAVRENO)) return
     } catch {}
     const t = setTimeout(() => setOpen(true), ZPOZDENI_MS)
     return () => clearTimeout(t)
-  }, [])
+  }, [konec, zacatek])
 
   const zavrit = () => {
     setOpen(false)
@@ -65,7 +68,7 @@ export default function BlackFridayPopup() {
             className="btn-primary"
             style={{ position: 'absolute', left: '50%', bottom: 20, transform: 'translateX(-50%)', boxShadow: '0 6px 18px rgba(0,0,0,0.35)' }}
           >
-            Využít akci
+            <Tlacitko klic="bfPopup" fallback="Využít akci" />
           </span>
         </Link>
         <button

@@ -2,7 +2,10 @@ import type { Metadata } from 'next'
 import './globals.css'
 import JsonLd from './components/JsonLd'
 import TopBar from './components/TopBar'
-import { client, BLACK_FRIDAY_QUERY } from '@/lib/sanity'
+import { BfKonecProvider } from './components/BfKonec'
+import PevneMezery from './components/PevneMezery'
+import { TlacitkaProvider, type TlacitkaData } from './components/Tlacitko'
+import { client, BLACK_FRIDAY_QUERY, TLACITKA_QUERY } from '@/lib/sanity'
 
 const LOCAL_BUSINESS_JSON_LD = {
   '@context': 'https://schema.org',
@@ -26,8 +29,8 @@ const LOCAL_BUSINESS_JSON_LD = {
   openingHoursSpecification: {
     '@type': 'OpeningHoursSpecification',
     dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-    opens: '07:00',
-    closes: '18:00',
+    opens: '08:00',
+    closes: '16:30',
   },
 }
 
@@ -59,6 +62,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     topBarData = await client.fetch(BLACK_FRIDAY_QUERY)
   } catch {}
 
+  let tlacitka: TlacitkaData = null
+  try {
+    tlacitka = await client.fetch<TlacitkaData>(TLACITKA_QUERY)
+  } catch {}
+
   return (
     <html lang="cs">
       <head>
@@ -71,8 +79,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body>
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MK4KFBF8" height="0" width="0" style={{ display: 'none', visibility: 'hidden' }} /></noscript>
-        <TopBar data={topBarData} />
-        {children}
+        <BfKonecProvider konec={topBarData?.konecAkce} zacatek={topBarData?.zacatekAkce}>
+          <TlacitkaProvider data={tlacitka}>
+            <TopBar data={topBarData} />
+            {children}
+            <PevneMezery />
+          </TlacitkaProvider>
+        </BfKonecProvider>
       </body>
     </html>
   )

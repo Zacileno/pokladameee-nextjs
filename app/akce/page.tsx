@@ -26,7 +26,7 @@ export default async function AkcePage() {
   return (
     <>
       <Header />
-      <main style={{ paddingTop: 100, minHeight: '60vh' }}>
+      <main style={{ paddingTop: 'calc(100px + var(--hlavicka-navic))', minHeight: '60vh' }}>
         <div className="container section">
           <h1 className="section-title">Akce a <span>slevy</span></h1>
           {akce.length === 0 ? (

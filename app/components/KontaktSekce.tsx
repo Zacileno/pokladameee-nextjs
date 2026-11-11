@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import KontaktForm from './KontaktForm'
+import BrandIcon from './BrandIcon'
 
 interface KontaktData {
   nadpis?: string
@@ -9,7 +10,6 @@ interface KontaktData {
   citat?: string
   fotoUrl?: string
   telefon?: string
-  telefonTechnicke?: string
   email?: string
   pracovniDoba?: string
   region?: string
@@ -23,13 +23,12 @@ export default function KontaktSekce({ kontakt }: Props) {
   const nadpis = kontakt?.nadpis || 'Napište přímo nám'
   const podnadpis = kontakt?.podnadpis || 'Zaměření je zdarma. Odpovíme do 24 hodin, obvykle dřív. Přijedeme k vám po celém MSK, Zlínsku i Olomoucku.'
   const jmeno = kontakt?.jmeno || 'Adam Hajdušek'
-  const role = kontakt?.role || 'Zakladatel & hlavní technik'
+  const role = kontakt?.role || 'Hlavní technik'
   const citat = kontakt?.citat || 'Každou podlahu řešíme osobně. Přijedeme se podívat.'
   const fotoUrl = kontakt?.fotoUrl || null
   const telefon = kontakt?.telefon || '+420 790 388 487'
-  const telefonTechnicke = kontakt?.telefonTechnicke || '+420 730 454 309'
   const email = kontakt?.email || 'adam.hajdusek@pokladameee.cz'
-  const pracovniDoba = kontakt?.pracovniDoba || 'Po–Pá 7:00–18:00'
+  const pracovniDoba = kontakt?.pracovniDoba || 'Po–Pá 8:00–16:30'
   const region = kontakt?.region || 'Moravskoslezský, Zlínský a Olomoucký kraj'
 
   const nadpisSlova = nadpis.split(' ')
@@ -40,12 +39,15 @@ export default function KontaktSekce({ kontakt }: Props) {
     <section id="kontakt" className="section" style={{ background: 'white' }}>
       <div className="container">
         <div className="kontakt-grid">
-          <div>
+          <div className="kontakt-info">
+            <div className="kontakt-hlavicka">
             <p style={{ color: 'var(--orange)', fontWeight: 700, fontSize: 13, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Nezávazná poptávka</p>
             <h2 className="section-title">
               {zbytek && <>{zbytek}<br /></>}
               <span>{posledniSlovo}</span>
             </h2>
+            </div>
+            <div className="kontakt-detail">
             <p style={{ marginTop: 20, fontSize: 17, lineHeight: 1.7, color: 'var(--gray-700)', marginBottom: 40 }}>
               {podnadpis}
             </p>
@@ -67,19 +69,18 @@ export default function KontaktSekce({ kontakt }: Props) {
               <div>
                 <div style={{ fontWeight: 800, fontSize: 18 }}>{jmeno}</div>
                 <div style={{ color: 'var(--gray-400)', fontSize: 14 }}>{role}</div>
-                <div style={{ color: 'var(--gray-700)', fontSize: 14, marginTop: 6, fontStyle: 'italic' }}>„{citat}"</div>
+                <div style={{ color: 'var(--gray-700)', fontSize: 14, marginTop: 6, fontStyle: 'italic' }}>„{citat}“</div>
               </div>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               {[
                 { icon: '📞', label: 'Zavolejte', val: telefon, href: `tel:${telefon.replace(/\s/g, '')}` },
-                { icon: '🛠️', label: 'Pro technické dotazy', val: telefonTechnicke, href: `tel:${telefonTechnicke.replace(/\s/g, '')}` },
                 { icon: '✉️', label: 'Napište e-mail', val: email, href: `mailto:${email}` },
                 { icon: '🕐', label: 'Pracovní doba', val: pracovniDoba },
                 { icon: '📍', label: 'Kde pokládáme', val: region },
               ].map(({ icon, label, val, href }) => (
                 <div key={label} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
-                  <span style={{ fontSize: 20, flexShrink: 0 }}>{icon}</span>
+                  <BrandIcon emoji={icon} size={36} />
                   <div>
                     <div style={{ fontSize: 12, color: 'var(--gray-400)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{label}</div>
                     {href ? <a href={href} style={{ fontWeight: 700, color: 'var(--blue)', fontSize: 16 }}>{val}</a>
@@ -89,8 +90,9 @@ export default function KontaktSekce({ kontakt }: Props) {
               ))}
             </div>
           </div>
+          </div>
 
-          <div style={{ background: 'var(--gray-50)', borderRadius: 16, padding: '40px 36px', border: '1px solid var(--gray-100)' }}>
+          <div className="kontakt-formular">
             <h3 style={{ fontSize: 22, fontWeight: 900, marginBottom: 6 }}>Nezávazná poptávka</h3>
             <p style={{ color: 'var(--gray-400)', fontSize: 14, marginBottom: 28 }}>Odpovíme do 24 hodin. Zaměření zdarma.</p>
             <KontaktForm />
