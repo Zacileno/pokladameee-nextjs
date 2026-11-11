@@ -3,12 +3,20 @@ import { MAPA_KRAJE, MAPA_SIRKA, MAPA_VYSKA } from '../../lib/mapa-kraju'
 import { KRAJE } from '../../lib/lokality'
 
 // Mapa ČR — proklikatelné jsou jen kraje, kam jezdíme (hover/barvy v globals.css: .mapa-kraj*)
-export default function MapaSekce() {
+// uvodStranky: na /lokality je mapa první sekcí — odsazení pod hlavičku, drobečková navigace a H1.
+export default function MapaSekce({ uvodStranky = false }: { uvodStranky?: boolean } = {}) {
   const aktivni = new Map(KRAJE.map(k => [k.mapaId, k]))
+  const Nadpis = uvodStranky ? 'h1' : 'h2'
 
   return (
-    <section id="kam-jezdime" className="section" style={{ background: 'white' }}>
+    <section id="kam-jezdime" className="section" style={{ background: 'white', ...(uvodStranky ? { paddingTop: 'calc(120px + var(--hlavicka-navic))' } : {}) }}>
       <div className="container">
+        {uvodStranky && (
+          <p style={{ fontSize: 14, fontWeight: 600, marginBottom: 20 }}>
+            <a href="/" style={{ color: 'var(--orange)' }}>Domů</a>
+            <span style={{ color: 'var(--gray-400)' }}> / Lokality</span>
+          </p>
+        )}
         <div className="mapa-grid">
           <svg viewBox={`0 0 ${MAPA_SIRKA} ${MAPA_VYSKA}`} className="mapa-svg" role="img" aria-label="Mapa krajů, kde pokládáme podlahy">
             {MAPA_KRAJE.filter(k => !aktivni.has(k.id)).map(k => (
@@ -25,7 +33,7 @@ export default function MapaSekce() {
           </svg>
 
           <div style={{ textAlign: 'center' }}>
-            <h2 className="section-title">Kam jezdím<span>eee</span>?</h2>
+            <Nadpis className="section-title">Kam jezdím<span>eee</span>?</Nadpis>
             <p style={{ fontSize: 20, fontWeight: 800, color: 'var(--black)', textTransform: 'uppercase', letterSpacing: '0.02em', marginBottom: 24 }}>
               Pokládáme ve <span style={{ color: 'var(--orange)' }}>3 krajích</span>
             </p>

@@ -80,6 +80,8 @@ export default async function MestoPage({ params }: { params: Params }) {
             <p style={{ fontSize: 14, fontWeight: 600, marginBottom: 20 }}>
               <a href="/" style={{ color: 'var(--orange)' }}>Domů</a>
               <span style={{ color: 'var(--gray-400)' }}> / </span>
+              <a href="/lokality" style={{ color: 'var(--orange)' }}>Lokality</a>
+              <span style={{ color: 'var(--gray-400)' }}> / </span>
               <a href={`/lokality/${kraj.slug}`} style={{ color: 'var(--orange)' }}>{kraj.nazev}</a>
               <span style={{ color: 'var(--gray-400)' }}> / {mesto.nazev}</span>
             </p>
