@@ -36,7 +36,7 @@ export default function BlogCard({ post, odkazText }: { post: BlogPostSummary; o
         </div>
         <h3 className="blog-karta-nadpis">{post.title}</h3>
         <p className="blog-karta-perex">{post.perex}</p>
-        <span className="blog-karta-link"><FormatovanyText value={odkazText} fallback="Číst dále →" /></span>
+        <span className="blog-karta-link"><FormatovanyText vOdkazu value={odkazText} fallback="Číst dále →" /></span>
       </div>
     </a>
   )

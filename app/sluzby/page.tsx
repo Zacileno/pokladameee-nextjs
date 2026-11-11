@@ -107,7 +107,7 @@ export default async function SluzbyPage() {
                   Vyberte si <strong>vinyl</strong>, <strong>PVC</strong>, <strong>koberec</strong> nebo <strong>dřevo</strong> podle toho, co od podlahy čekáte doma i v kanceláři.
                   Nejste si něčím jistí? Sepsali jsme
                 </>} />{' '}
-                <a href="/faq" style={{ color: 'var(--orange)', fontWeight: 700, textDecoration: 'underline', textUnderlineOffset: 3 }}><FormatovanyText value={stranka?.uvodOdkaz} fallback="odpovědi na nejčastější dotazy" /></a>.
+                <a href="/faq" style={{ color: 'var(--orange)', fontWeight: 700, textDecoration: 'underline', textUnderlineOffset: 3 }}><FormatovanyText vOdkazu value={stranka?.uvodOdkaz} fallback="odpovědi na nejčastější dotazy" /></a>.
               </p>
               <div className="sluzby-uvod-kroky">
                 {kroky.map(k => (
@@ -135,7 +135,7 @@ export default async function SluzbyPage() {
                   <div className="sluzby-dlazdice-obsah">
                     <h2><FormatovanyText value={stranka?.[s.klic]?.nazev} fallback={s.title} /></h2>
                     <p><FormatovanyText value={stranka?.[s.klic]?.popis} fallback={s.popis} /></p>
-                    <Link href={`/sluzby/${s.slug}`} className="btn-primary"><span><FormatovanyText value={stranka?.tlacitkoProdukt} fallback="Zobrazit produkt" /></span></Link>
+                    <Link href={`/sluzby/${s.slug}`} className="btn-primary"><span><FormatovanyText vOdkazu value={stranka?.tlacitkoProdukt} fallback="Zobrazit produkt" /></span></Link>
                   </div>
                 </div>
               ))}

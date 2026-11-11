@@ -1,4 +1,5 @@
 import { defineType, defineField, defineArrayMember } from 'sanity'
+import { odkazAnotace } from './objects/formatovanyText'
 
 // Texty stránky /prubeh-realizace — prázdné pole = na webu zůstane výchozí text
 // (lib/prubeh-realizace.ts). Kapitoly a bloky jsou seznamy, aby stránka zabrala
@@ -44,6 +45,7 @@ const odstavce = (name: string, title: string, description?: string) =>
                 },
               ],
             },
+            odkazAnotace,
           ],
         },
       }),

@@ -51,7 +51,7 @@ export default function BenefityGrid({ compact = false, texty }: { compact?: boo
         {!compact && (
           <div style={{ textAlign: 'center', marginTop: 40 }}>
             <a href="#pozice" className="btn-primary" style={{ borderRadius: 10 }}>
-              <span><FormatovanyText value={texty?.benefityTlacitko} fallback="Otevřené pozice" /></span>
+              <span><FormatovanyText vOdkazu value={texty?.benefityTlacitko} fallback="Otevřené pozice" /></span>
             </a>
           </div>
         )}

@@ -114,7 +114,7 @@ export default function KarieraKontaktForm({ poziceNazev, texty }: { poziceNazev
             />
             <span>
               <FormatovanyText value={texty?.formSouhlas} fallback="Souhlasím se zpracováním osobních údajů dle" />{' '}
-              <a href="/ochrana-osobnich-udaju" style={{ color: 'var(--orange)' }}><FormatovanyText value={texty?.formSouhlasOdkaz} fallback="zásad ochrany osobních údajů" /></a>
+              <a href="/ochrana-osobnich-udaju" style={{ color: 'var(--orange)' }}><FormatovanyText vOdkazu value={texty?.formSouhlasOdkaz} fallback="zásad ochrany osobních údajů" /></a>
             </span>
           </label>
           {error && <p style={{ color: '#c00', fontSize: 14 }}>{error}</p>}
@@ -125,7 +125,7 @@ export default function KarieraKontaktForm({ poziceNazev, texty }: { poziceNazev
               className="btn-primary"
               style={{ borderRadius: 10, padding: '15px 32px', opacity: loading ? 0.7 : 1 }}
             >
-              {loading ? (texty?.formOdesilam || 'Odesílám...') : <span><FormatovanyText value={texty?.formTlacitko} fallback="Odeslat přihlášku" /></span>}
+              {loading ? (texty?.formOdesilam || 'Odesílám...') : <span><FormatovanyText vOdkazu value={texty?.formTlacitko} fallback="Odeslat přihlášku" /></span>}
             </button>
           </div>
         </form>

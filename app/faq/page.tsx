@@ -155,7 +155,7 @@ export default async function FaqPage() {
                 padding: '8px 18px', borderRadius: 100, border: '1px solid rgba(255,255,255,0.25)',
                 textDecoration: 'none',
               }}>
-                <FormatovanyText value={k.texty?.stitek} fallback={k.label} />
+                <FormatovanyText vOdkazu value={k.texty?.stitek} fallback={k.label} />
               </a>
             ))}
           </div>
