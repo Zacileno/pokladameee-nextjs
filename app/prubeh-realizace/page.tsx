@@ -37,6 +37,16 @@ const textKomponenty: PortableTextComponents = {
   listItem: { bullet: ({ children }) => <li>{children}</li> },
   marks: {
     barva: ({ value, children }) => <span style={{ color: BARVY[value?.hodnota] }}>{children}</span>,
+    odkaz: ({ value, children }) => {
+      const href = typeof value?.href === 'string' ? value.href.trim() : ''
+      if (!href) return <>{children}</>
+      const nova = !!value?.novaZalozka
+      return (
+        <a href={href} target={nova ? '_blank' : undefined} rel={nova || /^https?:/.test(href) ? 'noopener noreferrer' : undefined} style={{ color: 'inherit', textDecoration: 'underline', textUnderlineOffset: 3 }}>
+          {children}
+        </a>
+      )
+    },
   },
 }
 

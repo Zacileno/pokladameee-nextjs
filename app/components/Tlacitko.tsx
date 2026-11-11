@@ -42,5 +42,5 @@ export function TlacitkaProvider({ data, children }: { data: TlacitkaData; child
 
 export default function Tlacitko({ klic, fallback }: { klic: KlicTlacitka; fallback: string }) {
   const data = useContext(TlacitkaKontext)
-  return <span><FormatovanyText value={data?.[klic]} fallback={fallback} /></span>
+  return <span><FormatovanyText vOdkazu value={data?.[klic]} fallback={fallback} /></span>
 }

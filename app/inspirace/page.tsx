@@ -94,7 +94,7 @@ export default async function InspracePage() {
                 <FormatovanyText value={stranka?.heroText} fallback="Prohlédněte si, jak vypadají naše realizace naživo. Žádné vizualizace ani katalogové fotky — jen skutečné podlahy, které jsme položili zákazníkům po celém Moravskoslezském, Zlínském a Olomouckém kraji." />
               </p>
               <a href="#realizace" className="btn-primary" style={{ borderRadius: 10, padding: '15px 28px' }}>
-                <span><FormatovanyText value={stranka?.heroTlacitko} fallback="Naše realizaceee" /></span>
+                <span><FormatovanyText vOdkazu value={stranka?.heroTlacitko} fallback="Naše realizaceee" /></span>
               </a>
             </div>
             <div className="insp-hero-foto">
@@ -183,7 +183,7 @@ export default async function InspracePage() {
             ))}
           </div>
           <div style={{ marginTop: 40, textAlign: 'center' }}>
-            <a href="#kontakt" className="btn-primary"><span><FormatovanyText value={stranka?.procTlacitko} fallback="Chci zaměření zdarma" /></span></a>
+            <a href="#kontakt" className="btn-primary"><span><FormatovanyText vOdkazu value={stranka?.procTlacitko} fallback="Chci zaměření zdarma" /></span></a>
           </div>
         </div>
       </section>

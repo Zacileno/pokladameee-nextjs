@@ -108,8 +108,8 @@ export default async function CoPokladamePage() {
                   <div className="cp-dlazdice-obsah">
                     <BrandIcon emoji={s.emoji} size={40} />
                     <div>
-                      <h2><FormatovanyText value={stranka?.[s.id]?.nazev} fallback={s.title} /></h2>
-                      <span><FormatovanyText value={stranka?.[s.id]?.claim} fallback={s.claim} /></span>
+                      <h2><FormatovanyText vOdkazu value={stranka?.[s.id]?.nazev} fallback={s.title} /></h2>
+                      <span><FormatovanyText vOdkazu value={stranka?.[s.id]?.claim} fallback={s.claim} /></span>
                     </div>
                   </div>
                 </a>
@@ -136,8 +136,8 @@ export default async function CoPokladamePage() {
                     ))}
                   </ul>
                   <div className="cp-blok-tlacitka">
-                    <a href="#kontakt" className="btn-primary"><span><FormatovanyText value={stranka?.[s.id]?.cta} fallback={s.cta} /></span></a>
-                    <Link href="/inspirace" className="cp-blok-odkaz"><FormatovanyText value={stranka?.odkazRealizace} fallback="Naše realizace →" /></Link>
+                    <a href="#kontakt" className="btn-primary"><span><FormatovanyText vOdkazu value={stranka?.[s.id]?.cta} fallback={s.cta} /></span></a>
+                    <Link href="/inspirace" className="cp-blok-odkaz"><FormatovanyText vOdkazu value={stranka?.odkazRealizace} fallback="Naše realizace →" /></Link>
                   </div>
                 </div>
               </div>

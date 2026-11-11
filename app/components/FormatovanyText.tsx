@@ -1,5 +1,5 @@
 // Vykreslí pole typu "formatovanyText" ze Sanity (jeden Portable Text blok s
-// marks pro tučně/kurzívu/barvu/velikost) inline, bez odstavcového obalu —
+// marks pro tučně/kurzívu/barvu/velikost/odkaz) inline, bez odstavcového obalu —
 // aby šlo vložit doprostřed existujícího <h1>/<p>. Když Sanity nic nevrátí
 // (nebo starý fallback), vykreslí se obyčejný text/JSX beze změny.
 
@@ -22,10 +22,10 @@ const VELIKOSTI: Record<string, string> = {
 }
 
 type Span = { _type: 'span'; text: string; marks?: string[] }
-type MarkDef = { _type: string; _key: string; hodnota?: string }
+type MarkDef = { _type: string; _key: string; hodnota?: string; href?: string; novaZalozka?: boolean }
 type Block = { _type: 'block'; children?: Span[]; markDefs?: MarkDef[] }
 
-function renderSpan(span: Span, markDefs: MarkDef[], key: number) {
+function renderSpan(span: Span, markDefs: MarkDef[], key: number, vOdkazu: boolean) {
   let node: React.ReactNode = span.text
   const marks = span.marks || []
 
@@ -33,11 +33,30 @@ function renderSpan(span: Span, markDefs: MarkDef[], key: number) {
   if (marks.includes('strong')) node = <strong>{node}</strong>
 
   const style: React.CSSProperties = {}
+  let odkaz: MarkDef | undefined
   for (const markKey of marks) {
     const def = markDefs.find((d) => d._key === markKey)
     if (!def) continue
     if (def._type === 'barva' && def.hodnota) style.color = BARVY[def.hodnota]
     if (def._type === 'velikost' && def.hodnota) style.fontSize = VELIKOSTI[def.hodnota]
+    if (def._type === 'odkaz' && def.href?.trim()) odkaz = def
+  }
+
+  // Odkaz — jen mimo tlačítka a jiné odkazy (<a> uvnitř <a> je neplatné HTML).
+  if (odkaz?.href && !vOdkazu) {
+    const href = odkaz.href.trim()
+    const nova = !!odkaz.novaZalozka
+    return (
+      <a
+        key={key}
+        href={href}
+        target={nova ? '_blank' : undefined}
+        rel={nova || /^https?:/.test(href) ? 'noopener noreferrer' : undefined}
+        style={{ color: 'inherit', textDecoration: 'underline', textUnderlineOffset: 3, ...style }}
+      >
+        {node}
+      </a>
+    )
   }
 
   if (Object.keys(style).length) node = <span style={style}>{node}</span>
@@ -45,7 +64,8 @@ function renderSpan(span: Span, markDefs: MarkDef[], key: number) {
   return <Fragment key={key}>{node}</Fragment>
 }
 
-export default function FormatovanyText({ value, fallback }: { value?: Block[] | string | null; fallback: React.ReactNode }) {
+// vOdkazu: pole je uvnitř tlačítka/odkazu — odkaz z editoru se pak vykreslí jako obyčejný text.
+export default function FormatovanyText({ value, fallback, vOdkazu = false }: { value?: Block[] | string | null; fallback: React.ReactNode; vOdkazu?: boolean }) {
   // Obyčejný string — buď fallback konstanta ze starého schématu, nebo placeholder. Vykreslí se přímo.
   if (typeof value === 'string') return <>{value}</>
 
@@ -54,7 +74,7 @@ export default function FormatovanyText({ value, fallback }: { value?: Block[] |
 
   return (
     <>
-      {block.children.map((span, i) => renderSpan(span, block.markDefs || [], i))}
+      {block.children.map((span, i) => renderSpan(span, block.markDefs || [], i, vOdkazu))}
     </>
   )
 }

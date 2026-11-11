@@ -31,17 +31,17 @@ export default function TopBar({ data }: { data?: TopBarData }) {
     <a href="/black-friday" className="top-bar" style={{ height: TOP_BAR_VYSKA }}>
       <div className="container top-bar-obsah">
         <span className="top-bar-stitek">
-          <FormatovanyText value={data?.topBarOznaceni} fallback="🔥 BLACK FRIDAY" />
+          <FormatovanyText vOdkazu value={data?.topBarOznaceni} fallback="🔥 BLACK FRIDAY" />
         </span>
         <span className="top-bar-text">
           <span style={{ color: 'var(--orange)' }}>
-            <FormatovanyText value={data?.topBarSleva} fallback={<>25&nbsp;%</>} />
+            <FormatovanyText vOdkazu value={data?.topBarSleva} fallback={<>25&nbsp;%</>} />
           </span>{' '}
-          <FormatovanyText value={data?.topBarZbytek} fallback="na podlahové krytiny" />
-          <span className="top-bar-dovetek">. <FormatovanyText value={data?.topBarDovetek} fallback="A to není vše." /></span>
+          <FormatovanyText vOdkazu value={data?.topBarZbytek} fallback="na podlahové krytiny" />
+          <span className="top-bar-dovetek">. <FormatovanyText vOdkazu value={data?.topBarDovetek} fallback="A to není vše." /></span>
         </span>
         <span className="top-bar-cta">
-          <FormatovanyText value={bezSipky(data?.topBarCta)} fallback="DETAIL AKCE" />
+          <FormatovanyText vOdkazu value={bezSipky(data?.topBarCta)} fallback="DETAIL AKCE" />
         </span>
       </div>
     </a>
