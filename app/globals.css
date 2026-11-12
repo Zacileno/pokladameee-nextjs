@@ -740,6 +740,8 @@ a.kraj-mesto:hover { color: var(--orange); box-shadow: 0 4px 16px rgba(255,136,0
 .pr-cta p { color: rgba(255,255,255,0.85); font-size: 17px; max-width: 520px; margin-bottom: 28px; }
 .pr-cta-tel { color: white; font-weight: 800; font-size: 18px; white-space: nowrap; }
 .pr-cta-adam { justify-self: center; height: 420px; width: auto; margin-top: -90px; display: block; }
+.pr-cta-bez-fotky { padding-top: 80px; }
+.pr-cta-bez-fotky .pr-cta-box { grid-template-columns: 1fr; }
 /* Adam v úvodu stojí přímo na kartě: desktop nad „Služba od A do Z“, mobil nad „Zaměření zdarma“ */
 .pr-hero-grid { min-height: 440px; }
 .pr-fakt { position: relative; }

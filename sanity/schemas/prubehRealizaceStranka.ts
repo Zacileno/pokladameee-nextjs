@@ -146,7 +146,7 @@ export const prubehRealizaceStrankaSchema = defineType({
     defineField({
       name: 'ctaFoto',
       title: 'Fotka u výzvy',
-      description: 'Postava na průhledném pozadí (PNG), ideálně na výšku a aspoň 900 px vysoká. Prázdné = výchozí fotka Adama.',
+      description: 'Postava na průhledném pozadí (PNG), ideálně na výšku a aspoň 900 px vysoká. Prázdné = výzva bez fotky.',
       type: 'image',
       group: 'zaver',
       fields: [defineField({ name: 'alt', title: 'Popis pro nevidomé a Google', type: 'string' })],

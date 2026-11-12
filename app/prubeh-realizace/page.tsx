@@ -95,7 +95,8 @@ export default async function PrubehRealizacePage() {
   const dobreVedet = cesta.flatMap(k => (k.bloky ?? []).filter(b => !b.cislo))
   const cestaUvod = cesta.find(k => k.uvod?.length)?.uvod
   const uvodAdam = fotoAdama(data?.uvodFoto)
-  const ctaAdam = fotoAdama(data?.ctaFoto)
+  // fotka u výzvy jen když je nahraná ve Studiu (výchozí Adam odstraněn na přání klienta)
+  const ctaFoto = data?.ctaFoto?.asset ? fotoAdama(data.ctaFoto) : null
 
   return (
     <>
@@ -218,7 +219,7 @@ export default async function PrubehRealizacePage() {
         </section>
 
         {/* VÝZVA — modrý pruh s Adamem (inspirace Malujemeee) */}
-        <section className="pr-cta">
+        <section className={`pr-cta${ctaFoto ? '' : ' pr-cta-bez-fotky'}`}>
           <div className="container">
             <div className="pr-cta-box">
               <div className="pr-cta-obsah">
@@ -229,7 +230,7 @@ export default async function PrubehRealizacePage() {
                   <a href="tel:+420790388487" className="pr-cta-tel">📞 +420 790 388 487</a>
                 </div>
               </div>
-              <img src={ctaAdam.src} alt={ctaAdam.alt} className="pr-cta-adam" />
+              {ctaFoto && <img src={ctaFoto.src} alt={ctaFoto.alt} className="pr-cta-adam" />}
             </div>
           </div>
         </section>
