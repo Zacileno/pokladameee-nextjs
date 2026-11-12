@@ -31,6 +31,8 @@ export type PrubehRealizaceStranka = {
   ctaNadpis?: string
   ctaText?: string
   ctaTlacitko?: string
+  uvodFoto?: PrubehFoto
+  ctaFoto?: PrubehFoto
 }
 
 let n = 0
@@ -52,7 +54,7 @@ function pt(zapis: string): PtBlock[] {
 const blok = (nadpis: string, obsah: string, cislo?: string): PrubehBlok => ({ _key: key(), _type: 'blok', ...(cislo ? { cislo } : {}), nadpis, obsah: pt(obsah) })
 const kapitola = (nadpis: string, uvod: string, bloky: PrubehBlok[]): PrubehKapitola => ({ _key: key(), _type: 'kapitola', nadpis, uvod: uvod ? pt(uvod) : [], bloky })
 
-export const PRUBEH_VYCHOZI: Required<Omit<PrubehRealizaceStranka, 'nadpis'>> = {
+export const PRUBEH_VYCHOZI: Required<Omit<PrubehRealizaceStranka, 'nadpis' | 'uvodFoto' | 'ctaFoto'>> = {
   uvod: pt(`
 U Pokládámeee zajišťujeme **kompletní službu od A do Z**, od prvního telefonátu až po předání. Pomůžeme vybrat podlahu, posoudíme podklad a podle dohodnutého rozsahu zajistíme materiál, odstranění původní krytiny, potřebné opravy, pokládku i dokončení.
 Konkrétní práce a související služby vždy pojmenujeme v nabídce, abyste věděli, co přebíráme my a co je potřeba připravit u vás.
@@ -139,10 +141,10 @@ Odstraníme zbytky po sjednaných pracích a zkontrolujeme podlahu, lišty, pře
 Můžete se na nás obrátit s hotovou představou i jen s potřebou vyměnit podlahu. **Provedeme vás výběrem a zařídíme dohodnutou realizaci.** Předem vysvětlíme, co bude potřeba, kdo co zajistí a jak práce ovlivní provoz domácnosti.
 `, [
       blok('První zavolání nebo odeslání poptávky', `
-Zjistíme, kde se bude realizovat, které místnosti řešíte, přibližnou plochu a požadovaný termín. Zeptáme se na původní krytinu, představu o nové podlaze a na to, zda se v prostoru bydlí. Zaznamenáme kontakt a domluvíme návštěvu technika. Pokud máte fotografie, pomohou nám připravit se na zaměření. **Přesný rozměr ani odborné znalosti při prvním zavolání nepotřebujete.**
+Zjistíme, kde se bude realizovat, které místnosti řešíte, přibližnou plochu a požadovaný termín. Zeptáme se na původní krytinu, představu o nové podlaze a na to, zda se v prostoru bydlí. Zaznamenáme kontakt a domluvíme návštěvu specialisty. Pokud máte fotografie, pomohou nám připravit se na zaměření. **Přesný rozměr ani odborné znalosti při prvním zavolání nepotřebujete.**
 `, '1'),
       blok('Bezplatné zaměření a konzultace na místě', `
-Technik změří prostor, prohlédne dostupný podklad a s pomocí vzorků probere vhodné materiály a dekory. Ptá se na běžné používání místností, děti, domácí zvířata, kolečkové židle nebo podlahové vytápění, aby doporučení odpovídalo skutečným potřebám.
+Specialista změří prostor, prohlédne dostupný podklad a s pomocí vzorků probere vhodné materiály a dekory. Ptá se na běžné používání místností, děti, domácí zvířata, kolečkové židle nebo podlahové vytápění, aby doporučení odpovídalo skutečným potřebám.
 Při návštěvě řešíme zejména:
 - rozměry a členění místností, směr pokládky, návaznosti a potřebný materiál včetně prořezu,
 - viditelný stav podkladu, rovnost, výšky a vlhkost vhodnou metodou; co lze potvrdit až po odkrytí,
