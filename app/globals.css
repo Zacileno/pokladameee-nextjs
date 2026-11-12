@@ -632,7 +632,7 @@ a.kraj-mesto:hover { color: var(--orange); box-shadow: 0 4px 16px rgba(255,136,0
 .pr-hero-text .pr-text p { font-size: 17px; color: var(--gray-700); }
 .pr-tlacitka { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
 .pr-odkaz { color: var(--blue); font-weight: 700; font-size: 15px; text-decoration: underline; text-underline-offset: 4px; }
-.pr-fakta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 8px; }
+.pr-fakta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
 .pr-fakt { display: flex; align-items: center; gap: 16px; background: white; border-radius: 16px; padding: 22px 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
 .pr-fakt h2 { font-size: 19px; font-weight: 900; color: var(--black); line-height: 1.2; margin-bottom: 4px; }
 .pr-fakt p { font-size: 14.5px; line-height: 1.5; }
