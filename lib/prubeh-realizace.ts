@@ -31,6 +31,8 @@ export type PrubehRealizaceStranka = {
   ctaNadpis?: string
   ctaText?: string
   ctaTlacitko?: string
+  uvodFoto?: PrubehFoto
+  ctaFoto?: PrubehFoto
 }
 
 let n = 0
@@ -52,7 +54,7 @@ function pt(zapis: string): PtBlock[] {
 const blok = (nadpis: string, obsah: string, cislo?: string): PrubehBlok => ({ _key: key(), _type: 'blok', ...(cislo ? { cislo } : {}), nadpis, obsah: pt(obsah) })
 const kapitola = (nadpis: string, uvod: string, bloky: PrubehBlok[]): PrubehKapitola => ({ _key: key(), _type: 'kapitola', nadpis, uvod: uvod ? pt(uvod) : [], bloky })
 
-export const PRUBEH_VYCHOZI: Required<Omit<PrubehRealizaceStranka, 'nadpis'>> = {
+export const PRUBEH_VYCHOZI: Required<Omit<PrubehRealizaceStranka, 'nadpis' | 'uvodFoto' | 'ctaFoto'>> = {
   uvod: pt(`
 U Pokládámeee zajišťujeme **kompletní službu od A do Z**, od prvního telefonátu až po předání. Pomůžeme vybrat podlahu, posoudíme podklad a podle dohodnutého rozsahu zajistíme materiál, odstranění původní krytiny, potřebné opravy, pokládku i dokončení.
 Konkrétní práce a související služby vždy pojmenujeme v nabídce, abyste věděli, co přebíráme my a co je potřeba připravit u vás.

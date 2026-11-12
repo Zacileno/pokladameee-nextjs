@@ -65,6 +65,14 @@ export const prubehRealizaceStrankaSchema = defineType({
     defineField({ name: 'nadpis', title: 'Nadpis stránky', type: 'formatovanyText', group: 'uvod' }),
     { ...odstavce('uvod', 'Úvodní text'), group: 'uvod' },
     defineField({
+      name: 'uvodFoto',
+      title: 'Fotka v úvodu',
+      description: 'Postava na průhledném pozadí (PNG), ideálně na výšku a aspoň 900 px vysoká. Prázdné = výchozí fotka Adama.',
+      type: 'image',
+      group: 'uvod',
+      fields: [defineField({ name: 'alt', title: 'Popis pro nevidomé a Google', type: 'string' })],
+    }),
+    defineField({
       name: 'fakta',
       title: 'Tři hlavní informace pod úvodem',
       type: 'array',
@@ -135,6 +143,14 @@ export const prubehRealizaceStrankaSchema = defineType({
     defineField({ name: 'ctaNadpis', title: 'Nadpis výzvy', type: 'string', group: 'zaver' }),
     defineField({ name: 'ctaText', title: 'Text výzvy', type: 'text', rows: 3, group: 'zaver' }),
     defineField({ name: 'ctaTlacitko', title: 'Text tlačítka', type: 'string', group: 'zaver' }),
+    defineField({
+      name: 'ctaFoto',
+      title: 'Fotka u výzvy',
+      description: 'Postava na průhledném pozadí (PNG), ideálně na výšku a aspoň 900 px vysoká. Prázdné = výchozí fotka Adama.',
+      type: 'image',
+      group: 'zaver',
+      fields: [defineField({ name: 'alt', title: 'Popis pro nevidomé a Google', type: 'string' })],
+    }),
   ],
   preview: { prepare: () => ({ title: 'Průběh realizace' }) },
 })

@@ -4,7 +4,6 @@ import { PortableText, type PortableTextComponents } from '@portabletext/react'
 import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 import BrandIcon from '@/app/components/BrandIcon'
-import CeduleGrafika from '@/app/components/CeduleGrafika'
 import ReferenceSekce from '@/app/components/ReferenceSekce'
 import VideoDlazdice from '@/app/components/VideoDlazdice'
 import { VIDEO_PORUBACEK_REFERENCE } from '@/lib/videa'
@@ -54,6 +53,13 @@ const Text = ({ value }: { value?: PtBlock[] }) =>
   value?.length ? <div className="pr-text"><PortableText value={value} components={textKomponenty} /></div> : null
 
 const FAKTA_IKONY = ['📐', '📋', '✅']
+
+// fotka Adama ze Studia (průhledné PNG), jinak výchozí výřez z /public
+const ADAM_VYCHOZI = '/assets/adam-postava.png'
+const fotoAdama = (foto?: { asset?: { _ref: string }; alt?: string }) => ({
+  src: foto?.asset ? urlFor(foto).height(1200).fit('max').url() : ADAM_VYCHOZI,
+  alt: foto?.alt || 'Adam Hajdušek z pokládámeee.cz',
+})
 const DOBRE_VEDET_IKONY = ['🛡', '📊', '🕐']
 // výchozí fotky k tématům pokládky (přepíše je fotka nahraná ve Studiu)
 const TEMA_FOTKY = [
@@ -88,12 +94,14 @@ export default async function PrubehRealizacePage() {
   })))
   const dobreVedet = cesta.flatMap(k => (k.bloky ?? []).filter(b => !b.cislo))
   const cestaUvod = cesta.find(k => k.uvod?.length)?.uvod
+  const uvodAdam = fotoAdama(data?.uvodFoto)
+  const ctaAdam = fotoAdama(data?.ctaFoto)
 
   return (
     <>
       <Header opaque />
       <main>
-        {/* ÚVOD — text vlevo, Adam s cedulí vpravo */}
+        {/* ÚVOD — text vlevo; Adam stojí na kartě „Služba od A do Z“ (desktop) / „Zaměření zdarma“ (mobil) */}
         <section className="pr-hero">
           <div className="container pr-hero-grid">
             <div>
@@ -110,12 +118,21 @@ export default async function PrubehRealizacePage() {
                 <a href="#cesta-zakazky" className="pr-odkaz">Jak to probíhá ↓</a>
               </div>
             </div>
-            <CeduleGrafika text="Od A do Z" />
           </div>
           <div className="container">
             <div className="pr-fakta">
               {fakta.map((f, i) => (
                 <div key={f._key} className="pr-fakt">
+                  {/* Adam nad první kartou (mobil) a nad poslední (desktop) — přepíná CSS */}
+                  {(i === 0 || i === fakta.length - 1) && (
+                    <div className={`pr-adam ${i === 0 ? 'pr-adam-mobil' : 'pr-adam-desktop'}`} aria-hidden={i === 0 ? undefined : true}>
+                      <img src={uvodAdam.src} alt={i === 0 ? uvodAdam.alt : ''} className="pr-adam-foto" />
+                      <div className="cedule-odznak pr-adam-odznak">
+                        <span style={{ fontSize: 17, fontWeight: 900, lineHeight: 1.1 }}>Zaměření<br />zdarma!</span>
+                        <span className="cedule-odznak-pill">do 48 hodin</span>
+                      </div>
+                    </div>
+                  )}
                   <BrandIcon emoji={FAKTA_IKONY[i % FAKTA_IKONY.length]} size={52} />
                   <div>
                     <h2>{f.nadpis}</h2>
@@ -212,7 +229,7 @@ export default async function PrubehRealizacePage() {
                   <a href="tel:+420790388487" className="pr-cta-tel">📞 +420 790 388 487</a>
                 </div>
               </div>
-              <img src="/assets/adam-postava.png" alt="Adam Hajdušek z pokládámeee.cz" width={469} height={900} className="pr-cta-adam" />
+              <img src={ctaAdam.src} alt={ctaAdam.alt} className="pr-cta-adam" />
             </div>
           </div>
         </section>
