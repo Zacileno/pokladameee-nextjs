@@ -758,7 +758,7 @@ a.kraj-mesto:hover { color: var(--orange); box-shadow: 0 4px 16px rgba(255,136,0
   .pr-fakta { grid-template-columns: 1fr; gap: 12px; }
   .pr-fakt { padding: 16px 18px; }
   .pr-hero-grid { min-height: 0; }
-  .pr-fakta { margin-top: 300px; }
+  .pr-fakta { margin-top: 324px; }
   .pr-adam-desktop { display: none; }
   .pr-adam-mobil { display: block; }
   .pr-adam-foto { height: 290px; }
