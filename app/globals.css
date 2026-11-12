@@ -743,10 +743,10 @@ a.kraj-mesto:hover { color: var(--orange); box-shadow: 0 4px 16px rgba(255,136,0
 .pr-cta-bez-fotky { padding-top: 80px; }
 .pr-cta-bez-fotky .pr-cta-box { grid-template-columns: 1fr; }
 /* Adam v úvodu stojí přímo na kartě: desktop nad „Služba od A do Z“, mobil nad „Zaměření zdarma“ */
-.pr-hero-grid { min-height: 440px; }
+.pr-hero-grid { min-height: 480px; }
 .pr-fakt { position: relative; }
 .pr-adam { position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); pointer-events: none; }
-.pr-adam-foto { display: block; height: 430px; width: auto; max-width: none; }
+.pr-adam-foto { display: block; height: 470px; width: auto; max-width: none; }
 .pr-adam-odznak { left: -72px; top: 52%; }
 .pr-adam-mobil { display: none; }
 @media (max-width: 1199px) {
@@ -760,10 +760,10 @@ a.kraj-mesto:hover { color: var(--orange); box-shadow: 0 4px 16px rgba(255,136,0
   .pr-fakta { grid-template-columns: 1fr; gap: 12px; }
   .pr-fakt { padding: 16px 18px; }
   .pr-hero-grid { min-height: 0; }
-  .pr-fakta { margin-top: 324px; }
+  .pr-fakta { margin-top: 354px; }
   .pr-adam-desktop { display: none; }
   .pr-adam-mobil { display: block; }
-  .pr-adam-foto { height: 290px; }
+  .pr-adam-foto { height: 320px; }
   .pr-adam-odznak { left: -64px; top: 46%; }
   .prk-osa { justify-content: flex-start; gap: 10px; overflow-x: auto; padding: 8px 0 12px calc(50% - 21px); scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent); mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent); }
   .prk-osa::-webkit-scrollbar { display: none; }
