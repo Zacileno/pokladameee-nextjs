@@ -26,7 +26,11 @@ type MarkDef = { _type: string; _key: string; hodnota?: string; href?: string; n
 type Block = { _type: 'block'; children?: Span[]; markDefs?: MarkDef[] }
 
 function renderSpan(span: Span, markDefs: MarkDef[], key: number, vOdkazu: boolean) {
-  let node: React.ReactNode = span.text
+  // Shift + Enter v editoru = nový řádek (\n) → <br />
+  const casti = span.text.split('\n')
+  let node: React.ReactNode = casti.length > 1
+    ? casti.map((c, i) => <Fragment key={i}>{i > 0 && <br />}{c}</Fragment>)
+    : span.text
   const marks = span.marks || []
 
   if (marks.includes('em')) node = <em>{node}</em>
