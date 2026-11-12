@@ -5,7 +5,14 @@ export const kontaktSekceSchema = defineType({
   title: 'Kontaktní sekce',
   type: 'document',
   fields: [
-    defineField({ name: 'nadpis', title: 'Nadpis', type: 'string' }),
+    defineField({
+      name: 'nadpisText',
+      title: 'Nadpis',
+      description: 'Nový řádek: Shift + Enter. Prázdné pole = „Napište přímo / nám“ s oranžovým posledním slovem.',
+      type: 'formatovanyText',
+    }),
+    // starý prostý nadpis — nahrazen polem nadpisText, web ho použije jen když nadpisText chybí
+    defineField({ name: 'nadpis', title: 'Nadpis (starý)', type: 'string', hidden: true }),
     defineField({ name: 'podnadpis', title: 'Podnadpis', type: 'text', rows: 3 }),
     defineField({ name: 'jmeno', title: 'Jméno', type: 'string' }),
     defineField({ name: 'role', title: 'Role', type: 'string' }),

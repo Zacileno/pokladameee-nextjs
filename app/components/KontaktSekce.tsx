@@ -1,9 +1,11 @@
 import Image from 'next/image'
 import KontaktForm from './KontaktForm'
 import BrandIcon from './BrandIcon'
+import FormatovanyText from './FormatovanyText'
 
 interface KontaktData {
   nadpis?: string
+  nadpisText?: Parameters<typeof FormatovanyText>[0]['value']
   podnadpis?: string
   jmeno?: string
   role?: string
@@ -23,7 +25,7 @@ export default function KontaktSekce({ kontakt }: Props) {
   const nadpis = kontakt?.nadpis || 'Napište přímo nám'
   const podnadpis = kontakt?.podnadpis || 'Zaměření je zdarma. Odpovíme do 24 hodin, obvykle dřív. Přijedeme k vám po celém MSK, Zlínsku i Olomoucku.'
   const jmeno = kontakt?.jmeno || 'Adam Hajdušek'
-  const role = kontakt?.role || 'Hlavní technik'
+  const role = kontakt?.role || 'Hlavní specialista'
   const citat = kontakt?.citat || 'Každou podlahu řešíme osobně. Přijedeme se podívat.'
   const fotoUrl = kontakt?.fotoUrl || null
   const telefon = kontakt?.telefon || '+420 790 388 487'
@@ -43,8 +45,11 @@ export default function KontaktSekce({ kontakt }: Props) {
             <div className="kontakt-hlavicka">
             <p style={{ color: 'var(--orange)', fontWeight: 700, fontSize: 13, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Nezávazná poptávka</p>
             <h2 className="section-title">
-              {zbytek && <>{zbytek}<br /></>}
-              <span>{posledniSlovo}</span>
+              {/* nadpis s formátováním ze Studia; jinak starý prostý nadpis s oranžovým posledním slovem */}
+              <FormatovanyText value={kontakt?.nadpisText} fallback={<>
+                {zbytek && <>{zbytek}<br /></>}
+                <span>{posledniSlovo}</span>
+              </>} />
             </h2>
             </div>
             <div className="kontakt-detail">

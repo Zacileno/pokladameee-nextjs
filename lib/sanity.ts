@@ -71,7 +71,7 @@ export const OBECNE_NASTAVENI_QUERY = `*[_type == "obecneNastaveni"][0] {
 }`
 
 export const KONTAKT_SEKCE_QUERY = `*[_type == "kontaktSekce"][0] {
-  nadpis, podnadpis,
+  nadpis, nadpisText, podnadpis,
   jmeno, role, citat,
   "fotoUrl": foto.asset->url,
   telefon, email,
