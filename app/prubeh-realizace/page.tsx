@@ -128,10 +128,6 @@ export default async function PrubehRealizacePage() {
                   {(i === 0 || i === fakta.length - 1) && (
                     <div className={`pr-adam ${i === 0 ? 'pr-adam-mobil' : 'pr-adam-desktop'}`} aria-hidden={i === 0 ? undefined : true}>
                       <img src={uvodAdam.src} alt={i === 0 ? uvodAdam.alt : ''} className="pr-adam-foto" />
-                      <div className="cedule-odznak pr-adam-odznak">
-                        <span style={{ fontSize: 17, fontWeight: 900, lineHeight: 1.1 }}>Zaměření<br />zdarma!</span>
-                        <span className="cedule-odznak-pill">do 48 hodin</span>
-                      </div>
                     </div>
                   )}
                   <BrandIcon emoji={FAKTA_IKONY[i % FAKTA_IKONY.length]} size={52} />
