@@ -37,7 +37,7 @@ const LOCAL_BUSINESS_JSON_LD = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.pokladameee.cz'),
   title: {
-    default: 'pokládámeee.cz – Vinylové podlahy v MSK | Hotovo, než se nadějeteee',
+    default: 'Pokládka podlah na Moravě | Hotovo, než se nadějeteee',
     template: '%s | pokládámeee.cz',
   },
   description: 'Profesionální pokládka vinylových podlah v Moravskoslezském, Zlínském a Olomouckém kraji. Zaměření zdarma do 48 hodin, hotovo, než se nadějeteee. Starou podlahu ekologicky odstraníme. Volejte Adama Hajdušek.',
