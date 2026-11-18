@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'pokládámeee.cz' }],
   icons: { icon: '/favicon.svg', shortcut: '/favicon.svg' },
   openGraph: {
-    title: 'pokládámeee.cz – Vinylové podlahy v MSK',
+    title: 'Pokládka podlah na Moravě | Hotovo, než se nadějeteee',
     description: 'Pokládka vinylových podlah v Moravskoslezském, Zlínském a Olomouckém kraji. Zaměření zdarma, hotovo, než se nadějeteee.',
     url: 'https://www.pokladameee.cz',
     siteName: 'pokládámeee.cz',

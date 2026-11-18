@@ -32,7 +32,7 @@ async function seed() {
         _key: 't1',
         nazev: 'Vinylová lepená podlaha',
         badge: 'Naše hlavní specializace',
-        popis: 'Lepený vinyl se přilepí přímo k podkladu speciálním lepidlem. Je stabilní, tichý a ideální pro podlahové topení. Pracujeme primárně s kolekcí UpFloor.',
+        popis: 'Lepený vinyl se přilepí přímo k podkladu speciálním lepidlem. Je stabilní, tichý a ideální pro podlahové topení. Pracujeme s prémiovými kolekcemi od ověřených výrobců.',
         vyhody: ['Vhodný pro podlahové topení', 'Maximální stabilita a ticho', 'Do koupelny, kuchyně i předsíně'],
         barva: 'orange',
       },
@@ -58,7 +58,7 @@ async function seed() {
     krokyPodnadpis: 'Od prvního kontaktu po hotovou podlahu — bez stresu.',
     kroky: [
       { _key: 'k1', nadpis: 'Zavoláte nebo napíšete', text: 'Do 48 h přijedeme na zaměření — bez závazku a zdarma.' },
-      { _key: 'k2', nadpis: 'Vyberete materiál', text: 'Přivezeme vzorník UpFloor, poradíme s výběrem a barvou.' },
+      { _key: 'k2', nadpis: 'Vyberete materiál', text: 'Přivezeme vzorník, poradíme s výběrem a barvou.' },
       { _key: 'k3', nadpis: 'Položíme a uklidíme', text: 'Profesionální pokládka, odpad ekologicky zlikvidujeme.' },
     ],
 
@@ -70,7 +70,7 @@ async function seed() {
       {
         _key: 'f1',
         otazka: 'Jaký je rozdíl mezi lepeným a plovoucím vinylem?',
-        odpoved: 'Lepený vinyl se přilepí přímo k podkladu — je stabilnější, tišší a ideální pro podlahové topení. Plovoucí (click) vinyl se spojuje zámkovým systémem bez lepidla, takže je rychlejší na montáž a snáze se vyměňuje. Pro většinu domácností doporučujeme lepenou variantu UpFloor.',
+        odpoved: 'Lepený vinyl se přilepí přímo k podkladu — je stabilnější, tišší a ideální pro podlahové topení. Plovoucí (click) vinyl se spojuje zámkovým systémem bez lepidla, takže je rychlejší na montáž a snáze se vyměňuje. Pro většinu domácností doporučujeme lepenou variantu.',
       },
       {
         _key: 'f2',
