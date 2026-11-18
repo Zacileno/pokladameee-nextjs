@@ -60,7 +60,7 @@ const OBECNE: FaqEntry[] = [
 ]
 
 const VINYL_FALLBACK: FaqEntry[] = [
-  { otazka: 'Jaký je rozdíl mezi lepeným a plovoucím vinylem?', odpoved: 'Lepený vinyl se přilepí přímo k podkladu — je stabilnější, tišší a ideální pro podlahové topení. Plovoucí (click) vinyl se spojuje zámkovým systémem bez lepidla, takže je rychlejší na montáž a snáze se vyměňuje. Pro většinu domácností doporučujeme lepenou variantu UpFloor.' },
+  { otazka: 'Jaký je rozdíl mezi lepeným a plovoucím vinylem?', odpoved: 'Lepený vinyl se přilepí přímo k podkladu — je stabilnější, tišší a ideální pro podlahové topení. Plovoucí (click) vinyl se spojuje zámkovým systémem bez lepidla, takže je rychlejší na montáž a snáze se vyměňuje. Pro většinu domácností doporučujeme lepenou variantu.' },
   { otazka: 'Jak dlouho trvá pokládka podlahy?', odpoved: 'Průměrný pokoj (20–25 m²) zvládneme za jeden pracovní den. Počítejte s tím, že zahrnujeme i demontáž staré podlahy a přípravu podkladu. Přesný harmonogram domluvíme na zaměření.' },
   { otazka: 'Musím si zajistit odvoz staré podlahy?', odpoved: 'Ne — odvoz a ekologická likvidace staré podlahy je součástí naší ceny. Nemusíte řešit kontejner ani odvoz.' },
   { otazka: 'Je vinylová podlaha vhodná do koupelny?', odpoved: 'Ano, lepený vinyl je 100% voděodolný a výborně snáší vlhkost. Používáme ho pravidelně do koupelen, kuchyní i předsíní. Plovoucí variantu do trvale vlhkých prostor nedoporučujeme.' },

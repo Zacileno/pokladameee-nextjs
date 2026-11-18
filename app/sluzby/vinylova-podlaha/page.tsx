@@ -36,7 +36,7 @@ const BENEFITY = [
 
 const KROKY = [
   { nadpis: 'Zavoláte nebo napíšete', text: 'Do 48 h přijedeme na zaměření — bez závazku a zdarma.' },
-  { nadpis: 'Vyberete materiál', text: 'Přivezeme vzorník UpFloor, poradíme s výběrem a barvou.' },
+  { nadpis: 'Vyberete materiál', text: 'Přivezeme vzorník, poradíme s výběrem a barvou.' },
   { nadpis: 'Položíme a uklidíme', text: 'Profesionální pokládka, odpad ekologicky zlikvidujeme.' },
 ]
 
@@ -52,7 +52,7 @@ const TYPY = [
   {
     nazev: 'Vinylová lepená podlaha',
     badge: 'Naše hlavní specializace',
-    popis: 'Lepený vinyl se přilepí přímo k podkladu speciálním lepidlem. Je stabilní, tichý a ideální pro podlahové topení. Pracujeme primárně s kolekcí UpFloor.',
+    popis: 'Lepený vinyl se přilepí přímo k podkladu speciálním lepidlem. Je stabilní, tichý a ideální pro podlahové topení. Pracujeme s prémiovými kolekcemi od ověřených výrobců.',
     vyhody: ['Vhodný pro podlahové topení', 'Maximální stabilita a ticho', 'Do koupelny, kuchyně i předsíně'],
     barva: 'orange',
   },
@@ -68,7 +68,7 @@ const TYPY = [
 const FAQ = [
   {
     otazka: 'Jaký je rozdíl mezi lepeným a plovoucím vinylem?',
-    odpoved: 'Lepený vinyl se přilepí přímo k podkladu — je stabilnější, tišší a ideální pro podlahové topení. Plovoucí (click) vinyl se spojuje zámkovým systémem bez lepidla, takže je rychlejší na montáž a snáze se vyměňuje. Pro většinu domácností doporučujeme lepenou variantu UpFloor.',
+    odpoved: 'Lepený vinyl se přilepí přímo k podkladu — je stabilnější, tišší a ideální pro podlahové topení. Plovoucí (click) vinyl se spojuje zámkovým systémem bez lepidla, takže je rychlejší na montáž a snáze se vyměňuje. Pro většinu domácností doporučujeme lepenou variantu.',
   },
   {
     otazka: 'Jak dlouho trvá pokládka podlahy?',
