@@ -16,7 +16,7 @@ import KontaktSekce from '../../../components/KontaktSekce'
 import CeduleGrafika from '../../../components/CeduleGrafika'
 import MestoMapa from '../../../components/MestoMapa'
 
-export const revalidate = 3600
+export const revalidate = 0
 export const dynamicParams = false
 
 export function generateStaticParams() {

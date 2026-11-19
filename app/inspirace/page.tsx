@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   },
   alternates: { canonical: 'https://www.pokladameee.cz/inspirace' },
 }
-export const revalidate = 3600
+export const revalidate = 0
 
 const ISTRIP = [
   { emoji: '📐', text: 'Zaměření zdarma' },
