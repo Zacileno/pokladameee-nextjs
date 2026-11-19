@@ -79,7 +79,7 @@ export async function nahledLokality(cedule: string, nadpis: string) {
 
         {/* oranžový odznak vpravo dole od postavy */}
         <div style={{
-          position: 'absolute', left: 1045, top: 420, width: 140, height: 140, borderRadius: 70, background: ORANZOVA,
+          position: 'absolute', left: 975, top: 420, width: 140, height: 140, borderRadius: 70, background: ORANZOVA,
           color: '#FFFFFF', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
           transform: 'rotate(-8deg)',
         }}>
