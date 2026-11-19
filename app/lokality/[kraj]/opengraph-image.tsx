@@ -5,7 +5,7 @@ import { getKraj } from '@/lib/lokality'
 // Náhled pro sdílení stránky kraje — Adam s cedulí kraje, jako na začátku stránky
 export const alt = 'Pokládámeee podlahy v kraji – pokládámeee.cz'
 export const size = NAHLED_VELIKOST
-export const contentType = 'image/png'
+export const contentType = 'image/jpeg'
 export const revalidate = 3600
 
 export default async function Image({ params }: { params: Promise<{ kraj: string }> }) {

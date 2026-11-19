@@ -33,51 +33,60 @@ export async function nahledLokality(cedule: string, nadpis: string) {
   const vsechenText = ['Pokládámeee podlahy –', nadpis, cedule.toUpperCase(), podnadpis, ...odznak].join('')
   const [cerna, tucna] = await Promise.all([nactiFont(900, vsechenText), nactiFont(600, vsechenText)])
 
-  return new ImageResponse(
+  // Rozložení pravé části odpovídá CeduleGrafika (globals.css .cedule-*): rámeček 573 × 630,
+  // postava 90 % výšky, cedule na tyči nakloněná za hlavou.
+  const X = 600
+  const png = await new ImageResponse(
     (
       <div style={{ width: '100%', height: '100%', display: 'flex', position: 'relative', background: '#FFFFFF', fontFamily: 'Barlow' }}>
-        {/* oranžový pruh dole přes celou šířku */}
-        <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 14, background: ORANZOVA, display: 'flex' }} />
-
         {/* levá část: logo, nadpis, podnadpis */}
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '0 0 0 72px', width: 700 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '0 0 20px 72px', width: 640 }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={`${WEB}/assets/logo/logo-zakladni.svg`} width={347} height={60} alt="" />
-          <div style={{ display: 'flex', flexDirection: 'column', marginTop: 48, fontSize: 60, fontWeight: 900, lineHeight: 1.08, color: '#000000' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', marginTop: 48, fontSize: 58, fontWeight: 900, lineHeight: 1.08, color: '#000000' }}>
             <div style={{ display: 'flex' }}>
-              Pokládám<span style={{ color: ORANZOVA }}>eee</span>&nbsp;podlahy –
+              <span>Pokládám</span>
+              <span style={{ color: ORANZOVA }}>eee</span>
+              <span style={{ marginLeft: 15 }}>podlahy –</span>
             </div>
             <div style={{ display: 'flex' }}>{nadpis}</div>
           </div>
-          <div style={{ display: 'flex', marginTop: 28, fontSize: 30, fontWeight: 600, color: '#3D3D3A' }}>{podnadpis}</div>
+          <div style={{ display: 'flex', marginTop: 28, fontSize: 28, fontWeight: 600, color: '#3D3D3A' }}>{podnadpis}</div>
         </div>
 
-        {/* pravá část: cedule na tyči za Adamem */}
-        <div style={{ position: 'absolute', left: 790, top: 70, width: 330, height: 330, display: 'flex', flexDirection: 'column', alignItems: 'center', transform: 'rotate(18deg)' }}>
+        {/* cedule na tyči — za postavou */}
+        <div style={{
+          position: 'absolute', left: X + 126, top: 57, width: 321, height: 321,
+          display: 'flex', flexDirection: 'column', alignItems: 'center',
+          transform: 'rotate(18deg)', transformOrigin: '50% 100%',
+        }}>
           <div style={{
             display: 'flex', background: MODRA, color: '#FFFFFF', border: '5px solid #FFFFFF', borderRadius: 12,
-            boxShadow: `0 0 0 3px ${MODRA}`, padding: '14px 22px', fontSize: 34, fontWeight: 900, lineHeight: 1.1,
-            textAlign: 'center', transform: 'rotate(-6deg)', maxWidth: 330,
+            boxShadow: `0 0 0 3px ${MODRA}`, padding: '12px 22px', fontSize: 30, fontWeight: 900, lineHeight: 1.1,
+            textAlign: 'center', transform: 'rotate(-6deg)', maxWidth: 321,
           }}>
             {cedule.toUpperCase()}
           </div>
           <div style={{ display: 'flex', flex: 1, width: 14, marginTop: -6, background: 'linear-gradient(90deg, #9a9a96, #d8d8d4 50%, #9a9a96)', borderRadius: 3 }} />
         </div>
 
-        {/* Adam */}
+        {/* postava */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={postava} alt="" height={590} style={{ position: 'absolute', bottom: 0, left: 760, height: 590 }} />
+        <img src={postava} alt="" style={{ position: 'absolute', bottom: 0, left: X + 46, height: 567 }} />
 
-        {/* oranžový odznak */}
+        {/* oranžový odznak vpravo dole od postavy */}
         <div style={{
-          position: 'absolute', left: 690, top: 330, width: 150, height: 150, borderRadius: 75, background: ORANZOVA,
+          position: 'absolute', left: 1030, top: 420, width: 140, height: 140, borderRadius: 70, background: ORANZOVA,
           color: '#FFFFFF', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
           transform: 'rotate(-8deg)',
         }}>
-          <div style={{ display: 'flex', fontSize: 22, fontWeight: 900, lineHeight: 1.05 }}>{odznak[0]}</div>
-          <div style={{ display: 'flex', fontSize: 22, fontWeight: 900, lineHeight: 1.05 }}>{odznak[1]}</div>
-          <div style={{ display: 'flex', marginTop: 8, background: '#FFFFFF', color: ORANZOVA, fontSize: 15, fontWeight: 600, borderRadius: 999, padding: '3px 12px' }}>{odznak[2]}</div>
+          <div style={{ display: 'flex', fontSize: 21, fontWeight: 900, lineHeight: 1.05 }}>{odznak[0]}</div>
+          <div style={{ display: 'flex', fontSize: 21, fontWeight: 900, lineHeight: 1.05 }}>{odznak[1]}</div>
+          <div style={{ display: 'flex', marginTop: 8, background: '#FFFFFF', color: ORANZOVA, fontSize: 14, fontWeight: 600, borderRadius: 999, padding: '3px 12px' }}>{odznak[2]}</div>
         </div>
+
+        {/* oranžový pruh dole přes celou šířku */}
+        <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 12, background: ORANZOVA, display: 'flex' }} />
       </div>
     ),
     {
@@ -87,5 +96,15 @@ export async function nahledLokality(cedule: string, nadpis: string) {
         { name: 'Barlow', data: tucna, weight: 600, style: 'normal' },
       ],
     },
-  )
+  ).arrayBuffer()
+
+  // PNG s fotkou má ~300 kB — WhatsApp velké obrázky nezobrazí, proto převod na JPG
+  // (sharp je součástí instalace Next.js). Když převod selže, vrátí se PNG.
+  try {
+    const sharp = (await import('sharp')).default
+    const jpg = await sharp(Buffer.from(png)).jpeg({ quality: 84, mozjpeg: true }).toBuffer()
+    return new Response(new Uint8Array(jpg), { headers: { 'Content-Type': 'image/jpeg' } })
+  } catch {
+    return new Response(png, { headers: { 'Content-Type': 'image/png' } })
+  }
 }
