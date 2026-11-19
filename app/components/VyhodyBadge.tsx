@@ -1,7 +1,10 @@
 import Tlacitko from '@/app/components/Tlacitko'
 import BrandIcon from './BrandIcon'
+import FormatovanyText from './FormatovanyText'
 
 type Vyhoda = { emoji?: string; title?: string; desc?: string }
+type FText = Parameters<typeof FormatovanyText>[0]['value']
+type Data = { stitek?: string; nadpis?: string; podnadpis?: string; nadpisText?: FText; podnadpisText?: FText; vyhody?: Vyhoda[] }
 
 const FALLBACK_VYHODY: Vyhoda[] = [
   { emoji: '🏆', title: 'Prémiové materiály', desc: 'Pracujeme s ověřenými materiály od předních výrobců s dlouhou zárukou.' },
@@ -10,7 +13,7 @@ const FALLBACK_VYHODY: Vyhoda[] = [
   { emoji: '📍', title: 'MSK – známeee kraj', desc: 'Působíme v Moravskoslezském, Zlínském i Olomouckém kraji. Přijedeme k vám.' },
 ]
 
-export default function VyhodyBadge({ data }: { data?: { nadpis?: string; podnadpis?: string; vyhody?: Vyhoda[] } }) {
+export default function VyhodyBadge({ data }: { data?: Data }) {
   const nadpis = data?.nadpis || 'Podlahu bez zbytečných starostí'
   const podnadpis = data?.podnadpis || 'Přijedeme, zaměříme, poradíme s výběrem. Celá realizace od A do Z — demontáž, příprava podkladu, pokládka, úklid.'
   const vyhody = data?.vyhody?.length ? data.vyhody : FALLBACK_VYHODY
@@ -20,9 +23,10 @@ export default function VyhodyBadge({ data }: { data?: { nadpis?: string; podnad
       <div className="container">
         <div className="vyhody-badge-grid">
           <div>
-            <p style={{ color: 'var(--orange)', fontWeight: 700, fontSize: 13, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Proč nás vybrat</p>
-            <h2 className="section-title">{nadpis.split(' ').slice(0, -2).join(' ')}<br /><span>{nadpis.split(' ').slice(-2).join(' ')}</span></h2>
-            <p style={{ marginTop: 20, fontSize: 17, lineHeight: 1.7, color: 'var(--gray-700)', maxWidth: 420 }}>{podnadpis}</p>
+            <p style={{ color: 'var(--orange)', fontWeight: 700, fontSize: 13, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>{data?.stitek || 'Proč nás vybrat'}</p>
+            {/* nadpis a podnadpis s formátováním ze Studia; jinak staré prosté texty */}
+            <h2 className="section-title"><FormatovanyText value={data?.nadpisText} fallback={<>{nadpis.split(' ').slice(0, -2).join(' ')}<br /><span>{nadpis.split(' ').slice(-2).join(' ')}</span></>} /></h2>
+            <p style={{ marginTop: 20, fontSize: 17, lineHeight: 1.7, color: 'var(--gray-700)', maxWidth: 420 }}><FormatovanyText value={data?.podnadpisText} fallback={podnadpis} /></p>
             <div style={{ marginTop: 32 }}>
               <a href="#kontakt" className="btn-primary"><Tlacitko klic="vyhody" fallback="Zaměřit zdarma" /></a>
             </div>

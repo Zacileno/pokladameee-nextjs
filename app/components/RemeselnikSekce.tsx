@@ -1,4 +1,5 @@
 import { client, PROJEKTY_QUERY } from '../../lib/sanity'
+import FormatovanyText from './FormatovanyText'
 
 export const revalidate = 0
 
@@ -59,7 +60,8 @@ function Hvezdicky({ pocet, accent }: { pocet: number; accent: string }) {
   )
 }
 
-type RodinaData = { nadpis?: string; podnadpis?: string; pocetKlientuCelkem?: number }
+type FText = Parameters<typeof FormatovanyText>[0]['value']
+type RodinaData = { stitek?: string; nadpis?: string; podnadpis?: string; nadpisText?: FText; podnadpisText?: FText; pocetKlientuCelkem?: number }
 
 export default async function RemeselnikSekce({ data }: { data?: RodinaData }) {
   const nadpis = data?.nadpis || 'Dobré řemeslo si zaslouží dobré jméno'
@@ -78,13 +80,14 @@ export default async function RemeselnikSekce({ data }: { data?: RodinaData }) {
       <div className="container" style={{ paddingTop: 80, paddingBottom: 56 }}>
         <div style={{ textAlign: 'center' }}>
           <p style={{ color: 'rgba(255,255,255,0.7)', fontWeight: 700, fontSize: 13, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>
-            Naše rodina značek
+            {data?.stitek || 'Naše rodina značek'}
           </p>
+          {/* nadpis a podnadpis s formátováním ze Studia; jinak staré prosté texty */}
           <h2 style={{ fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 900, color: 'white', lineHeight: 1.15, marginBottom: 20 }}>
-            {nadpis}
+            <FormatovanyText value={data?.nadpisText} fallback={nadpis} />
           </h2>
           <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: 17, lineHeight: 1.7, maxWidth: 620, margin: '0 auto' }}>
-            {podnadpis}{' '}
+            <FormatovanyText value={data?.podnadpisText} fallback={podnadpis} />{' '}
             Potvrdilo nám to již <strong style={{ color: 'white' }}>{pocet.toLocaleString('cs-CZ')} klientů</strong> napříč projekty.
           </p>
         </div>
