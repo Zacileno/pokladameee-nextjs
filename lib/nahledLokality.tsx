@@ -45,7 +45,7 @@ export async function nahledLokality(cedule: string, nadpis: string) {
           <img src={`${WEB}/assets/logo/logo-zakladni.svg`} width={347} height={60} alt="" />
           <div style={{ display: 'flex', flexDirection: 'column', marginTop: 48, fontSize: 58, fontWeight: 900, lineHeight: 1.08, color: '#000000' }}>
             <div style={{ display: 'flex' }}>
-              <span>Pokládám</span>
+              Pokládám
               <span style={{ color: ORANZOVA }}>eee</span>
               <span style={{ marginLeft: 15 }}>podlahy –</span>
             </div>
