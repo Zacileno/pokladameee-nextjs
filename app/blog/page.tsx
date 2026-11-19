@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { SOCIAL_OBRAZEK } from '@/lib/socialObrazek'
 import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 import KontaktSekce from '@/app/components/KontaktSekce'
@@ -19,6 +20,7 @@ export const metadata: Metadata = {
     title: 'Blog | pokládámeee.cz',
     description: 'Rady, návody a tipy k výběru a pokládce podlah.',
     url: 'https://www.pokladameee.cz/blog',
+    images: SOCIAL_OBRAZEK,
   },
   alternates: { canonical: 'https://www.pokladameee.cz/blog' },
 }

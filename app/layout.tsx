@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { SOCIAL_OBRAZEK } from '@/lib/socialObrazek'
 import './globals.css'
 import JsonLd from './components/JsonLd'
 import TopBar from './components/TopBar'
@@ -51,7 +52,10 @@ export const metadata: Metadata = {
     siteName: 'pokládámeee.cz',
     locale: 'cs_CZ',
     type: 'website',
+    images: SOCIAL_OBRAZEK,
   },
+  // X (Twitter) bez vlastního obrázku převezme og:image
+  twitter: { card: 'summary_large_image' },
   robots: { index: true, follow: true },
   alternates: { canonical: 'https://www.pokladameee.cz' },
 }

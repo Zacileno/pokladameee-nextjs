@@ -5,6 +5,7 @@ export const obecneNastaveniSchema = defineType({
   title: 'Obecné nastavení',
   type: 'document',
   fieldsets: [
+    { name: 'nahledy', title: 'Obrázky pro sdílení na sociálních sítích', options: { collapsible: true, collapsed: false } },
     { name: 'tlacitka', title: 'Tlačítka', options: { collapsible: true, collapsed: false } },
     { name: 'tlacitkaPripravovane', title: 'Tlačítka na stránkách, které ještě nejsou na ostrém webu', options: { collapsible: true, collapsed: true } },
   ],
@@ -14,6 +15,22 @@ export const obecneNastaveniSchema = defineType({
     defineField({ name: 'pracovniDoba', title: 'Pracovní doba', type: 'string' }),
     defineField({ name: 'region', title: 'Region', type: 'string' }),
     defineField({ name: 'popisFooter', title: 'Popis firmy (footer)', type: 'text', rows: 3 }),
+    // Názvy polí bannerObrazek a foto jsou převzaté z jiných dokumentů schválně: Sanity počítá
+    // limit atributů podle názvu pole, takže nové pole se stejným názvem limit nezvyšuje.
+    defineField({
+      name: 'bannerObrazek',
+      title: 'Obecný náhledový obrázek',
+      description: 'Ukáže se při sdílení odkazu (Facebook, WhatsApp…) u všech stránek kromě lokalit, Black Friday a článků blogu. Ideálně 1200 × 630 px. Facebook může starý obrázek ukazovat ještě pár dní.',
+      type: 'image',
+      fieldset: 'nahledy',
+    }),
+    defineField({
+      name: 'foto',
+      title: 'Postava na stránkách lokalit',
+      description: 'Postava u cedule na začátku stránek krajů a měst a v jejich náhledu pro sdílení. PNG s průhledným pozadím, na výšku (jako současný Adam). Prázdné = Adam.',
+      type: 'image',
+      fieldset: 'nahledy',
+    }),
     defineField({ name: 'tlacitkoHlavicka', title: 'Hlavička webu (počítač i mobil)', type: 'formatovanyText', fieldset: 'tlacitka' }),
     defineField({ name: 'tlacitkoVideo', title: 'Přehrání videa v sekci Hodnocení', type: 'formatovanyText', fieldset: 'tlacitka' }),
     defineField({ name: 'tlacitkoDekujeme', title: 'Stránka Děkujeme — návrat na web', type: 'formatovanyText', fieldset: 'tlacitka' }),

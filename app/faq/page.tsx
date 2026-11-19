@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { SOCIAL_OBRAZEK } from '@/lib/socialObrazek'
 import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 import KontaktSekce from '@/app/components/KontaktSekce'
@@ -24,6 +25,7 @@ export const metadata: Metadata = {
     title: 'Časté otázky | pokládámeee.cz',
     description: 'Odpovědi na nejčastější otázky o pokládce podlah — vinyl, PVC, koberce i dřevo.',
     url: 'https://www.pokladameee.cz/faq',
+    images: SOCIAL_OBRAZEK,
   },
   alternates: { canonical: 'https://www.pokladameee.cz/faq' },
 }

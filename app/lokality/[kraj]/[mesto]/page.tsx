@@ -102,7 +102,7 @@ export default async function MestoPage({ params }: { params: Params }) {
                 </div>
                 <a href="#kontakt" className="btn-primary kraj-cta" style={{ marginTop: 32, padding: '16px 32px' }}><Tlacitko klic="lokalityZamereni" fallback="Chci zaměření zdarma" /></a>
               </div>
-              <CeduleGrafika text={mesto.nazev} />
+              <CeduleGrafika text={mesto.nazev} postavaUrl={obecneNastaveni?.postavaUrl} />
             </div>
           </div>
         </section>
