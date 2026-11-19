@@ -44,12 +44,13 @@ export async function nahledLokality(cedule: string, nadpis: string) {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={`${WEB}/assets/logo/logo-zakladni.svg`} width={347} height={60} alt="" />
           <div style={{ display: 'flex', flexDirection: 'column', marginTop: 48, fontSize: 58, fontWeight: 900, lineHeight: 1.08, color: '#000000' }}>
+            {/* satori zahazuje mezery na okrajích kusů textu — mezera je proto okraj bloku */}
             <div style={{ display: 'flex' }}>
-              Pokládám
-              <span style={{ color: ORANZOVA }}>eee</span>
-              <span style={{ marginLeft: 15 }}>podlahy –</span>
+              <div style={{ display: 'flex' }}>Pokládám</div>
+              <div style={{ display: 'flex', color: ORANZOVA }}>eee</div>
+              <div style={{ display: 'flex', marginLeft: 16 }}>podlahy</div>
             </div>
-            <div style={{ display: 'flex' }}>{nadpis}</div>
+            <div style={{ display: 'flex', fontSize: nadpis.length > 14 ? 50 : 58 }}>{`– ${nadpis}`}</div>
           </div>
           <div style={{ display: 'flex', marginTop: 28, fontSize: 28, fontWeight: 600, color: '#3D3D3A' }}>{podnadpis}</div>
         </div>
