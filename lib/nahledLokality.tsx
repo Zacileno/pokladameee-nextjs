@@ -55,16 +55,16 @@ export async function nahledLokality(cedule: string, nadpis: string) {
           <div style={{ display: 'flex', marginTop: 28, fontSize: 28, fontWeight: 600, color: '#3D3D3A' }}>{podnadpis}</div>
         </div>
 
-        {/* cedule na tyči — za postavou */}
+        {/* cedule na tyči — za postavou; dlouhé názvy se zalomí na 2 řádky, aby se vešly */}
         <div style={{
-          position: 'absolute', left: X + 126, top: 57, width: 321, height: 321,
+          position: 'absolute', left: X + 80, top: 57, width: 321, height: 321,
           display: 'flex', flexDirection: 'column', alignItems: 'center',
           transform: 'rotate(18deg)', transformOrigin: '50% 100%',
         }}>
           <div style={{
             display: 'flex', background: MODRA, color: '#FFFFFF', border: '5px solid #FFFFFF', borderRadius: 12,
-            boxShadow: `0 0 0 3px ${MODRA}`, padding: '12px 22px', fontSize: cedule.length > 12 ? 25 : 30, fontWeight: 900, lineHeight: 1.1,
-            textAlign: 'center', transform: 'rotate(-6deg)', maxWidth: 290,
+            boxShadow: `0 0 0 3px ${MODRA}`, padding: '12px 22px', fontSize: cedule.length > 12 ? 24 : 30, fontWeight: 900, lineHeight: 1.1,
+            textAlign: 'center', transform: 'rotate(-6deg)', maxWidth: 260,
           }}>
             {cedule.toUpperCase()}
           </div>
@@ -75,9 +75,9 @@ export async function nahledLokality(cedule: string, nadpis: string) {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={postava} alt="" style={{ position: 'absolute', bottom: 0, left: X + 46, height: 567 }} />
 
-        {/* oranžový odznak vlevo dole u postavy (jako na stránce) */}
+        {/* oranžový odznak vpravo dole od postavy */}
         <div style={{
-          position: 'absolute', left: X - 40, top: 410, width: 140, height: 140, borderRadius: 70, background: ORANZOVA,
+          position: 'absolute', left: 1045, top: 420, width: 140, height: 140, borderRadius: 70, background: ORANZOVA,
           color: '#FFFFFF', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
           transform: 'rotate(-8deg)',
         }}>
