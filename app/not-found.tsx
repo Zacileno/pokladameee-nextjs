@@ -33,7 +33,7 @@ export default function NotFound() {
         <div style={{ display: 'flex', gap: 20, justifyContent: 'center', flexWrap: 'wrap', paddingTop: 24, borderTop: '1px solid var(--gray-100)' }}>
           <Link href="/#jak-to-funguje" style={{ color: 'var(--gray-500)', fontSize: 14, fontWeight: 600 }}>Jak to funguje</Link>
           <Link href="/#reference" style={{ color: 'var(--gray-500)', fontSize: 14, fontWeight: 600 }}>Reference</Link>
-          <Link href="/faq" style={{ color: 'var(--gray-500)', fontSize: 14, fontWeight: 600 }}>FAQ</Link>
+          <Link href="/caste-dotazy" style={{ color: 'var(--gray-500)', fontSize: 14, fontWeight: 600 }}>Časté dotazy</Link>
           <Link href="/#kontakt" style={{ color: 'var(--gray-500)', fontSize: 14, fontWeight: 600 }}>Kontakt</Link>
           <Link href="/kariera" style={{ color: 'var(--gray-500)', fontSize: 14, fontWeight: 600 }}>Kariéra</Link>
         </div>

@@ -11,6 +11,12 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        // FAQ přejmenováno na Časté dotazy (2026-11-19) — staré odkazy a Google vedou na novou adresu
+        source: '/faq',
+        destination: '/caste-dotazy',
+        permanent: true,
+      },
+      {
         source: '/kariera/pokladac-vinylove-podlahy-msk',
         destination: '/kariera/podlahar-vinylove-podlahy-msk',
         permanent: true,

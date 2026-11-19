@@ -86,7 +86,7 @@ export default async function SluzbyPage() {
                   Vyberte si <strong>vinyl</strong>, <strong>PVC</strong>, <strong>koberec</strong> nebo <strong>dřevo</strong> podle toho, co od podlahy čekáte doma i v kanceláři.
                   Nejste si něčím jistí? Sepsali jsme
                 </>} />{' '}
-                <a href="/faq" style={{ color: 'var(--orange)', fontWeight: 700, textDecoration: 'underline', textUnderlineOffset: 3 }}><FormatovanyText vOdkazu value={stranka?.uvodOdkaz} fallback="odpovědi na nejčastější dotazy" /></a>.
+                <a href="/caste-dotazy" style={{ color: 'var(--orange)', fontWeight: 700, textDecoration: 'underline', textUnderlineOffset: 3 }}><FormatovanyText vOdkazu value={stranka?.uvodOdkaz} fallback="odpovědi na nejčastější dotazy" /></a>.
               </p>
               <div className="sluzby-uvod-kroky">
                 {kroky.map(k => (
