@@ -68,7 +68,7 @@ export const RODINA_ZNACEK_QUERY = `*[_type == "rodinaZnacek"][0] {
 }`
 
 export const OBECNE_NASTAVENI_QUERY = `*[_type == "obecneNastaveni"][0] {
-  telefon, email, pracovniDoba, region, popisFooter
+  telefon, email, pracovniDoba, region, popisFooter, "postavaUrl": foto.asset->url
 }`
 
 export const KONTAKT_SEKCE_QUERY = `*[_type == "kontaktSekce"][0] {

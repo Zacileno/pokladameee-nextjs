@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { SOCIAL_OBRAZEK } from '@/lib/socialObrazek'
 import Image from 'next/image'
 import { PortableText, type PortableTextComponents } from '@portabletext/react'
 import Header from '@/app/components/Header'
@@ -22,6 +23,7 @@ export const metadata: Metadata = {
     title: 'Průběh realizace | pokládámeee.cz',
     description: 'Kompletní služba od A do Z. Podívejte se, co zahrnuje profesionální pokládka a jak se postaráme o vaši zakázku.',
     url: 'https://www.pokladameee.cz/prubeh-realizace',
+    images: SOCIAL_OBRAZEK,
   },
   alternates: { canonical: 'https://www.pokladameee.cz/prubeh-realizace' },
 }

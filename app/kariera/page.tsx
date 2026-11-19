@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { SOCIAL_OBRAZEK } from '@/lib/socialObrazek'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import KarieraHero from './components/KarieraHero'
@@ -20,6 +21,7 @@ export const metadata: Metadata = {
     title: 'Kariéra | Pokládámeee.cz',
     description: 'Hledáme šikovné řemeslníky, obchodníky a koordinátory do týmu pokládámeee.cz v Moravskoslezském kraji.',
     url: 'https://www.pokladameee.cz/kariera',
+    images: SOCIAL_OBRAZEK,
     siteName: 'pokládámeee.cz',
     locale: 'cs_CZ',
     type: 'website',

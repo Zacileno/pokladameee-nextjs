@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { SOCIAL_OBRAZEK } from '@/lib/socialObrazek'
 import { client, INSPIRACE_QUERY, INSPIRACE_STRANKA_QUERY, KONTAKT_SEKCE_QUERY } from '../../lib/sanity'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -19,6 +20,7 @@ export const metadata: Metadata = {
     title: 'Inspirace a galerie | pokládámeee.cz',
     description: 'Skutečné realizace podlah v Moravskoslezském, Zlínském a Olomouckém kraji — žádné katalogové fotky, jen naše vlastní práce.',
     url: 'https://www.pokladameee.cz/inspirace',
+    images: SOCIAL_OBRAZEK,
   },
   alternates: { canonical: 'https://www.pokladameee.cz/inspirace' },
 }

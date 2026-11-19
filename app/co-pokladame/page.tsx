@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { SOCIAL_OBRAZEK } from '@/lib/socialObrazek'
 import Image from 'next/image'
 import Link from 'next/link'
 import Header from '@/app/components/Header'
@@ -20,6 +21,7 @@ export const metadata: Metadata = {
     title: 'Podlahy na míru | pokládámeee.cz',
     description: 'Podlahy do bytů, domů, firem i bytových družstev. Zaměříme, položíme a po sobě uklidíme.',
     url: 'https://www.pokladameee.cz/co-pokladame',
+    images: SOCIAL_OBRAZEK,
   },
   alternates: { canonical: 'https://www.pokladameee.cz/co-pokladame' },
 }

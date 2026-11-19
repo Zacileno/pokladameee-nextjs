@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { SOCIAL_OBRAZEK } from '@/lib/socialObrazek'
 import { notFound } from 'next/navigation'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
@@ -44,6 +45,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title: `${p.nazev} | Kariéra pokládámeee.cz`,
       description: p.perex,
       url: `https://www.pokladameee.cz/kariera/${p.slug}`,
+      images: SOCIAL_OBRAZEK,
       siteName: 'pokládámeee.cz',
       locale: 'cs_CZ',
       type: 'website',

@@ -87,7 +87,7 @@ export default async function KrajPage({ params }: { params: Promise<{ kraj: str
                 </div>
                 <a href="#kontakt" className="btn-primary kraj-cta" style={{ marginTop: 32, padding: '16px 32px' }}><Tlacitko klic="lokalityZamereni" fallback="Chci zaměření zdarma" /></a>
               </div>
-              <CeduleGrafika text={kraj.nazev} />
+              <CeduleGrafika text={kraj.nazev} postavaUrl={obecneNastaveni?.postavaUrl} />
             </div>
 
             {/* MĚSTA — proklik na podstránku města */}

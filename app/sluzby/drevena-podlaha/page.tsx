@@ -1,5 +1,6 @@
 import Tlacitko from '@/app/components/Tlacitko'
 import type { Metadata } from 'next'
+import { SOCIAL_OBRAZEK } from '@/lib/socialObrazek'
 import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 import BenefityGrid from '@/app/components/BenefityGrid'
@@ -23,6 +24,7 @@ export const metadata: Metadata = {
     title: 'Dřevěná podlaha — pokládka bez starostí | pokládámeee.cz',
     description: 'Profesionální pokládka dřevěných podlah v Moravskoslezském, Zlínském a Olomouckém kraji. Zaměření zdarma do 48 hodin, kompletní servis od výběru dřeviny po úklid.',
     url: 'https://www.pokladameee.cz/sluzby/drevena-podlaha',
+    images: SOCIAL_OBRAZEK,
   },
   alternates: { canonical: 'https://www.pokladameee.cz/sluzby/drevena-podlaha' },
 }
