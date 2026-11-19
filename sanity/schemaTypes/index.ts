@@ -11,6 +11,8 @@ import { procNasVybratSchema } from '../schemas/procNasVybrat'
 import { rodinaZnacekSchema } from '../schemas/rodinaZnacek'
 import { obecneNastaveniSchema } from '../schemas/obecneNastaveni'
 import { kontaktSekceSchema } from '../schemas/kontaktSekce'
+import { mapaSekceSchema } from '../schemas/mapaSekce'
+import { lokalityStrankaSchema } from '../schemas/lokalityStranka'
 import { vinylovaPodlahaSchema } from '../schemas/vinylovaPodlaha'
 import { pvcPodlahaSchema } from '../schemas/pvcPodlaha'
 import { kobercovaPodlahaSchema } from '../schemas/kobercovaPodlaha'
@@ -27,5 +29,5 @@ import { prubehRealizaceStrankaSchema } from '../schemas/prubehRealizaceStranka'
 import { formatovanyTextSchema } from '../schemas/objects/formatovanyText'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [inspiraceSchema, akceSchema, referenceSchema, projektSchema, heroSekceSchema, heroIkonkySchema, sluzbySekceSchema, jakToFungujeSchema, procNasVybratSchema, rodinaZnacekSchema, obecneNastaveniSchema, kontaktSekceSchema, vinylovaPodlahaSchema, pvcPodlahaSchema, kobercovaPodlahaSchema, drevenaPodlahaSchema, blogPostSchema, karierniPoziceSchema, blackFridaySchema, sluzbyStrankaSchema, blogStrankaSchema, karieraStrankaSchema, coPokladameStrankaSchema, faqStrankaSchema, prubehRealizaceStrankaSchema, formatovanyTextSchema],
+  types: [inspiraceSchema, akceSchema, referenceSchema, projektSchema, heroSekceSchema, heroIkonkySchema, sluzbySekceSchema, jakToFungujeSchema, procNasVybratSchema, rodinaZnacekSchema, obecneNastaveniSchema, kontaktSekceSchema, mapaSekceSchema, vinylovaPodlahaSchema, pvcPodlahaSchema, kobercovaPodlahaSchema, drevenaPodlahaSchema, blogPostSchema, karierniPoziceSchema, blackFridaySchema, sluzbyStrankaSchema, blogStrankaSchema, karieraStrankaSchema, coPokladameStrankaSchema, faqStrankaSchema, prubehRealizaceStrankaSchema, lokalityStrankaSchema, formatovanyTextSchema],
 }
