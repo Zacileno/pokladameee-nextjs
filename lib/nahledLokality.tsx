@@ -35,7 +35,9 @@ export async function nahledLokality(cedule: string, nadpis: string) {
 
   // Rozložení pravé části odpovídá CeduleGrafika (globals.css .cedule-*): rámeček 573 × 630,
   // postava 90 % výšky, cedule na tyči nakloněná za hlavou.
-  const X = 600
+  const X = 690
+  // „Olomoucký kraj“ → OLOMOUCKÝ / KRAJ, aby se cedule vešla; dlouhá města se zalomí sama
+  const radkyCedule = cedule.endsWith(' kraj') ? [cedule.slice(0, -5), 'kraj'] : [cedule]
   const png = await new ImageResponse(
     (
       <div style={{ width: '100%', height: '100%', display: 'flex', position: 'relative', background: '#FFFFFF', fontFamily: 'Barlow' }}>
@@ -55,18 +57,18 @@ export async function nahledLokality(cedule: string, nadpis: string) {
           <div style={{ display: 'flex', marginTop: 28, fontSize: 28, fontWeight: 600, color: '#3D3D3A' }}>{podnadpis}</div>
         </div>
 
-        {/* cedule na tyči — za postavou */}
+        {/* cedule na tyči — za postavou; dlouhé názvy se zalomí na 2 řádky, aby se vešly */}
         <div style={{
-          position: 'absolute', left: X + 126, top: 57, width: 321, height: 321,
+          position: 'absolute', left: X + 60, top: 57, width: 321, height: 321,
           display: 'flex', flexDirection: 'column', alignItems: 'center',
           transform: 'rotate(18deg)', transformOrigin: '50% 100%',
         }}>
           <div style={{
             display: 'flex', background: MODRA, color: '#FFFFFF', border: '5px solid #FFFFFF', borderRadius: 12,
-            boxShadow: `0 0 0 3px ${MODRA}`, padding: '12px 22px', fontSize: 30, fontWeight: 900, lineHeight: 1.1,
-            textAlign: 'center', transform: 'rotate(-6deg)', maxWidth: 321,
+            boxShadow: `0 0 0 3px ${MODRA}`, padding: '12px 22px', fontSize: Math.max(...radkyCedule.map((r) => r.length)) > 11 ? 24 : 30, fontWeight: 900, lineHeight: 1.1,
+            flexDirection: 'column', alignItems: 'center', textAlign: 'center', transform: 'rotate(-6deg)', maxWidth: 250,
           }}>
-            {cedule.toUpperCase()}
+            {radkyCedule.map((r) => <div key={r} style={{ display: 'flex' }}>{r.toUpperCase()}</div>)}
           </div>
           <div style={{ display: 'flex', flex: 1, width: 14, marginTop: -6, background: 'linear-gradient(90deg, #9a9a96, #d8d8d4 50%, #9a9a96)', borderRadius: 3 }} />
         </div>
@@ -77,7 +79,7 @@ export async function nahledLokality(cedule: string, nadpis: string) {
 
         {/* oranžový odznak vpravo dole od postavy */}
         <div style={{
-          position: 'absolute', left: 1030, top: 420, width: 140, height: 140, borderRadius: 70, background: ORANZOVA,
+          position: 'absolute', left: 975, top: 420, width: 140, height: 140, borderRadius: 70, background: ORANZOVA,
           color: '#FFFFFF', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
           transform: 'rotate(-8deg)',
         }}>
