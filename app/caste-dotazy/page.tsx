@@ -24,10 +24,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Časté otázky | pokládámeee.cz',
     description: 'Odpovědi na nejčastější otázky o pokládce podlah — vinyl, PVC, koberce i dřevo.',
-    url: 'https://www.pokladameee.cz/faq',
+    url: 'https://www.pokladameee.cz/caste-dotazy',
     images: SOCIAL_OBRAZEK,
   },
-  alternates: { canonical: 'https://www.pokladameee.cz/faq' },
+  alternates: { canonical: 'https://www.pokladameee.cz/caste-dotazy' },
 }
 
 type RT = Parameters<typeof FormatovanyText>[0]['value']

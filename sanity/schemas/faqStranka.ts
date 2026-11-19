@@ -1,6 +1,6 @@
 import { defineType, defineField } from 'sanity'
 
-// Texty stránky /faq — prázdné pole = na webu zůstane výchozí text.
+// Texty stránky /caste-dotazy — prázdné pole = na webu zůstane výchozí text.
 // Otázky ke službám se dál berou z podstránek služeb, aby nebyly na dvou místech.
 const text = (name: string, title: string, group: string) =>
   defineField({ name, title, type: 'formatovanyText', group })

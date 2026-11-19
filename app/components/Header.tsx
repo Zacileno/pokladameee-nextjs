@@ -37,7 +37,7 @@ const VEDLEJSI_LINKS: [string, string][] = [
   ['/prubeh-realizace', 'Jak to funguje'],
   ['/#reference', 'Reference'],
   ['/lokality', 'Lokality'],
-  ['/faq', 'Časté dotazy'],
+  ['/caste-dotazy', 'Časté dotazy'],
   ['/kariera', 'Kariéra'],
   ['/blog', 'Blog'],
 ]
@@ -159,7 +159,7 @@ export default function Header({ opaque }: { opaque?: boolean }) {
               )}
             </div>
           ))}
-          {[['/o-nas', 'O nás'], ['/inspirace', 'Inspirace'], ['/prubeh-realizace', 'Jak to funguje'], ['/#reference', 'Reference'], ['/lokality', 'Lokality'], ['/faq', 'Časté dotazy'], ['/#kontakt', 'Kontakt'], ['/kariera', 'Kariéra'], ['/blog', 'Blog']].map(([href, label]) => (
+          {[['/o-nas', 'O nás'], ['/inspirace', 'Inspirace'], ['/prubeh-realizace', 'Jak to funguje'], ['/#reference', 'Reference'], ['/lokality', 'Lokality'], ['/caste-dotazy', 'Časté dotazy'], ['/#kontakt', 'Kontakt'], ['/kariera', 'Kariéra'], ['/blog', 'Blog']].map(([href, label]) => (
             <a key={href} href={href} onClick={() => setMenuOpen(false)} style={{ color: 'white', fontWeight: 600, fontSize: 18 }}>{label}</a>
           ))}
           <a href="/#kontakt" className="btn-primary" onClick={() => setMenuOpen(false)} style={{ textAlign: 'center', justifyContent: 'center' }}><Tlacitko klic="hlavicka" fallback="Chci podlahu" /></a>
