@@ -288,7 +288,7 @@ export default async function VinylovaPodlahaPage() {
       {/* FAQ */}
       <section className="section" style={{ background: 'var(--gray-50)' }}>
         <div className="container">
-          <h2 className="section-title" style={{ textAlign: 'center', marginBottom: 8 }}>Časté otázky</h2>
+          <h2 className="section-title" style={{ textAlign: 'center', marginBottom: 8 }}>Časté dotazy</h2>
           <p className="section-subtitle" style={{ textAlign: 'center', margin: '0 auto 48px' }}>Odpovídáme na to, co zákazníci řeší nejčastěji.</p>
           <div className="faq-list">
             {faq.map((f, i) => (
