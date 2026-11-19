@@ -71,6 +71,10 @@ export const OBECNE_NASTAVENI_QUERY = `*[_type == "obecneNastaveni"][0] {
   telefon, email, pracovniDoba, region, popisFooter, "postavaUrl": foto.asset->url
 }`
 
+export const MAPA_SEKCE_QUERY = `*[_type == "mapaSekce"][0] { nadpisText, podnadpisText, heroText }`
+
+export const LOKALITY_STRANKA_QUERY = `*[_type == "lokalityStranka"][0] { nadpis, realizaceNadpis }`
+
 export const KONTAKT_SEKCE_QUERY = `*[_type == "kontaktSekce"][0] {
   nadpis, nadpisText, podnadpis,
   jmeno, role, citat,

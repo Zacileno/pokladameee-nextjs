@@ -14,6 +14,8 @@ import { procNasVybratSchema } from './sanity/schemas/procNasVybrat'
 import { rodinaZnacekSchema } from './sanity/schemas/rodinaZnacek'
 import { obecneNastaveniSchema } from './sanity/schemas/obecneNastaveni'
 import { kontaktSekceSchema } from './sanity/schemas/kontaktSekce'
+import { mapaSekceSchema } from './sanity/schemas/mapaSekce'
+import { lokalityStrankaSchema } from './sanity/schemas/lokalityStranka'
 import { vinylovaPodlahaSchema } from './sanity/schemas/vinylovaPodlaha'
 import { pvcPodlahaSchema } from './sanity/schemas/pvcPodlaha'
 import { kobercovaPodlahaSchema } from './sanity/schemas/kobercovaPodlaha'
@@ -36,5 +38,5 @@ export default defineConfig({
   projectId: '8cvsenqb',
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
   plugins: [structureTool(), visionTool()],
-  schema: { types: [akceSchema, blackFridaySchema, inspiraceSchema, inspiraceStrankaSchema, referenceSchema, projektSchema, heroSekceSchema, heroIkonkySchema, sluzbySekceSchema, jakToFungujeSchema, procNasVybratSchema, rodinaZnacekSchema, obecneNastaveniSchema, kontaktSekceSchema, vinylovaPodlahaSchema, pvcPodlahaSchema, kobercovaPodlahaSchema, drevenaPodlahaSchema, karieraStrankaSchema, karierniPoziceSchema, blogStrankaSchema, blogPostSchema, sluzbyStrankaSchema, coPokladameStrankaSchema, faqStrankaSchema, prubehRealizaceStrankaSchema, formatovanyTextSchema] },
+  schema: { types: [akceSchema, blackFridaySchema, inspiraceSchema, inspiraceStrankaSchema, referenceSchema, projektSchema, heroSekceSchema, heroIkonkySchema, sluzbySekceSchema, jakToFungujeSchema, procNasVybratSchema, rodinaZnacekSchema, obecneNastaveniSchema, kontaktSekceSchema, mapaSekceSchema, vinylovaPodlahaSchema, pvcPodlahaSchema, kobercovaPodlahaSchema, drevenaPodlahaSchema, karieraStrankaSchema, karierniPoziceSchema, blogStrankaSchema, blogPostSchema, sluzbyStrankaSchema, coPokladameStrankaSchema, faqStrankaSchema, prubehRealizaceStrankaSchema, lokalityStrankaSchema, formatovanyTextSchema] },
 })
