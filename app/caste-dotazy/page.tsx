@@ -19,10 +19,10 @@ import {
 export const revalidate = 0
 
 export const metadata: Metadata = {
-  title: 'Časté otázky',
+  title: 'Časté dotazy',
   description: 'Odpovědi na nejčastější otázky o pokládce vinylových, PVC, kobercových a dřevěných podlah. Zaměření zdarma do 48 hodin, kompletní servis od výběru materiálu po úklid.',
   openGraph: {
-    title: 'Časté otázky | pokládámeee.cz',
+    title: 'Časté dotazy | pokládámeee.cz',
     description: 'Odpovědi na nejčastější otázky o pokládce podlah — vinyl, PVC, koberce i dřevo.',
     url: 'https://www.pokladameee.cz/caste-dotazy',
     images: SOCIAL_OBRAZEK,
@@ -142,7 +142,7 @@ export default async function FaqPage() {
       <section style={{ background: 'var(--blue)', paddingTop: 'calc(140px + var(--hlavicka-navic))', paddingBottom: 64 }}>
         <div className="container">
           <p style={{ fontSize: 13, fontWeight: 600, letterSpacing: '2px', color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', marginBottom: 16 }}>
-            <FormatovanyText value={stranka?.nadpisMaly} fallback="Časté otázky" />
+            <FormatovanyText value={stranka?.nadpisMaly} fallback="Časté dotazy" />
           </p>
           <h1 style={{ fontSize: 'clamp(32px, 5vw, 48px)', fontWeight: 900, color: 'white', lineHeight: 1.1, marginBottom: 16, maxWidth: 700 }}>
             <FormatovanyText value={stranka?.nadpis} fallback="Co lidé nejčastěji řeší, než si u nás objednají podlahu" />
