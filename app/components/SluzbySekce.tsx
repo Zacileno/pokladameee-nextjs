@@ -1,5 +1,6 @@
 import Tlacitko from '@/app/components/Tlacitko'
 import BrandIcon from './BrandIcon'
+import FormatovanyText from './FormatovanyText'
 
 type Sluzba = {
   emoji?: string
@@ -10,8 +11,11 @@ type Sluzba = {
 
 type Props = {
   data?: {
+    stitek?: string
     nadpis?: string
     podnadpis?: string
+    nadpisText?: Parameters<typeof FormatovanyText>[0]['value']
+    podnadpisText?: Parameters<typeof FormatovanyText>[0]['value']
     sluzby?: Sluzba[]
   }
 }
@@ -39,12 +43,15 @@ export default function SluzbySekce({ data }: Props) {
     <section id="sluzby" className="section" style={{ background: 'var(--gray-50)' }}>
       <div className="container">
         <div style={{ marginBottom: 48 }}>
-          <p style={{ color: 'var(--orange)', fontWeight: 700, fontSize: 13, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Co pokládámeee</p>
+          <p style={{ color: 'var(--orange)', fontWeight: 700, fontSize: 13, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>{data?.stitek || 'Co pokládámeee'}</p>
+          {/* nadpis a podnadpis s formátováním ze Studia; jinak staré prosté texty */}
           <h2 className="section-title">
-            {prvniRadek && <>{prvniRadek}<br /></>}
-            {maNa && 'na '}<span>{posledniDve}</span>
+            <FormatovanyText value={data?.nadpisText} fallback={<>
+              {prvniRadek && <>{prvniRadek}<br /></>}
+              {maNa && 'na '}<span>{posledniDve}</span>
+            </>} />
           </h2>
-          <p className="section-subtitle" style={{ marginTop: 16 }}>{podnadpis}</p>
+          <p className="section-subtitle" style={{ marginTop: 16 }}><FormatovanyText value={data?.podnadpisText} fallback={podnadpis} /></p>
         </div>
 
         <div className="sluzby-grid">

@@ -5,8 +5,12 @@ export const procNasVybratSchema = defineType({
   title: 'Proč nás vybrat',
   type: 'document',
   fields: [
-    defineField({ name: 'nadpis', title: 'Nadpis', type: 'string' }),
-    defineField({ name: 'podnadpis', title: 'Podnadpis', type: 'text', rows: 3 }),
+    defineField({ name: 'stitek', title: 'Štítek nad nadpisem', description: 'Malý text velkými písmeny nad nadpisem.', type: 'string' }),
+    defineField({ name: 'nadpisText', title: 'Nadpis', description: 'Nový řádek: Shift + Enter.', type: 'formatovanyText' }),
+    defineField({ name: 'podnadpisText', title: 'Podnadpis', description: 'Nový řádek: Shift + Enter.', type: 'formatovanyText' }),
+    // staré prosté texty — web je použije jen když nová pole chybí
+    defineField({ name: 'nadpis', title: 'Nadpis (starý)', type: 'string', hidden: true }),
+    defineField({ name: 'podnadpis', title: 'Podnadpis (starý)', type: 'text', rows: 3, hidden: true }),
     defineField({
       name: 'vyhody',
       title: 'Výhody (max. 4)',

@@ -5,6 +5,8 @@ export const jakToFungujeSchema = defineType({
   title: 'Jak to funguje',
   type: 'document',
   fields: [
+    defineField({ name: 'stitek', title: 'Štítek nad nadpisem', description: 'Malý text velkými písmeny nad nadpisem.', type: 'string' }),
+    defineField({ name: 'nadpisText', title: 'Nadpis', description: 'Nový řádek: Shift + Enter.', type: 'formatovanyText' }),
     defineField({
       name: 'kroky',
       title: 'Kroky (max. 4)',

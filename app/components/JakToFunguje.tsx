@@ -1,5 +1,6 @@
 import Tlacitko from '@/app/components/Tlacitko'
 import BrandIcon from './BrandIcon'
+import FormatovanyText from './FormatovanyText'
 
 type Krok = { title?: string; desc?: string }
 
@@ -19,7 +20,9 @@ const sEee = (text = '') => {
   return i < 0 ? text : <>{text.slice(0, i)}<span>eee</span>{text.slice(i + 3)}</>
 }
 
-export default function JakToFunguje({ data }: { data?: { kroky?: Krok[] } }) {
+type Data = { stitek?: string; nadpisText?: Parameters<typeof FormatovanyText>[0]['value']; kroky?: Krok[] }
+
+export default function JakToFunguje({ data }: { data?: Data }) {
   const kroky = data?.kroky?.length ? data.kroky : FALLBACK_KROKY
 
   return (
@@ -31,11 +34,14 @@ export default function JakToFunguje({ data }: { data?: { kroky?: Krok[] } }) {
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div style={{ marginBottom: 64 }}>
           <p style={{ color: 'var(--orange)', fontWeight: 700, fontSize: 13, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>
-            Jak to fungujeee
+            {data?.stitek || 'Jak to fungujeee'}
           </p>
+          {/* nadpis s formátováním ze Studia; jinak výchozí text */}
           <h2 className="section-title" style={{ color: 'white' }}>
-            Čtyři kroky{' '}
-            <span style={{ color: 'var(--orange)' }}>k nové podlaze</span>
+            <FormatovanyText value={data?.nadpisText} fallback={<>
+              Čtyři kroky{' '}
+              <span style={{ color: 'var(--orange)' }}>k nové podlaze</span>
+            </>} />
           </h2>
         </div>
         <div className="kroky-grid">
