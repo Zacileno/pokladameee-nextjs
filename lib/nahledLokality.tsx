@@ -35,7 +35,7 @@ export async function nahledLokality(cedule: string, nadpis: string) {
 
   // Rozložení pravé části odpovídá CeduleGrafika (globals.css .cedule-*): rámeček 573 × 630,
   // postava 90 % výšky, cedule na tyči nakloněná za hlavou.
-  const X = 600
+  const X = 690
   const png = await new ImageResponse(
     (
       <div style={{ width: '100%', height: '100%', display: 'flex', position: 'relative', background: '#FFFFFF', fontFamily: 'Barlow' }}>
@@ -63,8 +63,8 @@ export async function nahledLokality(cedule: string, nadpis: string) {
         }}>
           <div style={{
             display: 'flex', background: MODRA, color: '#FFFFFF', border: '5px solid #FFFFFF', borderRadius: 12,
-            boxShadow: `0 0 0 3px ${MODRA}`, padding: '12px 22px', fontSize: 30, fontWeight: 900, lineHeight: 1.1,
-            textAlign: 'center', transform: 'rotate(-6deg)', maxWidth: 321,
+            boxShadow: `0 0 0 3px ${MODRA}`, padding: '12px 22px', fontSize: cedule.length > 12 ? 25 : 30, fontWeight: 900, lineHeight: 1.1,
+            textAlign: 'center', transform: 'rotate(-6deg)', maxWidth: 290,
           }}>
             {cedule.toUpperCase()}
           </div>
@@ -75,9 +75,9 @@ export async function nahledLokality(cedule: string, nadpis: string) {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={postava} alt="" style={{ position: 'absolute', bottom: 0, left: X + 46, height: 567 }} />
 
-        {/* oranžový odznak vpravo dole od postavy */}
+        {/* oranžový odznak vlevo dole u postavy (jako na stránce) */}
         <div style={{
-          position: 'absolute', left: 1030, top: 420, width: 140, height: 140, borderRadius: 70, background: ORANZOVA,
+          position: 'absolute', left: X - 40, top: 410, width: 140, height: 140, borderRadius: 70, background: ORANZOVA,
           color: '#FFFFFF', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
           transform: 'rotate(-8deg)',
         }}>
