@@ -83,61 +83,38 @@ export const KONTAKT_SEKCE_QUERY = `*[_type == "kontaktSekce"][0] {
   pracovniDoba, region
 }`
 
-export const VINYLOVA_PODLAHA_QUERY = `*[_type == "vinylovaPodlaha"][0] {
-  heroNadpis, heroPodnadpis, heroBadge,
+// pole "…Format" = formátovaný text, pole bez přípony = původní prostý text (záloha)
+const PODLAHA_POLE = `
+  "heroStitek": heroStitekFormat,
+  "heroNadpis": coalesce(heroNadpisFormat, heroNadpis),
+  "heroPodnadpis": coalesce(heroPodnadpisFormat, heroPodnadpis),
+  "heroBadge": coalesce(heroBadgeFormat, heroBadge),
   "heroFotkaUrl": heroFotka.asset->url,
-  istrip[] { emoji, text },
-  typyNadpis, typyPodnadpis,
-  typy[] { nazev, badge, popis, vyhody, barva },
-  benefityNadpis,
-  benefity[] { emoji, nadpis, text },
-  krokyNadpis, krokyPodnadpis,
-  kroky[] { nadpis, text },
+  istrip[] { emoji, "text": coalesce(textFormat, text) },
+  "typyNadpis": coalesce(typyNadpisFormat, typyNadpis),
+  "typyPodnadpis": coalesce(typyPodnadpisFormat, typyPodnadpis),
+  typy[] {
+    "nazev": coalesce(nazevFormat, nazev), "badge": coalesce(badgeFormat, badge), "popis": coalesce(popisFormat, popis),
+    "vyhody": coalesce(vyhodyFormat[].text, vyhody), barva
+  },
+  "benefityNadpis": coalesce(benefityNadpisFormat, benefityNadpis),
+  benefity[] { emoji, "nadpis": coalesce(nadpisFormat, nadpis), "text": coalesce(textFormat, text) },
+  "krokyNadpis": coalesce(krokyNadpisFormat, krokyNadpis),
+  "krokyPodnadpis": coalesce(krokyPodnadpisFormat, krokyPodnadpis),
+  kroky[] { "nadpis": coalesce(nadpisFormat, nadpis), "text": coalesce(textFormat, text) },
+  galerieNadpis, galeriePodnadpis, videoNadpis,
   referenceHodnoceni, referenceCitace, referenceJmeno,
-  faq[] { otazka, odpoved }
-}`
+  faqNadpis, faqPodnadpis,
+  faq[] { "otazka": coalesce(otazkaFormat, otazka), "odpoved": coalesce(odpovedFormat, odpoved) }
+`
 
-export const PVC_PODLAHA_QUERY = `*[_type == "pvcPodlaha"][0] {
-  heroNadpis, heroPodnadpis, heroBadge,
-  "heroFotkaUrl": heroFotka.asset->url,
-  istrip[] { emoji, text },
-  typyNadpis, typyPodnadpis,
-  typy[] { nazev, badge, popis, vyhody, barva },
-  benefityNadpis,
-  benefity[] { emoji, nadpis, text },
-  krokyNadpis, krokyPodnadpis,
-  kroky[] { nadpis, text },
-  referenceHodnoceni, referenceCitace, referenceJmeno,
-  faq[] { otazka, odpoved }
-}`
+export const VINYLOVA_PODLAHA_QUERY = `*[_type == "vinylovaPodlaha"][0] {${PODLAHA_POLE}}`
 
-export const KOBERCOVA_PODLAHA_QUERY = `*[_type == "kobercovaPodlaha"][0] {
-  heroNadpis, heroPodnadpis, heroBadge,
-  "heroFotkaUrl": heroFotka.asset->url,
-  istrip[] { emoji, text },
-  typyNadpis, typyPodnadpis,
-  typy[] { nazev, badge, popis, vyhody, barva },
-  benefityNadpis,
-  benefity[] { emoji, nadpis, text },
-  krokyNadpis, krokyPodnadpis,
-  kroky[] { nadpis, text },
-  referenceHodnoceni, referenceCitace, referenceJmeno,
-  faq[] { otazka, odpoved }
-}`
+export const PVC_PODLAHA_QUERY = `*[_type == "pvcPodlaha"][0] {${PODLAHA_POLE}}`
 
-export const DREVENA_PODLAHA_QUERY = `*[_type == "drevenaPodlaha"][0] {
-  heroNadpis, heroPodnadpis, heroBadge,
-  "heroFotkaUrl": heroFotka.asset->url,
-  istrip[] { emoji, text },
-  typyNadpis, typyPodnadpis,
-  typy[] { nazev, badge, popis, vyhody, barva },
-  benefityNadpis,
-  benefity[] { emoji, nadpis, text },
-  krokyNadpis, krokyPodnadpis,
-  kroky[] { nadpis, text },
-  referenceHodnoceni, referenceCitace, referenceJmeno,
-  faq[] { otazka, odpoved }
-}`
+export const KOBERCOVA_PODLAHA_QUERY = `*[_type == "kobercovaPodlaha"][0] {${PODLAHA_POLE}}`
+
+export const DREVENA_PODLAHA_QUERY = `*[_type == "drevenaPodlaha"][0] {${PODLAHA_POLE}}`
 
 export const BLOG_POSTS_QUERY = `*[_type == "blogPost"] | order(datumVydani desc) {
   _id, title, "slug": slug.current, kategorie, perex, datumVydani,
@@ -152,15 +129,20 @@ export const BLOG_POST_QUERY = `*[_type == "blogPost" && slug.current == $slug][
 
 export const BLOG_SLUGS_QUERY = `*[_type == "blogPost"]{ "slug": slug.current }`
 
+const POZICE_POLE = `
+  _id, nazev, nadpis, "slug": slug.current, region, typ,
+  "regionLabel": coalesce(regionLabelFormat, regionLabel), "typLabel": coalesce(typLabelFormat, typLabel), "perex": coalesce(perexFormat, perex),
+  "naplnPrace": coalesce(naplnPraceFormat[].text, naplnPrace, []),
+  "pozadujeme": coalesce(pozadujemeFormat[].text, pozadujeme, []),
+  "nabizime": coalesce(nabizimeFormat[].text, nabizime, []),
+  datumZverejneni
+`
+
 export const KARIERNI_POZICE_QUERY = `*[_type == "karierniPozice" && aktivni != false] | order(datumZverejneni desc) {
-  _id, nazev, "slug": slug.current, region, regionLabel, typ, typLabel, perex,
-  naplnPrace, pozadujeme, nabizime, datumZverejneni
-}`
+${POZICE_POLE}}`
 
 export const KARIERNI_POZICE_DETAIL_QUERY = `*[_type == "karierniPozice" && slug.current == $slug && aktivni != false][0] {
-  _id, nazev, "slug": slug.current, region, regionLabel, typ, typLabel, perex,
-  naplnPrace, pozadujeme, nabizime, datumZverejneni
-}`
+${POZICE_POLE}}`
 
 export const KARIERNI_POZICE_SLUGS_QUERY = `*[_type == "karierniPozice" && aktivni != false]{ "slug": slug.current }`
 
@@ -170,7 +152,19 @@ export const CO_POKLADAME_STRANKA_QUERY = `*[_type == "coPokladameStranka"][0]`
 
 export const FAQ_STRANKA_QUERY = `*[_type == "faqStranka"][0]`
 
-export const PRUBEH_REALIZACE_QUERY = `*[_type == "prubehRealizaceStranka"][0]`
+export const PRUBEH_REALIZACE_QUERY = `*[_type == "prubehRealizaceStranka"][0] {
+  ...,
+  fakta[] { ..., "nadpis": coalesce(nadpisFormat, nadpis), "text": coalesce(textFormat, text) },
+  "prehledNadpis": coalesce(prehledNadpisFormat, prehledNadpis),
+  "prehledText": coalesce(prehledTextFormat, prehledText),
+  "dobreVedetNadpis": coalesce(dobreVedetNadpisFormat, dobreVedetNadpis),
+  "pokladkaNadpis": coalesce(pokladkaNadpisFormat, pokladkaNadpis),
+  "pokladkaText": coalesce(pokladkaTextFormat, pokladkaText),
+  kapitoly[] { ..., "nadpis": coalesce(nadpisFormat, nadpis), bloky[] { ..., "nadpis": coalesce(nadpisFormat, nadpis) } },
+  "ctaNadpis": coalesce(ctaNadpisFormat, ctaNadpis),
+  "ctaText": coalesce(ctaTextFormat, ctaText),
+  "ctaTlacitko": coalesce(ctaTlacitkoFormat, ctaTlacitko)
+}`
 
 export const TLACITKA_QUERY = `{
   "hlavicka": *[_type == "obecneNastaveni"][0].tlacitkoHlavicka,

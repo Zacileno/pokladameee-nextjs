@@ -46,6 +46,9 @@ function renderSpan(span: Span, markDefs: MarkDef[], key: number, vOdkazu: boole
     if (def._type === 'odkaz' && def.href?.trim()) odkaz = def
   }
 
+  // samotná velikost nemění barvu (nadpisy mají span v CSS oranžový)
+  if (style.fontSize && !style.color) style.color = 'inherit'
+
   // Odkaz — jen mimo tlačítka a jiné odkazy (<a> uvnitř <a> je neplatné HTML).
   if (odkaz?.href && !vOdkazu) {
     const href = odkaz.href.trim()

@@ -1,7 +1,7 @@
 'use client'
-import { useState } from 'react'
+import { useState, type ReactNode } from 'react'
 
-export default function FaqItem({ otazka, odpoved }: { otazka: string; odpoved: string }) {
+export default function FaqItem({ otazka, odpoved }: { otazka: ReactNode; odpoved: ReactNode }) {
   const [open, setOpen] = useState(false)
   return (
     <div style={{ borderBottom: '1px solid var(--gray-100)' }}>

@@ -94,13 +94,13 @@ export default function VolnePozice({ pozice, excludeSlug, texty }: { pozice: Po
               }}
             >
               <div>
-                <p style={{ fontSize: 17, fontWeight: 700, marginBottom: 8 }}>{p.nazev}</p>
+                <p style={{ fontSize: 17, fontWeight: 700, marginBottom: 8 }}><FormatovanyText vOdkazu value={p.nadpis} fallback={p.nazev} /></p>
                 <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                   <span style={{ background: 'var(--blue)', color: 'white', borderRadius: 8, padding: '4px 10px', fontSize: 12, fontWeight: 600 }}>
-                    {p.regionLabel}
+                    <FormatovanyText vOdkazu value={p.regionLabel} fallback={null} />
                   </span>
                   <span style={{ background: '#E8F0F8', color: 'var(--blue)', borderRadius: 8, padding: '4px 10px', fontSize: 12, fontWeight: 600 }}>
-                    {p.typLabel}
+                    <FormatovanyText vOdkazu value={p.typLabel} fallback={null} />
                   </span>
                 </div>
               </div>

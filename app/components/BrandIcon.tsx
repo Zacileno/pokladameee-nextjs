@@ -1,4 +1,6 @@
 import type { ReactNode } from 'react'
+import FormatovanyText from './FormatovanyText'
+import { prostyText, type RT } from '@/lib/prostyText'
 
 // Vlastní ikony v brandu (linka + dílec jako podlaha).
 // Mapují se podle emoji, které přichází ze Sanity / fallbacků — neznámé emoji se vykreslí beze změny.
@@ -460,14 +462,30 @@ export default function BrandIcon({ emoji, size = 48, tone = 'default', fill }: 
   )
 }
 
+// odebere emoji ze začátku textu (i formátovaného); kdyby bylo emoji samostatně naformátované,
+// přejde se na další kousek textu
+function bezZacatku(text: RT, emoji: string): RT {
+  if (typeof text === 'string') return text.trim().slice(emoji.length).trim()
+  if (!text?.[0]?.children) return text
+  let hotovo = false
+  const children = text[0].children.map(s => {
+    if (hotovo) return s
+    const bezMezer = s.text.trimStart()
+    const bezEmoji = bezMezer.startsWith(emoji) ? bezMezer.slice(emoji.length).trimStart() : bezMezer
+    if (bezEmoji) hotovo = true
+    return { ...s, text: bezEmoji }
+  })
+  return [{ ...text[0], children }]
+}
+
 // Text, který začíná emoji (např. "🚛 Odvoz staré podlahy zdarma" ze Sanity) → ikona + zbytek textu
-export function IkonaText({ text, size = 28, tone = 'default' }: { text: string; size?: number; tone?: BrandIconTone }) {
-  const [prvni = '', ...zbytek] = text.trim().split(/\s+/)
-  if (!ICONS[normalize(prvni)]) return <>{text}</>
+export function IkonaText({ text, size = 28, tone = 'default' }: { text: RT; size?: number; tone?: BrandIconTone }) {
+  const [prvni = ''] = prostyText(text).trim().split(/\s+/)
+  if (!ICONS[normalize(prvni)]) return <FormatovanyText value={text} fallback={null} />
   return (
     <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
       <BrandIcon emoji={prvni} size={size} tone={tone} />
-      {zbytek.join(' ')}
+      <span><FormatovanyText value={bezZacatku(text, prvni)} fallback={null} /></span>
     </span>
   )
 }

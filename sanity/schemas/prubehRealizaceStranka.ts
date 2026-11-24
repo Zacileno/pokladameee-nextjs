@@ -1,11 +1,11 @@
 import { defineType, defineField, defineArrayMember } from 'sanity'
-import { odkazAnotace } from './objects/formatovanyText'
+import { odkazAnotace, velikostAnotace } from './objects/formatovanyText'
+import { nahled, puvodni } from './objects/pomocne'
 
 // Texty stránky /prubeh-realizace — prázdné pole = na webu zůstane výchozí text
-// (lib/prubeh-realizace.ts). Kapitoly a bloky jsou seznamy, aby stránka zabrala
-// v Sanity jen pár desítek atributů (limit free plánu je 2000).
+// (lib/prubeh-realizace.ts).
 
-// odstavce s tučným písmem, kurzívou, barvou a odrážkami
+// odstavce s tučným písmem, kurzívou, barvou, velikostí, odkazem a odrážkami
 const odstavce = (name: string, title: string, description?: string) =>
   defineField({
     name,
@@ -45,6 +45,7 @@ const odstavce = (name: string, title: string, description?: string) =>
                 },
               ],
             },
+            velikostAnotace,
             odkazAnotace,
           ],
         },
@@ -81,17 +82,28 @@ export const prubehRealizaceStrankaSchema = defineType({
         type: 'object',
         name: 'fakt',
         fields: [
-          defineField({ name: 'nadpis', title: 'Nadpis', type: 'string' }),
-          defineField({ name: 'text', title: 'Text', type: 'text', rows: 2 }),
+          defineField({ name: 'nadpisFormat', title: 'Nadpis', type: 'formatovanyText' }),
+          defineField({ name: 'textFormat', title: 'Text', type: 'formatovanyText' }),
+          puvodni('nadpis'),
+          puvodni('text', 'text'),
         ],
-        preview: { select: { title: 'nadpis', subtitle: 'text' } },
+        preview: {
+          select: { nadpis: 'nadpisFormat', stary: 'nadpis', text: 'textFormat' },
+          prepare: ({ nadpis, stary, text }) => ({ title: nahled(nadpis) || stary, subtitle: nahled(text) }),
+        },
       }],
     }),
-    defineField({ name: 'prehledNadpis', title: 'Přehled kroků: nadpis', type: 'string', group: 'uvod' }),
-    defineField({ name: 'prehledText', title: 'Přehled kroků: text', type: 'text', rows: 2, group: 'uvod' }),
-    defineField({ name: 'dobreVedetNadpis', title: 'Nadpis karet „Dobré vědět“', type: 'string', group: 'kapitoly' }),
-    defineField({ name: 'pokladkaNadpis', title: 'Profesionální pokládka: nadpis sekce', type: 'string', group: 'kapitoly' }),
-    defineField({ name: 'pokladkaText', title: 'Profesionální pokládka: text pod nadpisem', type: 'text', rows: 2, group: 'kapitoly' }),
+    defineField({ name: 'odkazKroky', title: 'Odkaz pod úvodem („Jak to probíhá ↓“)', type: 'formatovanyText', group: 'uvod' }),
+    defineField({ name: 'prehledNadpisFormat', title: 'Přehled kroků: nadpis', type: 'formatovanyText', group: 'uvod' }),
+    defineField({ name: 'prehledTextFormat', title: 'Přehled kroků: text', type: 'formatovanyText', group: 'uvod' }),
+    defineField({ name: 'dobreVedetNadpisFormat', title: 'Nadpis karet „Dobré vědět“', type: 'formatovanyText', group: 'kapitoly' }),
+    defineField({ name: 'pokladkaNadpisFormat', title: 'Profesionální pokládka: nadpis sekce', type: 'formatovanyText', group: 'kapitoly' }),
+    defineField({ name: 'pokladkaTextFormat', title: 'Profesionální pokládka: text pod nadpisem', type: 'formatovanyText', group: 'kapitoly' }),
+    puvodni('prehledNadpis'),
+    puvodni('prehledText', 'text'),
+    puvodni('dobreVedetNadpis'),
+    puvodni('pokladkaNadpis'),
+    puvodni('pokladkaText', 'text'),
     defineField({
       name: 'kapitoly',
       title: 'Kapitoly',
@@ -102,7 +114,8 @@ export const prubehRealizaceStrankaSchema = defineType({
         type: 'object',
         name: 'kapitola',
         fields: [
-          defineField({ name: 'nadpis', title: 'Nadpis kapitoly', type: 'string' }),
+          defineField({ name: 'nadpisFormat', title: 'Nadpis kapitoly', type: 'formatovanyText' }),
+          puvodni('nadpis'),
           odstavce('uvod', 'Úvodní text kapitoly (nepovinné)'),
           defineField({
             name: 'fotky',
@@ -127,22 +140,32 @@ export const prubehRealizaceStrankaSchema = defineType({
               name: 'blok',
               fields: [
                 defineField({ name: 'cislo', title: 'Číslo kroku (nepovinné)', description: 'Vyplňte jen u kroků cesty zakázky (1–12).', type: 'string' }),
-                defineField({ name: 'nadpis', title: 'Nadpis', type: 'string' }),
+                defineField({ name: 'nadpisFormat', title: 'Nadpis', type: 'formatovanyText' }),
+                puvodni('nadpis'),
                 odstavce('obsah', 'Text'),
               ],
               preview: {
-                select: { cislo: 'cislo', nadpis: 'nadpis' },
-                prepare: ({ cislo, nadpis }) => ({ title: cislo ? `${cislo}. ${nadpis ?? ''}` : nadpis }),
+                select: { cislo: 'cislo', nadpis: 'nadpisFormat', stary: 'nadpis' },
+                prepare: ({ cislo, nadpis, stary }) => {
+                  const text = nahled(nadpis) || stary
+                  return { title: cislo ? `${cislo}. ${text ?? ''}` : text }
+                },
               },
             }],
           }),
         ],
-        preview: { select: { title: 'nadpis' } },
+        preview: {
+          select: { nadpis: 'nadpisFormat', stary: 'nadpis' },
+          prepare: ({ nadpis, stary }) => ({ title: nahled(nadpis) || stary }),
+        },
       }],
     }),
-    defineField({ name: 'ctaNadpis', title: 'Nadpis výzvy', type: 'string', group: 'zaver' }),
-    defineField({ name: 'ctaText', title: 'Text výzvy', type: 'text', rows: 3, group: 'zaver' }),
-    defineField({ name: 'ctaTlacitko', title: 'Text tlačítka', type: 'string', group: 'zaver' }),
+    defineField({ name: 'ctaNadpisFormat', title: 'Nadpis výzvy', type: 'formatovanyText', group: 'zaver' }),
+    defineField({ name: 'ctaTextFormat', title: 'Text výzvy', type: 'formatovanyText', group: 'zaver' }),
+    defineField({ name: 'ctaTlacitkoFormat', title: 'Text tlačítka', type: 'formatovanyText', group: 'zaver' }),
+    puvodni('ctaNadpis'),
+    puvodni('ctaText', 'text'),
+    puvodni('ctaTlacitko'),
     defineField({
       name: 'ctaFoto',
       title: 'Fotka u výzvy',

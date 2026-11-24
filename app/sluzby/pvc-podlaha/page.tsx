@@ -11,9 +11,11 @@ import RealizaceGalerie from '@/app/components/RealizaceGalerie'
 import { REALIZACE } from '@/lib/realizace'
 import PostupKroky from '@/app/components/PostupKroky'
 import BrandIcon, { IkonaText } from '@/app/components/BrandIcon'
+import FormatovanyText from '@/app/components/FormatovanyText'
 import FaqItem from './FaqItem'
 import { client, BF_TERMIN_QUERY, PVC_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY } from '@/lib/sanity'
 import { bfBezi } from '@/lib/black-friday'
+import { prostyText, type RT } from '@/lib/prostyText'
 
 export const revalidate = 0
 
@@ -101,29 +103,34 @@ const FAQ = [
   },
 ]
 
-type Typ = { nazev?: string; badge?: string; popis?: string; vyhody?: string[]; barva?: string }
-type Krok = { nadpis?: string; text?: string }
-type Istrip = { emoji?: string; text?: string }
-type Benefit = { emoji?: string; nadpis?: string; text?: string }
-type FaqEntry = { otazka?: string; odpoved?: string }
+type Typ = { nazev?: RT; badge?: RT; popis?: RT; vyhody?: RT[]; barva?: string }
+type Krok = { nadpis?: RT; text?: RT }
+type Istrip = { emoji?: string; text?: RT }
+type Benefit = { emoji?: string; nadpis?: RT; text?: RT }
+type FaqEntry = { otazka?: RT; odpoved?: RT }
 
 type PvcData = {
-  heroNadpis?: string
-  heroPodnadpis?: string
-  heroBadge?: string
+  heroStitek?: RT
+  heroNadpis?: RT
+  heroPodnadpis?: RT
+  heroBadge?: RT
   heroFotkaUrl?: string
   istrip?: Istrip[]
-  typyNadpis?: string
-  typyPodnadpis?: string
+  typyNadpis?: RT
+  typyPodnadpis?: RT
   typy?: Typ[]
-  benefityNadpis?: string
+  benefityNadpis?: RT
   benefity?: Benefit[]
-  krokyNadpis?: string
-  krokyPodnadpis?: string
+  krokyNadpis?: RT
+  krokyPodnadpis?: RT
   kroky?: Krok[]
   referenceHodnoceni?: number
   referenceCitace?: string
   referenceJmeno?: string
+  galerieNadpis?: RT
+  galeriePodnadpis?: RT
+  faqNadpis?: RT
+  faqPodnadpis?: RT
   faq?: FaqEntry[]
 }
 
@@ -174,13 +181,13 @@ export default async function PvcPodlahaPage() {
                 </div>
               )}
               <p style={{ fontSize: 13, fontWeight: 600, letterSpacing: '2px', color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', marginBottom: 16 }}>
-                PVC podlahy · MSK, Zlínsko, Olomoucko
+                <FormatovanyText value={data?.heroStitek} fallback="PVC podlahy · MSK, Zlínsko, Olomoucko" />
               </p>
               <h1 style={{ fontSize: 'clamp(36px, 5vw, 54px)', fontWeight: 900, color: 'white', lineHeight: 1.1, marginBottom: 20 }}>
-                {heroNadpis}
+                <FormatovanyText value={heroNadpis} fallback={null} />
               </h1>
               <p style={{ fontSize: 18, color: 'rgba(255,255,255,0.8)', lineHeight: 1.7, marginBottom: 12, maxWidth: 520 }}>
-                {heroPodnadpis}
+                <FormatovanyText value={heroPodnadpis} fallback={null} />
               </p>
               <p style={{ fontSize: 15, color: 'var(--orange)', fontWeight: 700, marginBottom: 36 }}>
                 <IkonaText text={heroBadge} size={30} tone="onBlue" />
@@ -213,7 +220,7 @@ export default async function PvcPodlahaPage() {
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={heroFotkaUrl}
-                  alt={heroNadpis}
+                  alt={prostyText(heroNadpis)}
                   style={{ borderRadius: '12px 12px 0 0', width: '100%', height: '100%', objectFit: 'cover', minHeight: 320 }}
                 />
               ) : (
@@ -237,9 +244,9 @@ export default async function PvcPodlahaPage() {
         <div className="container">
           <div className="sluzby-istripgrid">
             {istrip.map(({ emoji, text }, i) => (
-              <div key={text || i} className="sluzby-istrip-item">
+              <div key={i} className="sluzby-istrip-item">
                 <BrandIcon emoji={emoji} size={48} />
-                <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--gray-700)', lineHeight: 1.3 }}>{text}</span>
+                <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--gray-700)', lineHeight: 1.3 }}><FormatovanyText value={text} fallback={null} /></span>
               </div>
             ))}
           </div>
@@ -249,26 +256,26 @@ export default async function PvcPodlahaPage() {
       {/* TYPY PODLAH */}
       <section className="section">
         <div className="container">
-          <h2 className="section-title" style={{ marginBottom: 8 }}>{typyNadpis}</h2>
-          <p className="section-subtitle" style={{ marginBottom: 40 }}>{typyPodnadpis}</p>
+          <h2 className="section-title" style={{ marginBottom: 8 }}><FormatovanyText value={typyNadpis} fallback={null} /></h2>
+          <p className="section-subtitle" style={{ marginBottom: 40 }}><FormatovanyText value={typyPodnadpis} fallback={null} /></p>
           <div className="typy-grid">
             {typy.map((t, i) => {
               const barva = t.barva === 'blue' ? 'var(--blue)' : 'var(--orange)'
               return (
-                <div key={t.nazev || i} style={{ background: '#fff', borderRadius: 12, boxShadow: '0 2px 12px rgba(0,0,0,0.08)', padding: 32, borderLeft: `4px solid ${barva}` }}>
+                <div key={i} style={{ background: '#fff', borderRadius: 12, boxShadow: '0 2px 12px rgba(0,0,0,0.08)', padding: 32, borderLeft: `4px solid ${barva}` }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16, flexWrap: 'wrap' }}>
-                    <h3 style={{ fontSize: 20, fontWeight: 800 }}>{t.nazev}</h3>
-                    {t.badge && (
-                      <span style={{ background: barva, color: '#fff', fontWeight: 700, fontSize: 12, padding: '4px 12px', borderRadius: 100, whiteSpace: 'nowrap' }}>{t.badge}</span>
+                    <h3 style={{ fontSize: 20, fontWeight: 800 }}><FormatovanyText value={t.nazev} fallback={null} /></h3>
+                    {prostyText(t.badge) && (
+                      <span style={{ background: barva, color: '#fff', fontWeight: 700, fontSize: 12, padding: '4px 12px', borderRadius: 100, whiteSpace: 'nowrap' }}><FormatovanyText value={t.badge} fallback={null} /></span>
                     )}
                   </div>
                   <p style={{ fontSize: 15, lineHeight: 1.7, color: 'var(--gray-700)', marginBottom: 16 }}>
-                    {t.popis}
+                    <FormatovanyText value={t.popis} fallback={null} />
                   </p>
                   <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
-                    {(t.vyhody || []).map(v => (
-                      <li key={v} style={{ fontSize: 14, color: 'var(--gray-700)', display: 'flex', gap: 8 }}>
-                        <span style={{ color: barva, fontWeight: 700 }}>✓</span>{v}
+                    {(t.vyhody || []).filter(v => prostyText(v)).map((v, j) => (
+                      <li key={j} style={{ fontSize: 14, color: 'var(--gray-700)', display: 'flex', gap: 8 }}>
+                        <span style={{ color: barva, fontWeight: 700 }}>✓</span><span><FormatovanyText value={v} fallback={null} /></span>
                       </li>
                     ))}
                   </ul>
@@ -279,18 +286,23 @@ export default async function PvcPodlahaPage() {
         </div>
       </section>
 
-      <BenefityGrid benefity={benefity as { emoji: string; nadpis: string; text: string }[]} nadpisSecce={benefityNadpis} />
+      <BenefityGrid benefity={benefity} nadpisSecce={benefityNadpis} />
 
       {/* JAK TO PROBÍHÁ */}
       <section className="section" style={{ background: '#FFF5E8' }}>
         <div className="container">
-          <h2 className="section-title" style={{ marginBottom: 8 }}>{krokyNadpis}</h2>
-          <p className="section-subtitle" style={{ marginBottom: 40 }}>{krokyPodnadpis}</p>
+          <h2 className="section-title" style={{ marginBottom: 8 }}><FormatovanyText value={krokyNadpis} fallback={null} /></h2>
+          <p className="section-subtitle" style={{ marginBottom: 40 }}><FormatovanyText value={krokyPodnadpis} fallback={null} /></p>
           <PostupKroky kroky={kroky} />
         </div>
       </section>
 
-      <RealizaceGalerie fotky={REALIZACE.pvc} podlaha="PVC podlaha" />
+      <RealizaceGalerie
+        fotky={REALIZACE.pvc}
+        podlaha="PVC podlaha"
+        nadpis={prostyText(data?.galerieNadpis) ? <FormatovanyText value={data?.galerieNadpis} fallback={null} /> : undefined}
+        podnadpis={prostyText(data?.galeriePodnadpis) ? <FormatovanyText value={data?.galeriePodnadpis} fallback={null} /> : undefined}
+      />
 
       <ReferenceSekce video={false} />
 
@@ -299,11 +311,15 @@ export default async function PvcPodlahaPage() {
       {/* FAQ */}
       <section className="section" style={{ background: 'var(--gray-50)' }}>
         <div className="container">
-          <h2 className="section-title" style={{ textAlign: 'center', marginBottom: 8 }}>Časté dotazy</h2>
-          <p className="section-subtitle" style={{ textAlign: 'center', margin: '0 auto 48px' }}>Odpovídáme na to, co zákazníci řeší nejčastěji.</p>
+          <h2 className="section-title" style={{ textAlign: 'center', marginBottom: 8 }}><FormatovanyText value={data?.faqNadpis} fallback="Časté dotazy" /></h2>
+          <p className="section-subtitle" style={{ textAlign: 'center', margin: '0 auto 48px' }}><FormatovanyText value={data?.faqPodnadpis} fallback="Odpovídáme na to, co zákazníci řeší nejčastěji." /></p>
           <div className="faq-list">
             {faq.map((f, i) => (
-              <FaqItem key={f.otazka || i} otazka={f.otazka || ''} odpoved={f.odpoved || ''} />
+              <FaqItem
+                key={i}
+                otazka={<FormatovanyText vOdkazu value={f.otazka} fallback={null} />}
+                odpoved={<FormatovanyText value={f.odpoved} fallback={null} />}
+              />
             ))}
           </div>
         </div>

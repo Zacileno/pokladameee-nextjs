@@ -1,6 +1,4 @@
-import type FormatovanyText from '@/app/components/FormatovanyText'
-
-type RT = Parameters<typeof FormatovanyText>[0]['value']
+import type { RT } from '@/lib/prostyText'
 
 // Texty ze Sanity (Kariéra — stránka); prázdné pole = výchozí text v komponentě
 export type KarieraStranka = {
@@ -47,14 +45,15 @@ export type KarieraStranka = {
 export type Pozice = {
   slug: string
   nazev: string
+  nadpis?: RT
   region: string
-  regionLabel: string
+  regionLabel: RT
   typ: string
-  typLabel: string
-  perex: string
-  naplnPrace: string[]
-  pozadujeme: string[]
-  nabizime: string[]
+  typLabel: RT
+  perex: RT
+  naplnPrace: RT[]
+  pozadujeme: RT[]
+  nabizime: RT[]
   datumZverejneni?: string
 }
 

@@ -2,6 +2,8 @@
 // Stejná data slouží jako fallback, když Sanity nic nevrátí, i jako počáteční
 // obsah dokumentu prubehRealizaceStranka ve Studiu.
 
+import type { RT } from '@/lib/prostyText'
+
 export type PtSpan = { _type: 'span'; _key: string; text: string; marks: string[] }
 export type PtBlock = {
   _type: 'block'
@@ -13,24 +15,25 @@ export type PtBlock = {
   level?: number
 }
 
-export type PrubehBlok = { _key: string; _type: 'blok'; cislo?: string; nadpis?: string; obsah?: PtBlock[] }
+export type PrubehBlok = { _key: string; _type: 'blok'; cislo?: string; nadpis?: RT; obsah?: PtBlock[] }
 export type PrubehFoto = { asset?: { _ref: string }; alt?: string; popisek?: string }
-export type PrubehKapitola = { _key: string; _type: 'kapitola'; nadpis?: string; uvod?: PtBlock[]; fotky?: PrubehFoto[]; bloky?: PrubehBlok[] }
-export type PrubehFakt = { _key: string; _type: 'fakt'; nadpis?: string; text?: string }
+export type PrubehKapitola = { _key: string; _type: 'kapitola'; nadpis?: RT; uvod?: PtBlock[]; fotky?: PrubehFoto[]; bloky?: PrubehBlok[] }
+export type PrubehFakt = { _key: string; _type: 'fakt'; nadpis?: RT; text?: RT }
 
 export type PrubehRealizaceStranka = {
   nadpis?: unknown
   uvod?: PtBlock[]
   fakta?: PrubehFakt[]
-  prehledNadpis?: string
-  prehledText?: string
-  dobreVedetNadpis?: string
-  pokladkaNadpis?: string
-  pokladkaText?: string
+  odkazKroky?: RT
+  prehledNadpis?: RT
+  prehledText?: RT
+  dobreVedetNadpis?: RT
+  pokladkaNadpis?: RT
+  pokladkaText?: RT
   kapitoly?: PrubehKapitola[]
-  ctaNadpis?: string
-  ctaText?: string
-  ctaTlacitko?: string
+  ctaNadpis?: RT
+  ctaText?: RT
+  ctaTlacitko?: RT
   uvodFoto?: PrubehFoto
   ctaFoto?: PrubehFoto
 }
@@ -54,7 +57,7 @@ function pt(zapis: string): PtBlock[] {
 const blok = (nadpis: string, obsah: string, cislo?: string): PrubehBlok => ({ _key: key(), _type: 'blok', ...(cislo ? { cislo } : {}), nadpis, obsah: pt(obsah) })
 const kapitola = (nadpis: string, uvod: string, bloky: PrubehBlok[]): PrubehKapitola => ({ _key: key(), _type: 'kapitola', nadpis, uvod: uvod ? pt(uvod) : [], bloky })
 
-export const PRUBEH_VYCHOZI: Required<Omit<PrubehRealizaceStranka, 'nadpis' | 'uvodFoto' | 'ctaFoto'>> = {
+export const PRUBEH_VYCHOZI: Required<Omit<PrubehRealizaceStranka, 'nadpis' | 'odkazKroky' | 'uvodFoto' | 'ctaFoto'>> = {
   uvod: pt(`
 U Pokládámeee zajišťujeme **kompletní službu od A do Z**, od prvního telefonátu až po předání. Pomůžeme vybrat podlahu, posoudíme podklad a podle dohodnutého rozsahu zajistíme materiál, odstranění původní krytiny, potřebné opravy, pokládku i dokončení.
 Konkrétní práce a související služby vždy pojmenujeme v nabídce, abyste věděli, co přebíráme my a co je potřeba připravit u vás.

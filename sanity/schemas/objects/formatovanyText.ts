@@ -29,6 +29,30 @@ export const odkazAnotace = defineArrayMember({
   ],
 })
 
+// Velikost textu — sdílí ji i editor stránky Průběh realizace.
+export const velikostAnotace = defineArrayMember({
+  name: 'velikost',
+  title: 'Velikost textu',
+  type: 'object',
+  fields: [
+    defineField({
+      name: 'hodnota',
+      title: 'Velikost',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Menší', value: 'small' },
+          { title: 'Normální', value: 'normal' },
+          { title: 'Větší', value: 'large' },
+          { title: 'Výrazně větší', value: 'xlarge' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'normal',
+    }),
+  ],
+})
+
 // Krátký formátovaný text pro jedno pole (badge, nadpis, tlačítko, odstavec…) s tučným písmem,
 // kurzívou, barvou, velikostí a odkazem — záměrně jen JEDEN blok (validation max(1)),
 // ať se dá vykreslit inline uvnitř existujícího <h1>/<p> bez vlastního odstavcového obalu.
@@ -72,28 +96,7 @@ export const formatovanyTextSchema = defineType({
               },
             ],
           },
-          {
-            name: 'velikost',
-            title: 'Velikost textu',
-            type: 'object',
-            fields: [
-              {
-                name: 'hodnota',
-                title: 'Velikost',
-                type: 'string',
-                options: {
-                  list: [
-                    { title: 'Menší', value: 'small' },
-                    { title: 'Normální', value: 'normal' },
-                    { title: 'Větší', value: 'large' },
-                    { title: 'Výrazně větší', value: 'xlarge' },
-                  ],
-                  layout: 'radio',
-                },
-                initialValue: 'normal',
-              },
-            ],
-          },
+          velikostAnotace,
           odkazAnotace,
         ],
       },
