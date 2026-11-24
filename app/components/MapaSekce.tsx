@@ -3,18 +3,21 @@ import FormatovanyText from './FormatovanyText'
 import { client, MAPA_SEKCE_QUERY } from '../../lib/sanity'
 import { MAPA_KRAJE, MAPA_SIRKA, MAPA_VYSKA } from '../../lib/mapa-kraju'
 import { KRAJE } from '../../lib/lokality'
+import { adresaKraje, nazevPodleAdresy, type NazevLokality } from '../../lib/lokality-sanity'
 
 // Mapa ČR — proklikatelné jsou jen kraje, kam jezdíme (hover/barvy v globals.css: .mapa-kraj*)
 // uvodStranky: na /lokality je mapa první sekcí — odsazení pod hlavičku, drobečková navigace a H1.
 // Texty ze Studia (dokument „Sekce Kam jezdímeee (mapa)“), jinak výchozí texty níže.
 type FText = Parameters<typeof FormatovanyText>[0]['value']
-type MapaData = { nadpisText?: FText; podnadpisText?: FText; heroText?: FText } | null
+type MapaData = { nadpisText?: FText; podnadpisText?: FText; heroText?: FText; kraje?: NazevLokality[] } | null
 
 export default async function MapaSekce({ uvodStranky = false }: { uvodStranky?: boolean } = {}) {
   let data: MapaData = null
   try {
     data = await client.fetch<MapaData>(MAPA_SEKCE_QUERY)
   } catch {}
+  const nazevLokality = nazevPodleAdresy(data?.kraje)
+  const nazevKraje = (k: (typeof KRAJE)[number]) => nazevLokality(adresaKraje(k.slug), k.nazev)
   const aktivni = new Map(KRAJE.map(k => [k.mapaId, k]))
   const Nadpis = uvodStranky ? 'h1' : 'h2'
 
@@ -35,7 +38,7 @@ export default async function MapaSekce({ uvodStranky = false }: { uvodStranky?:
             {MAPA_KRAJE.filter(k => aktivni.has(k.id)).map(k => {
               const kraj = aktivni.get(k.id)!
               return (
-                <a key={k.id} href={`/lokality/${kraj.slug}`} className="mapa-kraj-odkaz" aria-label={kraj.nazev}>
+                <a key={k.id} href={`/lokality/${kraj.slug}`} className="mapa-kraj-odkaz" aria-label={nazevKraje(kraj)}>
                   <path d={k.d} className="mapa-kraj mapa-kraj-aktivni" fillRule="evenodd" />
                 </a>
               )
@@ -57,7 +60,7 @@ export default async function MapaSekce({ uvodStranky = false }: { uvodStranky?:
             <a href="#kontakt" className="btn-primary mapa-cta" style={{ padding: '16px 32px' }}><Tlacitko klic="mapa" fallback="Chci zaměření zdarma" /></a>
             <div className="mapa-kraje-odkazy">
               {KRAJE.map(k => (
-                <a key={k.slug} href={`/lokality/${k.slug}`}>{k.nazev}</a>
+                <a key={k.slug} href={`/lokality/${k.slug}`}>{nazevKraje(k)}</a>
               ))}
             </div>
           </div>

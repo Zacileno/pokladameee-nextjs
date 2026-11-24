@@ -71,9 +71,15 @@ export const OBECNE_NASTAVENI_QUERY = `*[_type == "obecneNastaveni"][0] {
   telefon, email, pracovniDoba, region, popisFooter, "postavaUrl": foto.asset->url
 }`
 
-export const MAPA_SEKCE_QUERY = `*[_type == "mapaSekce"][0] { nadpisText, podnadpisText, heroText }`
+export const MAPA_SEKCE_QUERY = `*[_type == "mapaSekce"][0] { nadpisText, podnadpisText, heroText, "kraje": *[_type == "lokalitaKraj"] { adresa, nazev } }`
 
 export const LOKALITY_STRANKA_QUERY = `*[_type == "lokalityStranka"][0] { nadpis, realizaceNadpis }`
+
+export const LOKALITA_KRAJ_QUERY = `*[_type == "lokalitaKraj" && adresa == $adresa][0]`
+
+export const LOKALITA_MESTO_QUERY = `*[_type == "lokalitaMesto" && adresa == $adresa][0]`
+
+export const LOKALITY_NAZVY_QUERY = `*[_type in ["lokalitaKraj", "lokalitaMesto"]] { adresa, nazev }`
 
 export const KONTAKT_SEKCE_QUERY = `*[_type == "kontaktSekce"][0] {
   nadpis, nadpisText, podnadpis,

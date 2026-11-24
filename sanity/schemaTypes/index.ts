@@ -13,6 +13,7 @@ import { obecneNastaveniSchema } from '../schemas/obecneNastaveni'
 import { kontaktSekceSchema } from '../schemas/kontaktSekce'
 import { mapaSekceSchema } from '../schemas/mapaSekce'
 import { lokalityStrankaSchema } from '../schemas/lokalityStranka'
+import { lokalitaKrajSchema, lokalitaMestoSchema } from '../schemas/lokality'
 import { vinylovaPodlahaSchema } from '../schemas/vinylovaPodlaha'
 import { pvcPodlahaSchema } from '../schemas/pvcPodlaha'
 import { kobercovaPodlahaSchema } from '../schemas/kobercovaPodlaha'
@@ -26,8 +27,8 @@ import { karieraStrankaSchema } from '../schemas/karieraStranka'
 import { coPokladameStrankaSchema } from '../schemas/coPokladameStranka'
 import { faqStrankaSchema } from '../schemas/faqStranka'
 import { prubehRealizaceStrankaSchema } from '../schemas/prubehRealizaceStranka'
-import { formatovanyTextSchema } from '../schemas/objects/formatovanyText'
+import { formatovaneOdstavceSchema, formatovanyTextSchema } from '../schemas/objects/formatovanyText'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [inspiraceSchema, akceSchema, referenceSchema, projektSchema, heroSekceSchema, heroIkonkySchema, sluzbySekceSchema, jakToFungujeSchema, procNasVybratSchema, rodinaZnacekSchema, obecneNastaveniSchema, kontaktSekceSchema, mapaSekceSchema, vinylovaPodlahaSchema, pvcPodlahaSchema, kobercovaPodlahaSchema, drevenaPodlahaSchema, blogPostSchema, karierniPoziceSchema, blackFridaySchema, sluzbyStrankaSchema, blogStrankaSchema, karieraStrankaSchema, coPokladameStrankaSchema, faqStrankaSchema, prubehRealizaceStrankaSchema, lokalityStrankaSchema, formatovanyTextSchema],
+  types: [inspiraceSchema, akceSchema, referenceSchema, projektSchema, heroSekceSchema, heroIkonkySchema, sluzbySekceSchema, jakToFungujeSchema, procNasVybratSchema, rodinaZnacekSchema, obecneNastaveniSchema, kontaktSekceSchema, mapaSekceSchema, vinylovaPodlahaSchema, pvcPodlahaSchema, kobercovaPodlahaSchema, drevenaPodlahaSchema, blogPostSchema, karierniPoziceSchema, blackFridaySchema, sluzbyStrankaSchema, blogStrankaSchema, karieraStrankaSchema, coPokladameStrankaSchema, faqStrankaSchema, prubehRealizaceStrankaSchema, lokalityStrankaSchema, lokalitaKrajSchema, lokalitaMestoSchema, formatovanyTextSchema, formatovaneOdstavceSchema],
 }

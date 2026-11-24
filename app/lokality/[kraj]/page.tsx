@@ -7,6 +7,7 @@ import {
   OBECNE_NASTAVENI_QUERY, KONTAKT_SEKCE_QUERY,
 } from '../../../lib/sanity'
 import { KRAJE, getKraj } from '../../../lib/lokality'
+import { adresaMesta, nactiKraj, nactiNazvy } from '../../../lib/lokality-sanity'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import VyhodySekce from '../../components/VyhodySekce'
@@ -14,6 +15,8 @@ import SluzbySekce from '../../components/SluzbySekce'
 import ReferenceSekce from '../../components/ReferenceSekce'
 import KontaktSekce from '../../components/KontaktSekce'
 import CeduleGrafika from '../../components/CeduleGrafika'
+import FormatovanyText from '../../components/FormatovanyText'
+import FormatovaneOdstavce from '../../components/FormatovaneOdstavce'
 
 export const revalidate = 0
 export const dynamicParams = false
@@ -27,11 +30,13 @@ export async function generateMetadata({ params }: { params: Promise<{ kraj: str
   const kraj = getKraj(slug)
   if (!kraj) return {}
   const url = `https://www.pokladameee.cz/lokality/${kraj.slug}`
-  const description = `Pokládka vinylových, PVC, kobercových i dřevěných podlah ${kraj.vKraji}. Zaměření zdarma, odvoz staré podlahy a u vás do 48 hodin.`
+  const texty = await nactiKraj(kraj.slug)
+  const title = texty?.seoTitle || `Pokládka podlah – ${kraj.nazev}`
+  const description = texty?.seoDescription || `Pokládka vinylových, PVC, kobercových i dřevěných podlah ${kraj.vKraji}. Zaměření zdarma, odvoz staré podlahy a u vás do 48 hodin.`
   return {
-    title: `Pokládka podlah – ${kraj.nazev}`,
+    title,
     description,
-    openGraph: { title: `Pokládka podlah – ${kraj.nazev} | pokládámeee.cz`, description, url },
+    openGraph: { title: `${title} | pokládámeee.cz`, description, url },
     alternates: { canonical: url },
   }
 }
@@ -40,6 +45,9 @@ export default async function KrajPage({ params }: { params: Promise<{ kraj: str
   const { kraj: slug } = await params
   const kraj = getKraj(slug)
   if (!kraj) notFound()
+
+  const [texty, nazevLokality] = await Promise.all([nactiKraj(kraj.slug), nactiNazvy()])
+  const nazev = texty?.nazev || kraj.nazev
 
   let heroIkonkyData: any = null
   let sluzbySekce: any = null
@@ -65,14 +73,15 @@ export default async function KrajPage({ params }: { params: Promise<{ kraj: str
               <a href="/" style={{ color: 'var(--orange)' }}>Domů</a>
               <span style={{ color: 'var(--gray-400)' }}> / </span>
               <a href="/lokality" style={{ color: 'var(--orange)' }}>Lokality</a>
-              <span style={{ color: 'var(--gray-400)' }}> / {kraj.nazev}</span>
+              <span style={{ color: 'var(--gray-400)' }}> / {nazev}</span>
             </p>
             <div className="kraj-hero-grid">
               <div className="kraj-hero-text">
                 <h1 style={{ fontSize: 'clamp(32px, 4.4vw, 50px)', fontWeight: 900, color: 'var(--black)', lineHeight: 1.1, marginBottom: 28 }}>
-                  Pokládám<span style={{ color: 'var(--orange)' }}>eee</span> podlahy – {kraj.nazev}
+                  <FormatovanyText value={texty?.nadpis} fallback={<>Pokládám<span style={{ color: 'var(--orange)' }}>eee</span> podlahy – {kraj.nazev}</>} />
                 </h1>
                 <div className="kraj-perex">
+                  <FormatovaneOdstavce value={texty?.perex} fallback={<>
                   <p>
                     <strong>Hledáte novou podlahu</strong>, která vydrží každodenní provoz rodiny, dětí i domácích mazlíčků?
                     Pokládáme vinylové, PVC, kobercové i dřevěné podlahy po celém kraji — {kraj.oblast}.
@@ -84,20 +93,21 @@ export default async function KrajPage({ params }: { params: Promise<{ kraj: str
                   <p>
                     Jezdíme <strong>i do menších obcí</strong>. Vyplňte formulář a ozveme se vám s nejbližším volným termínem.
                   </p>
+                  </>} />
                 </div>
                 <a href="#kontakt" className="btn-primary kraj-cta" style={{ marginTop: 32, padding: '16px 32px' }}><Tlacitko klic="lokalityZamereni" fallback="Chci zaměření zdarma" /></a>
               </div>
-              <CeduleGrafika text={kraj.nazev} postavaUrl={obecneNastaveni?.postavaUrl} />
+              <CeduleGrafika text={texty?.cedule || kraj.nazev} postavaUrl={obecneNastaveni?.postavaUrl} />
             </div>
 
             {/* MĚSTA — proklik na podstránku města */}
             <div className="kraj-mesta">
               <div className="kraj-mesta-grid">
                 {kraj.mesta.map(m => (
-                  <a key={m.slug} href={`/lokality/${kraj.slug}/${m.slug}`} className="kraj-mesto">{m.nazev}</a>
+                  <a key={m.slug} href={`/lokality/${kraj.slug}/${m.slug}`} className="kraj-mesto">{nazevLokality(adresaMesta(kraj.slug, m.slug), m.nazev)}</a>
                 ))}
               </div>
-              <p style={{ fontSize: 14, marginTop: 16 }}>A v dalších městech a obcích {kraj.vKraji}…</p>
+              <p style={{ fontSize: 14, marginTop: 16 }}><FormatovanyText value={texty?.mestaText} fallback={<>A v dalších městech a obcích {kraj.vKraji}…</>} /></p>
             </div>
           </div>
         </section>
