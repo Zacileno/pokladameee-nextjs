@@ -33,7 +33,7 @@ export default function FaqItem({ otazka, odpoved }: FaqItemProps) {
           textAlign: 'left',
         }}
       >
-        {otazka}
+        <span>{otazka}</span>
         <span style={{
           display: 'inline-flex',
           alignItems: 'center',

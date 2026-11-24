@@ -1,11 +1,28 @@
 import { defineType, defineField } from 'sanity'
+import { nahled, odrazky, puvodni } from './objects/pomocne'
+
+const blok = (text: string) => [
+  { _type: 'block', _key: 'b0', style: 'normal', markDefs: [], children: [{ _type: 'span', _key: 's0', text, marks: [] }] },
+]
 
 export const karierniPoziceSchema = defineType({
   name: 'karierniPozice',
   title: 'Kariéra — pozice',
   type: 'document',
   fields: [
-    defineField({ name: 'nazev', title: 'Název pozice', type: 'string', validation: r => r.required() }),
+    defineField({
+      name: 'nazev',
+      title: 'Název pozice',
+      description: 'Bez formátování — používá ho Google, záložka prohlížeče, adresa stránky a formulář.',
+      type: 'string',
+      validation: r => r.required(),
+    }),
+    defineField({
+      name: 'nadpis',
+      title: 'Název pozice na webu (formátovaný)',
+      description: 'Nadpis na stránce pozice a v seznamu volných pozic. Při změně názvu uprav obě pole. Prázdné = použije se Název pozice.',
+      type: 'formatovanyText',
+    }),
     defineField({
       name: 'slug',
       title: 'URL adresa (slug)',
@@ -14,7 +31,8 @@ export const karierniPoziceSchema = defineType({
       validation: r => r.required(),
     }),
     defineField({ name: 'region', title: 'Region (hodnota pro filtr)', type: 'string', initialValue: 'moravskoslezsky-kraj' }),
-    defineField({ name: 'regionLabel', title: 'Region (zobrazený text)', type: 'string', initialValue: 'Moravskoslezský kraj', validation: r => r.required() }),
+    defineField({ name: 'regionLabelFormat', title: 'Region (zobrazený text)', type: 'formatovanyText', initialValue: () => blok('Moravskoslezský kraj') }),
+    puvodni('regionLabel'),
     defineField({
       name: 'typ',
       title: 'Typ pozice',
@@ -27,11 +45,16 @@ export const karierniPoziceSchema = defineType({
         ],
       },
     }),
-    defineField({ name: 'typLabel', title: 'Typ pozice (zobrazený text)', type: 'string', validation: r => r.required() }),
-    defineField({ name: 'perex', title: 'Perex', type: 'text', rows: 3, validation: r => r.required() }),
-    defineField({ name: 'naplnPrace', title: 'Náplň práce', type: 'array', of: [{ type: 'string' }] }),
-    defineField({ name: 'pozadujeme', title: 'Požadujeme', type: 'array', of: [{ type: 'string' }] }),
-    defineField({ name: 'nabizime', title: 'Nabízíme', type: 'array', of: [{ type: 'string' }] }),
+    defineField({ name: 'typLabelFormat', title: 'Typ pozice (zobrazený text)', type: 'formatovanyText' }),
+    defineField({ name: 'perexFormat', title: 'Perex', description: 'Nový řádek: Shift + Enter.', type: 'formatovanyText' }),
+    odrazky('naplnPraceFormat', 'Náplň práce'),
+    odrazky('pozadujemeFormat', 'Požadujeme'),
+    odrazky('nabizimeFormat', 'Nabízíme'),
+    puvodni('typLabel'),
+    puvodni('perex', 'text'),
+    puvodni('naplnPrace', 'array', { of: [{ type: 'string' }] }),
+    puvodni('pozadujeme', 'array', { of: [{ type: 'string' }] }),
+    puvodni('nabizime', 'array', { of: [{ type: 'string' }] }),
     defineField({
       name: 'datumZverejneni',
       title: 'Datum zveřejnění',
@@ -50,6 +73,7 @@ export const karierniPoziceSchema = defineType({
     },
   ],
   preview: {
-    select: { title: 'nazev', subtitle: 'regionLabel' },
+    select: { title: 'nazev', region: 'regionLabelFormat', stary: 'regionLabel' },
+    prepare: ({ title, region, stary }) => ({ title, subtitle: nahled(region) || stary }),
   },
 })

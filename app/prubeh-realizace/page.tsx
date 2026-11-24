@@ -13,6 +13,7 @@ import FormatovanyText from '@/app/components/FormatovanyText'
 import PrubehKroky, { type Krok } from './PrubehKroky'
 import { client, urlFor, KONTAKT_SEKCE_QUERY, PRUBEH_REALIZACE_QUERY } from '@/lib/sanity'
 import { PRUBEH_VYCHOZI, type PrubehRealizaceStranka, type PtBlock } from '@/lib/prubeh-realizace'
+import { prostyText, type RT } from '@/lib/prostyText'
 
 export const revalidate = 0
 
@@ -28,9 +29,9 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://www.pokladameee.cz/prubeh-realizace' },
 }
 
-type RT = Parameters<typeof FormatovanyText>[0]['value']
-
 const BARVY: Record<string, string> = { orange: 'var(--orange)', blue: 'var(--blue)', black: 'var(--black)', gray: 'var(--gray-400)' }
+
+const VELIKOSTI: Record<string, string> = { small: '0.85em', normal: '1em', large: '1.25em', xlarge: '1.6em' }
 
 const textKomponenty: PortableTextComponents = {
   block: { normal: ({ children }) => <p>{children}</p> },
@@ -38,6 +39,7 @@ const textKomponenty: PortableTextComponents = {
   listItem: { bullet: ({ children }) => <li>{children}</li> },
   marks: {
     barva: ({ value, children }) => <span style={{ color: BARVY[value?.hodnota] }}>{children}</span>,
+    velikost: ({ value, children }) => <span style={{ fontSize: VELIKOSTI[value?.hodnota] }}>{children}</span>,
     odkaz: ({ value, children }) => {
       const href = typeof value?.href === 'string' ? value.href.trim() : ''
       if (!href) return <>{children}</>
@@ -71,6 +73,8 @@ const TEMA_FOTKY = [
   { src: '/realizace/vinyl-stanislavice-chodba.jpg', alt: 'Hotová chodba s obvodovými lištami a návazností na dveře — Stanislavice', pozice: '50% 60%' },
 ]
 
+type PoleTextu = 'prehledNadpis' | 'prehledText' | 'dobreVedetNadpis' | 'pokladkaNadpis' | 'pokladkaText' | 'ctaNadpis' | 'ctaText' | 'ctaTlacitko'
+
 export default async function PrubehRealizacePage() {
   let kontaktSekce: any = null
   let data: PrubehRealizaceStranka | null = null
@@ -83,7 +87,7 @@ export default async function PrubehRealizacePage() {
 
   // prázdné pole ve Studiu = výchozí text z podkladu
   const s = PRUBEH_VYCHOZI
-  const t = (pole: keyof typeof s) => (data?.[pole] as string | undefined) || (s[pole] as string)
+  const t = (pole: PoleTextu, vOdkazu = false) => <FormatovanyText vOdkazu={vOdkazu} value={data?.[pole]} fallback={s[pole] as string} />
   const uvod = data?.uvod?.length ? data.uvod : s.uvod
   const fakta = data?.fakta?.length ? data.fakta : s.fakta
   const kapitoly = data?.kapitoly?.length ? data.kapitoly : s.kapitoly
@@ -92,7 +96,7 @@ export default async function PrubehRealizacePage() {
   const cesta = kapitoly.filter(k => k.bloky?.some(b => b.cislo))
   const temata = kapitoly.filter(k => !k.bloky?.some(b => b.cislo))
   const kroky: Krok[] = cesta.flatMap(k => (k.bloky ?? []).filter(b => b.cislo).map(b => ({
-    cislo: b.cislo!, nadpis: b.nadpis ?? '', faze: k.nadpis ?? '', obsah: <Text value={b.obsah} />,
+    cislo: b.cislo!, nadpis: b.nadpis, faze: k.nadpis, obsah: <Text value={b.obsah} />,
   })))
   const dobreVedet = cesta.flatMap(k => (k.bloky ?? []).filter(b => !b.cislo))
   const cestaUvod = cesta.find(k => k.uvod?.length)?.uvod
@@ -117,8 +121,8 @@ export default async function PrubehRealizacePage() {
               </h1>
               <div className="pr-hero-text"><Text value={uvod} /></div>
               <div className="pr-tlacitka">
-                <a href="#kontakt" className="btn-primary"><span>{t('ctaTlacitko')}</span></a>
-                <a href="#cesta-zakazky" className="pr-odkaz">Jak to probíhá ↓</a>
+                <a href="#kontakt" className="btn-primary"><span>{t('ctaTlacitko', true)}</span></a>
+                <a href="#cesta-zakazky" className="pr-odkaz"><span><FormatovanyText vOdkazu value={data?.odkazKroky} fallback="Jak to probíhá ↓" /></span></a>
               </div>
             </div>
           </div>
@@ -134,8 +138,8 @@ export default async function PrubehRealizacePage() {
                   )}
                   <BrandIcon emoji={FAKTA_IKONY[i % FAKTA_IKONY.length]} size={52} />
                   <div>
-                    <h2>{f.nadpis}</h2>
-                    <p>{f.text}</p>
+                    <h2><FormatovanyText value={f.nadpis} fallback={null} /></h2>
+                    <p><FormatovanyText value={f.text} fallback={null} /></p>
                   </div>
                 </div>
               ))}
@@ -170,7 +174,7 @@ export default async function PrubehRealizacePage() {
                 {dobreVedet.map((b, i) => (
                   <div key={b._key} className="pr-vedet">
                     <BrandIcon emoji={DOBRE_VEDET_IKONY[i % DOBRE_VEDET_IKONY.length]} size={56} />
-                    <h3>{b.nadpis}</h3>
+                    <h3><FormatovanyText value={b.nadpis} fallback={null} /></h3>
                     <Text value={b.obsah} />
                   </div>
                 ))}
@@ -193,17 +197,17 @@ export default async function PrubehRealizacePage() {
                   <div key={k._key} className={`pr-tema${i % 2 ? ' pr-tema-obracene' : ''}`}>
                     <div className="pr-tema-foto">
                       {foto
-                        ? <Image src={urlFor(foto).width(1000).url()} alt={foto.alt || k.nadpis || ''} fill unoptimized style={{ objectFit: 'cover' }} />
+                        ? <Image src={urlFor(foto).width(1000).url()} alt={foto.alt || prostyText(k.nadpis)} fill unoptimized style={{ objectFit: 'cover' }} />
                         : <Image src={TEMA_FOTKY[i % TEMA_FOTKY.length].src} alt={TEMA_FOTKY[i % TEMA_FOTKY.length].alt} fill unoptimized style={{ objectFit: 'cover', objectPosition: TEMA_FOTKY[i % TEMA_FOTKY.length].pozice }} />}
                       <span className="pr-tema-cislo">{String(i + 1).padStart(2, '0')}</span>
                     </div>
                     <div className="pr-tema-obsah">
-                      <h3>{k.nadpis}</h3>
+                      <h3><FormatovanyText value={k.nadpis} fallback={null} /></h3>
                       <Text value={k.uvod} />
                       <div className="pr-akordeon">
                         {(k.bloky ?? []).map((b, j) => (
                           <details key={b._key} open={j === 0}>
-                            <summary>{b.nadpis}</summary>
+                            <summary><FormatovanyText vOdkazu value={b.nadpis} fallback={null} /></summary>
                             <Text value={b.obsah} />
                           </details>
                         ))}
@@ -224,7 +228,7 @@ export default async function PrubehRealizacePage() {
                 <h2>{t('ctaNadpis')}</h2>
                 <p>{t('ctaText')}</p>
                 <div className="pr-tlacitka">
-                  <a href="#kontakt" className="btn-primary"><span>{t('ctaTlacitko')}</span></a>
+                  <a href="#kontakt" className="btn-primary"><span>{t('ctaTlacitko', true)}</span></a>
                   <a href="tel:+420790388487" className="pr-cta-tel">📞 +420 790 388 487</a>
                 </div>
               </div>

@@ -15,6 +15,7 @@ import {
   KONTAKT_SEKCE_QUERY,
   FAQ_STRANKA_QUERY,
 } from '@/lib/sanity'
+import { prostyText, type RT } from '@/lib/prostyText'
 
 export const revalidate = 0
 
@@ -29,8 +30,6 @@ export const metadata: Metadata = {
   },
   alternates: { canonical: 'https://www.pokladameee.cz/caste-dotazy' },
 }
-
-type RT = Parameters<typeof FormatovanyText>[0]['value']
 
 type FaqEntry = { _key?: string; otazka?: RT; odpoved?: RT }
 
@@ -47,10 +46,6 @@ type FaqStranka = {
   koberce?: SekceTexty
   drevo?: SekceTexty
 }
-
-// strukturovaná data (JSON-LD) potřebují prostý text bez formátování
-const prostyText = (value: RT): string =>
-  typeof value === 'string' ? value : (value?.[0]?.children || []).map(c => c.text).join('')
 
 const OBECNE: FaqEntry[] = [
   { otazka: 'Jak rychle k vám přijedete?', odpoved: 'Po poptávce vás navštívíme do 48 hodin. Prostor profesionálně zaměříme, zhodnotíme stav podkladu a rovnou na místě vám podlahu naceníme.' },
@@ -173,7 +168,7 @@ export default async function FaqPage() {
               {s.faq.map((f: FaqEntry, idx: number) => (
                 <FaqItem
                   key={f._key || idx}
-                  otazka={<FormatovanyText value={f.otazka} fallback={null} />}
+                  otazka={<FormatovanyText vOdkazu value={f.otazka} fallback={null} />}
                   odpoved={<FormatovanyText value={f.odpoved} fallback={null} />}
                 />
               ))}

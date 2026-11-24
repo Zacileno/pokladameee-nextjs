@@ -1,8 +1,10 @@
 'use client'
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import BrandIcon from '@/app/components/BrandIcon'
+import FormatovanyText from '@/app/components/FormatovanyText'
+import { prostyText, type RT } from '@/lib/prostyText'
 
-export type Krok = { cislo: string; nadpis: string; faze: string; obsah: ReactNode }
+export type Krok = { cislo: string; nadpis?: RT; faze?: RT; obsah: ReactNode }
 
 const IKONY = ['📞', '📐', '💰', '🎨', '📋', '🚛', '🏠', '🛠', '🔨', '🪵', '✅', '🤝']
 
@@ -30,7 +32,7 @@ export default function PrubehKroky({ kroky }: { kroky: Krok[] }) {
             type="button"
             role="tab"
             aria-selected={i === aktivni}
-            aria-label={`Krok ${k.cislo}: ${k.nadpis}`}
+            aria-label={`Krok ${k.cislo}: ${prostyText(k.nadpis)}`}
             className={`prk-tecka${i === aktivni ? ' prk-tecka-aktivni' : ''}${i < aktivni ? ' prk-tecka-hotovo' : ''}`}
             onClick={() => setAktivni(i)}
           >
@@ -45,8 +47,8 @@ export default function PrubehKroky({ kroky }: { kroky: Krok[] }) {
             <div className="prk-krok-hlava">
               <div className="prk-krok-ikona"><BrandIcon emoji={IKONY[i % IKONY.length]} size={72} /></div>
               <span className="prk-velke-cislo">{k.cislo.padStart(2, '0')}</span>
-              <p className="prk-faze">{k.faze}</p>
-              <h3>{k.nadpis}</h3>
+              <p className="prk-faze"><FormatovanyText value={k.faze} fallback={null} /></p>
+              <h3><FormatovanyText value={k.nadpis} fallback={null} /></h3>
             </div>
             <div className="prk-krok-text">{k.obsah}</div>
           </article>

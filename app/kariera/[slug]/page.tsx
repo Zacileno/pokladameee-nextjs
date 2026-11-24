@@ -7,6 +7,7 @@ import JsonLd from '../../components/JsonLd'
 import PoziceDetail from './components/PoziceDetail'
 import { client, KARIERNI_POZICE_QUERY, KARIERNI_POZICE_DETAIL_QUERY, KARIERNI_POZICE_SLUGS_QUERY, KARIERA_STRANKA_QUERY } from '@/lib/sanity'
 import { pozice as POZICE_FALLBACK, type KarieraStranka, type Pozice } from '@/lib/kariera-data'
+import { prostyText, type RT } from '@/lib/prostyText'
 
 export const revalidate = 0
 
@@ -38,12 +39,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const p = await getPozice(slug)
   if (!p) return {}
+  const popis = prostyText(p.perex)
   return {
     title: `${p.nazev} | Kariéra pokládámeee.cz`,
-    description: p.perex,
+    description: popis,
     openGraph: {
       title: `${p.nazev} | Kariéra pokládámeee.cz`,
-      description: p.perex,
+      description: popis,
       url: `https://www.pokladameee.cz/kariera/${p.slug}`,
       images: SOCIAL_OBRAZEK,
       siteName: 'pokládámeee.cz',
@@ -54,8 +56,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 }
 
-function seznamNaHtml(nadpis: string, polozky: string[]) {
-  if (!polozky?.length) return ''
+function seznamNaHtml(nadpis: string, seznam: RT[]) {
+  const polozky = (seznam || []).map(prostyText).filter(Boolean)
+  if (!polozky.length) return ''
   return `<p>${nadpis}:</p><ul>${polozky.map(i => `<li>${i}</li>`).join('')}</ul>`
 }
 
@@ -75,7 +78,7 @@ export default async function PozicePage({ params }: { params: Promise<{ slug: s
     '@context': 'https://schema.org',
     '@type': 'JobPosting',
     title: p.nazev,
-    description: `<p>${p.perex}</p>${seznamNaHtml('Náplň práce', p.naplnPrace)}${seznamNaHtml('Požadujeme', p.pozadujeme)}${seznamNaHtml('Nabízíme', p.nabizime)}`,
+    description: `<p>${prostyText(p.perex)}</p>${seznamNaHtml('Náplň práce', p.naplnPrace)}${seznamNaHtml('Požadujeme', p.pozadujeme)}${seznamNaHtml('Nabízíme', p.nabizime)}`,
     datePosted: datumPosted,
     validThrough,
     employmentType: 'FULL_TIME',
@@ -89,7 +92,7 @@ export default async function PozicePage({ params }: { params: Promise<{ slug: s
       '@type': 'Place',
       address: {
         '@type': 'PostalAddress',
-        addressRegion: p.regionLabel,
+        addressRegion: prostyText(p.regionLabel),
         addressCountry: 'CZ',
       },
     },
