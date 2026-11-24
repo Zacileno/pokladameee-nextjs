@@ -16,6 +16,7 @@ import { obecneNastaveniSchema } from './sanity/schemas/obecneNastaveni'
 import { kontaktSekceSchema } from './sanity/schemas/kontaktSekce'
 import { mapaSekceSchema } from './sanity/schemas/mapaSekce'
 import { lokalityStrankaSchema } from './sanity/schemas/lokalityStranka'
+import { lokalitaKrajSchema, lokalitaMestoSchema } from './sanity/schemas/lokality'
 import { vinylovaPodlahaSchema } from './sanity/schemas/vinylovaPodlaha'
 import { pvcPodlahaSchema } from './sanity/schemas/pvcPodlaha'
 import { kobercovaPodlahaSchema } from './sanity/schemas/kobercovaPodlaha'
@@ -29,7 +30,7 @@ import { karieraStrankaSchema } from './sanity/schemas/karieraStranka'
 import { coPokladameStrankaSchema } from './sanity/schemas/coPokladameStranka'
 import { faqStrankaSchema } from './sanity/schemas/faqStranka'
 import { prubehRealizaceStrankaSchema } from './sanity/schemas/prubehRealizaceStranka'
-import { formatovanyTextSchema } from './sanity/schemas/objects/formatovanyText'
+import { formatovaneOdstavceSchema, formatovanyTextSchema } from './sanity/schemas/objects/formatovanyText'
 
 export default defineConfig({
   name: 'pokladameee',
@@ -38,5 +39,5 @@ export default defineConfig({
   projectId: '8cvsenqb',
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
   plugins: [structureTool(), visionTool()],
-  schema: { types: [akceSchema, blackFridaySchema, inspiraceSchema, inspiraceStrankaSchema, referenceSchema, projektSchema, heroSekceSchema, heroIkonkySchema, sluzbySekceSchema, jakToFungujeSchema, procNasVybratSchema, rodinaZnacekSchema, obecneNastaveniSchema, kontaktSekceSchema, mapaSekceSchema, vinylovaPodlahaSchema, pvcPodlahaSchema, kobercovaPodlahaSchema, drevenaPodlahaSchema, karieraStrankaSchema, karierniPoziceSchema, blogStrankaSchema, blogPostSchema, sluzbyStrankaSchema, coPokladameStrankaSchema, faqStrankaSchema, prubehRealizaceStrankaSchema, lokalityStrankaSchema, formatovanyTextSchema] },
+  schema: { types: [akceSchema, blackFridaySchema, inspiraceSchema, inspiraceStrankaSchema, referenceSchema, projektSchema, heroSekceSchema, heroIkonkySchema, sluzbySekceSchema, jakToFungujeSchema, procNasVybratSchema, rodinaZnacekSchema, obecneNastaveniSchema, kontaktSekceSchema, mapaSekceSchema, vinylovaPodlahaSchema, pvcPodlahaSchema, kobercovaPodlahaSchema, drevenaPodlahaSchema, karieraStrankaSchema, karierniPoziceSchema, blogStrankaSchema, blogPostSchema, sluzbyStrankaSchema, coPokladameStrankaSchema, faqStrankaSchema, prubehRealizaceStrankaSchema, lokalityStrankaSchema, lokalitaKrajSchema, lokalitaMestoSchema, formatovanyTextSchema, formatovaneOdstavceSchema] },
 })

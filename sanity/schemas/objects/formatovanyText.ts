@@ -53,6 +53,47 @@ export const velikostAnotace = defineArrayMember({
   ],
 })
 
+// Odstavec s tučným písmem, kurzívou, barvou, velikostí a odkazem.
+const textovyBlok = defineArrayMember({
+  type: 'block',
+  styles: [{ title: 'Normální', value: 'normal' }],
+  lists: [],
+  marks: {
+    decorators: [
+      { title: 'Tučně', value: 'strong' },
+      { title: 'Kurzíva', value: 'em' },
+    ],
+    annotations: [
+      {
+        name: 'barva',
+        title: 'Barva textu',
+        type: 'object',
+        fields: [
+          {
+            name: 'hodnota',
+            title: 'Barva',
+            type: 'string',
+            options: {
+              list: [
+                { title: 'Oranžová (brand)', value: 'orange' },
+                { title: 'Modrá (brand)', value: 'blue' },
+                { title: 'Krémová (brand)', value: 'cream' },
+                { title: 'Černá', value: 'black' },
+                { title: 'Bílá', value: 'white' },
+                { title: 'Šedá', value: 'gray' },
+              ],
+              layout: 'radio',
+            },
+            initialValue: 'orange',
+          },
+        ],
+      },
+      velikostAnotace,
+      odkazAnotace,
+    ],
+  },
+})
+
 // Krátký formátovaný text pro jedno pole (badge, nadpis, tlačítko, odstavec…) s tučným písmem,
 // kurzívou, barvou, velikostí a odkazem — záměrně jen JEDEN blok (validation max(1)),
 // ať se dá vykreslit inline uvnitř existujícího <h1>/<p> bez vlastního odstavcového obalu.
@@ -62,45 +103,16 @@ export const formatovanyTextSchema = defineType({
   title: 'Formátovaný text',
   type: 'array',
   of: [
-    defineArrayMember({
-      type: 'block',
-      styles: [{ title: 'Normální', value: 'normal' }],
-      lists: [],
-      marks: {
-        decorators: [
-          { title: 'Tučně', value: 'strong' },
-          { title: 'Kurzíva', value: 'em' },
-        ],
-        annotations: [
-          {
-            name: 'barva',
-            title: 'Barva textu',
-            type: 'object',
-            fields: [
-              {
-                name: 'hodnota',
-                title: 'Barva',
-                type: 'string',
-                options: {
-                  list: [
-                    { title: 'Oranžová (brand)', value: 'orange' },
-                    { title: 'Modrá (brand)', value: 'blue' },
-                    { title: 'Krémová (brand)', value: 'cream' },
-                    { title: 'Černá', value: 'black' },
-                    { title: 'Bílá', value: 'white' },
-                    { title: 'Šedá', value: 'gray' },
-                  ],
-                  layout: 'radio',
-                },
-                initialValue: 'orange',
-              },
-            ],
-          },
-          velikostAnotace,
-          odkazAnotace,
-        ],
-      },
-    }),
+    textovyBlok,
   ],
   validation: (r) => r.max(1).warning('Toto pole se vykresluje inline — používej jen jeden odstavec/blok.'),
+})
+
+// Delší text s více odstavci (Enter = nový odstavec). Vykresluje se přes
+// app/components/FormatovaneOdstavce.tsx, každý blok je na webu samostatný <p>.
+export const formatovaneOdstavceSchema = defineType({
+  name: 'formatovaneOdstavce',
+  title: 'Formátované odstavce',
+  type: 'array',
+  of: [textovyBlok],
 })

@@ -7,6 +7,7 @@ import {
   OBECNE_NASTAVENI_QUERY, KONTAKT_SEKCE_QUERY,
 } from '../../../../lib/sanity'
 import { KRAJE, getKraj, getMesto } from '../../../../lib/lokality'
+import { adresaKraje, adresaMesta, nactiMesto, nactiNazvy } from '../../../../lib/lokality-sanity'
 import Header from '../../../components/Header'
 import Footer from '../../../components/Footer'
 import VyhodySekce from '../../../components/VyhodySekce'
@@ -15,6 +16,8 @@ import ReferenceSekce from '../../../components/ReferenceSekce'
 import KontaktSekce from '../../../components/KontaktSekce'
 import CeduleGrafika from '../../../components/CeduleGrafika'
 import MestoMapa from '../../../components/MestoMapa'
+import FormatovanyText from '../../../components/FormatovanyText'
+import FormatovaneOdstavce from '../../../components/FormatovaneOdstavce'
 
 export const revalidate = 0
 export const dynamicParams = false
@@ -42,11 +45,13 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   if (!nalez) return {}
   const { kraj, mesto } = nalez
   const url = `https://www.pokladameee.cz/lokality/${kraj.slug}/${mesto.slug}`
-  const description = `Pokládka vinylových, PVC, kobercových i dřevěných podlah ${mesto.vMeste} a okolí. Zaměření zdarma, odvoz staré podlahy a u vás do 48 hodin.`
+  const texty = await nactiMesto(kraj.slug, mesto.slug)
+  const title = texty?.seoTitle || `Pokládka podlah ${mesto.nazev}`
+  const description = texty?.seoDescription || `Pokládka vinylových, PVC, kobercových i dřevěných podlah ${mesto.vMeste} a okolí. Zaměření zdarma, odvoz staré podlahy a u vás do 48 hodin.`
   return {
-    title: `Pokládka podlah ${mesto.nazev}`,
+    title,
     description,
-    openGraph: { title: `Pokládka podlah ${mesto.nazev} | pokládámeee.cz`, description, url },
+    openGraph: { title: `${title} | pokládámeee.cz`, description, url },
     alternates: { canonical: url },
   }
 }
@@ -56,6 +61,10 @@ export default async function MestoPage({ params }: { params: Params }) {
   if (!nalez) notFound()
   const { kraj, mesto } = nalez
   const dalsiMesta = kraj.mesta.filter(m => m.slug !== mesto.slug)
+
+  const [texty, nazevLokality] = await Promise.all([nactiMesto(kraj.slug, mesto.slug), nactiNazvy()])
+  const nazev = texty?.nazev || mesto.nazev
+  const nazevKraje = nazevLokality(adresaKraje(kraj.slug), kraj.nazev)
 
   let heroIkonkyData: any = null
   let sluzbySekce: any = null
@@ -82,15 +91,16 @@ export default async function MestoPage({ params }: { params: Params }) {
               <span style={{ color: 'var(--gray-400)' }}> / </span>
               <a href="/lokality" style={{ color: 'var(--orange)' }}>Lokality</a>
               <span style={{ color: 'var(--gray-400)' }}> / </span>
-              <a href={`/lokality/${kraj.slug}`} style={{ color: 'var(--orange)' }}>{kraj.nazev}</a>
-              <span style={{ color: 'var(--gray-400)' }}> / {mesto.nazev}</span>
+              <a href={`/lokality/${kraj.slug}`} style={{ color: 'var(--orange)' }}>{nazevKraje}</a>
+              <span style={{ color: 'var(--gray-400)' }}> / {nazev}</span>
             </p>
             <div className="kraj-hero-grid">
               <div className="kraj-hero-text">
                 <h1 style={{ fontSize: 'clamp(32px, 4.4vw, 50px)', fontWeight: 900, color: 'var(--black)', lineHeight: 1.1, marginBottom: 28 }}>
-                  Pokládám<span style={{ color: 'var(--orange)' }}>eee</span> podlahy – {mesto.nazev}
+                  <FormatovanyText value={texty?.nadpis} fallback={<>Pokládám<span style={{ color: 'var(--orange)' }}>eee</span> podlahy – {mesto.nazev}</>} />
                 </h1>
                 <div className="kraj-perex">
+                  <FormatovaneOdstavce value={texty?.perex} fallback={<>
                   <p><Text text={mesto.perex} /></p>
                   <p>
                     <strong>Přijedeme k vám a zaměříme zdarma</strong>, poradíme s výběrem materiálu a připravíme kalkulaci.
@@ -99,10 +109,11 @@ export default async function MestoPage({ params }: { params: Params }) {
                   <p>
                     Pokládáme vinylové, PVC, kobercové i dřevěné podlahy. Vyplňte formulář a ozveme se vám s nejbližším volným termínem.
                   </p>
+                  </>} />
                 </div>
                 <a href="#kontakt" className="btn-primary kraj-cta" style={{ marginTop: 32, padding: '16px 32px' }}><Tlacitko klic="lokalityZamereni" fallback="Chci zaměření zdarma" /></a>
               </div>
-              <CeduleGrafika text={mesto.nazev} postavaUrl={obecneNastaveni?.postavaUrl} />
+              <CeduleGrafika text={texty?.cedule || mesto.nazev} postavaUrl={obecneNastaveni?.postavaUrl} />
             </div>
           </div>
         </section>
@@ -113,14 +124,14 @@ export default async function MestoPage({ params }: { params: Params }) {
         <section className="section" style={{ background: 'var(--gray-50)' }}>
           <div className="container">
             <h2 className="section-title" style={{ textAlign: 'center', marginBottom: 40 }}>
-              Pokládám<span>eee</span> {mesto.vMeste} a okolí
+              <FormatovanyText value={texty?.okoliNadpis} fallback={<>Pokládám<span>eee</span> {mesto.vMeste} a okolí</>} />
             </h2>
             <div className="mapa-grid">
               <div className="kraj-perex">
-                {mesto.okoli.map((odstavec, i) => <p key={i}><Text text={odstavec} /></p>)}
+                <FormatovaneOdstavce value={texty?.okoliText} fallback={mesto.okoli.map((odstavec, i) => <p key={i}><Text text={odstavec} /></p>)} />
                 <a href="#kontakt" className="btn-primary kraj-cta" style={{ marginTop: 18, padding: '16px 32px' }}><Tlacitko klic="lokalityKonzultace" fallback="Konzultace zdarma" /></a>
               </div>
-              <MestoMapa kraj={kraj} mesto={mesto} />
+              <MestoMapa kraj={{ ...kraj, nazev: nazevKraje }} mesto={{ ...mesto, nazev }} />
             </div>
           </div>
         </section>
@@ -131,14 +142,14 @@ export default async function MestoPage({ params }: { params: Params }) {
         <section className="section" style={{ background: 'white' }}>
           <div className="container">
             <div className="kraj-mesta" style={{ marginTop: 0, textAlign: 'center' }}>
-              <p style={{ fontSize: 17, fontWeight: 800, color: 'var(--black)', marginBottom: 16 }}>Pokládám<span style={{ color: 'var(--orange)' }}>eee</span> i v dalších městech {kraj.vKraji}</p>
+              <p style={{ fontSize: 17, fontWeight: 800, color: 'var(--black)', marginBottom: 16 }}><FormatovanyText value={texty?.mestaNadpis} fallback={<>Pokládám<span style={{ color: 'var(--orange)' }}>eee</span> i v dalších městech {kraj.vKraji}</>} /></p>
               <div className="kraj-mesta-grid mesto-dalsi-grid">
                 {dalsiMesta.map(m => (
-                  <a key={m.slug} href={`/lokality/${kraj.slug}/${m.slug}`} className="kraj-mesto">{m.nazev}</a>
+                  <a key={m.slug} href={`/lokality/${kraj.slug}/${m.slug}`} className="kraj-mesto">{nazevLokality(adresaMesta(kraj.slug, m.slug), m.nazev)}</a>
                 ))}
               </div>
               <p style={{ fontSize: 14, marginTop: 16 }}>
-                A v dalších městech a obcích {kraj.vKraji}… <a href={`/lokality/${kraj.slug}`} style={{ color: 'var(--orange)', fontWeight: 700 }}>Všechna místa →</a>
+                <FormatovanyText value={texty?.mestaText} fallback={<>A v dalších městech a obcích {kraj.vKraji}…</>} />{' '}<a href={`/lokality/${kraj.slug}`} style={{ color: 'var(--orange)', fontWeight: 700 }}><FormatovanyText vOdkazu value={texty?.mestaOdkaz} fallback="Všechna místa →" /></a>
               </p>
             </div>
           </div>
