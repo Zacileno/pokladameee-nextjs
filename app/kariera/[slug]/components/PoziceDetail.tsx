@@ -29,7 +29,7 @@ function BulletList({ items }: { items: RT[] }) {
 export default function PoziceDetail({ pozice, vsechnyPozice, texty }: { pozice: Pozice; vsechnyPozice: Pozice[]; texty?: KarieraStranka | null }) {
   return (
     <>
-      <section style={{ background: 'white', padding: '48px 0 0' }}>
+      <section style={{ background: 'white', padding: 'calc(128px + var(--hlavicka-navic)) 0 0' }}>
         <div className="container">
           <p style={{ fontSize: 14, color: '#999', marginBottom: 24 }}>
             <a href="/" style={{ color: '#999' }}>Domů</a>
