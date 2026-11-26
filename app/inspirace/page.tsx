@@ -166,7 +166,7 @@ export default async function InspracePage() {
       {/* REALIZACE VE VIDEU — Divadlo loutek + Porubáček */}
       <KratkaVidea
         id="videa"
-        videa={[SHORTS_DIVADLO[0], SHORTS_PORUBACEK[0], SHORTS_DIVADLO[1], SHORTS_PORUBACEK[1], SHORTS_PORUBACEK[2]]}
+        videa={[SHORTS_DIVADLO[0], SHORTS_PORUBACEK[2], SHORTS_DIVADLO[1], SHORTS_PORUBACEK[0], SHORTS_DIVADLO[2]]}
         nadpis={<>Realizace ve vid<span>eee</span>u</>}
         podnadpis="Divadlo loutek Ostrava a dětské centrum Porubáček — podívejte se, jak to probíhalo."
         pozadi="#FFF5E8"

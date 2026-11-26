@@ -59,10 +59,11 @@ export const SHORTS_PORUBACEK: KratkeVideo[] = [
   { id: 'DbarmydFlFI', nazev: 'Porubáček: Jak se o nás dozvěděli?', snimek: 'sd2' },
 ]
 
-// Divadlo loutek Ostrava (m9WJ9bJDJFI je skoro totožné s hQ30eRhEdmU, proto vynecháno)
+// Divadlo loutek Ostrava (2. a 3. díl mají stejný titulní náhled, proto 3. díl ukazuje záběr z průběhu)
 export const SHORTS_DIVADLO: KratkeVideo[] = [
-  { id: 'VI05J18FUMc', nazev: 'Divadlo loutek Ostrava: pokládka' },
-  { id: 'hQ30eRhEdmU', nazev: 'Divadlo loutek Ostrava: realizace', snimek: 'sd1' },
+  { id: 'VI05J18FUMc', nazev: 'Divadlo loutek Ostrava — 1. díl' },
+  { id: 'hQ30eRhEdmU', nazev: 'Divadlo loutek Ostrava — 2. díl' },
+  { id: 'm9WJ9bJDJFI', nazev: 'Divadlo loutek Ostrava — 3. díl', snimek: 'sd1' },
 ]
 
 // nábor
