@@ -13,6 +13,8 @@ import { REALIZACE } from '@/lib/realizace'
 import BrandIcon, { IkonaText } from '@/app/components/BrandIcon'
 import FormatovanyText from '@/app/components/FormatovanyText'
 import FaqItem from './FaqItem'
+import KratkaVidea from '@/app/components/KratkaVidea'
+import { SHORTS_VINYL } from '@/lib/videa'
 import { client, BF_TERMIN_QUERY, VINYLOVA_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY } from '@/lib/sanity'
 import { bfBezi } from '@/lib/black-friday'
 import { prostyText, type RT } from '@/lib/prostyText'
@@ -294,6 +296,13 @@ export default async function VinylovaPodlahaPage() {
       />
 
       <ReferenceSekce video={false} />
+
+      <KratkaVidea
+        videa={SHORTS_VINYL}
+        nadpis={<>Vinyl ve vid<span>eee</span>u</>}
+        podnadpis="Proč vinyl a jak se o něj starat — za minutu."
+        pozadi="#FFF5E8"
+      />
 
       <MapaSekce />
 

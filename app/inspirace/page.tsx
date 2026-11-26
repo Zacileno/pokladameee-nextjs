@@ -11,7 +11,8 @@ import YouTubeVideo from '../components/YouTubeVideo'
 import FormatovanyText from '../components/FormatovanyText'
 import RealizaceGalerie from '../components/RealizaceGalerie'
 import { FOTOGALERIE } from '../../lib/realizace'
-import { VIDEO_PORUBACEK_VYSLEDEK } from '../../lib/videa'
+import { VIDEO_PORUBACEK_VYSLEDEK, SHORTS_DIVADLO, SHORTS_PORUBACEK } from '../../lib/videa'
+import KratkaVidea from '../components/KratkaVidea'
 
 export const metadata: Metadata = {
   title: 'Inspirace a galerie',
@@ -161,6 +162,15 @@ export default async function InspracePage() {
           </div>
         </div>
       </section>
+
+      {/* REALIZACE VE VIDEU — Divadlo loutek + Porubáček */}
+      <KratkaVidea
+        id="videa"
+        videa={[...SHORTS_DIVADLO, ...SHORTS_PORUBACEK]}
+        nadpis={<>Realizace ve vid<span>eee</span>u</>}
+        podnadpis="Divadlo loutek Ostrava a dětské centrum Porubáček — podívejte se, jak to probíhalo."
+        pozadi="#FFF5E8"
+      />
 
       {/* FOTOGALERIE — mix typů podlah, velký slider přes celou šířku */}
       <RealizaceGalerie

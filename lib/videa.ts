@@ -18,3 +18,53 @@ export const youtubeNahled = (id: string) => `https://i.ytimg.com/vi/${id}/maxre
 
 // ID videa z odkazu na YouTube (youtu.be/ID, watch?v=ID, shorts/ID, embed/ID)
 export const youtubeId = (url?: string) => url?.match(/(?:youtu\.be\/|v=|shorts\/|embed\/)([\w-]{11})/)?.[1]
+
+// ── Krátká videa na výšku (YouTube Shorts, kanál Pokládámeee) ──
+export type KratkeVideo = { id: string; nazev: string }
+
+// svislý náhled Shorts videa (9:16)
+export const shortsNahled = (id: string) => `https://i.ytimg.com/vi/${id}/oardefault.jpg`
+
+// jak pracujeme — ukázky z realizací
+export const SHORTS_JAK_PRACUJEME: KratkeVideo[] = [
+  { id: '9A6Mg_dtgmU', nazev: 'Jaké podlahy pokládáme?' },
+  { id: 'Orkf19z4-BA', nazev: 'Jak u nás probíhá realizace?' },
+  { id: 'Pu75rPqXHSU', nazev: 'Rychle, čistě a bez starostí' },
+  { id: 'nb5pNlozjr8', nazev: 'Jak vypadá podlaha po realizaci?' },
+  { id: 'vVelZlL_dHA', nazev: 'Jak vypadá koberec po realizaci?' },
+]
+
+// rady k výběru podlahy
+export const SHORTS_VYBER_PODLAHY: KratkeVideo[] = [
+  { id: 'UWFfDZP31eI', nazev: 'Největší chyba při výběru podlahy' },
+  { id: 'f_H_r-VjtHA', nazev: 'Na tohle si při výběru dejte pozor' },
+  { id: 'WVEvnmfJFHM', nazev: 'Co je nejtěžší na výběru podlahy?' },
+  { id: 'qbQbT107bMk', nazev: '3 věci, které podlahář neřekne nahlas' },
+]
+
+// vinyl a údržba
+export const SHORTS_VINYL: KratkeVideo[] = [
+  { id: 'RwrobPmdnF4', nazev: 'Jak popsat vinyl jednou větou?' },
+  { id: 'AGBFw0X2Ru4', nazev: 'Jak se udržuje vinylová podlaha?' },
+  { id: 'q-enqqxMdjA', nazev: 'Jaká podlaha je nejlepší na údržbu?' },
+]
+
+// Porubáček — zákaznice vypráví
+export const SHORTS_PORUBACEK: KratkeVideo[] = [
+  { id: 'DbarmydFlFI', nazev: 'Porubáček: Jak se o nás dozvěděli?' },
+  { id: 'Gm2N8rr-U1s', nazev: 'Porubáček: Kde hledali inspiraci?' },
+  { id: 'zEQy945zzQc', nazev: 'Porubáček: Jak probíhala realizace?' },
+]
+
+// Divadlo loutek Ostrava
+export const SHORTS_DIVADLO: KratkeVideo[] = [
+  { id: 'VI05J18FUMc', nazev: 'Divadlo loutek Ostrava — 1. díl' },
+  { id: 'hQ30eRhEdmU', nazev: 'Divadlo loutek Ostrava — 2. díl' },
+  { id: 'm9WJ9bJDJFI', nazev: 'Divadlo loutek Ostrava — 3. díl' },
+]
+
+// nábor
+export const SHORTS_NABOR: KratkeVideo[] = [
+  { id: 'gWwFRnoOmkw', nazev: 'Hledáme podlaháře' },
+  { id: 'Fhm9XhQyOog', nazev: 'Přidej se k nám jako podlahář' },
+]

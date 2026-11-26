@@ -20,6 +20,8 @@ import KontaktSekce from './components/KontaktSekce'
 import Footer from './components/Footer'
 import { FOTOGALERIE } from '../lib/realizace'
 import BlackFridayPopup from './components/BlackFridayPopup'
+import KratkaVidea from './components/KratkaVidea'
+import { SHORTS_JAK_PRACUJEME } from '../lib/videa'
 
 export const revalidate = 0
 
@@ -54,6 +56,11 @@ export default async function Home() {
         <VyhodySekce ikonky={heroIkonkyData?.ikonky} />
         <SluzbySekce data={sluzbySekce} />
         <JakToFunguje data={jakToFungujeData} />
+        <KratkaVidea
+          videa={SHORTS_JAK_PRACUJEME}
+          nadpis={<>Podívejte se, jak pracujem<span>eee</span></>}
+          podnadpis="Krátká videa přímo z našich realizací."
+        />
         {/* <GalerieSekce /> */}
         <VyhodyBadge data={procNasVybratData} />
         <MapaSekce />
