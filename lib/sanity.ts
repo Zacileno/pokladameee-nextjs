@@ -214,3 +214,6 @@ export const BLACK_FRIDAY_QUERY = `*[_type == "blackFriday"][0] {
   produktyNadpis, slevaBadge, zdarmaPopisek,
   seoTitle, seoDescription
 }`
+
+// sekce krátkých videí (pole videaSekce) v dokumentu daného typu — app/components/VideaSekce.tsx
+export const VIDEA_SEKCE_QUERY = `*[_type == $typ][0].videaSekce { skryt, nadpis, podnadpis, "videa": videa[] { odkaz, nazev, nahled, "obrazek": vlastniNahled.asset->url } }`

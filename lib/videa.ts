@@ -22,7 +22,7 @@ export const youtubeId = (url?: string) => url?.match(/(?:youtu\.be\/|v=|shorts\
 // ── Krátká videa na výšku (YouTube Shorts, kanál Pokládámeee) ──
 // snimek = záběr z průběhu videa (sd1 ≈ 25 %, sd2 ≈ 50 %, sd3 ≈ 75 %) místo titulního náhledu,
 // aby vedle sebe nestály stejně vypadající náhledy
-export type KratkeVideo = { id: string; nazev: string; snimek?: 'sd1' | 'sd2' | 'sd3' }
+export type KratkeVideo = { id: string; nazev: string; snimek?: 'sd1' | 'sd2' | 'sd3'; obrazek?: string }
 
 // svislý náhled Shorts videa (9:16); záběry sd* jsou 4:3 s černými pruhy — ořízne je object-fit: cover
 export const shortsNahled = (id: string, snimek?: KratkeVideo['snimek']) =>

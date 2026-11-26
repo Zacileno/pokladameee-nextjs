@@ -6,7 +6,7 @@ import KontaktSekce from '@/app/components/KontaktSekce'
 import JsonLd from '@/app/components/JsonLd'
 import FormatovanyText from '@/app/components/FormatovanyText'
 import FaqItem from './FaqItem'
-import KratkaVidea from '@/app/components/KratkaVidea'
+import VideaSekce from '@/app/components/VideaSekce'
 import { SHORTS_VYBER_PODLAHY, SHORTS_VINYL } from '@/lib/videa'
 import {
   client,
@@ -179,7 +179,8 @@ export default async function FaqPage() {
         </section>
       ))}
 
-      <KratkaVidea
+      <VideaSekce
+        typ="faqStranka"
         id="videa"
         videa={[...SHORTS_VYBER_PODLAHY, ...SHORTS_VINYL]}
         nadpis={<>Odpovědi i ve vid<span>eee</span>u</>}

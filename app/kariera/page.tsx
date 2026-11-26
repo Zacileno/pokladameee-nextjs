@@ -9,7 +9,7 @@ import FilozofieSecce from './components/FilozofieSecce'
 import KulturaGrid from './components/KulturaGrid'
 import VolnePozice from './components/VolnePozice'
 import KarieraKontaktForm from './components/KarieraKontaktForm'
-import KratkaVidea from '../components/KratkaVidea'
+import VideaSekce from '../components/VideaSekce'
 import { SHORTS_NABOR } from '@/lib/videa'
 import { client, KARIERNI_POZICE_QUERY, KARIERA_STRANKA_QUERY } from '@/lib/sanity'
 import { pozice as POZICE_FALLBACK, type KarieraStranka, type Pozice } from '@/lib/kariera-data'
@@ -49,7 +49,8 @@ export default async function KarieraPage() {
         <TestimonialCarousel texty={texty} />
         <BenefityGrid texty={texty} />
         <FilozofieSecce texty={texty} />
-        <KratkaVidea
+        <VideaSekce
+          typ="karieraStranka"
           videa={SHORTS_NABOR}
           nadpis={<>Koho hledám<span>eee</span>?</>}
           podnadpis="Adam vám za minutu řekne, jak to u nás chodí."

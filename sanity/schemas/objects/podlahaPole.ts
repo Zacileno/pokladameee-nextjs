@@ -1,5 +1,6 @@
 import { defineField } from 'sanity'
 import { nahled, odrazky, puvodni } from './pomocne'
+import { videaSekcePole, videaSkupina } from './videaSekce'
 
 // Společná pole čtyř podstránek: Vinylová, PVC, Kobercová a Dřevěná podlaha.
 // Prázdné pole = na webu zůstane výchozí text.
@@ -18,6 +19,7 @@ export const podlahaSkupiny = [
   { name: 'galerie', title: 'Realizace' },
   { name: 'reference', title: 'Reference strip' },
   { name: 'faq', title: 'FAQ' },
+  videaSkupina,
 ]
 
 export const podlahaPole = [
@@ -159,4 +161,5 @@ export const podlahaPole = [
       },
     }],
   }),
+  videaSekcePole,
 ]

@@ -12,7 +12,7 @@ import FormatovanyText from '../components/FormatovanyText'
 import RealizaceGalerie from '../components/RealizaceGalerie'
 import { FOTOGALERIE } from '../../lib/realizace'
 import { VIDEO_PORUBACEK_VYSLEDEK, SHORTS_DIVADLO, SHORTS_PORUBACEK } from '../../lib/videa'
-import KratkaVidea from '../components/KratkaVidea'
+import VideaSekce from '../components/VideaSekce'
 
 export const metadata: Metadata = {
   title: 'Inspirace a galerie',
@@ -164,7 +164,8 @@ export default async function InspracePage() {
       </section>
 
       {/* REALIZACE VE VIDEU — Divadlo loutek + Porubáček */}
-      <KratkaVidea
+      <VideaSekce
+        typ="inspiraceStranka"
         id="videa"
         videa={[SHORTS_DIVADLO[0], SHORTS_PORUBACEK[2], SHORTS_DIVADLO[1], SHORTS_PORUBACEK[0], SHORTS_DIVADLO[2]]}
         nadpis={<>Realizace ve vid<span>eee</span>u</>}

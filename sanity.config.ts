@@ -31,6 +31,8 @@ import { coPokladameStrankaSchema } from './sanity/schemas/coPokladameStranka'
 import { faqStrankaSchema } from './sanity/schemas/faqStranka'
 import { prubehRealizaceStrankaSchema } from './sanity/schemas/prubehRealizaceStranka'
 import { formatovaneOdstavceSchema, formatovanyTextSchema } from './sanity/schemas/objects/formatovanyText'
+import { kratkeVideoSchema, videaSekceSchema } from './sanity/schemas/objects/videaSekce'
+import { uvodVideaSchema } from './sanity/schemas/uvodVidea'
 
 export default defineConfig({
   name: 'pokladameee',
@@ -39,5 +41,5 @@ export default defineConfig({
   projectId: '8cvsenqb',
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
   plugins: [structureTool(), visionTool()],
-  schema: { types: [akceSchema, blackFridaySchema, inspiraceSchema, inspiraceStrankaSchema, referenceSchema, projektSchema, heroSekceSchema, heroIkonkySchema, sluzbySekceSchema, jakToFungujeSchema, procNasVybratSchema, rodinaZnacekSchema, obecneNastaveniSchema, kontaktSekceSchema, mapaSekceSchema, vinylovaPodlahaSchema, pvcPodlahaSchema, kobercovaPodlahaSchema, drevenaPodlahaSchema, karieraStrankaSchema, karierniPoziceSchema, blogStrankaSchema, blogPostSchema, sluzbyStrankaSchema, coPokladameStrankaSchema, faqStrankaSchema, prubehRealizaceStrankaSchema, lokalityStrankaSchema, lokalitaKrajSchema, lokalitaMestoSchema, formatovanyTextSchema, formatovaneOdstavceSchema] },
+  schema: { types: [akceSchema, blackFridaySchema, inspiraceSchema, inspiraceStrankaSchema, referenceSchema, projektSchema, heroSekceSchema, heroIkonkySchema, sluzbySekceSchema, jakToFungujeSchema, procNasVybratSchema, rodinaZnacekSchema, obecneNastaveniSchema, kontaktSekceSchema, mapaSekceSchema, vinylovaPodlahaSchema, pvcPodlahaSchema, kobercovaPodlahaSchema, drevenaPodlahaSchema, karieraStrankaSchema, karierniPoziceSchema, blogStrankaSchema, blogPostSchema, sluzbyStrankaSchema, coPokladameStrankaSchema, faqStrankaSchema, prubehRealizaceStrankaSchema, lokalityStrankaSchema, lokalitaKrajSchema, lokalitaMestoSchema, formatovanyTextSchema, formatovaneOdstavceSchema, kratkeVideoSchema, videaSekceSchema, uvodVideaSchema] },
 })

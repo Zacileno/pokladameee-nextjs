@@ -1,4 +1,5 @@
 import { defineType, defineField } from 'sanity'
+import { videaSekcePole, videaSkupina } from './objects/videaSekce'
 import { IKONY } from './sluzbyStranka'
 
 // ikony používané na kariéře navíc oproti službám (všechny umí BrandIcon)
@@ -27,6 +28,7 @@ export const karieraStrankaSchema = defineType({
     { name: 'formular', title: 'Formulář' },
     { name: 'detail', title: 'Detail pozice' },
     { name: 'dekujeme', title: 'Děkovná stránka' },
+    videaSkupina,
   ],
   fields: [
     text('heroStitek', 'Štítek nad nadpisem (např. „Kariéra“)', 'uvod'),
@@ -133,6 +135,7 @@ export const karieraStrankaSchema = defineType({
     text('dekujemeText', 'Text', 'dekujeme'),
     text('dekujemeTlacitko', 'Text tlačítka zpět na kariéru', 'dekujeme'),
     text('dekujemeSlogan', 'Text pod rámečkem', 'dekujeme'),
+    videaSekcePole,
   ],
   preview: { prepare: () => ({ title: 'Kariéra' }) },
 })

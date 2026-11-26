@@ -1,4 +1,5 @@
 import { defineType, defineField } from 'sanity'
+import { videaSekcePole, videaSkupina } from './objects/videaSekce'
 
 // Texty stránky /caste-dotazy — prázdné pole = na webu zůstane výchozí text.
 // Otázky ke službám se dál berou z podstránek služeb, aby nebyly na dvou místech.
@@ -27,6 +28,7 @@ export const faqStrankaSchema = defineType({
     { name: 'uvod', title: 'Úvod', default: true },
     { name: 'obecne', title: 'Obecné otázky' },
     { name: 'sluzby', title: 'Sekce služeb' },
+    videaSkupina,
   ],
   fields: [
     text('nadpisMaly', 'Malý nadpis nad hlavním nadpisem', 'uvod'),
@@ -51,6 +53,7 @@ export const faqStrankaSchema = defineType({
     sekce('pvc', 'Sekce PVC podlaha', 'sluzby', 'Otázky a odpovědi se upravují v dokumentu „Podstránka: PVC podlaha“, záložka FAQ.'),
     sekce('koberce', 'Sekce Koberce', 'sluzby', 'Otázky a odpovědi se upravují v dokumentu „Podstránka: Kobercová podlaha“, záložka FAQ.'),
     sekce('drevo', 'Sekce Dřevěná podlaha', 'sluzby', 'Otázky a odpovědi se upravují v dokumentu „Podstránka: Dřevěná podlaha“, záložka FAQ.'),
+    videaSekcePole,
   ],
   preview: { prepare: () => ({ title: 'FAQ' }) },
 })
