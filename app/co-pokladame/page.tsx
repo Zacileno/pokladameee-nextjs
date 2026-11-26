@@ -152,7 +152,7 @@ export default async function CoPokladamePage() {
         <JakToFunguje data={jakToFungujeData} />
         <KratkaVidea
           videa={SHORTS_VYBER_PODLAHY}
-          nadpis={<>Jak vybrat podlahu bez chyb<span>eee</span></>}
+          nadpis={<>Jak správně vybrat podlah<span>uuu</span></>}
           podnadpis="Na co si dát pozor, než se rozhodnete — rady od našich specialistů."
         />
         <ReferenceSekce video={false} />

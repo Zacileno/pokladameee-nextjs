@@ -312,7 +312,7 @@ export default async function KobercovaPodlahaPage() {
       </section>
 
       <KratkaVidea
-        videa={[{ id: 'vVelZlL_dHA', nazev: 'Jak vypadá koberec po realizaci?' }, ...SHORTS_PORUBACEK]}
+        videa={[SHORTS_PORUBACEK[0], { id: 'vVelZlL_dHA', nazev: 'Jak vypadá koberec po realizaci?', snimek: 'sd1' }, SHORTS_PORUBACEK[1], SHORTS_PORUBACEK[2]]}
         nadpis={<>Koberec v Porubáčku očima zákaznic<span>eee</span></>}
         podnadpis="Jak se o nás dozvěděli, kde hledali inspiraci a jak pokládka probíhala."
         pozadi="#FFF5E8"

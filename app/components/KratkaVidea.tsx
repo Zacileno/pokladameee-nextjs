@@ -43,7 +43,7 @@ export default function KratkaVidea({ videa, nadpis, podnadpis, pozadi, id }: {
             {videa.map(v => (
               <button key={v.id} type="button" className="kratke-video" onClick={() => setOtevrene(v)} aria-label={`Přehrát video: ${v.nazev}`}>
                 <span className="kratke-video-foto">
-                  <img src={shortsNahled(v.id)} alt="" loading="lazy" />
+                  <img src={shortsNahled(v.id, v.snimek)} alt="" loading="lazy" />
                   <span className="yt-video-play" aria-hidden="true" />
                 </span>
                 <span className="kratke-video-nazev">{v.nazev}</span>
