@@ -10,6 +10,8 @@ import ReferenceSekce from '@/app/components/ReferenceSekce'
 import MapaSekce from '@/app/components/MapaSekce'
 import KontaktSekce from '@/app/components/KontaktSekce'
 import FormatovanyText from '@/app/components/FormatovanyText'
+import KratkaVidea from '@/app/components/KratkaVidea'
+import { SHORTS_VYBER_PODLAHY } from '@/lib/videa'
 import { client, JAK_TO_FUNGUJE_QUERY, KONTAKT_SEKCE_QUERY, CO_POKLADAME_STRANKA_QUERY } from '@/lib/sanity'
 
 export const revalidate = 0
@@ -148,6 +150,11 @@ export default async function CoPokladamePage() {
         </section>
 
         <JakToFunguje data={jakToFungujeData} />
+        <KratkaVidea
+          videa={SHORTS_VYBER_PODLAHY}
+          nadpis={<>Jak správně vybrat podlah<span>uuu</span></>}
+          podnadpis="Na co si dát pozor, než se rozhodnete — rady od našich specialistů."
+        />
         <ReferenceSekce video={false} />
         <MapaSekce />
         <KontaktSekce kontakt={kontaktSekce} />

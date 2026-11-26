@@ -17,7 +17,8 @@ import { client, BF_TERMIN_QUERY, KOBERCOVA_PODLAHA_QUERY, KONTAKT_SEKCE_QUERY }
 import { bfBezi } from '@/lib/black-friday'
 import { prostyText, type RT } from '@/lib/prostyText'
 import YouTubeVideo from '@/app/components/YouTubeVideo'
-import { VIDEO_PORUBACEK_VYSLEDEK } from '@/lib/videa'
+import { VIDEO_PORUBACEK_VYSLEDEK, SHORTS_PORUBACEK } from '@/lib/videa'
+import KratkaVidea from '@/app/components/KratkaVidea'
 
 export const revalidate = 0
 
@@ -309,6 +310,13 @@ export default async function KobercovaPodlahaPage() {
           </div>
         </div>
       </section>
+
+      <KratkaVidea
+        videa={[SHORTS_PORUBACEK[0], { id: 'vVelZlL_dHA', nazev: 'Jak vypadá koberec po realizaci?', snimek: 'sd1' }, SHORTS_PORUBACEK[1], SHORTS_PORUBACEK[2]]}
+        nadpis={<>Koberec v Porubáčku očima zákaznic<span>eee</span></>}
+        podnadpis="Jak se o nás dozvěděli, kde hledali inspiraci a jak pokládka probíhala."
+        pozadi="#FFF5E8"
+      />
 
       <RealizaceGalerie
         fotky={REALIZACE.koberce}

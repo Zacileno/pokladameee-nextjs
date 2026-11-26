@@ -760,3 +760,30 @@ a.kraj-mesto:hover { color: var(--orange); box-shadow: 0 4px 16px rgba(255,136,0
   .pr-tlacitka { flex-direction: column; align-items: stretch; text-align: center; }
   .pr-tlacitka .btn-primary { justify-content: center; }
 }
+
+/* ── Krátká videa na výšku (YouTube Shorts) ── */
+.kratka-videa-hlava { text-align: center; margin-bottom: 40px; }
+.kratka-videa-hlava .section-subtitle { margin: 0 auto; }
+.kratka-videa-obal { position: relative; }
+.kratka-videa-rada { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 4px 4px 12px; justify-content: safe center; }
+.kratka-videa-rada::-webkit-scrollbar { display: none; }
+.kratke-video { flex: 0 0 calc((100% - 60px) / 4); max-width: 260px; scroll-snap-align: start; border: 0; padding: 0; background: none; cursor: pointer; text-align: left; font: inherit; color: var(--black); }
+.kratke-video-foto { position: relative; display: block; aspect-ratio: 9 / 16; border-radius: 16px; overflow: hidden; background: var(--black); box-shadow: 0 5px 20px rgba(0,0,0,0.12); }
+.kratke-video-foto img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s; }
+.kratke-video:hover .kratke-video-foto img { transform: scale(1.04); }
+.kratke-video:hover .yt-video-play { transform: scale(1.08); }
+.kratke-video-nazev { display: block; margin-top: 12px; font-size: 16px; font-weight: 800; line-height: 1.3; }
+.kratka-videa-sipka { position: absolute; top: calc(50% - 40px); width: 48px; height: 48px; border-radius: 50%; border: 0; background: white; color: var(--black); font-size: 30px; line-height: 1; box-shadow: 0 4px 16px rgba(0,0,0,0.2); cursor: pointer; z-index: 2; }
+.kratka-videa-sipka.vlevo { left: -12px; }
+.kratka-videa-sipka.vpravo { right: -12px; }
+.video-modal-svisle { max-width: min(420px, calc((100vh - 120px) * 9 / 16)); }
+@media (max-width: 900px) {
+  .kratka-videa-hlava { margin-bottom: 28px; }
+  .kratka-videa-rada { gap: 14px; justify-content: flex-start; margin: 0 -24px; padding: 4px 24px 12px; scroll-padding: 0 24px; }
+  .kratke-video { flex-basis: 44%; max-width: none; }
+  .kratke-video-nazev { font-size: 14px; }
+  .kratka-videa-sipka { display: none; }
+}
+@media (max-width: 480px) {
+  .kratke-video { flex-basis: 62%; }
+}

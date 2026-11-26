@@ -6,6 +6,8 @@ import KontaktSekce from '@/app/components/KontaktSekce'
 import JsonLd from '@/app/components/JsonLd'
 import FormatovanyText from '@/app/components/FormatovanyText'
 import FaqItem from './FaqItem'
+import KratkaVidea from '@/app/components/KratkaVidea'
+import { SHORTS_VYBER_PODLAHY, SHORTS_VINYL } from '@/lib/videa'
 import {
   client,
   VINYLOVA_PODLAHA_QUERY,
@@ -176,6 +178,14 @@ export default async function FaqPage() {
           </div>
         </section>
       ))}
+
+      <KratkaVidea
+        id="videa"
+        videa={[...SHORTS_VYBER_PODLAHY, ...SHORTS_VINYL]}
+        nadpis={<>Odpovědi i ve vid<span>eee</span>u</>}
+        podnadpis="Nejčastější otázky k výběru a údržbě podlahy — krátce a srozumitelně."
+        pozadi="#FFF5E8"
+      />
 
       <KontaktSekce kontakt={kontaktSekce} />
 
