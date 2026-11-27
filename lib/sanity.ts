@@ -83,7 +83,7 @@ export const LOKALITY_NAZVY_QUERY = `*[_type in ["lokalitaKraj", "lokalitaMesto"
 
 export const KONTAKT_SEKCE_QUERY = `*[_type == "kontaktSekce"][0] {
   nadpis, nadpisText, podnadpis,
-  jmeno, role, citat,
+  zobrazitOsobu, jmeno, role, citat,
   "fotoUrl": foto.asset->url,
   telefon, email,
   pracovniDoba, region
