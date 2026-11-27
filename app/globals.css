@@ -625,10 +625,10 @@ a.kraj-mesto:hover { color: var(--orange); box-shadow: 0 4px 16px rgba(255,136,0
 }
 /* === PRŮBĚH REALIZACE (app/prubeh-realizace) === */
 .pr-hero { background: var(--orange-light); padding-top: calc(120px + var(--hlavicka-navic)); padding-bottom: 72px; overflow: hidden; }
-.pr-hero-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 48px; align-items: center; }
+.pr-hero-grid { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center; }
 .pr-h1 { font-size: clamp(36px, 5vw, 62px); font-weight: 900; line-height: 1.05; color: var(--black); margin-bottom: 20px; }
 .pr-h1 span { color: var(--orange); }
-.pr-hero-text { max-width: 620px; margin-bottom: 32px; }
+.pr-hero-text { max-width: 920px; margin-bottom: 32px; }
 .pr-hero-text .pr-text p { font-size: 17px; color: var(--gray-700); }
 .pr-tlacitka { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
 .pr-odkaz { color: var(--blue); font-weight: 700; font-size: 15px; text-decoration: underline; text-underline-offset: 4px; }

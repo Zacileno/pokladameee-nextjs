@@ -31,6 +31,14 @@ export const shortsNahled = (id: string, snimek?: KratkeVideo['snimek']) =>
 // Videa s Adamem byla 27. 11. 2026 na přání klientky z webu odstraněna (rady, nábor, Divadlo 1. díl).
 // Prázdný seznam = sekce se na webu neukáže, dokud se ve Studiu nepřidají videa.
 
+// Videa, ve kterých je Adam — web je nezobrazí, ani když zůstanou uložená ve Studiu.
+export const VIDEA_S_ADAMEM = new Set([
+  'VI05J18FUMc', // Divadlo loutek 1. díl
+  'f_H_r-VjtHA', 'UWFfDZP31eI', 'WVEvnmfJFHM', 'qbQbT107bMk', 'RwrobPmdnF4', 'AGBFw0X2Ru4', 'q-enqqxMdjA', // rady
+  'gWwFRnoOmkw', 'Fhm9XhQyOog', // nábor
+  'Wi5x2PURFcM', 'SNnVL3QjVyU', // POV
+])
+
 // homepage — realizace a zákaznice
 export const SHORTS_JAK_PRACUJEME: KratkeVideo[] = [
   { id: 'Orkf19z4-BA', nazev: 'Jak u nás probíhá realizace?', snimek: 'sd1' },

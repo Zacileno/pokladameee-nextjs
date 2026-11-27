@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 import KratkaVidea from './KratkaVidea'
 import FormatovanyText from './FormatovanyText'
 import { client, VIDEA_SEKCE_QUERY } from '../../lib/sanity'
-import { youtubeId, type KratkeVideo } from '../../lib/videa'
+import { youtubeId, VIDEA_S_ADAMEM, type KratkeVideo } from '../../lib/videa'
 import { prostyText, type RT } from '../../lib/prostyText'
 
 type VideaData = {
@@ -30,7 +30,7 @@ export default async function VideaSekce({ typ, videa, nadpis, podnadpis, pozadi
 
   const zeStudia: KratkeVideo[] = (data?.videa || []).flatMap(v => {
     const idVidea = youtubeId(v.odkaz)
-    if (!idVidea) return []
+    if (!idVidea || VIDEA_S_ADAMEM.has(idVidea)) return []
     return [{
       id: idVidea,
       nazev: v.nazev || '',
