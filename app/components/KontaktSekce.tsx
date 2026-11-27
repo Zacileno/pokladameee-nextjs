@@ -7,6 +7,7 @@ interface KontaktData {
   nadpis?: string
   nadpisText?: Parameters<typeof FormatovanyText>[0]['value']
   podnadpis?: string
+  zobrazitOsobu?: boolean
   jmeno?: string
   role?: string
   citat?: string
@@ -24,6 +25,8 @@ interface Props {
 export default function KontaktSekce({ kontakt }: Props) {
   const nadpis = kontakt?.nadpis || 'Napište přímo nám'
   const podnadpis = kontakt?.podnadpis || 'Zaměření je zdarma. Odpovíme do 24 hodin, obvykle dřív. Přijedeme k vám po celém MSK, Zlínsku i Olomoucku.'
+  // karta kontaktní osoby jen když je ve Studiu zapnutá (od 27. 11. 2026 vypnutá)
+  const zobrazitOsobu = kontakt?.zobrazitOsobu === true
   const jmeno = kontakt?.jmeno || 'Adam Hajdušek'
   const role = kontakt?.role || 'Hlavní specialista'
   const citat = kontakt?.citat || 'Každou podlahu řešíme osobně. Přijedeme se podívat.'
@@ -56,6 +59,7 @@ export default function KontaktSekce({ kontakt }: Props) {
             <p style={{ marginTop: 20, fontSize: 17, lineHeight: 1.7, color: 'var(--gray-700)', marginBottom: 40 }}>
               {podnadpis}
             </p>
+            {zobrazitOsobu && (
             <div style={{ display: 'flex', alignItems: 'center', gap: 20, padding: '24px', borderRadius: 12, background: 'var(--gray-50)', border: '1px solid var(--gray-100)', marginBottom: 32 }}>
               {fotoUrl ? (
                 <Image
@@ -77,6 +81,7 @@ export default function KontaktSekce({ kontakt }: Props) {
                 <div style={{ color: 'var(--gray-700)', fontSize: 14, marginTop: 6, fontStyle: 'italic' }}>„{citat}“</div>
               </div>
             </div>
+            )}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               {[
                 { icon: '📞', label: 'Zavolejte', val: telefon, href: `tel:${telefon.replace(/\s/g, '')}` },
