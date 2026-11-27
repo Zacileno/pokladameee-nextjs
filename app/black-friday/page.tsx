@@ -109,12 +109,9 @@ export default async function BlackFridayPage() {
     fotky = produktyData.map(d => d?.heroFotkaUrl || null)
   } catch {}
 
-  // Stejná fotka Adama jako v KontaktSekce — lokální adam.jpg má useknutou hlavu, proto jen jako záloha
-  let adamFotoUrl = '/assets/adam.jpg'
   let kontaktSekce: any = null
   try {
     kontaktSekce = await client.fetch(KONTAKT_SEKCE_QUERY)
-    if (kontaktSekce?.fotoUrl) adamFotoUrl = kontaktSekce.fotoUrl
   } catch {}
 
   const bannerObrazekUrl = data.bannerObrazekUrl || BANNER_FALLBACK
@@ -197,7 +194,7 @@ export default async function BlackFridayPage() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: 24, flexWrap: 'wrap' }}>
                   <AkcePopup label={<FormatovanyText value={data.ctaPopupText} fallback="Využít akci" />} />
                   <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                    <Image src={adamFotoUrl} alt="Adam Hajdušek" width={52} height={52} unoptimized style={{ borderRadius: '50%', objectFit: 'cover', objectPosition: 'center top', border: '2px solid var(--orange)', flexShrink: 0 }} />
+                    {/* fotka Adama odstraněna na přání klienta (27. 11. 2026), text zůstává */}
                     <span style={{ fontWeight: 800, fontSize: 15, color: 'var(--blue)' }}>
                       <FormatovanyText value={data.adamText} fallback="Přijedeme a ZDARMA zaměříme" />
                     </span>
