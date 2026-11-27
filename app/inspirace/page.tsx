@@ -27,6 +27,9 @@ export const metadata: Metadata = {
 }
 export const revalidate = 0
 
+// blok „Realizace ve videu“ — 27. 11. 2026 vypnut na přání klienta (po vyřazení videí s Adamem zbyla jen 2); videa zůstávají ve Studiu
+const ZOBRAZIT_VIDEA = false
+
 const ISTRIP = [
   { emoji: '📐', text: 'Zaměření zdarma' },
   { emoji: '⚡', text: 'U vás do 48 hodin' },
@@ -163,7 +166,8 @@ export default async function InspracePage() {
         </div>
       </section>
 
-      {/* REALIZACE VE VIDEU — Divadlo loutek + Porubáček */}
+      {/* REALIZACE VE VIDEU — Divadlo loutek + Porubáček (zatím vypnuto, viz ZOBRAZIT_VIDEA) */}
+      {ZOBRAZIT_VIDEA && (
       <VideaSekce
         typ="inspiraceStranka"
         id="videa"
@@ -172,6 +176,7 @@ export default async function InspracePage() {
         podnadpis="Divadlo loutek Ostrava a dětské centrum Porubáček — podívejte se, jak to probíhalo."
         pozadi="#FFF5E8"
       />
+      )}
 
       {/* FOTOGALERIE — mix typů podlah, velký slider přes celou šířku */}
       <RealizaceGalerie
