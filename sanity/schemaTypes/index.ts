@@ -28,7 +28,9 @@ import { coPokladameStrankaSchema } from '../schemas/coPokladameStranka'
 import { faqStrankaSchema } from '../schemas/faqStranka'
 import { prubehRealizaceStrankaSchema } from '../schemas/prubehRealizaceStranka'
 import { formatovaneOdstavceSchema, formatovanyTextSchema } from '../schemas/objects/formatovanyText'
+import { kratkeVideoSchema, videaSekceSchema } from '../schemas/objects/videaSekce'
+import { uvodVideaSchema } from '../schemas/uvodVidea'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [inspiraceSchema, akceSchema, referenceSchema, projektSchema, heroSekceSchema, heroIkonkySchema, sluzbySekceSchema, jakToFungujeSchema, procNasVybratSchema, rodinaZnacekSchema, obecneNastaveniSchema, kontaktSekceSchema, mapaSekceSchema, vinylovaPodlahaSchema, pvcPodlahaSchema, kobercovaPodlahaSchema, drevenaPodlahaSchema, blogPostSchema, karierniPoziceSchema, blackFridaySchema, sluzbyStrankaSchema, blogStrankaSchema, karieraStrankaSchema, coPokladameStrankaSchema, faqStrankaSchema, prubehRealizaceStrankaSchema, lokalityStrankaSchema, lokalitaKrajSchema, lokalitaMestoSchema, formatovanyTextSchema, formatovaneOdstavceSchema],
+  types: [inspiraceSchema, akceSchema, referenceSchema, projektSchema, heroSekceSchema, heroIkonkySchema, sluzbySekceSchema, jakToFungujeSchema, procNasVybratSchema, rodinaZnacekSchema, obecneNastaveniSchema, kontaktSekceSchema, mapaSekceSchema, vinylovaPodlahaSchema, pvcPodlahaSchema, kobercovaPodlahaSchema, drevenaPodlahaSchema, blogPostSchema, karierniPoziceSchema, blackFridaySchema, sluzbyStrankaSchema, blogStrankaSchema, karieraStrankaSchema, coPokladameStrankaSchema, faqStrankaSchema, prubehRealizaceStrankaSchema, lokalityStrankaSchema, lokalitaKrajSchema, lokalitaMestoSchema, formatovanyTextSchema, formatovaneOdstavceSchema, kratkeVideoSchema, videaSekceSchema, uvodVideaSchema],
 }

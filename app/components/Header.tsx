@@ -6,6 +6,13 @@ import Image from 'next/image'
 import { TOP_BAR_VYSKA, zobrazitTopBar } from '@/lib/black-friday'
 import { useBfKonec } from './BfKonec'
 
+// oranžové sluchátko u telefonního čísla (dřív fotka Adama)
+const TelefonIkona = () => (
+  <svg width={24} height={24} viewBox="0 0 24 24" aria-hidden="true" style={{ flexShrink: 0 }}>
+    <path fill="var(--orange)" d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z" />
+  </svg>
+)
+
 const SLUZBY_LINKS: [string, string][] = [
   ['/sluzby/vinylova-podlaha', 'Vinylová podlaha'],
   ['/sluzby/pvc-podlaha', 'PVC podlaha'],
@@ -132,8 +139,7 @@ export default function Header({ opaque }: { opaque?: boolean }) {
           <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
             <a href="/#kontakt" className="btn-primary" style={{ padding: '9px 20px', fontSize: 15 }}><Tlacitko klic="hlavicka" fallback="Chci podlahu" /></a>
             <a href="tel:+420790388487" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: 'white', fontWeight: 800, fontSize: 16, whiteSpace: 'nowrap' }}>
-              <Image src="https://cdn.sanity.io/images/8cvsenqb/production/306c4a22e24e1a5c96a6be2521d307acb1a0da87-120x120.png" alt="Adam Hajdušek" width={32} height={32} unoptimized
-                style={{ width: 32, height: 32, borderRadius: '50%', objectFit: 'cover', border: '1.5px solid rgba(255,255,255,0.6)' }} />
+              <TelefonIkona />
               +420 790 388 487
             </a>
           </div>
@@ -163,8 +169,7 @@ export default function Header({ opaque }: { opaque?: boolean }) {
           ))}
           <a href="/#kontakt" className="btn-primary" onClick={() => setMenuOpen(false)} style={{ textAlign: 'center', justifyContent: 'center' }}><Tlacitko klic="hlavicka" fallback="Chci podlahu" /></a>
           <a href="tel:+420790388487" onClick={() => setMenuOpen(false)} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, color: 'white', fontWeight: 700, fontSize: 18 }}>
-            <Image src="https://cdn.sanity.io/images/8cvsenqb/production/306c4a22e24e1a5c96a6be2521d307acb1a0da87-120x120.png" alt="Adam Hajdušek" width={32} height={32} unoptimized
-              style={{ width: 32, height: 32, borderRadius: '50%', objectFit: 'cover', border: '1.5px solid rgba(255,255,255,0.6)' }} />
+            <TelefonIkona />
             +420 790 388 487
           </a>
         </div>

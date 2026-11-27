@@ -1,4 +1,5 @@
 import { defineType, defineField } from 'sanity'
+import { videaSekcePole, videaSkupina } from './objects/videaSekce'
 
 // Texty stránky /co-pokladame — prázdné pole = na webu zůstane výchozí text.
 const text = (name: string, title: string, group: string) =>
@@ -36,6 +37,7 @@ export const coPokladameStrankaSchema = defineType({
   groups: [
     { name: 'uvod', title: 'Úvod', default: true },
     { name: 'skupiny', title: 'Skupiny zákazníků' },
+    videaSkupina,
   ],
   fields: [
     text('nadpis', 'Nadpis stránky', 'uvod'),
@@ -45,6 +47,7 @@ export const coPokladameStrankaSchema = defineType({
     skupina('firmy', 'Firmy'),
     skupina('druzstva', 'Bytová družstva a SVJ'),
     text('odkazRealizace', 'Text odkazu na realizace (u všech skupin)', 'skupiny'),
+    videaSekcePole,
   ],
   preview: { prepare: () => ({ title: 'Podlahy na míru' }) },
 })

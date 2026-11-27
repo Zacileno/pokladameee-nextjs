@@ -1,4 +1,5 @@
 import { defineType, defineField } from 'sanity'
+import { videaSekcePole, videaSkupina } from './objects/videaSekce'
 import { IKONY } from './sluzbyStranka'
 
 // Texty stránky /inspirace — prázdné pole = na webu zůstane výchozí text.
@@ -15,6 +16,7 @@ export const inspiraceStrankaSchema = defineType({
     { name: 'realizace', title: 'Naše realizace' },
     { name: 'galerie', title: 'Fotogalerie' },
     { name: 'proc', title: 'Proč Pokládámeee' },
+    videaSkupina,
   ],
   fields: [
     defineField({
@@ -69,6 +71,7 @@ export const inspiraceStrankaSchema = defineType({
     }),
     text('procTlacitko', 'Text tlačítka pod kartami', 'proc'),
     text('recenzeNadpis', 'Nadpis recenzí („Co o nás říkají zákazníci“)', 'proc'),
+    videaSekcePole,
   ],
   preview: { prepare: () => ({ title: 'Inspirace — stránka' }) },
 })
