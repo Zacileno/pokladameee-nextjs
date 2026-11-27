@@ -100,7 +100,6 @@ export default async function PrubehRealizacePage() {
   })))
   const dobreVedet = cesta.flatMap(k => (k.bloky ?? []).filter(b => !b.cislo))
   const cestaUvod = cesta.find(k => k.uvod?.length)?.uvod
-  const uvodAdam = fotoAdama(data?.uvodFoto)
   // fotka u výzvy jen když je nahraná ve Studiu (výchozí Adam odstraněn na přání klienta)
   const ctaFoto = data?.ctaFoto?.asset ? fotoAdama(data.ctaFoto) : null
 
@@ -108,7 +107,7 @@ export default async function PrubehRealizacePage() {
     <>
       <Header opaque />
       <main>
-        {/* ÚVOD — text vlevo; Adam stojí na kartě „Služba od A do Z“ (desktop) / „Zaměření zdarma“ (mobil) */}
+        {/* ÚVOD — text a pod ním 3 karty (fotka Adama odstraněna na přání klienta, 27. 11. 2026) */}
         <section className="pr-hero">
           <div className="container pr-hero-grid">
             <div>
@@ -130,12 +129,6 @@ export default async function PrubehRealizacePage() {
             <div className="pr-fakta">
               {fakta.map((f, i) => (
                 <div key={f._key} className="pr-fakt">
-                  {/* Adam nad první kartou (mobil) a nad poslední (desktop) — přepíná CSS */}
-                  {(i === 0 || i === fakta.length - 1) && (
-                    <div className={`pr-adam ${i === 0 ? 'pr-adam-mobil' : 'pr-adam-desktop'}`} aria-hidden={i === 0 ? undefined : true}>
-                      <img src={uvodAdam.src} alt={i === 0 ? uvodAdam.alt : ''} className="pr-adam-foto" />
-                    </div>
-                  )}
                   <BrandIcon emoji={FAKTA_IKONY[i % FAKTA_IKONY.length]} size={52} />
                   <div>
                     <h2><FormatovanyText value={f.nadpis} fallback={null} /></h2>

@@ -743,7 +743,6 @@ a.kraj-mesto:hover { color: var(--orange); box-shadow: 0 4px 16px rgba(255,136,0
 .pr-cta-bez-fotky { padding-top: 80px; }
 .pr-cta-bez-fotky .pr-cta-box { grid-template-columns: 1fr; }
 /* Adam v úvodu stojí přímo na kartě: desktop nad „Služba od A do Z“, mobil nad „Zaměření zdarma“ */
-.pr-hero-grid { min-height: 480px; }
 .pr-fakt { position: relative; }
 .pr-adam { position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); pointer-events: none; }
 .pr-adam-foto { display: block; height: 470px; width: auto; max-width: none; }
@@ -759,7 +758,6 @@ a.kraj-mesto:hover { color: var(--orange); box-shadow: 0 4px 16px rgba(255,136,0
   .pr-fakta { grid-template-columns: 1fr; gap: 12px; }
   .pr-fakt { padding: 16px 18px; }
   .pr-hero-grid { min-height: 0; }
-  .pr-fakta { margin-top: 354px; }
   .pr-adam-desktop { display: none; }
   .pr-adam-mobil { display: block; }
   .pr-adam-foto { height: 320px; }
